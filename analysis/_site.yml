@@ -1,7 +1,7 @@
-name: "MSTPsummerStatistics"
+name: "ISTP Summer JC: Statistical Theory & Methods"
 output_dir: "../docs"
 navbar:
-  title: "MSTPsummerStatistics"
+  title: "ISTP Summer JC: Statistical Theory & Methods"
   left:
     - text: "Home"
       href: index.html
@@ -15,10 +15,10 @@ navbar:
 output:
   workflowr::wflow_html:
     toc: yes
-    toc_float: yes
+    toc_float: no
     theme: readable
     highlight: textmate
-    code_folding: none
+    code_folding: hide
     lib_dir: site_libs
     self_contained: no
     include:

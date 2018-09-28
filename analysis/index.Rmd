@@ -1,17 +1,15 @@
 ---
-title: "MSTP Summer Statistics Website"
+title: "ISTP Summer JC: Statistical Theory & Methods"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: false
 ---
-
 #Welcome to the Summer Statistics Website! 
-You will find the slides, materials, and source code for the course here.
+[Syllabus](syllabus.html) 
 
+###Week 1:  
 
-###Week 1 Materials
+###Week 2:
 
-###Week 2 Materials
-
-###Week 3 Materials
+###Week 3:

@@ -5,4 +5,4 @@ output:
     toc: false
 ---
 
-Repository to contain material for the 1st year MSTP summer statistics Journal Club at the University of Chicago
+Repository to contain material for the 1st year MSTP summer statistics Journal Club at the University of Chicago 

@@ -1,0 +1,9 @@
+---
+title: "syllabus"
+date: "2018-09-27"
+output: workflowr::wflow_html
+---
+
+#ISTP Summer Journal Club: Statistical Theory & Methods
+
+ 
