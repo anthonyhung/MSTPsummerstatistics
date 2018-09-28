@@ -6,4 +6,6 @@ output:
     toc: false
 ---
 
-Welcome to my research website.
+Welcome to the Summer Statistics Website! You will find the slides, materials, and source code for the course here. 
+
+
