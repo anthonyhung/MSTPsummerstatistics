@@ -1,11 +1,17 @@
 ---
-title: "Home"
+title: "MSTP Summer Statistics Website"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: false
 ---
 
-Welcome to the Summer Statistics Website! You will find the slides, materials, and source code for the course here. 
+#Welcome to the Summer Statistics Website! 
+You will find the slides, materials, and source code for the course here.
 
 
+###Week 1 Materials
+
+###Week 2 Materials
+
+###Week 3 Materials
