@@ -1,0 +1,25 @@
+---
+title: "ProbabilityReview"
+author: "Anthony Hung"
+date: "2019-04-24"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+Probability is a foundational concept in statistics, and understanding the basics of probability is important for understanding the theory behind commonly used statistical tests and developing statistical methods. Here, we discuss 
+
+##Random Variables
+
+Random variables are variables that can take on a set of possible numerical outcomes, each of which has a probability of occuring. For example, the result of a coin flip can be thought of as a random variable that can take on one of two values: heads or tails, each with a probability $\frac{1}{2}$ of occuring. 
+
+
+
+
+##Properties of Random Variables
+
+##Types of distributions: Discrete vs. Continuous
+
+##Working with named distributions in R
