@@ -247,41 +247,191 @@ div.section {
 
 <div id="TOC">
 <ul>
-<li><a href="#istp-summer-journal-club-statistical-theory-methods">ISTP Summer Journal Club: Statistical Theory &amp; Methods</a></li>
+<li><a href="#istp-summer-journal-club-statistical-theory-methods">ISTP Summer Journal Club: Statistical Theory &amp; Methods</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#objectives">Objectives</a></li>
+<li><a href="#outline-of-course">Outline of Course</a></li>
+</ul></li>
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2018-09-28</p>
-<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
-<ul>
-<li>
-<p><details> <summary> <strong style="color:red;">✖</strong> <strong>R Markdown file:</strong> uncommitted changes </summary> The R Markdown file has staged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
-</details>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/61d28ebdaad4004d2e52aee9d13afcfb2d962798" target="_blank">61d28eb</a> </summary></p>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-04-24
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.3.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2459910c8b747d9722a41861f8b65d3681e3d54etargetblank2459910a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/2459910c8b747d9722a41861f8b65d3681e3d54e" target="_blank">2459910</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2459910c8b747d9722a41861f8b65d3681e3d54etargetblank2459910a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
-    Modified:   analysis/about.Rmd
     Modified:   analysis/index.Rmd
     Modified:   analysis/syllabus.Rmd
 
-Staged changes:
-    Modified:   analysis/_site.yml
-    Modified:   analysis/index.Rmd
-    New:        analysis/syllabus.Rmd
-
 </code></pre>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
-</li>
-</ul>
-<hr />
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2459910c8b747d9722a41861f8b65d3681e3d54e/analysis/syllabus.Rmd" target="_blank">2459910</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2018-09-28
+</td>
+<td>
+Update all webpages
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2459910c8b747d9722a41861f8b65d3681e3d54e/docs/syllabus.html" target="_blank">2459910</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2018-09-28
+</td>
+<td>
+Update all webpages
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
 <div id="istp-summer-journal-club-statistical-theory-methods" class="section level1">
 <h1>ISTP Summer Journal Club: Statistical Theory &amp; Methods</h1>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>A thorough understanding of statistics is essential for both experimental design and data analysis. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.</p>
+<p>In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for entry into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. At present, the biostatics course required for all MSTP trainees is very similar in content to what is covered in most introductory college statistics courses, making it unappealing and ineffective for most students. However, many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.</p>
+<p>Building off of a basic, college-level understanding of statistics, this new journal-club style course aims to incorporate in-depth, field-specific workshops that will allow students to tailor their statistical toolbox to their particular research interests and goals.</p>
+</div>
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
+<ul>
+<li><p>Foundations of theoretical and applied understanding of probability and statistics</p></li>
+<li><p>Working knowledge of how to use R</p></li>
+<li><p>Deeper understanding of statistical tests specific to research area</p></li>
+<li><p>Connect students with resources to seek out statistical advising in the future</p></li>
+<li><p>Data analysis project using real data</p></li>
+</ul>
+</div>
+<div id="outline-of-course" class="section level2">
+<h2>Outline of Course</h2>
+<p>Week 1: Why statistics matters; Probability and distributions; Intro to R</p>
+<p>Week 2: Review of basic statistical tests</p>
+<p>Week 3: PCA, t-SNE, bootstrapping and machine learning</p>
+<p>Week 4: Poisson processes, Bayesian inference &amp; MCMC</p>
+<p>Weeks 5-9: Breakouts within specific programs</p>
+<ul>
+<li><p>Work with PIs or senior grad students in same research area</p></li>
+<li><p>Handle real data and work hands-on with analysis tools used by people in the field</p></li>
+<li><p>Prepare a presentation with results of statistical analyses</p></li>
+</ul>
+<p>Week 10 : Data presentations</p>
+</div>
 </div>
 
 <script type="text/x-mathjax-config">
@@ -289,6 +439,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
 http://docs.mathjax.org/en/latest/configuration.html.  This will make
@@ -300,14 +451,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-<hr>
-<p>
-  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-  analysis was created with
-  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
-</p>
-<hr>
 
 
 

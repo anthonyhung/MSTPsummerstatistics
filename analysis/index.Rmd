@@ -6,7 +6,7 @@ output:
     toc: false
 ---
 #Welcome to the Summer Statistics Website! 
-[Syllabus](syllabus.html) 
+* [Syllabus](syllabus.html) 
 
 ###Week 1:  
 
