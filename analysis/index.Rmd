@@ -8,8 +8,16 @@ output:
 #Welcome to the Summer Statistics Website! 
 * [Syllabus](syllabus.html) 
 
-###Week 1:  
+###Week 1:
+
+* [Central Limit Theorem](CLT.html)
+
+* [Probability Review](ProbabilityReview.html)
+
+* [Introduction to R](introR.html)
 
 ###Week 2:
+
+* [Correcting for Mutliple Tests](multipleTesting.html)
 
 ###Week 3:

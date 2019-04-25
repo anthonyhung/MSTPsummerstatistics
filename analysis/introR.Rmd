@@ -1,0 +1,30 @@
+---
+title: "Introduction to R"
+author: "Anthony Hung"
+date: "2019-04-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code.
+
+Both R and RStudio are freely available online.
+
+## Downloading/Installing R and RStudio
+
+* Download the appropriate "base" version of R for your operating system from CRAN: https://cran.r-project.org/
+
+* Install the software with default settings.
+
+* Download the appropriate RStudio version for your operating system: https://www.rstudio.com/products/rstudio/download/#download
+
+## 
+
+
+```{r}
+
+```
+

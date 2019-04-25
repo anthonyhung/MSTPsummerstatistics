@@ -1,0 +1,23 @@
+---
+title: "multipleTesting"
+author: "Anthony Hung"
+date: "2019-04-24"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+## The problem of multiple testing
+
+As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. 
+
+## Bonferroni Correction
+
+## False Discovery Rates
+
+```{r}
+
+```
+

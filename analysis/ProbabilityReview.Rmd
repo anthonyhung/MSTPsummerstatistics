@@ -9,17 +9,25 @@ editor_options:
 
 ## Introduction
 
-Probability is a foundational concept in statistics, and understanding the basics of probability is important for understanding the theory behind commonly used statistical tests and developing statistical methods. Here, we discuss 
+Probability is a foundational concept in statistics, and understanding the basics of probability is important for understanding the theory behind commonly used statistical tests and developing statistical methods. Here, we discuss the basics behind random variables and their probability distributions.
 
 ##Random Variables
 
-Random variables are variables that can take on a set of possible numerical outcomes, each of which has a probability of occuring. For example, the result of a coin flip can be thought of as a random variable that can take on one of two values: heads or tails, each with a probability $\frac{1}{2}$ of occuring. 
+Random variables are variables that can take on a set of possible numerical values, each of which has a probability of occuring. Oftentimes the numerical values that a random variable takes on represents a particular outcome. For example, the result of a coin flip can be thought of as a random variable that can take on one of two values: heads or tails, each with a probability $\frac{1}{2}$ of occuring. 
 
 
+| Value | Outcome | Probability |
+|----------------|-----------------------------------------------------------------------|---------------------------------------------------------|
+| $0$ | $heads$ | $P_{heads} = \frac{1}{2}$ |
+| $1$ | $tails$ | $P_{tails} = \frac{1}{2}$ |
 
 
 ##Properties of Random Variables
 
+The sum of all the probabilities of the possible values that a 
+
 ##Types of distributions: Discrete vs. Continuous
+
+##
 
 ##Working with named distributions in R

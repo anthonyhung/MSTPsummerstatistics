@@ -1,0 +1,80 @@
+---
+title: "The Central Limit Theorem"
+author: "Anthony Hung"
+date: "2019-04-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+The central limit theorem (CLT) is a fundamental pillar to statistics and probability. Understanding it goes a long way to explain why we can make inferences about populations (biology) based on a limited number of samples (experiments) taken from those populations.
+
+## Definitions
+
+The CLT states that for sufficiently large samples taken from a population with any population distribution, the sampling distribution of the mean tends towards a normal distribution centered around the true mean of the population. The power of this statement is that it does not matter what shape the population distribution takes. If our sample size is large enough, the distribution of our samples looks like a bell curve with a mean that is approximately equal to the population mean.
+
+To go more in depth, let's define what we mean by population and sampling distributions.
+
+### Example: Studying the heights of a population of wild deer
+
+Imagine we are rangers at a National Park and are charged with finding the average  height of all the deer (which number at 1,0000,000) in our park. One way to go about doing this would be go out one day and capture __all 1,000,000 deer in the park__ and measure their heights. If you were to do so, you may obtain a dataset that looks like this:
+
+```{r deer population parameters}
+deer_heights <- rbeta(1E6, 10, 1)*100
+
+hist(deer_heights)
+abline(v= mean(deer_heights), col="red")
+mean(deer_heights)
+```
+
+What we can see is that the histogram, or the __population distribution__ of the 1000 heights does not look like a bell curve, which means that the heights of the population of deer is not normally distributed. This is the population distibution, as it includes every single member of the population rather than representing a subset of the population. The mean of the population distribution of heights is 90.90923 (represented by the red line on the histogram). This the __population mean__.
+
+Of course, you will almost never have the resources or time to be able to measure every single individual in a population you are interested in. For example, as a ranger you may go out and randomly capture a few representative samples, each containing 30 deer from your park, and measure their heights to compute the mean height within each sample. Each of the means of your samples is a __sample mean__, and plotting the many sample means you have computed will give you the __sampling distribution__.
+
+Let's look first at individual sample means. Say we go out on 5 sampling expeditions, capturing 25 deer each time.
+
+```{r single samples}
+for(i in 1:5){
+  print(mean(sample(deer_heights, 25, replace=F)))
+}
+```
+
+The sample means from each of our 5 samples differ somewhat, due to the nature of random sampling. Some of the sample means are higher than the population mean, and some are lower. What happens if we take many more samples and plot their distribution?
+
+Below, we take 500 samples of size 25 from our original deer population, compute the means of each of those samples, and plot the sampling distribution.
+
+```{r sample deer}
+sample_means <- c()
+
+for(i in 1:500){
+  sample_means <- c(sample_means, mean(sample(deer_heights, 25, replace=F)))
+}
+hist(sample_means,  xlim = c(84, 98), main="Sampling distribution, n=25")
+abline(v=mean(sample_means), col="red")
+mean(sample_means)
+```
+
+We can appreciate that even though our __population distribution__ looked very left-skewed, our __sampling distribution__ looks much more bell-shaped and normal. The mean of the sampling distribution is 90.8481, which is very close to the true population mean. This, in essence, is what the CLT tells us. Even though our population distribution was not normally distributed, the shape of the sampling distribution tends to a normal distribution centered around the true population mean as the sample size increases. Furthermore, the larger our sample size, the lower the variance around the true population mean. What happens if instead of sampling 25 deer at a time, we sample 100?
+
+```{r sample deer 100}
+sample_means <- c()
+
+for(i in 1:500){
+  sample_means <- c(sample_means, mean(sample(deer_heights, 100, replace=F)))
+}
+hist(sample_means,  xlim = c(84, 98), main="Sampling distribution, n=100")
+abline(v=mean(sample_means), col="red")
+mean(sample_means)
+```
+
+By keeping both of our x-axis ranges constant, we can appreciate that the sampling distribution with sample sizes of 100 deer is much more tightly centered around the mean than the distribution with sample sizes of 25. 
+
+The relationship between the sample distribution variance and the sample size demonstrates why statistical inferences improve with larger sample sizes. As your n increases, you have more certainty in your estimates, since your sample statistics are more likely to be close to the true population parameters.
+
+## CLT $\ne$ Law of Large Numbers
+
+The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter Taken to the near limit, you can imagine that if you were able to sample 999,999 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
+
+In contrast, the CLT does not say anything about individual samples and their estimates of population parameters. Instead, it describes the shape of the sampling distribution, which encompasses what one would expect to see through taking many samples from the population.
