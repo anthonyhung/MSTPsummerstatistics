@@ -56,7 +56,7 @@ abline(v=mean(sample_means), col="red")
 mean(sample_means)
 ```
 
-We can appreciate that even though our __population distribution__ looked very left-skewed, our __sampling distribution__ looks much more bell-shaped and normal. The mean of the sampling distribution is 90.8481, which is very close to the true population mean. This, in essence, is what the CLT tells us. Even though our population distribution was not normally distributed, the shape of the sampling distribution tends to a normal distribution centered around the true population mean as the sample size increases. Furthermore, the larger our sample size, the lower the variance around the true population mean. What happens if instead of sampling 25 deer at a time, we sample 100?
+We can appreciate that even though our __population distribution__ looked very left-skewed, our __sampling distribution__ looks much more bell-shaped and normal. The mean of the sampling distribution is 90.8481, which is very close to the true population mean. This, in essence, is what the CLT tells us. Even though our population distribution was not normally distributed, the shape of the sampling distribution tends to a normal distribution centered around the true population mean as the sample size increases. The CLT not only tell us what shape to expect for our sampling distribution, but also how spread out our sampling distribution is expected to be depending on our sample size. What happens if instead of sampling 25 deer at a time, we sample 100?
 
 ```{r sample deer 100}
 sample_means <- c()
@@ -71,10 +71,25 @@ mean(sample_means)
 
 By keeping both of our x-axis ranges constant, we can appreciate that the sampling distribution with sample sizes of 100 deer is much more tightly centered around the mean than the distribution with sample sizes of 25. 
 
-The relationship between the sample distribution variance and the sample size demonstrates why statistical inferences improve with larger sample sizes. As your n increases, you have more certainty in your estimates, since your sample statistics are more likely to be close to the true population parameters.
+#### Standard deviation of sampling distribution
+
+Mathematically, the relationship between the sample size and the standard deviation of the sampling distribution as n tends towards large numbers is given by:
+
+$$\sigma_{sampling} = \frac{\sigma}{\sqrt{n}}$$
+
+The relationship between the sample distribution standard deviation and the sample size demonstrates why statistical inferences improve with larger sample sizes. As your n increases, you have more certainty in your estimates, since your sample statistics are more likely to be close to the true population parameters.
 
 ## CLT $\ne$ Law of Large Numbers
 
 The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter Taken to the near limit, you can imagine that if you were able to sample 999,999 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
 
 In contrast, the CLT does not say anything about individual samples and their estimates of population parameters. Instead, it describes the shape of the sampling distribution, which encompasses what one would expect to see through taking many samples from the population.
+
+
+## Key points about the CLT
+
+* The statement of the CLT allows us to use information we calculate based on a random representative sample to infer parameters of the population. This is of great usefulness to us a scientists. Imagine if the only way to obtain accurate measurements of a population of cells, mice, or patients was to measure every single last one!
+
+* The precision of the estimates we obtain from our samples depends very much on the sample size, or number of individuals contained within each sample.
+
+* The fact that even with large sample size, our estimates of the population mean have some amount of variance around the true population mean gives us an idea of the importance of replicating experiments. Replication allows us to get some sense of how large the standard deviation of our sampling distribution is, and averaging across replicates increases the accuracy of our estimates.
