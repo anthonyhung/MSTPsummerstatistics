@@ -10,6 +10,8 @@ output:
 
 ###Week 1:
 
+* [Course Introduction and Probability vs Statistics](introCourse.html)
+
 * [Central Limit Theorem](CLT.html)
 
 * [Probability Review](ProbabilityReview.html)
@@ -21,5 +23,3 @@ output:
 * [Linear Regression](linearRegression.html)
 
 * [Correcting for Mutliple Tests](multipleTesting.html)
-
-###Week 3:

@@ -1,5 +1,5 @@
 ---
-title: "linearRegression"
+title: "Introduction to the Course and Probability vs Statistics"
 author: "Anthony Hung"
 date: "2019-04-26"
 output: workflowr::wflow_html
@@ -7,6 +7,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduction
+## Welcome!
+
+## Goals
+
+## Probability vs Statistics
 
 
