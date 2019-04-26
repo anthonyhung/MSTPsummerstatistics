@@ -18,6 +18,8 @@ output:
 
 ###Week 2:
 
+* [Linear Regression](linearRegression.html)
+
 * [Correcting for Mutliple Tests](multipleTesting.html)
 
 ###Week 3:
