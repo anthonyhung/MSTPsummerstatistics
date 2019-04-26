@@ -88,6 +88,10 @@ In contrast, the CLT does not say anything about individual samples and their es
 
 ## Key points about the CLT
 
+* The CLT describes the characteristics of a __sampling distribution__, not individual samples themselves.
+
+* The CLT allows us to apply many of the statistical tests that are commonly used to a wide variety of situations. For example, in nature there is no such thing as a perfectly normally distributed population. However, the CLT tells us that if we have a large enough sample size, we can always expect to see a normally distributed sampling distribution, which means we can apply statistical tests that assume normality on sampling distributions.
+
 * The statement of the CLT allows us to use information we calculate based on a random representative sample to infer parameters of the population. This is of great usefulness to us a scientists. Imagine if the only way to obtain accurate measurements of a population of cells, mice, or patients was to measure every single last one!
 
 * The precision of the estimates we obtain from our samples depends very much on the sample size, or number of individuals contained within each sample.
