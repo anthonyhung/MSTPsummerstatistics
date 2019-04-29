@@ -14,9 +14,9 @@ output:
 
 * [Central Limit Theorem](CLT.html)
 
-* [Probability Review](ProbabilityReview.html)
-
 * [Introduction to R](introR.html)
+
+* [Probability Review](ProbabilityReview.html)
 
 ###Week 2:
 

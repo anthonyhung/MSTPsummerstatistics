@@ -11,9 +11,7 @@ output: workflowr::wflow_html
 A thorough understanding of statistics is essential for both experimental design and data analysis. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.
  
 In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for entry into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. At present, the biostatics course required for all MSTP trainees is very similar in content to what is covered in most introductory college statistics courses, making it unappealing and ineffective for most students. However, many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.
- 
-Building off of a basic, college-level understanding of statistics, this new journal-club style course aims to incorporate in-depth, field-specific workshops that will allow students to tailor their statistical toolbox to their particular research interests and goals.
- 
+
 ##Objectives
 
 * Foundations of theoretical and applied understanding of probability and statistics
@@ -47,3 +45,7 @@ Weeks 5-9: Breakouts within specific programs
 
 Week 10 : Data presentations
 
+
+## Acknowledgements
+
+Thank you very much to Frank Wen and Katie Lee, who started the course and gave helpful advice.

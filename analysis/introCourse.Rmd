@@ -9,8 +9,33 @@ editor_options:
 
 ## Welcome!
 
+I hope you are all excited for the course! Throughout this quarter we will covering topics in the theory and practical aspects of statistical tests and probabilistic inference. We will also have the time to engage in excercises to apply our knowledge to toy datasets. The course will close off with individual projects in which you work with data generated during your summer rotations using your newfound skills.
+
 ## Goals
+
+* Review foundations of theoretical and applied understanding of probability and statistics
+
+* Establish working knowledge of how to use R
+
+* Instill a deeper understanding of statistical tests specific to research area
+
+* Connect students with resources to seek out statistical advising in the future
+
+* Carry out a data analysis project using real data
+
 
 ## Probability vs Statistics
 
+While the title of this course only mentions statistics, in reality knowledge of probability and statitics go hand-in-hand. Both probability and statistics deal with analyzing the relative frequency of events that are the result of random processes.
 
+*From Steven Skiena's "Calculated Bets" book:*
+
+>__Probability__ deals with predicting the likelihood of future events, while __statistics__ involves the analysis of the frequency of past events.
+
+>__Probability theory__ enables us to find the consequences of a given ideal world, while __statistical theory__ enables us to to measure the extent to which our world is ideal.
+
+We will explore more of both of these fields throughout the course.
+
+## Bibliography
+
+* https://www3.cs.stonybrook.edu/~skiena/jaialai/excerpts/node12.html

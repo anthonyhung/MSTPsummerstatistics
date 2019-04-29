@@ -2,14 +2,16 @@
 title: "Introduction to R"
 author: "Anthony Hung"
 date: "2019-04-25"
-output: workflowr::wflow_html
+output: 
+  workflowr::wflow_html:
+    code_folding: show
 editor_options:
   chunk_output_type: console
 ---
 
 ## Introduction
 
-Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code.
+Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code as we develop it.
 
 Both R and RStudio are freely available online.
 
@@ -21,10 +23,165 @@ Both R and RStudio are freely available online.
 
 * Download the appropriate RStudio version for your operating system: https://www.rstudio.com/products/rstudio/download/#download
 
-## 
+## R Basics
 
+Follow along in your R console with the code in each of the code chunks as we explore the different aspects of R! Clicking on the github logo on the top right corner of the webpage will take you to the repository for this website, where you can download the R markdown file for this page to load into RStudio to follow along.
 
-```{r}
+### Mathematical operations in R
 
+Many familiar operators work in R, allowing you to work with numbers like you would in a calculator. Operators such as inequalities also work, returning "TRUE" if the proposed logical expression is true and "FALSE" otherwise.
+
+```{r math}
+2+4 #addition
+2-4 #subtraction
+2*4 #multiplication
+2/4 #division
+2^4 #exponentiation
+log(2) #the default log base is the natural log
+
+2 < 4
+2 > 4
+2 >= 4 #greater than or equal to 
+2 == 2 #is equal to (notice that there are two equal signs, as a single equal sign denotes assignment)
+2 != 4 #is not equal to 
+2 != 4 | 2 + 2 == 4 #OR
+2 != 4 & 2 + 2 == 4 #AND
+"Red" == "Red"
 ```
 
+### Objects
+
+In addition to being able to work with actual numbers, R works in objects, which can represent anything from numbers to strings to vectors to matrices. Everything in R is an object. The best practice for assigning variable names to objects is the "<-" operator. After objects are created, they are stored in in the "Environment" tab in your RStudio console and can be called upon to perform different operations.
+
+R has many data structures, including:
+
+* atomic vector
+* list
+* matrix
+* data frame
+* factors
+
+R has 6 atomic vector types, or classes. Atomic means that a vector only contains elements of one class (i.e. the elements inside the vector do not come from mutliple classes).
+
+* character
+* numeric (real or decimal)
+* integer
+* logical (TRUE or FALSE)
+* complex (containing i)
+
+```{r objects}
+a <- 2
+b <- 3
+a + b
+class(a) #the "class" function tells you what class of object a is
+
+d <- c(1,2,3,4,5) #the "c" function concatenates the arguments contained within it into a vector
+class(d)
+d[3] #brackets allow you index vectors or matrices. Here, we call the third value from our d vector.
+
+#The below code stores the stated values in a dataframe which contains employee ids, names, salaries, and start dates for 5 employees
+emp.data <- data.frame(
+   emp_id = c (1:5), 
+   emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+   salary = c(623.3,515.2,611.0,729.0,843.25), 
+   
+   start_date = as.Date(c("2012-01-01", "2013-09-23", "2014-11-15", "2014-05-11",
+      "2015-03-27")),
+   stringsAsFactors = FALSE
+)
+
+emp.data
+emp.data$emp_id #the $ operator calls on a certain column of a dataframe
+emp.data$emp_name[emp.data$salary > 620] #You can combine logical operators, brackets, and the $ sign to subset your dataframe in any way you choose! Here, we print out all the employee names for employees who have a salary greater than 620.
+
+ls() #ls lists all the variable names that have been assigned to objects in your workspace
+```
+
+### Using Packages in R
+
+In addition to the basic functions provided in R, oftentimes we will be working with packages that contain functions written by other people to perform common tasks or specific analyses. Packages can also contain datasets. We can load these packages into our R environment after installing them in R.
+
+```{r Packages}
+usePackage <- function(p) 
+{
+  if (!is.element(p, installed.packages()[,1]))
+    install.packages(p, dep = TRUE)
+  require(p, character.only = TRUE)
+}
+
+usePackage("gapminder")#This code installs the gapminder packages, which contains vital statistics data from multiple countries. install.packages() is the function that will install a package for you if you know it's name.
+library("gapminder") #After installing the package, we need to tell R to load it into our current environment with this function.
+head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the "head" function to print out the first 6 rows of this dataset.
+
+?gapminder #the ? operator lauches a help page to describe a particular function, including the arguments it takes. Whenever using a new function, it is good practice to first explore it through ?.
+```
+
+### Loops
+
+Oftentimes, we may want to perform the same operation or function many many times. Rather than having to explicitly write out each individual operation, we can make use of loops. For example, let's say that we want to raise the number 2 to the power of each integer from 0 to 20. We could either write out 2^0, 2^1, 2^2 ..., or make use of a for loop to condense our code while getting the same result.
+
+```{r loops}
+2^0
+2^1
+2^2
+2^3
+# ...
+
+#This is a for loop. in the parentheses after the for function, we specify over what range of values we want to loop over, and assign a dummy variable name to take on each of those values in sequence. Within the curly braces, we state what operation we want to perform over all the values taken on by the dummy variable.
+for(i in 0:20){
+  print(2^i)
+}
+```
+
+### User-defined Functions (UDF)
+
+Another way to avoid writing out or copy-pasting the same exact thing over and over again when working with data is to write a function to contain a certain combination of operations you find yourself running mutliple times. For example, you may find yourself needing to calculate the Hardy-Weinberg Equillibrium genotype frequencies of a population given the allele frequencies. We can wrap up all the code that you would need to calculate this in a function that we can call upon again and again.
+
+```{r functions}
+calc_HWE_geno <- function(p = 0.5){ 
+  q <- 1-p
+  
+  pp <- p^2
+  pq <- 2*p*q
+  qq <- q^2
+  
+  return(c(pp, pq, qq))
+}
+
+calc_HWE_geno(p = 0.1)
+
+#note that in our UDF we assigned a default value to p (p = 0.5). This means that if we do not specify a value for our argument of p, it will default to using that value.
+
+calc_HWE_geno()
+```
+
+### Plots
+
+In addition to mathematical operations, R can help with data visualization. Base R has a few useful plotting functions, but popular packages such as ggplot2 give more customization and control to the user.
+
+```{r Plotting}
+hist(gapminder$lifeExp)
+
+boxplot(lifeExp ~ continent, data = gapminder) #box plot for the life expectancies of all years per continent
+```
+
+### Setting a random seed
+
+R has many functions that use a random number generator to generate an output. For example, the r____ functions (e.g. rbinom, runif) pull numbers from a probability distribution of your choice. In order to create reproducible analyses, it is often advantageous to be able to reliably obtain the same "random" number after running the same function over again. In order to do so, we can set a seed for the random number generator.
+
+```{r seed}
+runif(1,0,1) #runif pulls a number from the uniform distribution with a set of given parameters
+runif(1,0,1) #we can see that running runif twice gives you differnt results
+
+set.seed(1234) #setting a seed allows us to obtain reproducible results from functions that use the random number generator
+runif(1,0,1)
+
+set.seed(1234)
+runif(1,0,1)
+```
+
+## Exercises:
+
+1. Write a function called calc_KE that takes as arguments the mass and velocity of an object and returns the kinetic energy of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s.
+
+2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.

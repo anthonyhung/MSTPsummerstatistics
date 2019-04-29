@@ -5,6 +5,9 @@ date: "2019-04-24"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
+  header-includes:
+     - \usepackage{tabularx}
+     - \usepackage{tcolorbox}
 ---
 
 ## Introduction

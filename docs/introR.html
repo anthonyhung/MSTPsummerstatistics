@@ -173,7 +173,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -251,13 +251,22 @@ div.section {
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#downloadinginstalling-r-and-rstudio">Downloading/Installing R and RStudio</a></li>
-<li><a href="#section"></a></li>
+<li><a href="#r-basics">R Basics</a><ul>
+<li><a href="#mathematical-operations-in-r">Mathematical operations in R</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#using-packages-in-r">Using Packages in R</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#user-defined-functions-udf">User-defined Functions (UDF)</a></li>
+<li><a href="#plots">Plots</a></li>
+<li><a href="#setting-a-random-seed">Setting a random seed</a></li>
+</ul></li>
+<li><a href="#exercises">Exercises:</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -266,7 +275,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -275,10 +284,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-26
+<strong>Last updated:</strong> 2019-04-28
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -294,12 +303,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -354,10 +363,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree3c0adcd1114f8914857ad0612204f3f6b48d2c1ctargetblank3c0adcda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/3c0adcd1114f8914857ad0612204f3f6b48d2c1c" target="_blank">3c0adcd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree22b3720a083c2f1e82c8ad357ae66aff45fe46d9targetblank22b3720a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/22b3720a083c2f1e82c8ad357ae66aff45fe46d9" target="_blank">22b3720</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree3c0adcd1114f8914857ad0612204f3f6b48d2c1ctargetblank3c0adcda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree22b3720a083c2f1e82c8ad357ae66aff45fe46d9targetblank22b3720a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -366,9 +375,15 @@ Great! You are using Git for version control. Tracking code development and conn
 Ignored files:
     Ignored:    .Rproj.user/
 
+Untracked files:
+    Untracked:  docs/figure/introR.Rmd/
+
 Unstaged changes:
     Modified:   analysis/introCourse.Rmd
+    Modified:   analysis/introR.Rmd
     Modified:   analysis/linearRegression.Rmd
+    Modified:   analysis/multipleTesting.Rmd
+    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -407,6 +422,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/22b3720a083c2f1e82c8ad357ae66aff45fe46d9/docs/introR.html" target="_blank">22b3720</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -501,7 +533,7 @@ finish CLT
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code.</p>
+<p>Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code as we develop it.</p>
 <p>Both R and RStudio are freely available online.</p>
 </div>
 <div id="downloadinginstalling-r-and-rstudio" class="section level2">
@@ -512,8 +544,209 @@ finish CLT
 <li><p>Download the appropriate RStudio version for your operating system: <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></p></li>
 </ul>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
+<div id="r-basics" class="section level2">
+<h2>R Basics</h2>
+<p>Follow along in your R console with the code in each of the code chunks as we explore the different aspects of R! Clicking on the github logo on the top right corner of the webpage will take you to the repository for this website, where you can download the R markdown file for this page to load into RStudio to follow along.</p>
+<div id="mathematical-operations-in-r" class="section level3">
+<h3>Mathematical operations in R</h3>
+<p>Many familiar operators work in R, allowing you to work with numbers like you would in a calculator. Operators such as inequalities also work, returning “TRUE” if the proposed logical expression is true and “FALSE” otherwise.</p>
+<pre class="r"><code>2+4 #addition</code></pre>
+<pre><code>[1] 6</code></pre>
+<pre class="r"><code>2-4 #subtraction</code></pre>
+<pre><code>[1] -2</code></pre>
+<pre class="r"><code>2*4 #multiplication</code></pre>
+<pre><code>[1] 8</code></pre>
+<pre class="r"><code>2/4 #division</code></pre>
+<pre><code>[1] 0.5</code></pre>
+<pre class="r"><code>2^4 #exponentiation</code></pre>
+<pre><code>[1] 16</code></pre>
+<pre class="r"><code>log(2) #the default log base is the natural log</code></pre>
+<pre><code>[1] 0.6931472</code></pre>
+<pre class="r"><code>2 &lt; 4</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>2 &gt; 4</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre class="r"><code>2 &gt;= 4 #greater than or equal to </code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre class="r"><code>2 == 2 #is equal to (notice that there are two equal signs, as a single equal sign denotes assignment)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>2 != 4 #is not equal to </code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>2 != 4 | 2 + 2 == 4 #OR</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>2 != 4 &amp; 2 + 2 == 4 #AND</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>&quot;Red&quot; == &quot;Red&quot;</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="objects" class="section level3">
+<h3>Objects</h3>
+<p>In addition to being able to work with actual numbers, R works in objects, which can represent anything from numbers to strings to vectors to matrices. Everything in R is an object. The best practice for assigning variable names to objects is the “&lt;-” operator. After objects are created, they are stored in in the “Environment” tab in your RStudio console and can be called upon to perform different operations.</p>
+<p>R has many data structures, including:</p>
+<ul>
+<li>atomic vector</li>
+<li>list</li>
+<li>matrix</li>
+<li>data frame</li>
+<li>factors</li>
+</ul>
+<p>R has 6 atomic vector types, or classes. Atomic means that a vector only contains elements of one class (i.e. the elements inside the vector do not come from mutliple classes).</p>
+<ul>
+<li>character</li>
+<li>numeric (real or decimal)</li>
+<li>integer</li>
+<li>logical (TRUE or FALSE)</li>
+<li>complex (containing i)</li>
+</ul>
+<pre class="r"><code>a &lt;- 2
+b &lt;- 3
+a + b</code></pre>
+<pre><code>[1] 5</code></pre>
+<pre class="r"><code>class(a) #the &quot;class&quot; function tells you what class of object a is</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>d &lt;- c(1,2,3,4,5) #the &quot;c&quot; function concatenates the arguments contained within it into a vector
+class(d)</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>d[3] #brackets allow you index vectors or matrices. Here, we call the third value from our d vector.</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre class="r"><code>#The below code stores the stated values in a dataframe which contains employee ids, names, salaries, and start dates for 5 employees
+emp.data &lt;- data.frame(
+   emp_id = c (1:5), 
+   emp_name = c(&quot;Rick&quot;,&quot;Dan&quot;,&quot;Michelle&quot;,&quot;Ryan&quot;,&quot;Gary&quot;),
+   salary = c(623.3,515.2,611.0,729.0,843.25), 
+   
+   start_date = as.Date(c(&quot;2012-01-01&quot;, &quot;2013-09-23&quot;, &quot;2014-11-15&quot;, &quot;2014-05-11&quot;,
+      &quot;2015-03-27&quot;)),
+   stringsAsFactors = FALSE
+)
+
+emp.data</code></pre>
+<pre><code>  emp_id emp_name salary start_date
+1      1     Rick 623.30 2012-01-01
+2      2      Dan 515.20 2013-09-23
+3      3 Michelle 611.00 2014-11-15
+4      4     Ryan 729.00 2014-05-11
+5      5     Gary 843.25 2015-03-27</code></pre>
+<pre class="r"><code>emp.data$emp_id #the $ operator calls on a certain column of a dataframe</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>emp.data$emp_name[emp.data$salary &gt; 620] #You can combine logical operators, brackets, and the $ sign to subset your dataframe in any way you choose! Here, we print out all the employee names for employees who have a salary greater than 620.</code></pre>
+<pre><code>[1] &quot;Rick&quot; &quot;Ryan&quot; &quot;Gary&quot;</code></pre>
+<pre class="r"><code>ls() #ls lists all the variable names that have been assigned to objects in your workspace</code></pre>
+<pre><code>[1] &quot;a&quot;        &quot;b&quot;        &quot;d&quot;        &quot;emp.data&quot;</code></pre>
+</div>
+<div id="using-packages-in-r" class="section level3">
+<h3>Using Packages in R</h3>
+<p>In addition to the basic functions provided in R, oftentimes we will be working with packages that contain functions written by other people to perform common tasks or specific analyses. Packages can also contain datasets. We can load these packages into our R environment after installing them in R.</p>
+<pre class="r"><code>usePackage &lt;- function(p) 
+{
+  if (!is.element(p, installed.packages()[,1]))
+    install.packages(p, dep = TRUE)
+  require(p, character.only = TRUE)
+}
+
+usePackage(&quot;gapminder&quot;)#This code installs the gapminder packages, which contains vital statistics data from multiple countries. install.packages() is the function that will install a package for you if you know it&#39;s name.</code></pre>
+<pre><code>Loading required package: gapminder</code></pre>
+<pre class="r"><code>library(&quot;gapminder&quot;) #After installing the package, we need to tell R to load it into our current environment with this function.
+head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the &quot;head&quot; function to print out the first 6 rows of this dataset.</code></pre>
+<pre><code># A tibble: 6 x 6
+  country     continent  year lifeExp      pop gdpPercap
+  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+1 Afghanistan Asia       1952    28.8  8425333      779.
+2 Afghanistan Asia       1957    30.3  9240934      821.
+3 Afghanistan Asia       1962    32.0 10267083      853.
+4 Afghanistan Asia       1967    34.0 11537966      836.
+5 Afghanistan Asia       1972    36.1 13079460      740.
+6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
+<pre class="r"><code>?gapminder #the ? operator lauches a help page to describe a particular function, including the arguments it takes. Whenever using a new function, it is good practice to first explore it through ?.</code></pre>
+</div>
+<div id="loops" class="section level3">
+<h3>Loops</h3>
+<p>Oftentimes, we may want to perform the same operation or function many many times. Rather than having to explicitly write out each individual operation, we can make use of loops. For example, let’s say that we want to raise the number 2 to the power of each integer from 0 to 20. We could either write out 2^0, 2^1, 2^2 …, or make use of a for loop to condense our code while getting the same result.</p>
+<pre class="r"><code>2^0</code></pre>
+<pre><code>[1] 1</code></pre>
+<pre class="r"><code>2^1</code></pre>
+<pre><code>[1] 2</code></pre>
+<pre class="r"><code>2^2</code></pre>
+<pre><code>[1] 4</code></pre>
+<pre class="r"><code>2^3</code></pre>
+<pre><code>[1] 8</code></pre>
+<pre class="r"><code># ...
+
+#This is a for loop. in the parentheses after the for function, we specify over what range of values we want to loop over, and assign a dummy variable name to take on each of those values in sequence. Within the curly braces, we state what operation we want to perform over all the values taken on by the dummy variable.
+for(i in 0:20){
+  print(2^i)
+}</code></pre>
+<pre><code>[1] 1
+[1] 2
+[1] 4
+[1] 8
+[1] 16
+[1] 32
+[1] 64
+[1] 128
+[1] 256
+[1] 512
+[1] 1024
+[1] 2048
+[1] 4096
+[1] 8192
+[1] 16384
+[1] 32768
+[1] 65536
+[1] 131072
+[1] 262144
+[1] 524288
+[1] 1048576</code></pre>
+</div>
+<div id="user-defined-functions-udf" class="section level3">
+<h3>User-defined Functions (UDF)</h3>
+<p>Another way to avoid writing out or copy-pasting the same exact thing over and over again when working with data is to write a function to contain a certain combination of operations you find yourself running mutliple times. For example, you may find yourself needing to calculate the Hardy-Weinberg Equillibrium genotype frequencies of a population given the allele frequencies. We can wrap up all the code that you would need to calculate this in a function that we can call upon again and again.</p>
+<pre class="r"><code>calc_HWE_geno &lt;- function(p = 0.5){ 
+  q &lt;- 1-p
+  
+  pp &lt;- p^2
+  pq &lt;- 2*p*q
+  qq &lt;- q^2
+  
+  return(c(pp, pq, qq))
+}
+
+calc_HWE_geno(p = 0.1)</code></pre>
+<pre><code>[1] 0.01 0.18 0.81</code></pre>
+<pre class="r"><code>#note that in our UDF we assigned a default value to p (p = 0.5). This means that if we do not specify a value for our argument of p, it will default to using that value.
+
+calc_HWE_geno()</code></pre>
+<pre><code>[1] 0.25 0.50 0.25</code></pre>
+</div>
+<div id="plots" class="section level3">
+<h3>Plots</h3>
+<p>In addition to mathematical operations, R can help with data visualization. Base R has a few useful plotting functions, but popular packages such as ggplot2 give more customization and control to the user.</p>
+<pre class="r"><code>hist(gapminder$lifeExp)</code></pre>
+<p><img src="figure/introR.Rmd/Plotting-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>boxplot(lifeExp ~ continent, data = gapminder) #box plot for the life expectancies of all years per continent</code></pre>
+<p><img src="figure/introR.Rmd/Plotting-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="setting-a-random-seed" class="section level3">
+<h3>Setting a random seed</h3>
+<p>R has many functions that use a random number generator to generate an output. For example, the r____ functions (e.g. rbinom, runif) pull numbers from a probability distribution of your choice. In order to create reproducible analyses, it is often advantageous to be able to reliably obtain the same “random” number after running the same function over again. In order to do so, we can set a seed for the random number generator.</p>
+<pre class="r"><code>runif(1,0,1) #runif pulls a number from the uniform distribution with a set of given parameters</code></pre>
+<pre><code>[1] 0.1944457</code></pre>
+<pre class="r"><code>runif(1,0,1) #we can see that running runif twice gives you differnt results</code></pre>
+<pre><code>[1] 0.205278</code></pre>
+<pre class="r"><code>set.seed(1234) #setting a seed allows us to obtain reproducible results from functions that use the random number generator
+runif(1,0,1)</code></pre>
+<pre><code>[1] 0.1137034</code></pre>
+<pre class="r"><code>set.seed(1234)
+runif(1,0,1)</code></pre>
+<pre><code>[1] 0.1137034</code></pre>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises:</h2>
+<ol style="list-style-type: decimal">
+<li><p>Write a function called calc_KE that takes as arguments the mass and velocity of an object and returns the kinetic energy of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s.</p></li>
+<li><p>Working with the gapminder dataset, find the country with the highest life expectancy in 1962.</p></li>
+</ol>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -536,12 +769,17 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] gapminder_0.3.0
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
- [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
-[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
-[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] Rcpp_0.12.18     knitr_1.20       whisker_0.3-2    magrittr_1.5    
+ [5] workflowr_1.3.0  rlang_0.2.2      fansi_0.3.0      stringr_1.3.1   
+ [9] tools_3.5.1      utf8_1.1.4       cli_1.0.0        git2r_0.23.0    
+[13] htmltools_0.3.6  yaml_2.2.0       rprojroot_1.3-2  digest_0.6.16   
+[17] assertthat_0.2.1 tibble_1.4.2     crayon_1.3.4     fs_1.2.7        
+[21] glue_1.3.0       evaluate_0.11    rmarkdown_1.10   stringi_1.2.4   
+[25] compiler_3.5.1   pillar_1.3.0     backports_1.1.2 </code></pre>
 </div>
 </div>
 
