@@ -266,7 +266,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -275,7 +275,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -287,7 +287,7 @@ div.section {
 <strong>Last updated:</strong> 2019-04-28
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -303,12 +303,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -363,10 +363,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree22b3720a083c2f1e82c8ad357ae66aff45fe46d9targetblank22b3720a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/22b3720a083c2f1e82c8ad357ae66aff45fe46d9" target="_blank">22b3720</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree133df4a6da47042807011612d94187d322af9c12targetblank133df4aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/133df4a6da47042807011612d94187d322af9c12" target="_blank">133df4a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree22b3720a083c2f1e82c8ad357ae66aff45fe46d9targetblank22b3720a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree133df4a6da47042807011612d94187d322af9c12targetblank133df4aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -374,16 +374,6 @@ Great! You are using Git for version control. Tracking code development and conn
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  docs/figure/introR.Rmd/
-
-Unstaged changes:
-    Modified:   analysis/introCourse.Rmd
-    Modified:   analysis/introR.Rmd
-    Modified:   analysis/linearRegression.Rmd
-    Modified:   analysis/multipleTesting.Rmd
-    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -422,6 +412,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/133df4a6da47042807011612d94187d322af9c12/analysis/introR.Rmd" target="_blank">133df4a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-28
+</td>
+<td>
+introR
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/133df4a6da47042807011612d94187d322af9c12/docs/introR.html" target="_blank">133df4a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-28
+</td>
+<td>
+introR
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -723,8 +747,82 @@ calc_HWE_geno()</code></pre>
 <p>In addition to mathematical operations, R can help with data visualization. Base R has a few useful plotting functions, but popular packages such as ggplot2 give more customization and control to the user.</p>
 <pre class="r"><code>hist(gapminder$lifeExp)</code></pre>
 <p><img src="figure/introR.Rmd/Plotting-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-Plotting-1">
+Past versions of Plotting-1.png
+</button>
+</p>
+<div id="fig-Plotting-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/133df4a6da47042807011612d94187d322af9c12/docs/figure/introR.Rmd/Plotting-1.png" target="_blank">133df4a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>boxplot(lifeExp ~ continent, data = gapminder) #box plot for the life expectancies of all years per continent</code></pre>
 <p><img src="figure/introR.Rmd/Plotting-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-Plotting-2">
+Past versions of Plotting-2.png
+</button>
+</p>
+<div id="fig-Plotting-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/133df4a6da47042807011612d94187d322af9c12/docs/figure/introR.Rmd/Plotting-2.png" target="_blank">133df4a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="setting-a-random-seed" class="section level3">
 <h3>Setting a random seed</h3>
