@@ -18,6 +18,8 @@ output:
 
 * [Probability Review](ProbabilityReview.html)
 
+* [Hidden Markov Models](HMM.html)
+
 ###Week 2:
 
 * [Linear Regression](linearRegression.html)
