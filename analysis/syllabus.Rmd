@@ -27,13 +27,13 @@ In an era of increasingly accessible computational tools, big data, and an empha
 
 ##Outline of Course
 
-Week 1: Why statistics matters; Intro to R; Probability and distributions
+Week 1: Why statistics matters; Intro to R; Probability and distributions; Markov Chains
 
 Week 2: Review of basic statistical tests
 
 Week 3: PCA, t-SNE, bootstrapping and machine learning
 
-Week 4: Markov Chains; Hidden Markov Models; Linear Regression; Mutliple Testing
+Week 4: Hidden Markov Models; Linear Regression; Mutliple Testing
 
 Weeks 5-9: Breakouts within specific programs
 

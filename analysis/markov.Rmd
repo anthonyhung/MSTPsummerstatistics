@@ -1,7 +1,7 @@
 ---
-title: "HMM"
+title: "markov"
 author: "Anthony Hung"
-date: "2019-04-29"
+date: "2019-05-01"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -12,7 +12,4 @@ editor_options:
 ```{r}
 
 ```
-
-
-Three fundamental problems to solve in HMMs
 

@@ -18,10 +18,14 @@ output:
 
 * [Probability Review](ProbabilityReview.html)
 
-* [Hidden Markov Models](HMM.html)
+* [Introduction to Markov Chains](markov.html)
 
-###Week 2:
+###Week 4:
+
+* [Hidden Markov Models](HMM.html)
 
 * [Linear Regression](linearRegression.html)
 
 * [Correcting for Mutliple Tests](multipleTesting.html)
+
+* [Power](powerAnalyses.html)
