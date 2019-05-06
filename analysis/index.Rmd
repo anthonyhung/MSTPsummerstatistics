@@ -8,7 +8,7 @@ output:
 #Welcome to the Summer Statistics Website! 
 * [Syllabus](syllabus.html) 
 
-###Week 1:
+### Week 1:
 
 * [Course Introduction and Probability vs Statistics](introCourse.html)
 
@@ -20,7 +20,7 @@ output:
 
 * [Introduction to Markov Chains](markov.html)
 
-###Week 4:
+### Week 4:
 
 * [Hidden Markov Models](HMM.html)
 
