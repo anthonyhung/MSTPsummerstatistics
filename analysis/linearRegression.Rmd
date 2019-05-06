@@ -8,3 +8,4 @@ editor_options:
 ---
 
 ## Introduction
+Oftentimes in science we will be interested in the relationship between two or more variables. A linear model, in which all the 

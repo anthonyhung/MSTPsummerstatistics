@@ -27,7 +27,7 @@ In an era of increasingly accessible computational tools, big data, and an empha
 
 ##Outline of Course
 
-Week 1: Why statistics matters; the Central Limit Theorem; Intro to R; Probability and distributions; Markov Chains
+Week 1: Why statistics matter; the Central Limit Theorem; Intro to R; Probability and distributions; Markov Chains
 
 Week 2: Review of basic statistical tests
 
@@ -48,4 +48,4 @@ Week 10 : Data presentations
 
 ## Acknowledgements
 
-Thank you very much to Frank Wen and Katie Lee, who started the course and gave helpful advice.
+Thank you very much to Frank Wen and Katie Lee, who started the course and gave helpful advice on course material and structure.

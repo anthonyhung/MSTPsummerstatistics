@@ -11,9 +11,9 @@
 
 <meta name="author" content="Anthony Hung" />
 
-<meta name="date" content="2019-04-24" />
+<meta name="date" content="2019-05-02" />
 
-<title>ProbabilityReview</title>
+<title>powerAnalyses</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -241,22 +241,21 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">ProbabilityReview</h1>
+<h1 class="title toc-ignore">powerAnalyses</h1>
 <h4 class="author"><em>Anthony Hung</em></h4>
-<h4 class="date"><em>2019-04-24</em></h4>
+<h4 class="date"><em>2019-05-02</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#section"></a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -265,7 +264,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -277,7 +276,7 @@ div.section {
 <strong>Last updated:</strong> 2019-05-06
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -293,12 +292,60 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
 </div>
 </div>
 </div>
@@ -365,10 +412,10 @@ Message
 <tbody>
 <tr>
 <td>
-html
+Rmd
 </td>
 <td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/docs/ProbabilityReview.html" target="_blank">ee75486</a>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/analysis/powerAnalyses.Rmd" target="_blank">ee75486</a>
 </td>
 <td>
 Anthony Hung
@@ -380,193 +427,6 @@ Anthony Hung
 Build site.
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5ea5f30ecc0c0780f1e40f7924eccb5da5a8973d/docs/ProbabilityReview.html" target="_blank">5ea5f30</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e0e8156650bd033b8f00400d88482996b63fce23/docs/ProbabilityReview.html" target="_blank">e0e8156</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e746cf5aeb1cb8550432e5e1c4d068084db37bfa/docs/ProbabilityReview.html" target="_blank">e746cf5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/22b3720a083c2f1e82c8ad357ae66aff45fe46d9/docs/ProbabilityReview.html" target="_blank">22b3720</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ddb3114f340d0a205d34aca4f7f35c516049fdb5/docs/ProbabilityReview.html" target="_blank">ddb3114</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/413d06593754be3f2cb5c65bf0f9f8b290e45c40/docs/ProbabilityReview.html" target="_blank">413d065</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6b98d6c19b53e6c549857d19bc13f75fe78e1289/docs/ProbabilityReview.html" target="_blank">6b98d6c</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/9f13e70b59c42080ed5d3870179af2956771d47e/analysis/ProbabilityReview.Rmd" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9f13e70b59c42080ed5d3870179af2956771d47e/docs/ProbabilityReview.html" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/68d1b401cd8805eaa95b3891e918bddbed4be94e/analysis/ProbabilityReview.Rmd" target="_blank">68d1b40</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Start probability intro
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/68d1b401cd8805eaa95b3891e918bddbed4be94e/docs/ProbabilityReview.html" target="_blank">68d1b40</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Start probability intro
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -576,37 +436,35 @@ Start probability intro
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Probability is a foundational concept in statistics, and understanding the basics of probability is important for understanding the theory behind commonly used statistical tests and developing statistical methods. Here, we discuss the basics behind random variables and their probability distributions.</p>
-<p>##Random Variables</p>
-<p>Random variables are variables that can take on a set of possible numerical values, each of which has a probability of occuring. Oftentimes the numerical values that a random variable takes on represents a particular outcome. For example, the result of a coin flip can be thought of as a random variable that can take on one of two values: heads or tails, each with a probability <span class="math inline">\(\frac{1}{2}\)</span> of occuring.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Value</th>
-<th>Outcome</th>
-<th>Probability</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(0\)</span></td>
-<td><span class="math inline">\(heads\)</span></td>
-<td><span class="math inline">\(P_{heads} = \frac{1}{2}\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(1\)</span></td>
-<td><span class="math inline">\(tails\)</span></td>
-<td><span class="math inline">\(P_{tails} = \frac{1}{2}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>##Properties of Random Variables</p>
-<p>The sum of all the probabilities of the possible values that a Random Variable can take must equal 1.</p>
-<p>##Types of distributions: Discrete vs. Continuous</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.14.4
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
+ [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
+ [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
+[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
+[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
-<p>##Working with named distributions in R</p>
 </div>
 
 <script type="text/x-mathjax-config">

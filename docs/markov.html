@@ -11,9 +11,9 @@
 
 <meta name="author" content="Anthony Hung" />
 
-<meta name="date" content="2019-04-24" />
+<meta name="date" content="2019-05-01" />
 
-<title>ProbabilityReview</title>
+<title>Markov Chains</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -241,16 +241,17 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">ProbabilityReview</h1>
+<h1 class="title toc-ignore">Markov Chains</h1>
 <h4 class="author"><em>Anthony Hung</em></h4>
-<h4 class="date"><em>2019-04-24</em></h4>
+<h4 class="date"><em>2019-05-01</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#section"></a></li>
+<li><a href="#the-markov-assumption">The Markov assumption</a></li>
+<li><a href="#components-of-markov-chains">Components of Markov Chains</a></li>
 </ul>
 </div>
 
@@ -274,7 +275,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-06
+<strong>Last updated:</strong> 2019-05-05
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -305,10 +306,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree536085f32c0661eee314035d5f2b7f3ab5548827targetblank536085fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/536085f32c0661eee314035d5f2b7f3ab5548827" target="_blank">536085f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree68addd76037669fa2544cf908f3598cd9e58fb91targetblank68addd7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/68addd76037669fa2544cf908f3598cd9e58fb91" target="_blank">68addd7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree536085f32c0661eee314035d5f2b7f3ab5548827targetblank536085fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree68addd76037669fa2544cf908f3598cd9e58fb91targetblank68addd7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -319,11 +320,9 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
-    Modified:   analysis/ProbabilityReview.Rmd
     Modified:   analysis/index.Rmd
     Modified:   analysis/linearRegression.Rmd
     Modified:   analysis/markov.Rmd
-    Modified:   analysis/multipleTesting.Rmd
     Modified:   analysis/syllabus.Rmd
 
 </code></pre>
@@ -365,10 +364,10 @@ Message
 <tbody>
 <tr>
 <td>
-html
+Rmd
 </td>
 <td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/docs/ProbabilityReview.html" target="_blank">ee75486</a>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/analysis/markov.Rmd" target="_blank">ee75486</a>
 </td>
 <td>
 Anthony Hung
@@ -380,193 +379,6 @@ Anthony Hung
 Build site.
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5ea5f30ecc0c0780f1e40f7924eccb5da5a8973d/docs/ProbabilityReview.html" target="_blank">5ea5f30</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e0e8156650bd033b8f00400d88482996b63fce23/docs/ProbabilityReview.html" target="_blank">e0e8156</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e746cf5aeb1cb8550432e5e1c4d068084db37bfa/docs/ProbabilityReview.html" target="_blank">e746cf5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/22b3720a083c2f1e82c8ad357ae66aff45fe46d9/docs/ProbabilityReview.html" target="_blank">22b3720</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ddb3114f340d0a205d34aca4f7f35c516049fdb5/docs/ProbabilityReview.html" target="_blank">ddb3114</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/413d06593754be3f2cb5c65bf0f9f8b290e45c40/docs/ProbabilityReview.html" target="_blank">413d065</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6b98d6c19b53e6c549857d19bc13f75fe78e1289/docs/ProbabilityReview.html" target="_blank">6b98d6c</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/9f13e70b59c42080ed5d3870179af2956771d47e/analysis/ProbabilityReview.Rmd" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9f13e70b59c42080ed5d3870179af2956771d47e/docs/ProbabilityReview.html" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/68d1b401cd8805eaa95b3891e918bddbed4be94e/analysis/ProbabilityReview.Rmd" target="_blank">68d1b40</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Start probability intro
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/68d1b401cd8805eaa95b3891e918bddbed4be94e/docs/ProbabilityReview.html" target="_blank">68d1b40</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Start probability intro
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -576,37 +388,16 @@ Start probability intro
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Probability is a foundational concept in statistics, and understanding the basics of probability is important for understanding the theory behind commonly used statistical tests and developing statistical methods. Here, we discuss the basics behind random variables and their probability distributions.</p>
-<p>##Random Variables</p>
-<p>Random variables are variables that can take on a set of possible numerical values, each of which has a probability of occuring. Oftentimes the numerical values that a random variable takes on represents a particular outcome. For example, the result of a coin flip can be thought of as a random variable that can take on one of two values: heads or tails, each with a probability <span class="math inline">\(\frac{1}{2}\)</span> of occuring.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Value</th>
-<th>Outcome</th>
-<th>Probability</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(0\)</span></td>
-<td><span class="math inline">\(heads\)</span></td>
-<td><span class="math inline">\(P_{heads} = \frac{1}{2}\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(1\)</span></td>
-<td><span class="math inline">\(tails\)</span></td>
-<td><span class="math inline">\(P_{tails} = \frac{1}{2}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>##Properties of Random Variables</p>
-<p>The sum of all the probabilities of the possible values that a Random Variable can take must equal 1.</p>
-<p>##Types of distributions: Discrete vs. Continuous</p>
+<p>Markov chains are models that describe the sequence of possible events for a system in which the probability of each event is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Today we will learn the basics behind Markov Chains and their long-run behavior.</p>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
-<p>##Working with named distributions in R</p>
+<div id="the-markov-assumption" class="section level2">
+<h2>The Markov assumption</h2>
+<p>The Markov assumption assumes that in order to predict the future behavior of a system, all that is required is knowledge of the present state of the system and not the past state of the system. For example, given a set of times <span class="math inline">\(t_1, t_2, t_3, t_4\)</span> and states <span class="math inline">\(X_1, X_2, X_3, X_4\)</span>, under the Markov assumption:</p>
+<p><span class="math display">\[P(X_4=1|X_3=0, X_2=1, X_1=1) = P(X_4=1|X_3=0)\]</span></p>
+<p>In other words, “the past and the future are conditionally independent given the present”. If we have knowledge about the present, then knowing the past does not give us any more information to predict what will happen in the future.</p>
+</div>
+<div id="components-of-markov-chains" class="section level2">
+<h2>Components of Markov Chains</h2>
 </div>
 
 <script type="text/x-mathjax-config">

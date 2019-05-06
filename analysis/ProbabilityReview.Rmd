@@ -24,7 +24,7 @@ Random variables are variables that can take on a set of possible numerical valu
 
 ##Properties of Random Variables
 
-The sum of all the probabilities of the possible values that a 
+The sum of all the probabilities of the possible values that a Random Variable can take must equal 1.
 
 ##Types of distributions: Discrete vs. Continuous
 

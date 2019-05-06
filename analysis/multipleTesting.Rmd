@@ -14,7 +14,9 @@ editor_options:
 
 ## The issue of multiple testing
 
-As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. 
+https://xkcd.com/882/
+
+As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing 
 
 ## Bonferroni Correction
 
