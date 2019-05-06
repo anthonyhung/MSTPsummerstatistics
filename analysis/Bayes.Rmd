@@ -1,0 +1,15 @@
+---
+title: "Bayes"
+author: "Anthony Hung"
+date: "2019-05-06"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+```{r}
+
+```
+

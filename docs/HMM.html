@@ -9,9 +9,11 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Anthony Hung" />
 
+<meta name="date" content="2019-04-29" />
 
-<title>ISTP Summer JC: Statistical Theory &amp; Methods</title>
+<title>HMM</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -239,14 +241,21 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">ISTP Summer JC: Statistical Theory &amp; Methods</h1>
+<h1 class="title toc-ignore">HMM</h1>
+<h4 class="author"><em>Anthony Hung</em></h4>
+<h4 class="date"><em>2019-04-29</em></h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+</ul>
+</div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -255,7 +264,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -267,7 +276,7 @@ div.section {
 <strong>Last updated:</strong> 2019-05-06
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -283,12 +292,60 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
 </div>
 </div>
 </div>
@@ -356,92 +413,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/44775d26599ad2d4840b9e05b96282d16720ca3d/analysis/index.Rmd" target="_blank">44775d2</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-05-06
-</td>
-<td>
-revise formatting of titles
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/44775d26599ad2d4840b9e05b96282d16720ca3d/docs/index.html" target="_blank">44775d2</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-05-06
-</td>
-<td>
-revise formatting of titles
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5ce0cb5a84150e44eebb9fb4e97eea311543764b/analysis/index.Rmd" target="_blank">5ce0cb5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-05-06
-</td>
-<td>
-republish
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5ce0cb5a84150e44eebb9fb4e97eea311543764b/docs/index.html" target="_blank">5ce0cb5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-05-06
-</td>
-<td>
-republish
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/d45dca418110b00b669ce0fc53b3824986a0e826/analysis/index.Rmd" target="_blank">d45dca4</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-05-06
-</td>
-<td>
-Republish
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/analysis/index.Rmd" target="_blank">ee75486</a>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/analysis/HMM.Rmd" target="_blank">ee75486</a>
 </td>
 <td>
 Anthony Hung
@@ -455,27 +427,10 @@ Build site.
 </tr>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5ea5f30ecc0c0780f1e40f7924eccb5da5a8973d/docs/index.html" target="_blank">5ea5f30</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/22ae3cd582bc4a1674a8078d7e3cd88257a9d7a1/analysis/index.Rmd" target="_blank">22ae3cd</a>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/22ae3cd582bc4a1674a8078d7e3cd88257a9d7a1/analysis/HMM.Rmd" target="_blank">22ae3cd</a>
 </td>
 <td>
 Anthony Hung
@@ -487,363 +442,6 @@ Anthony Hung
 Add HMM file
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e746cf5aeb1cb8550432e5e1c4d068084db37bfa/docs/index.html" target="_blank">e746cf5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/133df4a6da47042807011612d94187d322af9c12/analysis/index.Rmd" target="_blank">133df4a</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-28
-</td>
-<td>
-introR
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/22b3720a083c2f1e82c8ad357ae66aff45fe46d9/docs/index.html" target="_blank">22b3720</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/3c0adcd1114f8914857ad0612204f3f6b48d2c1c/analysis/index.Rmd" target="_blank">3c0adcd</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-add intro to course file
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ddb3114f340d0a205d34aca4f7f35c516049fdb5/docs/index.html" target="_blank">ddb3114</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/0edcad95dfbd624ba71a1e019a26cc42b9d94f63/analysis/index.Rmd" target="_blank">0edcad9</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Add linear regression file
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/0edcad95dfbd624ba71a1e019a26cc42b9d94f63/docs/index.html" target="_blank">0edcad9</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Add linear regression file
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/413d06593754be3f2cb5c65bf0f9f8b290e45c40/docs/index.html" target="_blank">413d065</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6b98d6c19b53e6c549857d19bc13f75fe78e1289/docs/index.html" target="_blank">6b98d6c</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e01ad33f4a61c52b88dfa75ab52af988091948ec/docs/index.html" target="_blank">e01ad33</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-Index add week 1 links
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/9f13e70b59c42080ed5d3870179af2956771d47e/analysis/index.Rmd" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9f13e70b59c42080ed5d3870179af2956771d47e/docs/index.html" target="_blank">9f13e70</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-finish CLT
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecc06a53827e5405c7c3c6e1d130bf8dd3b897df/analysis/index.Rmd" target="_blank">ecc06a5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Add syllabus:
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ecc06a53827e5405c7c3c6e1d130bf8dd3b897df/docs/index.html" target="_blank">ecc06a5</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Add syllabus:
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2459910c8b747d9722a41861f8b65d3681e3d54e/analysis/index.Rmd" target="_blank">2459910</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-28
-</td>
-<td>
-Update all webpages
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2459910c8b747d9722a41861f8b65d3681e3d54e/docs/index.html" target="_blank">2459910</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-28
-</td>
-<td>
-Update all webpages
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/903b313a15de90a93169389677672eacb61897f4/analysis/index.Rmd" target="_blank">903b313</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-27
-</td>
-<td>
-Publish webpages
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/903b313a15de90a93169389677672eacb61897f4/docs/index.html" target="_blank">903b313</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-27
-</td>
-<td>
-Publish webpages
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/c0d9a0b4653ec2d71234a22c83448e046f6f1522/analysis/index.Rmd" target="_blank">c0d9a0b</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-27
-</td>
-<td>
-Build webpages
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/c0d9a0b4653ec2d71234a22c83448e046f6f1522/docs/index.html" target="_blank">c0d9a0b</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-27
-</td>
-<td>
-Build webpages
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/7d9b5566639c7f0be1064ba264df76b9e8920fed/analysis/index.Rmd" target="_blank">7d9b556</a>
-</td>
-<td>
-Anthony Hung
-</td>
-<td>
-2018-09-27
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -851,33 +449,37 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<div id="welcome-to-the-summer-statistics-website" class="section level1">
-<h1>Welcome to the Summer Statistics Website!</h1>
-<ul>
-<li><a href="syllabus.html">Syllabus</a></li>
-</ul>
-<div id="week-1" class="section level3">
-<h3>Week 1:</h3>
-<ul>
-<li><p><a href="introCourse.html">Course Introduction and Probability vs Statistics</a></p></li>
-<li><p><a href="CLT.html">Central Limit Theorem</a></p></li>
-<li><p><a href="introR.html">Introduction to R</a></p></li>
-</ul>
-</div>
-<div id="week-3" class="section level3">
-<h3>Week 3:</h3>
-<ul>
-<li><p><a href="Bayes.html">Bayesian Inference</a></p></li>
-<li><p><a href="markov.html">Introduction to Markov Chains</a></p></li>
-<li><p><a href="HMM.html">Hidden Markov Models</a></p></li>
-</ul>
-</div>
-<div id="week-4" class="section level3">
-<h3>Week 4:</h3>
-<ul>
-<li><p><a href="powerAnalyses.html">Power</a></p></li>
-<li><p><a href="multipleTesting.html">Correcting for Mutliple Tests</a></p></li>
-</ul>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Three fundamental problems to solve in HMMs</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.14.4
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
+ [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
+ [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
+[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
+[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
 </div>
 </div>
 

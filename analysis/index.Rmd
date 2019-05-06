@@ -17,16 +17,18 @@ output:
 
 * [Introduction to R](introR.html)
 
-* [Probability Review](ProbabilityReview.html)
+### Week 3:
+
+* [Bayesian Inference](Bayes.html)
 
 * [Introduction to Markov Chains](markov.html)
 
-### Week 4:
-
 * [Hidden Markov Models](HMM.html)
 
-* [Linear Models](linearRegression.html)
+### Week 4:
+
+* [Power](powerAnalyses.html)
 
 * [Correcting for Mutliple Tests](multipleTesting.html)
 
-* [Power](powerAnalyses.html)
+
