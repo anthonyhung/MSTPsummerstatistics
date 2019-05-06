@@ -5,7 +5,8 @@ output:
   workflowr::wflow_html:
     toc: false
 ---
-#Welcome to the Summer Statistics Website! 
+# Welcome to the Summer Statistics Website! 
+
 * [Syllabus](syllabus.html) 
 
 ### Week 1:
