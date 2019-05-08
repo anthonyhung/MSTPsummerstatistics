@@ -4,36 +4,37 @@ date: "2018-09-27"
 output: workflowr::wflow_html
 ---
 
-#ISTP Summer Journal Club: Statistical Theory & Methods
+# ISTP Summer Journal Club: Statistical Theory & Methods
 
-##Overview
+## Overview
 
 A thorough understanding of statistics is essential for both experimental design and data analysis. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.
  
 In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for entry into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. At present, the biostatics course required for all MSTP trainees is very similar in content to what is covered in most introductory college statistics courses, making it unappealing and ineffective for most students. However, many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.
 
-##Objectives
+## Learning Objectives
 
-* Foundations of theoretical and applied understanding of probability and statistics
+* Establish a groundwork in theoretical and applied understanding of probability and distributions
 
-* Working knowledge of how to use R
+* Introduce the theoretical basis behind commonly used statistical tests and assumptions inherent to each test
 
-* Deeper understanding of statistical tests specific to research area
+* Obtain a working knowledge of how to use R to streamline robust and reproducible statistical analyses
+
+* Learn how to integrate statistical thinking into experimental work throughout the scientific process from study design to data analysis
 
 * Connect students with resources to seek out statistical advising in the future
 
-* Data analysis project using real data
- 
+* Perform a data analysis project using real data
 
-##Outline of Course
+## Outline of Course
 
-Week 1: Why statistics matter; the Central Limit Theorem; Intro to R; Probability and distributions; Markov Chains
+Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Review of basic statistical tests
 
-Week 2: Review of basic statistical tests
+Week 2: Review of basic statistical tests continued; Probability and distributions
 
-Week 3: PCA, t-SNE, bootstrapping and machine learning
+Week 3: Bayesian inference; Markov Chains; Hidden Markov Models
 
-Week 4: Hidden Markov Models; Linear Regression; Mutliple Testing; Power Analyses
+Week 4: Linear Regression; Mutliple Testing; Power Analyses
 
 Weeks 5-9: Breakouts within specific programs
 

@@ -10,19 +10,52 @@ editor_options:
      - \usepackage{tcolorbox}
 ---
 
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
 ## Introduction
+
+Multiple testing describes situations where many hypotheses are simultaneously investigated from a given dataset. Correct treatment of statistics when working with multiple hypotheses is paramount, as mistakes can easily lead to false interpretations of results and many false positives. Our objectives today are to review the framework behind hypothesis testing in single hypotheses, why this framework falls apart in multiple testing, and different methods that have been proposed to correct for multiple testing.
+
+## Hypothesis testing
+
+The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis. 
+
 
 ## The issue of multiple testing
 
-https://xkcd.com/882/
+As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart. 
 
-As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing 
+To illustrate this, consider the xkcd comic (https://xkcd.com/882/). Obviously, something is not right with the conclusions of the study, since we all have an intuition that green jelly beans do not have any true association with skin conditions. To better understand why mutliple testing can easily lead to false positive associations unless adequately treated, let us walk through the calculations for the probability of making a Type 1 error given the number of tests you are performing.
+
+### Case 1: Performing 1 test
+
+Let us say we are performing the study in the comic and testing for a link between purple jelly beans and acne at a significance level $\alpha = 0.05$. What is the probability that we make a type 1 error?
+
+<hide> As $\alpha$ is equal to our type 1 error rate (the probability of rejecting the null hypothesis given the null hypothesis is true), we know that the probability is equal to 0.05.</hide>
+
+### Case 2: Performing 20 tests
+
+Now, let us test for an association between 20 different colors of jelly beans and acne at a significance level of $\alpha = 0.05$ for each individual test. What is the probability that we make at least one type 1 error now?
+
+<hide> 
+Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to $1- \alpha = 0.95$. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is $1-(1-0.05)^{20} = 0.6415$.
+</hide>
+
+Clearly, 
 
 ## Bonferroni Correction
 
-## False Discovery Rates
+## Holm's Procedure
 
-```{r}
+## q values and False Discovery Rates
 
-```
 

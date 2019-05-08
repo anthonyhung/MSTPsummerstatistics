@@ -9,6 +9,10 @@ editor_options:
 
 ## Introduction
 
+Bayesian inference is a 
+
+Our objectives today include learning about Bayes rule,
+
 ```{r}
 
 ```

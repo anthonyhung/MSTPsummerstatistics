@@ -9,7 +9,7 @@ editor_options:
 
 ## Introduction
 
-Markov chains are models that describe the sequence of possible events for a system in which the probability of each event is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Today we will learn the basics behind Markov Chains and their long-run behavior.
+Markov chains are models that describe the sequence of possible events for a system in which the probability of each event is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind Markov Chains and their long-run behavior.
 
 ## The Markov assumption
 

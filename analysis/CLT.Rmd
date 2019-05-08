@@ -9,7 +9,7 @@ editor_options:
 
 ## Introduction
 
-The central limit theorem (CLT) is a fundamental pillar to statistics and probability. Understanding it goes a long way to explain why we can make inferences about populations (biology) based on a limited number of samples (experiments) taken from those populations.
+The central limit theorem (CLT) is a fundamental pillar to statistics and probability. Understanding it goes a long way to explain why we can make inferences about populations (biology) based on a limited number of samples (experiments) taken from those populations. Our objective today is to learn about what the CLT says and how this concept is used widely in science to apply statistical tests to sample data.
 
 ## Definitions
 

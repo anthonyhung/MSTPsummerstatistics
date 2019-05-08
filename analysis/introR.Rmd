@@ -9,9 +9,21 @@ editor_options:
   chunk_output_type: console
 ---
 
+
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
 ## Introduction
 
-Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code as we develop it.
+Here, we introduce R, a statistical programming language. Doing statistics within a programming language brings many advantages, including allowing one to organize all analyses into program files that can be rerun to replicate analyses. In addition to using R, we will be using RStudio, an integrated development environment (IDE), which assists us in working with R and outputs of our code as we develop it. Our objective today is to get everyone up to speed with working knowledge of R and programming to be able to do exercises as a part of the rest of the course.
 
 Both R and RStudio are freely available online.
 
@@ -182,6 +194,7 @@ runif(1,0,1)
 
 ## Exercises:
 
-1. Write a function called calc_KE that takes as arguments the mass and velocity of an object and returns the kinetic energy of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s.
+1. Write a function called calc_KE that takes as arguments the mass (in kg) and velocity (in m/s) of an object and returns the kinetic energy (in Joules) of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s. <hide>0.36 Joules</hide>
 
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
+<hide>Iceland</hide>

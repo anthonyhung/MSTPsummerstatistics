@@ -250,15 +250,20 @@ div.section {
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#the-issue-of-multiple-testing">The issue of multiple testing</a></li>
+<li><a href="#hypothesis-testing">Hypothesis testing</a></li>
+<li><a href="#the-issue-of-multiple-testing">The issue of multiple testing</a><ul>
+<li><a href="#case-1-performing-1-test">Case 1: Performing 1 test</a></li>
+<li><a href="#case-2-performing-20-tests">Case 2: Performing 20 tests</a></li>
+</ul></li>
 <li><a href="#bonferroni-correction">Bonferroni Correction</a></li>
-<li><a href="#false-discovery-rates">False Discovery Rates</a></li>
+<li><a href="#holms-procedure">Holm’s Procedure</a></li>
+<li><a href="#q-values-and-false-discovery-rates">q values and False Discovery Rates</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -267,7 +272,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -276,10 +281,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-06
+<strong>Last updated:</strong> 2019-05-08
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -295,70 +300,22 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree8860e5737b62132c7bac7959da994ae00186a388targetblank8860e57a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/8860e5737b62132c7bac7959da994ae00186a388" target="_blank">8860e57</a> </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree44775d26599ad2d4840b9e05b96282d16720ca3dtargetblank44775d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/44775d26599ad2d4840b9e05b96282d16720ca3d" target="_blank">44775d2</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree44775d26599ad2d4840b9e05b96282d16720ca3dtargetblank44775d2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree8860e5737b62132c7bac7959da994ae00186a388targetblank8860e57a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -368,11 +325,15 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  analysis/Bayes.Rmd
-
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/CLT.Rmd
+    Modified:   analysis/HMM.Rmd
+    Modified:   analysis/introR.Rmd
+    Modified:   analysis/markov.Rmd
+    Modified:   analysis/multipleTesting.Rmd
+    Modified:   analysis/powerAnalyses.Rmd
+    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -411,6 +372,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2ec7944f6cbaafe7eae338dc3e788fd1ee8b5a25/docs/multipleTesting.html" target="_blank">2ec7944</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -639,48 +617,48 @@ finish CLT
 </div>
 </div>
 </div>
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
+<p>Multiple testing describes situations where many hypotheses are simultaneously investigated from a given dataset. Correct treatment of statistics when working with multiple hypotheses is paramount, as mistakes can easily lead to false interpretations of results and many false positives. Our objectives today are to review the framework behind hypothesis testing in single hypotheses, why this framework falls apart in multiple testing, and different methods that have been proposed to correct for multiple testing.</p>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2>Hypothesis testing</h2>
+<p>The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis.</p>
 </div>
 <div id="the-issue-of-multiple-testing" class="section level2">
 <h2>The issue of multiple testing</h2>
-<p><a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a></p>
-<p>As many scientific fields enter an age of “Big Data,” where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing</p>
+<p>As many scientific fields enter an age of “Big Data,” where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart.</p>
+<p>To illustrate this, consider the xkcd comic (<a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a>). Obviously, something is not right with the conclusions of the study, since we all have an intuition that green jelly beans do not have any true association with skin conditions. To better understand why mutliple testing can easily lead to false positive associations unless adequately treated, let us walk through the calculations for the probability of making a Type 1 error given the number of tests you are performing.</p>
+<div id="case-1-performing-1-test" class="section level3">
+<h3>Case 1: Performing 1 test</h3>
+<p>Let us say we are performing the study in the comic and testing for a link between purple jelly beans and acne at a significance level <span class="math inline">\(\alpha = 0.05\)</span>. What is the probability that we make a type 1 error?</p>
+<p><hide> As <span class="math inline">\(\alpha\)</span> is equal to our type 1 error rate (the probability of rejecting the null hypothesis given the null hypothesis is true), we know that the probability is equal to 0.05.</hide></p>
+</div>
+<div id="case-2-performing-20-tests" class="section level3">
+<h3>Case 2: Performing 20 tests</h3>
+<p>Now, let us test for an association between 20 different colors of jelly beans and acne at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> for each individual test. What is the probability that we make at least one type 1 error now?</p>
+<p><hide> Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to <span class="math inline">\(1- \alpha = 0.95\)</span>. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is <span class="math inline">\(1-(1-0.05)^{20} = 0.6415\)</span>. </hide></p>
+<p>Clearly,</p>
+</div>
 </div>
 <div id="bonferroni-correction" class="section level2">
 <h2>Bonferroni Correction</h2>
 </div>
-<div id="false-discovery-rates" class="section level2">
-<h2>False Discovery Rates</h2>
-<br>
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
-</button>
-</p>
-<div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.1 (2018-07-02)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.14.4
-
-Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
- [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
-[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
-[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+<div id="holms-procedure" class="section level2">
+<h2>Holm’s Procedure</h2>
 </div>
+<div id="q-values-and-false-discovery-rates" class="section level2">
+<h2>q values and False Discovery Rates</h2>
 </div>
 
 <script type="text/x-mathjax-config">
