@@ -173,7 +173,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -255,9 +255,12 @@ div.section {
 <li><a href="#case-1-performing-1-test">Case 1: Performing 1 test</a></li>
 <li><a href="#case-2-performing-20-tests">Case 2: Performing 20 tests</a></li>
 </ul></li>
+<li><a href="#correcting-for-multiple-tests">Correcting for multiple tests:</a><ul>
 <li><a href="#bonferroni-correction">Bonferroni Correction</a></li>
 <li><a href="#holms-procedure">Holm’s Procedure</a></li>
-<li><a href="#q-values-and-false-discovery-rates">q values and False Discovery Rates</a></li>
+<li><a href="#false-discovery-rates-q-values-and-the-benjamini-hochberg-method">False Discovery Rates, q values, and the Benjamini-Hochberg Method</a></li>
+<li><a href="#exercise">Exercise:</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -281,10 +284,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-08
+<strong>Last updated:</strong> 2019-05-17
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -312,10 +315,58 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree8860e5737b62132c7bac7959da994ae00186a388targetblank8860e57a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/8860e5737b62132c7bac7959da994ae00186a388" target="_blank">8860e57</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree8860e5737b62132c7bac7959da994ae00186a388targetblank8860e57a" class="panel-collapse collapse">
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree239723ec3a2b2292484af14f0a209ba997b6cc7btargetblank239723ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/239723ec3a2b2292484af14f0a209ba997b6cc7b" target="_blank">239723e</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree239723ec3a2b2292484af14f0a209ba997b6cc7btargetblank239723ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -325,15 +376,11 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
+Untracked files:
+    Untracked:  docs/figure/multipleTesting.Rmd/
+
 Unstaged changes:
-    Modified:   analysis/Bayes.Rmd
-    Modified:   analysis/CLT.Rmd
-    Modified:   analysis/HMM.Rmd
-    Modified:   analysis/introR.Rmd
-    Modified:   analysis/markov.Rmd
     Modified:   analysis/multipleTesting.Rmd
-    Modified:   analysis/powerAnalyses.Rmd
-    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -372,6 +419,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/239723ec3a2b2292484af14f0a209ba997b6cc7b/analysis/multipleTesting.Rmd" target="_blank">239723e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+Update learning objectives
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/239723ec3a2b2292484af14f0a209ba997b6cc7b/docs/multipleTesting.html" target="_blank">239723e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+Update learning objectives
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -648,17 +729,132 @@ hide:hover {
 <h3>Case 2: Performing 20 tests</h3>
 <p>Now, let us test for an association between 20 different colors of jelly beans and acne at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> for each individual test. What is the probability that we make at least one type 1 error now?</p>
 <p><hide> Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to <span class="math inline">\(1- \alpha = 0.95\)</span>. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is <span class="math inline">\(1-(1-0.05)^{20} = 0.6415\)</span>. </hide></p>
-<p>Clearly,</p>
+<p>This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! Clearly, we need to take into account the number of tests when setting our significance threshold.</p>
+<p>In the above two examples, what we calculated was the probability of making <strong>at least one type 1 error</strong> in all the independent tests we were performing. This is otherwise known as the <strong>Family-Wise Error Rate (FWER)</strong>.</p>
 </div>
 </div>
-<div id="bonferroni-correction" class="section level2">
-<h2>Bonferroni Correction</h2>
+<div id="correcting-for-multiple-tests" class="section level2">
+<h2>Correcting for multiple tests:</h2>
+<div id="bonferroni-correction" class="section level3">
+<h3>Bonferroni Correction</h3>
+<p>The Bonferroni correction is the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of <span class="math inline">\(\alpha\)</span>.</p>
+<p>To carry out the correction, simply set your corrected <span class="math display">\[\alpha_{corrected} = \frac{\alpha}{m}\]</span>, where m is the number of tests you are performing. Rejecting the null hypothesis for each individual test at a significance level of <span class="math inline">\(\leq \frac{\alpha}{m}\)</span> keeps our FWER at <span class="math inline">\(\leq \alpha\)</span>.</p>
+<p>The proof for this inequality comes from Boole’s inequality, which states that “for any finite countable set of events, the probability that at least one of the events happens is no greater than the sum of the probabilities of the individual events” (<a href="https://en.wikipedia.org/wiki/Boole%27s_inequality" class="uri">https://en.wikipedia.org/wiki/Boole%27s_inequality</a>). In this case, <span class="math inline">\(\alpha \leq m \cdot \alpha_{corrected}\)</span>.</p>
+<p><strong>Exercise:</strong> In the case where we tested for an association between 20 colors of jelly beans and acne, what would our Bonferroni corrected <span class="math inline">\(\alpha\)</span> be?</p>
+<p><hide> <span class="math inline">\(\alpha_{corrected} = \frac{0.05}{20} = 0.0025\)</span> </hide></p>
+<p>An alternative way to perform the Bonferroni correction is not to adjust our significance level, but rather adjust our p-values themselves. To do this, simply multiply your p-values by the number of tests performed and use the uncorrected <span class="math inline">\(\alpha\)</span> as your significance level.</p>
+<p><span class="math display">\[p_{adjusted} = m \cdot p\]</span></p>
+<p>R has a function to adjust p-values through a variety of methods, including Bonferroni:</p>
+<pre class="r"><code>adjusted_pvals &lt;- p.adjust(c(0.05,0.0000001, 0.8), method = &quot;bonferroni&quot;) 
+print(adjusted_pvals)</code></pre>
+<pre><code>[1] 1.5e-01 3.0e-07 1.0e+00</code></pre>
+<p>Although the Bonferroni correction is relatively simple to implement, in practice it a very conservative correction (meaning that through employing it, you will likely be missing out on many true positives through overcorrecting for multiple tests, amplifying the number of FNs). This effect is especially powerful when you are carrying out a large number of tests or when the tests you are performing are not completely independent.</p>
+<p>Because of this flaw in the Bonferroni correction, much effort has been devoted to developing methods that can correct for the number of FPs while not inflating the number of FNs.</p>
 </div>
-<div id="holms-procedure" class="section level2">
-<h2>Holm’s Procedure</h2>
+<div id="holms-procedure" class="section level3">
+<h3>Holm’s Procedure</h3>
+<p>Holm’s procedure also corrects for the FWER, but is uniformly more powerful than the Bonferroni correction (it gives you fewer FNs for any range of p-value than if you were to use the Bonferroni correction).</p>
+<p>The steps for carrying out the procedure given you are performing m hypotheses:</p>
+<ul>
+<li><p>Order your p-values from smallest to largest (<span class="math inline">\(P_1, P_2, P_3, P_4\)</span>) corresponding to null hypotheses (<span class="math inline">\(H_1, H_2, H_3, H_4\)</span>).</p></li>
+<li><p>For each rank k starting with 1 (corresponding to your smallest p-value), calculate an <span class="math inline">\(\alpha_{adjustedk}\)</span> such that:</p></li>
+</ul>
+<p><span class="math display">\[\alpha_{adjustedk}=\frac{\alpha}{m+ 1 -k}\]</span></p>
+<ul>
+<li><p>Compare each p-value with its corresponding adjusted significance level, starting from the smallest p-value. Keep comparing until you find a p-value that is <strong>greater than</strong> its adjusted significance level.</p></li>
+<li><p>Reject the hypotheses corresponding to the ranked p-values up to and <strong>not including</strong> the first p-value that is greater than its adjusted significance level.</p></li>
+</ul>
+<p><strong>Exercise:</strong> That probably was a bit confusing, so let us walk through an example:</p>
+<p>Suppose we have 4 p-values: {0.5, 0.01, 0.001, 0.3}. We want to perform a Holm procedure correction to get our FWER to 0.05</p>
+<ul>
+<li>Order the p-values from smallest to largest</li>
+</ul>
+<p><hide> {0.001, 0.01, 0.3, 0.5} </hide></p>
+<ul>
+<li>Calculate the adjusted <span class="math inline">\(\alpha\)</span> for the first rank test.</li>
+</ul>
+<p><hide> <span class="math inline">\(\alpha_{adjusted1}=\frac{\alpha}{m+ 1 -1} = \frac{0.05}{4+ 1 -1} = 0.0125\)</span></hide></p>
+<ul>
+<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the first rank test to its p-value.</li>
+</ul>
+<p><hide> <span class="math inline">\(0.0125 &gt; 0.001\)</span>. Reject the first rank hypothesis (the hypothesis with the lowest p-value of the 4). </hide></p>
+<ul>
+<li>Now, calculate the adjusted <span class="math inline">\(\alpha\)</span> for the second rank test.</li>
+</ul>
+<p><hide> <span class="math inline">\(\alpha_{adjusted2}=\frac{0.05}{4+ 1 -2} = 0.01666667\)</span></hide></p>
+<ul>
+<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the second rank test to its p-value.</li>
+</ul>
+<p><hide> <span class="math inline">\(0.01666667 &gt; 0.01\)</span>. Reject the second rank hypothesis (the hypothesis with the second lowest p-value of the 4). </hide></p>
+<ul>
+<li>Now, calculate the adjusted <span class="math inline">\(\alpha\)</span> for the third rank test.</li>
+</ul>
+<p><hide> <span class="math inline">\(\alpha_{adjusted3}=\frac{0.05}{4+ 1 -3} = 0.025\)</span></hide></p>
+<ul>
+<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the second rank test to its p-value.</li>
+</ul>
+<p><hide> <span class="math inline">\(0.025 &lt; 0.3\)</span>. Do not reject the third rank hypothesis (or any other hypothesis with higher rank). </hide></p>
+<p>The rationale behind the Holm procedure is that it still corrects for the FWER like the Bonferroni correction, but whereas the Bonferroni correction applied the same <span class="math inline">\(\alpha_{corrected}\)</span> to all tests no matter how large their p-values were, the Holm procedure applies the most stringent threshold to the smallest p-value (<span class="math inline">\(\alpha_{corrected1}= \frac{\alpha}{m}\)</span>) and applies the least stringent threshold to the largest p-value (<span class="math inline">\(\alpha_{correctedm}= \frac{\alpha}{1}\)</span>). In other words, larger p-values experience less of a correction than smaller p-values, meaning you are more likely to reject their hypotheses compared to if you applied the same stringent significance level uniformly to all tests.</p>
 </div>
-<div id="q-values-and-false-discovery-rates" class="section level2">
-<h2>q values and False Discovery Rates</h2>
+<div id="false-discovery-rates-q-values-and-the-benjamini-hochberg-method" class="section level3">
+<h3>False Discovery Rates, q values, and the Benjamini-Hochberg Method</h3>
+<div id="false-discovery-rates" class="section level4">
+<h4>False discovery rates</h4>
+<p>In addition the the FWER, a different framework to conceptualize the number of incorrect conclusions you draw from performing a set of hypothesis tests is the False discovery rate (FDR).</p>
+<p>When we set <span class="math inline">\(\alpha = 0.05\)</span> we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that <strong>among the tests that are called significant, about 5% will turn out to be null (false discoveries)</strong>. In other words, <span class="math inline">\(\alpha = 0.05\)</span> means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed <strong>X number of tests</strong> and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.</p>
+<p><span class="math display">\[FDR = \frac{FP}{FP+TP}\]</span></p>
+</div>
+<div id="q-values" class="section level4">
+<h4>q-values</h4>
+<p>Q-values are the name given to the adjusted p-values found using an optimised FDR approach. The FDR approach uses characteristics of a p-value distribution to produce a list of q-values.</p>
+<p><strong>Exercise:</strong> If we were to perform a bunch of tests in a universe where all the null hypotheses are true and calculate their p-values, what would the distribution of p-values look like?</p>
+<p><hide> The distribution should look like a uniform distribution between 0 and 1. (Why? Hint: what is the definition of a p-value?) </hide></p>
+<p>Observe the distributions of p-values collected from 2 different sets of 10000 tests. What is different between the two? Which do you think corresponds to a set of tests where the null hypothesis is true for all the tests?</p>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If there are no true positives in a set of tests, you will expect to see a distribution more like the first distribution, but if there are true positives in a set of tests you will expect to see a distribution more like the second. So, even if there are no true positives in the experiment, we still expect, by chance, to get p-values &lt; 0.05. These are all false positives. However, even in an experiment with true positives, we are still unsure if a p-value &lt; 0.05 represents a true positive or a false positive. This is because in the second set, the majority of tests are consistent with the null hypothesis, but there are a minority which are consistent with true positives. The resulting histogram is the sum of two histograms (one representing all the null tests, and one representing all the true positive tests). See below for a graphical depiction of this fact. Therefore, in the composite plot the true positives are mixed in with the false positives at the left side of the distribution! The q-value approach tries to find the height of the histogram where the p-value distribution flattens out on the right (where the majority of tests are drawn from the null distribution) and uses this information to determine what proportion of the values on the left side of the distribution are false positives vs true positives, giving us FDR adjusted p-values (q-values).</p>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>q-values are defined as such:</p>
+<p><span class="math display">\[q_i(p_i) = min_{t \ge p_i}FDR(t)\]</span></p>
+<p>Q-value table screenshot To interpret the q-values, you need to look at the ordered list of q-values. There are 3516 compounds in this experiment. If we take unknown compound 1723 as an example, we see that it has a p-value of 0.0101 and a q-value of 0.0172. Recall that a p-value of 0.0101 implies a 1.01% chance of false positives, and so with 3516 compounds, we expect about 36 false positives, i.e. 3516 × 0.0101 = 35.51. In this experiment, there are 800 compounds with a value of 0.0101 or less, and so 36 of these will be false positives.</p>
+<p>On the other hand, the q-value is 0.0172, which means we should expect 1.72% of all the compounds with q-value less than this to be false positives. This is a much better situation. We know that 800 compounds have a q-value of 0.0172 or less and so we should expect 800 × 0.0172 = 13.76 false positives rather than the predicted 36. Just to reiterate, false positives according to p-values take all 3516 values into account when determining how many false positives we should expect to see while q-values take into account only those tests with q-values less than the threshold we choose. Of course, it is not always the case that q-values will result in less false positives, but what we can say is that they give a far more accurate indication of the level of false positives for a given cut-off value.</p>
+<p>When doing lots of tests, as in a metabolomics experiment, it is more intuitive to interpret p and q values by looking at the entire list of values in this way rather that looking at each one independently. In this way, a threshold of 0.05 has meaning across the entire experiment. When deciding on a cut-off or threshold value, you should do this from the point of view of how many false positives will this result in, rather than just randomly picking a p- or q-value of 0.05 and saying that every compound with p-value less this is significant.</p>
+</div>
+<div id="benjamini-hochberg-method" class="section level4">
+<h4>Benjamini-Hochberg Method</h4>
+</div>
+</div>
+<div id="exercise" class="section level3">
+<h3>Exercise:</h3>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.14.4
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
+ [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
+ [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
+[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
+[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+</div>
+</div>
 </div>
 
 <script type="text/x-mathjax-config">
