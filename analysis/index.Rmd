@@ -23,8 +23,6 @@ output:
 
 * [Introduction to Markov Chains](markov.html)
 
-* [Hidden Markov Models](HMM.html)
-
 ### Week 4:
 
 * [Power](powerAnalyses.html)

@@ -7,19 +7,42 @@ editor_options:
   chunk_output_type: console
 ---
 
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
 ## Introduction
 
-Markov chains are models that describe the sequence of possible events for a system in which the probability of each event is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind Markov Chains and their long-run behavior.
+Markov chains are models that describe the sequence of possible countable events for a system in which the probability of transitions from each event to the next is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind Markov Chains and their long-run behavior.
 
 ## The Markov assumption
 
-The Markov assumption assumes that in order to predict the future behavior of a system, all that is required is knowledge of the present state of the system and not the past state of the system. For example, given a set of times $t_1, t_2, t_3, t_4$ and states $X_1, X_2, X_3, X_4$, under the Markov assumption: 
+The Markov assumption assumes that in order to predict the future behavior of a system, all that is required is knowledge of the present state of the system and not the past state of the system. For example, given a set of times $t_1, t_2, t_3, t_4$ and states $X_1, X_2, X_3, X_4$, under the Markov assumption or Markov property: 
 
 $$P(X_4=1|X_3=0, X_2=1, X_1=1) = P(X_4=1|X_3=0)$$
 
 In other words, "the past and the future are conditionally independent given the present”. 
-If we have knowledge about the present, then knowing the past does not give us any more information to predict what will happen in the future.
+If we have knowledge about the present, then knowing the past does not give us any more information to predict what will happen in the future. Another term that is commonly used to describe Markov chains is "memorylessness."
+
+__Question:__ What distribution that we have discussed in probability is also described by the property of "memorylessness"?
+
+<hide> The Poisson distribution is memoryless. You can set any point along a Poisson process as time 0 and have it be another Poisson process. </hide>
+
+### The central dogma of biology as a Markov chain
+
+The central dogma of biology describes how information moves from DNA to RNA to Protein.
+
+$$DNA \rightarrow RNA \rightarrow Protein$$
+
+The assumption under the central dogma is that information flows only in one direction, and never backwards. Under a Markov chain model of the central dogma, the amount of RNA you observe in a cell is some function of the genetic variations seen at the DNA sequence level (in coding and noncoding regulatory regions), and the amount of protein you see in the cell is some function of the abundance of RNA transcripts in the cell coding for that protein. If you know the amount of RNA in the cell, then knowing the underlying DNA sequence of the cell at the gene encoding the protein does not give you more information to better predict the amount of protein in the cell. Obviously, there are exceptions to such a simple model of biology, but in the vast majority of cases this model does a very good job of describing biological networks.
 
 ## Components of Markov Chains 
 
-
+A Markov chain can be described by two 

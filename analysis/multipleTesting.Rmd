@@ -159,7 +159,7 @@ Observe the distributions of p-values collected from 2 different sets of 10000 t
 
 ```{r echo=FALSE}
 set1 <- runif(10000)
-set2p <- rexp(500)/10
+set2p <- rexp(500, rate = 2)/10
 
 hist(set1, breaks = seq(from = 0, to = 1, by = 0.05), main = "Set 1 p-values")
 hist(c(set1[1:9500], set2p), breaks = seq(from = 0, to = 1, by = 0.05), main = "Set 2 p-values")
@@ -175,19 +175,56 @@ hist(c(set1[1:9500], set2p), breaks = seq(from = 0, to = 1, by = 0.05), main = "
 abline(h = 460, col = "red")
 ```
 
-q-values are defined as such:
-
-$$q_i(p_i) = min_{t \ge p_i}FDR(t)$$
-
-Q-value table screenshot
-To interpret the q-values, you need to look at the ordered list of q-values. There are 3516 compounds in this experiment. If we take unknown compound 1723 as an example, we see that it has a p-value of 0.0101 and a q-value of 0.0172. Recall that a p-value of 0.0101 implies a 1.01% chance of false positives, and so with 3516 compounds, we expect about 36 false positives, i.e. 3516 × 0.0101 = 35.51. In this experiment, there are 800 compounds with a value of 0.0101 or less, and so 36 of these will be false positives.
-
-On the other hand, the q-value is 0.0172, which means we should expect 1.72% of all the compounds with q-value less than this to be false positives. This is a much better situation. We know that 800 compounds have a q-value of 0.0172 or less and so we should expect 800 × 0.0172 = 13.76 false positives rather than the predicted 36. Just to reiterate, false positives according to p-values take all 3516 values into account when determining how many false positives we should expect to see while q-values take into account only those tests with q-values less than the threshold we choose. Of course, it is not always the case that q-values will result in less false positives, but what we can say is that they give a far more accurate indication of the level of false positives for a given cut-off value.
-
-When doing lots of tests, as in a metabolomics experiment, it is more intuitive to interpret p and q values by looking at the entire list of values in this way rather that looking at each one independently. In this way, a threshold of 0.05 has meaning across the entire experiment. When deciding on a cut-off or threshold value, you should do this from the point of view of how many false positives will this result in, rather than just randomly picking a p- or q-value of 0.05 and saying that every compound with p-value less this is significant.
+A q-value threshold of 0.05 means that 0.05 of significant results will result in false positives. Another way to think about this is if we arrange all the q values for our set of tests from smallest to largest and pick one (for example a q-value of 0.10), then if we were to reject all hypotheses with a q-value less than this number in our set, we would expect 10% of them to be false positives. The most popular method of calculating q-values is known as the Benjamini-Hochberg method.
 
 #### Benjamini-Hochberg Method
 
+Before going into the mathematical details of the BH method, let us return to the p-value distribution we described above. 
+
+```{r echo=FALSE}
+hist(c(set1[1:9500], set2p), breaks = seq(from = 0, to = 1, by = 0.05), main = "Histogram of all tests in Set2")
+abline(h = 460, col = "red")
+```
+
+Given that we know that the right side of the distribution is largely made up by null tests (which are uniformly flattly distributed between 0 and 1), and the true positive tests are concentrated around p-values of 0, how would you try to find a set of tests that would give you the highest proportion of true positives?
+
+<hide> One thing we could do is take advantage of the red line we've drawn, which can be thought of as separating our two distributions apart. Notice how the number of true positive tests in each histogram bin is the number of tests in each bin that rise above the red line. In this case, we could be fairly confident in knowing that if we took the tests with the 350 lowest p-values, we would have a set that was enriched for true positives (since there are ~350 tests above the red line in the last bin). We can imagine that if we were to draw a circle around the p-values in the distribution that we wanted to keep as significant, we could determine what number of p-values to circle in order to have an FDR of approximately 0.05. </hide>
+
+The BH method does something similar to the quick and dirty method we employed above, but instead of reporting p-values, it adjusts them to assign q-values to each test instead.
+
+#### Actually performing the method:
+
+The mathematics of employing the BH method are actually very simple. Here are the steps assuming you have a set of p-values from a set of hypothesis tests.
+
+1. Order the p-values from smallest to largest and rank them from 1 (smallest) to m (largest)
+2. Adjust the p-values using this equation:
+$$q_i = min\{\frac{p_i m}{i}, q_{i+1}\}$$ 
+
+where $q_i, p_i$ represents the q-value or p-value for the test ranked $i$, m represents the total number of tests in your set, and $q_{i+1}$ is the q-value for the next largest rank test.
+
+And that's it! You would then interpret the q-values as we did above: "If we arrange all the q values for our set of tests from smallest to largest and pick one (for example a q-value of 0.10), then if we were to reject all hypotheses with a q-value less than this number in our set, we would expect 10% of them to be false positives."
+
+Taking a closer look at the q-value equation, we can figure out what each part means. 
+
+The numerator ($p_i m$) represents the expected number of FP if you accept all the tests with p-values of $p_i$ or smaller. Why is this the case? <hide> Recall that $p_i$ is the type 1 error rate, and m is the total number of results in your experiment. Just as rejecting all tests with a p-value of 0.05 or less means that 5% of our your tests will be false positives, the same can be said for any p-value. </hide> 
+
+The denominator ($i$) represents the number of hypotheses you will reject at a threshold equal to $q_i$. Why is this? <hide> In this test, by rejecting the test corresponding to $q_i$, you will be also rejecting all tests with q-values less than $q_i$. This is equal to the rank number $i$. Therefore, the equation is  the expected number of FP based on the p-value divided by the total number of positives declared at that same p-value threshold. Recall that $FDR = \frac{FP}{FP+TP}$ </hide>. 
+
+Finally, why do we take the minimum value between $\frac{p_i m}{i}$ and $q_{i+1}$? <hide> This allows us to maintain the same rank order of our p-values and our q-values. If you paid attention to the previous explanations of the other terms, you could have realized that I switched from discussing rejecting __p-values__ less than a certain threshold to talking about rejecting __q-values__ less than a certain threshold. By maintaining the rank order of our tests (making it so the adjusted p-value or q-value cannot be larger than that of higher rank order tests), we can make that switch. </hide>
+
+#### Let's walk through an example on the board:
+
+Suppose we have p-values for 10 tests: {0.01, 0.11, 0.21, 0.31, 0.41, 0.51, 0.61, 0.71, 0.81, 0.91}. We want to perform a Benjamini-Hochberg procedure on the p-values to obtain q-values.
+
+<hide> {0.1, 0.55, 0.70, 0.77, 0.82, 0.85, 0.87, 0.89, 0.90, 0.91} </hide>
 
 ### Exercise:
+
+Write a function that takes as input a vector of p-values and performs a Benjamini-Hochberg procedure to return a vector of q-values. Plot histograms of the vector of p-values in Set3 (found below) before and after correction.
+
+```{r}
+set.seed(1234)
+set3 <- c(runif(10000), rexp(500, rate = 2)/10)
+```
+
 
