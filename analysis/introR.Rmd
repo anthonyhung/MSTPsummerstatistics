@@ -192,9 +192,20 @@ set.seed(1234)
 runif(1,0,1)
 ```
 
+### Reading and writing data in R
+
+Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://drive.google.com/open?id=1A5kcC2CCfl9pGL0_jn7kgO6Mp3T8rSNIQp7wbt49vXo.
+
+```{r read write}
+data <- read.csv("./data/bandersnatch.csv")
+```
+
+
 ## Exercises:
 
 1. Write a function called calc_KE that takes as arguments the mass (in kg) and velocity (in m/s) of an object and returns the kinetic energy (in Joules) of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s. <hide>0.36 Joules</hide>
 
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
 <hide>Iceland</hide>
+
+3. 

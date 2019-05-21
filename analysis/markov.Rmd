@@ -46,3 +46,16 @@ The assumption under the central dogma is that information flows only in one dir
 ## Components of Markov Chains 
 
 A Markov chain can be described by two 
+
+
+
+
+
+
+
+
+
+
+## Hidden Markov Models
+
+https://www.sciencedirect.com/science/article/pii/S0006349596794341
