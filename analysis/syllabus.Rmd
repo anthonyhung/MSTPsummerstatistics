@@ -1,6 +1,6 @@
 ---
 title: "syllabus"
-date: "2018-09-27"
+date: "2019-05-22"
 output: workflowr::wflow_html
 ---
 
@@ -8,9 +8,23 @@ output: workflowr::wflow_html
 
 ## Overview
 
-A thorough understanding of statistics is essential for both experimental design and data analysis. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.
- 
-In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for entry into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. At present, the biostatics course required for all MSTP trainees is very similar in content to what is covered in most introductory college statistics courses, making it unappealing and ineffective for most students. However, many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.
+A thorough understanding of statistics is essential for both experimental design and data analysis in biomedical research. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.
+
+In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for admission into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. Many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.
+
+Building off of a basic, college-level understanding of statistics, this course aims to have students review and teach essential statistical theory and methods. This will then allow students to use their statistical toolbox for a project that suits their particular research interests and goals.
+
+## Objectives
+
+_Statistical Theory_
+
+Students will build a foundation of theoretical and applied understanding of probability and statistics. This will provide a deeper understanding of statistical tests specific to particular research areas. By the end of the course, students should have working knowledge of key concepts, including, but not limited to probability distributions, hypothesis testing, Bayesian inference, Markov models, multiple testing corrections. See the course schedule for topics covered in the course. Students should be able to apply these concepts to perform data analysis using their own data, or explain how statistical tests are used in the scientific literature.
+
+_Statistical Methods_
+
+This course also requires students to build computational skills in order to perform data analysis. For this course, the programming language R will be taught. Students, regardless of previous experience, will be expected to learn the fundamentals of how to use R and RStudio. Accompanying this will be a basic exposure the Unix terminal shell and Git/Github. By the end of this course, students should be familiar with the following in R: installation, variable assignment, variable types, operators and functions, data structures, reading and writing data, conditional branching, looping, loading and installing packages, writing functions, and, of course, basic statistical testing and plotting.
+These concepts will be taught again for the Basic Computing in R track at the BSD QBio5 MBL boot camp. Students are expected by then to be proficient enough in R to choose the Advanced Computing in R track instead.
+
 
 ## Learning Objectives
 
@@ -26,17 +40,46 @@ In an era of increasingly accessible computational tools, big data, and an empha
 
 * Perform a data analysis project using real data
 
+## Final Project
+
+Following the 4-5 weeks of lectures, each student will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes. Two options are available for the presentation:
+
+1. Complete a data analysis project using data from a rotation project or data previously collected by members of a rotation lab. In addition to carrying out the project, each student will create a 10 minute presentation describing the data that were collected as well as the statistical methods used to analyze the data to be presented in the 10th week.
+
+2. Select a primary research paper in a field of interest and create a 10 minute presentation describing the statistical methods used in the paper and the conclusions drawn using those statistical tests to be presented in the 10th week.
+
+Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes.
+
+## Grading
+
+The grades for this course will be Pass/Fail (P/F), with Pass being a final grade 70% or higher, and are based on the following criteria:
+
+_Participation (30%):_
+
+Students are expected to attend all sessions listed in the course schedule. In cases of expected scheduling conflicts, please notify the instructors at least 24 hours in advance for an excused absence.
+
+_Homework (40%):_
+
+Quizzes after each lecture will be given in order to assess understanding after each lecture. Each is quiz is due by the time the next lecture begins (except for the last lecture; the quiz will be due 48 hours after lecture ends). Because these quizzes are meant to help students review and reinforce concepts, they will be graded based on completion and effort.
+Tutorials and other resources will be given for students to learn R. These tutorials must be completed by the end of the course. Grading will depend on timely submission of an R script that contains code used for the tutorial.
+
+_Final Project (40%):_
+
+Grading for the final project will be based on completion, effort, and a demonstrated understanding of statistical concepts. Students will need to submit all scripts/code, slides, papers, and/or other materials used in their final project before the day of their presentation.
+
 ## Outline of Course
 
-Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Review of basic statistical tests
+Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions 
 
-Week 2: Review of basic statistical tests continued; Probability and distributions
+Week 2: Bayesian inference
 
-Week 3: Bayesian inference; Markov Chains; Hidden Markov Models
+Week 3: Markov Chains; Hidden Markov Models; Review of basic statistical tests
 
-Week 4: Linear Regression; Mutliple Testing; Power Analyses
+Week 4: Review of basic statistical tests Continued; Linear Regression
 
-Weeks 5-9: Breakouts within specific programs
+Week 5: Mutliple Testing; Power Analyses
+
+Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent time to complete final project.)
 
 * Work with PIs or senior grad students in same research area
 
@@ -44,7 +87,19 @@ Weeks 5-9: Breakouts within specific programs
 
 * Prepare a presentation with results of statistical analyses
 
-Week 10 : Data presentations
+* Week 7: Final project proposed to instructors
+
+Week 10 : Project presentations
+
+## Final Note
+
+As course instructors, we understand that everyone has had different experiences and backgrounds in statistics. Thus, we are aware that a concept taught in lecture may be review for one and new to another. What you get out of this course ultimately depends on how much effort you put in. We know that laboratory rotations will take most of your time, but we hope that you challenge yourself to learn something new in this course. We want this course to be helpful for you, so please give us feedback throughout the course.
+
+The reason we also encourage you to learn basic computing in R is that you will encounter lessons in R again at BSD QBio. We do not want your learning in this class the the boot camp to be redundant, and therefore hope this course becomes a stepping stone for you to learn more advanced computing at the boot camp. We hope this sounds fair, and do not expect the tutorials to take too long.
+
+Finally, we hope that the final project on a topic of your choice will be something that is relevant to your graduate studies and something you are excited about. Please feel free to email us for office hours if you need any help selecting a topic for your final project. Overall, we are excited for the opportunity to work with and get to better know you all. We hope you are as well!
+
+~Anthony and Allen
 
 
 ## Acknowledgements

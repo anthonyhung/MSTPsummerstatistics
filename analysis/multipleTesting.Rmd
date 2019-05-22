@@ -227,4 +227,3 @@ set.seed(1234)
 set3 <- c(runif(10000), rexp(500, rate = 2)/10)
 ```
 
-

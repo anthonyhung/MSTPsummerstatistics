@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2018-09-27" />
+<meta name="date" content="2019-05-22" />
 
 <title>syllabus</title>
 
@@ -241,7 +241,7 @@ div.section {
 
 
 <h1 class="title toc-ignore">syllabus</h1>
-<h4 class="date"><em>2018-09-27</em></h4>
+<h4 class="date"><em>2019-05-22</em></h4>
 
 </div>
 
@@ -249,8 +249,12 @@ div.section {
 <ul>
 <li><a href="#istp-summer-journal-club-statistical-theory-methods">ISTP Summer Journal Club: Statistical Theory &amp; Methods</a><ul>
 <li><a href="#overview">Overview</a></li>
+<li><a href="#objectives">Objectives</a></li>
 <li><a href="#learning-objectives">Learning Objectives</a></li>
+<li><a href="#final-project">Final Project</a></li>
+<li><a href="#grading">Grading</a></li>
 <li><a href="#outline-of-course">Outline of Course</a></li>
+<li><a href="#final-note">Final Note</a></li>
 <li><a href="#acknowledgements">Acknowledgements</a></li>
 </ul></li>
 </ul>
@@ -258,7 +262,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -267,7 +271,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -276,10 +280,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-18
+<strong>Last updated:</strong> 2019-05-22
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -295,30 +299,40 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree193ab25f3669113690dde6ae45a377acf5ac68dftargetblank193ab25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/193ab25f3669113690dde6ae45a377acf5ac68df" target="_blank">193ab25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4ce8e8525dac0d35ce6baff65f0d608a139ba63ftargetblank4ce8e85a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/4ce8e8525dac0d35ce6baff65f0d608a139ba63f" target="_blank">4ce8e85</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree193ab25f3669113690dde6ae45a377acf5ac68dftargetblank193ab25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4ce8e8525dac0d35ce6baff65f0d608a139ba63ftargetblank4ce8e85a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/introR.Rmd
+    Modified:   analysis/multipleTesting.Rmd
+    Modified:   analysis/powerAnalyses.Rmd
+    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -357,6 +371,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/096760a626cc23032b925ccc238d64c8c991c8c7/docs/syllabus.html" target="_blank">096760a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -725,8 +756,16 @@ Update all webpages
 <h1>ISTP Summer Journal Club: Statistical Theory &amp; Methods</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p>A thorough understanding of statistics is essential for both experimental design and data analysis. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.</p>
-<p>In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for entry into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. At present, the biostatics course required for all MSTP trainees is very similar in content to what is covered in most introductory college statistics courses, making it unappealing and ineffective for most students. However, many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.</p>
+<p>A thorough understanding of statistics is essential for both experimental design and data analysis in biomedical research. Too often, time and resources are wasted due to a poor understanding of sample size and power calculations, and the reliability of scientific reports has repeatedly been scrutinized in recent years due to questionable, if not fraudulent, application of statistical tests.</p>
+<p>In an era of increasingly accessible computational tools, big data, and an emphasis on open-access databases, the need for rigorous training in statistical methods has become more important than ever. As a requirement for admission into Pritzker, all MSTP students must have taken a statistics or biomathematics course in college. Many of us agree that further training in statistics would be a valuable resource and would help us feel more confident about the work we are doing.</p>
+<p>Building off of a basic, college-level understanding of statistics, this course aims to have students review and teach essential statistical theory and methods. This will then allow students to use their statistical toolbox for a project that suits their particular research interests and goals.</p>
+</div>
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
+<p><em>Statistical Theory</em></p>
+<p>Students will build a foundation of theoretical and applied understanding of probability and statistics. This will provide a deeper understanding of statistical tests specific to particular research areas. By the end of the course, students should have working knowledge of key concepts, including, but not limited to probability distributions, hypothesis testing, Bayesian inference, Markov models, multiple testing corrections. See the course schedule for topics covered in the course. Students should be able to apply these concepts to perform data analysis using their own data, or explain how statistical tests are used in the scientific literature.</p>
+<p><em>Statistical Methods</em></p>
+<p>This course also requires students to build computational skills in order to perform data analysis. For this course, the programming language R will be taught. Students, regardless of previous experience, will be expected to learn the fundamentals of how to use R and RStudio. Accompanying this will be a basic exposure the Unix terminal shell and Git/Github. By the end of this course, students should be familiar with the following in R: installation, variable assignment, variable types, operators and functions, data structures, reading and writing data, conditional branching, looping, loading and installing packages, writing functions, and, of course, basic statistical testing and plotting. These concepts will be taught again for the Basic Computing in R track at the BSD QBio5 MBL boot camp. Students are expected by then to be proficient enough in R to choose the Advanced Computing in R track instead.</p>
 </div>
 <div id="learning-objectives" class="section level2">
 <h2>Learning Objectives</h2>
@@ -739,19 +778,47 @@ Update all webpages
 <li><p>Perform a data analysis project using real data</p></li>
 </ul>
 </div>
+<div id="final-project" class="section level2">
+<h2>Final Project</h2>
+<p>Following the 4-5 weeks of lectures, each student will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes. Two options are available for the presentation:</p>
+<ol style="list-style-type: decimal">
+<li><p>Complete a data analysis project using data from a rotation project or data previously collected by members of a rotation lab. In addition to carrying out the project, each student will create a 10 minute presentation describing the data that were collected as well as the statistical methods used to analyze the data to be presented in the 10th week.</p></li>
+<li><p>Select a primary research paper in a field of interest and create a 10 minute presentation describing the statistical methods used in the paper and the conclusions drawn using those statistical tests to be presented in the 10th week.</p></li>
+</ol>
+<p>Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes.</p>
+</div>
+<div id="grading" class="section level2">
+<h2>Grading</h2>
+<p>The grades for this course will be Pass/Fail (P/F), with Pass being a final grade 70% or higher, and are based on the following criteria:</p>
+<p><em>Participation (30%):</em></p>
+<p>Students are expected to attend all sessions listed in the course schedule. In cases of expected scheduling conflicts, please notify the instructors at least 24 hours in advance for an excused absence.</p>
+<p><em>Homework (40%):</em></p>
+<p>Quizzes after each lecture will be given in order to assess understanding after each lecture. Each is quiz is due by the time the next lecture begins (except for the last lecture; the quiz will be due 48 hours after lecture ends). Because these quizzes are meant to help students review and reinforce concepts, they will be graded based on completion and effort. Tutorials and other resources will be given for students to learn R. These tutorials must be completed by the end of the course. Grading will depend on timely submission of an R script that contains code used for the tutorial.</p>
+<p><em>Final Project (40%):</em></p>
+<p>Grading for the final project will be based on completion, effort, and a demonstrated understanding of statistical concepts. Students will need to submit all scripts/code, slides, papers, and/or other materials used in their final project before the day of their presentation.</p>
+</div>
 <div id="outline-of-course" class="section level2">
 <h2>Outline of Course</h2>
-<p>Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Review of basic statistical tests</p>
-<p>Week 2: Review of basic statistical tests continued; Probability and distributions</p>
-<p>Week 3: Bayesian inference; Markov Chains; Hidden Markov Models</p>
-<p>Week 4: Linear Regression; Mutliple Testing; Power Analyses</p>
-<p>Weeks 5-9: Breakouts within specific programs</p>
+<p>Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions</p>
+<p>Week 2: Bayesian inference</p>
+<p>Week 3: Markov Chains; Hidden Markov Models; Review of basic statistical tests</p>
+<p>Week 4: Review of basic statistical tests Continued; Linear Regression</p>
+<p>Week 5: Mutliple Testing; Power Analyses</p>
+<p>Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent time to complete final project.)</p>
 <ul>
 <li><p>Work with PIs or senior grad students in same research area</p></li>
 <li><p>Handle real data and work hands-on with analysis tools used by people in the field</p></li>
 <li><p>Prepare a presentation with results of statistical analyses</p></li>
+<li><p>Week 7: Final project proposed to instructors</p></li>
 </ul>
-<p>Week 10 : Data presentations</p>
+<p>Week 10 : Project presentations</p>
+</div>
+<div id="final-note" class="section level2">
+<h2>Final Note</h2>
+<p>As course instructors, we understand that everyone has had different experiences and backgrounds in statistics. Thus, we are aware that a concept taught in lecture may be review for one and new to another. What you get out of this course ultimately depends on how much effort you put in. We know that laboratory rotations will take most of your time, but we hope that you challenge yourself to learn something new in this course. We want this course to be helpful for you, so please give us feedback throughout the course.</p>
+<p>The reason we also encourage you to learn basic computing in R is that you will encounter lessons in R again at BSD QBio. We do not want your learning in this class the the boot camp to be redundant, and therefore hope this course becomes a stepping stone for you to learn more advanced computing at the boot camp. We hope this sounds fair, and do not expect the tutorials to take too long.</p>
+<p>Finally, we hope that the final project on a topic of your choice will be something that is relevant to your graduate studies and something you are excited about. Please feel free to email us for office hours if you need any help selecting a topic for your final project. Overall, we are excited for the opportunity to work with and get to better know you all. We hope you are as well!</p>
+<p>~Anthony and Allen</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2>Acknowledgements</h2>

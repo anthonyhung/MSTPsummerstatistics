@@ -250,12 +250,13 @@ div.section {
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#reviewing-the-concept-of-power">Reviewing the concept of Power</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -264,7 +265,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -273,10 +274,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-20
+<strong>Last updated:</strong> 2019-05-21
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -292,78 +293,36 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4ce8e8525dac0d35ce6baff65f0d608a139ba63ftargetblank4ce8e85a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/4ce8e8525dac0d35ce6baff65f0d608a139ba63f" target="_blank">4ce8e85</a> </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree096760a626cc23032b925ccc238d64c8c991c8c7targetblank096760aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/096760a626cc23032b925ccc238d64c8c991c8c7" target="_blank">096760a</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree096760a626cc23032b925ccc238d64c8c991c8c7targetblank096760aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4ce8e8525dac0d35ce6baff65f0d608a139ba63ftargetblank4ce8e85a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/introR.Rmd
+    Modified:   analysis/powerAnalyses.Rmd
 
 </code></pre>
 <p>
@@ -402,6 +361,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/4ce8e8525dac0d35ce6baff65f0d608a139ba63f/docs/powerAnalyses.html" target="_blank">4ce8e85</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+bandersnatch add
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -513,35 +489,41 @@ Build site.
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<br>
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
-</button>
-</p>
-<div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.1 (2018-07-02)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.14.4
-
-Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.11  
- [9] stringi_1.2.4   fs_1.2.7        whisker_0.3-2   rmarkdown_1.10 
-[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
-[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+<p>Before going to the lab to carry out any type of full-scale experiment, it is important to determine how many samples and replicates you will need to include in the experiment to best answer the question you would like to answer. Power analyses allow researchers to determine the smallest <strong>sample size</strong> required to detect the <strong>effect size</strong> of a given comparison at a given <strong>significance level</strong>.</p>
+<p>Performing a power analysis before carrying out an experiment has many benefits, among them including:</p>
+<ul>
+<li><p>Avoiding wasting reagents, animals, or precious samples through an improperly designed experiment that includes more replicates or larger sample sizes than was required.</p></li>
+<li><p>Avoiding performing an invalid study that does not have sufficient power to detect a difference of interest.</p></li>
+<li><p>Remaining ethical in our conduct of science through avoiding p-hacking by predetermining the number of replicates to perform or number of samples to collect.</p></li>
+</ul>
+<p>Performing a power analysis after running an experiment is also useful, particularly in the case of a negative result. A question to motivate why it is useful to perform power analyses even after a study is complete, you can ask yourself: “if I performed an experiment and did not detect a statistically significant result, does it necessarily mean that the null hypothesis you were testing is true”?</p>
+<p>Our objectives today are to review the concept of power, discuss what a power analysis is, and different ways to carry out a power analysis.</p>
 </div>
+<div id="reviewing-the-concept-of-power" class="section level2">
+<h2>Reviewing the concept of Power</h2>
+<p>Recall that there are four possible scenarios when performing a hypothesis test on a null hypothesis. We have previously discussed in some detail the concept of Type 1 and Type 2 errors, which will occur with some probability in any type of test that you will perform.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(H_0\)</span> is True</th>
+<th><span class="math inline">\(H_0\)</span> is False</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>reject <span class="math inline">\(H_0\)</span></td>
+<td>P(Type 1 error) = <span class="math inline">\(\alpha\)</span></td>
+<td>P(True Positive) = <strong>Power</strong> = <span class="math inline">\(1- \beta\)</span></td>
+</tr>
+<tr class="even">
+<td>fail to reject <span class="math inline">\(H_0\)</span></td>
+<td>P(True Negative) = <span class="math inline">\(1-\alpha\)</span></td>
+<td>P(Type 2 error) = <span class="math inline">\(\beta\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Power can be thought of as the probability of rejecting the null hypothesis given that the null hypothesis is false (the probability that we are in the top right-hand quadrant of the table).</p>
 </div>
 
 <script type="text/x-mathjax-config">

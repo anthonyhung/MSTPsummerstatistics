@@ -88,9 +88,38 @@ a + b
 class(a) #the "class" function tells you what class of object a is
 
 d <- c(1,2,3,4,5) #the "c" function concatenates the arguments contained within it into a vector
+d
+d <- c(d, 1) #The "c" function also allows you to append items to an existing vector
+d
 class(d)
 d[3] #brackets allow you index vectors or matrices. Here, we call the third value from our d vector.
 
+#Matrices are just like vectors, but with two dimensions
+my_matrix <- matrix(seq(1:9), ncol = 3)
+my_matrix
+
+#vectors and matrices can only contain objects of one class. If you include objects of multiple types into the same vector, R will perform coersion to force all the objects contained in the vector into a shared class
+x <- c(1.7, "a")
+x
+class("a")
+class(1.7)
+class(x)
+y <- c(TRUE, 2)
+y
+z <- c("a", TRUE)
+z
+
+#If you would like to store objects of multiple classes into one object, a list can accomodate such a task.
+x_y_z_list <- list(x,y,z)
+x_y_z_list
+#to index an element in a list, use double brackets [[]]. You can further index elements within an element of a list.
+x_y_z_list[[1]]
+x_y_z_list[[1]][2]
+#elements in a list can be assigned names
+x_y_z_list <- list(a=x, b=y, c=z)
+x_y_z_list
+
+#Dataframes are a very commonly used type of object in R. You can think of a dataframe as a rectangular combination of lists.
 #The below code stores the stated values in a dataframe which contains employee ids, names, salaries, and start dates for 5 employees
 emp.data <- data.frame(
    emp_id = c (1:5), 
@@ -104,6 +133,8 @@ emp.data <- data.frame(
 
 emp.data
 emp.data$emp_id #the $ operator calls on a certain column of a dataframe
+class(emp.data$emp_id) #As noted earlier, a dataframe can be thought of as a rectangular list, combining different data classes together, each in a different column.
+class(emp.data$salary)
 emp.data$emp_name[emp.data$salary > 620] #You can combine logical operators, brackets, and the $ sign to subset your dataframe in any way you choose! Here, we print out all the employee names for employees who have a salary greater than 620.
 
 ls() #ls lists all the variable names that have been assigned to objects in your workspace
@@ -194,10 +225,38 @@ runif(1,0,1)
 
 ### Reading and writing data in R
 
-Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://drive.google.com/open?id=1A5kcC2CCfl9pGL0_jn7kgO6Mp3T8rSNIQp7wbt49vXo.
+Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://raw.githubusercontent.com/anthonyhung/MSTPsummerstatistics/master/data/bandersnatch.csv. If you would like to have your own copy of this dataset, you can open up a terminal window and run the commands.
+```{bash}
+cd ~/Desktop
+mkdir data
+cd data
+wget https://raw.githubusercontent.com/anthonyhung/MSTPsummerstatistics/master/data/bandersnatch.csv
+```
 
+Now that we have a copy of the data in a data directory on our desktop, we can load it into R using a relative or absolute directory path and the read.csv function.
 ```{r read write}
-data <- read.csv("./data/bandersnatch.csv")
+data <- read.csv("~/Desktop/data/bandersnatch.csv")
+#let's take a look at the dataset we've just loaded
+head(data)
+summary(data)
+
+#what is the difference between these two function calls?
+head(read.csv("~/Desktop/data/bandersnatch.csv", header = T))
+head(read.csv("~/Desktop/data/bandersnatch.csv", header = F))
+
+#let's look at the structure of the data
+class(data)
+class(data$Color)
+class(data$Baseline.Frumiosity)
+
+#let's make some plots with the data
+hist(data$Baseline.Frumiosity)
+hist(data$Post.Frumiosity)
+plot(data$Baseline.Frumiosity, data$Post.Frumiosity)
+
+#we can also write data files and export them using R
+data$Size <- rnorm(nrow(data))
+write.csv(data, "~/Desktop/data/new_bandersnatch.csv")
 ```
 
 
@@ -208,4 +267,4 @@ data <- read.csv("./data/bandersnatch.csv")
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
 <hide>Iceland</hide>
 
-3. 
+3. Based on the plots we made of the bandersnatch data, there seems to be something going on that could potentially be interesting. Find out what might explain the structure in the data we see.

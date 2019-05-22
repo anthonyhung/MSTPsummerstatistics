@@ -9,9 +9,44 @@ editor_options:
 
 ## Introduction
 
+Before going to the lab to carry out any type of full-scale experiment, it is important to determine how many samples and replicates you will need to include in the experiment to best answer the question you would like to answer. Power analyses allow researchers to determine the smallest __sample size__ required to detect the __effect size__ of a given comparison at a given __significance level__.
+
+Performing a power analysis before carrying out an experiment has many benefits, among them including:
+
+* Avoiding wasting reagents, animals, or precious samples through an improperly designed experiment that includes more replicates or larger sample sizes than was required.
+
+* Avoiding performing an invalid study that does not have sufficient power to detect a difference of interest.
+
+* Remaining ethical in our conduct of science through avoiding p-hacking by predetermining the number of replicates to perform or number of samples to collect.
+
+Performing a power analysis after running an experiment is also useful, particularly in the case of a negative result. A question to motivate why it is useful to perform power analyses even after a study is complete, you can ask yourself: "if I performed an experiment and did not detect a statistically significant result, does it necessarily mean that the null hypothesis you were testing is true"?
+
+Our objectives today are to review the concept of power, discuss what a power analysis is, and different ways to carry out a power analysis.
+
+## Reviewing the concept of Power
+
+Recall that there are four possible scenarios when performing a hypothesis test on a null hypothesis. We have previously discussed in some detail the concept of Type 1 and Type 2 errors, which will occur with some probability in any type of test that you will perform.
+
+|  | $H_0$ is True | $H_0$ is False |
+|----------------|-----------------------------------------------------------------------|---------------------------------------------------------|
+| reject $H_0$ | P(Type 1 error) = $\alpha$ | P(True Positive) = __Power__ = $1- \beta$ |
+| fail to reject $H_0$  | P(True Negative) = $1-\alpha$ | P(Type 2 error) = $\beta$ |
+
+Power can be thought of as the probability of rejecting the null hypothesis given that the null hypothesis is false (the probability of correctly rejecting the null hypothesis). It is also 1-$\beta$, the probability of making a type 2 error. Since power is a probability, it takes on values between 0 and 1.
+
+There are 5 quantities that primarily affect power:
+
+1. Significance level ($\alpha$)
+
+2. Sample size (n)
+
+3. Variance in the response variable
+
+4. Magnitude of the effect size
+
+5. Type of test (one or two tailed)
 
 
-```{r}
 
-```
 
+sampling theory, graphical approaches to power analyses, intervals, example of power analysis
