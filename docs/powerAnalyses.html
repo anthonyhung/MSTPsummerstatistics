@@ -272,7 +272,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -281,7 +281,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -293,7 +293,7 @@ div.section {
 <strong>Last updated:</strong> 2019-05-24
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -309,12 +309,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -369,10 +369,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4e210d641f8ab305d79d5c884528be2e26f028f5targetblank4e210d6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/4e210d641f8ab305d79d5c884528be2e26f028f5" target="_blank">4e210d6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea321d7b2e20826590e55b0957b026534e845ecaftargetblanka321d7ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/a321d7b2e20826590e55b0957b026534e845ecaf" target="_blank">a321d7b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4e210d641f8ab305d79d5c884528be2e26f028f5targetblank4e210d6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea321d7b2e20826590e55b0957b026534e845ecaftargetblanka321d7ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -384,16 +384,6 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-
-Untracked files:
-    Untracked:  docs/figure/powerAnalyses.Rmd/
-
-Unstaged changes:
-    Modified:   analysis/Bayes.Rmd
-    Modified:   analysis/CLT.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   analysis/powerAnalyses.Rmd
-    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -432,6 +422,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/analysis/powerAnalyses.Rmd" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+commit before republish
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a321d7b2e20826590e55b0957b026534e845ecaf/docs/powerAnalyses.html" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+commit before republish
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -671,9 +695,83 @@ power_visualization &lt;- ggplot(data = data.frame(x = c(0, 25)), aes(x)) +
   stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = &quot;blue&quot;, linetype = &quot;solid&quot;)
 power_visualization</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-1-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>We would like to perform a one-tailed T-test to determine if there is sufficient evidence in our data to support rejecting the null hypothesis in favor of the alternative. Let us use an <span class="math inline">\(\alpha = 0.05\)</span> and plot the significance threshold on the null distribution:</p>
 <pre class="r"><code>power_visualization + geom_vline(xintercept=1.645*2+10, linetype = &quot;dashed&quot;, color = &quot;black&quot;)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-2-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Observed means to the right of this threshold would be declared as significant. Now, there are two possible realities: either the null hypothesis (<span class="math inline">\(H_0\)</span>) is indeed True, or <span class="math inline">\(H_0\)</span> is False (see the table above). Let’s first transport ourselves to the reality where the null hypothesis is True.</p>
 <div id="h_0-is-true" class="section level3">
 <h3><span class="math inline">\(H_0\)</span> is True</h3>
@@ -689,6 +787,43 @@ power_visualization</code></pre>
   geom_vline(xintercept=1.645*2+10, linetype = &quot;dashed&quot;, color = &quot;black&quot;)
 H0true</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-3-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The area under the null distribution curve to the right of the significance threshold in green is the probability of falsely rejecting the null hypothesis given that the null hypothesis is true (<span class="math inline">\(\alpha\)</span>). Therefore, the area under the curve to the right of the black line is 5% of the total area under the blue curve. Since the total area under the blue curve must add up to 100%, the remaining area to the left of the black line in yellow is 95%, or the probability of a true negative given the null hypothesis is true.</p>
 <p>Now, let’s transport ourselves instead to the world where the null hypothesis is False and the alternative hypothesis is true.</p>
 </div>
@@ -706,6 +841,43 @@ H0true</code></pre>
   geom_vline(xintercept=1.645*2+10, linetype = &quot;dashed&quot;, color = &quot;black&quot;)
 H0false</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-4-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The area under the alternative distribution curve to the left of the significance threshold in orange is the probability of incorrectly <strong>not</strong> rejecting the null hypothesis given that the null hypothesis is false (False negative, type 2 error). What value should the area under the curve to the left of the black line be? <hide><span class="math inline">\(\beta\)</span></hide> Since the total area under the blue curve must add up to 100%, the remaining area to the left of the black line in purple is <span class="math inline">\(1-\beta\)</span>, or the probability of a true positive given the alternative hypothesis is true. This is also known as the power of the test.</p>
 </div>
 </div>
@@ -731,24 +903,209 @@ feather_data &lt;-
 plot &lt;- ggplot(data = feather_data, aes(x = Feathers)) + geom_density() + xlim(0, 25)
 plot</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-5-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>What we can appreciate from the plot is that the distribution of number of feathers of sampled birds is shifted down from 12.5. We can see this through comparing the mean of the distribution (in the black solid line) with 12.5 (in the red dashed line). The spread of our sample distribution is fairly broad, with a standard deviation of 3.</p>
 <pre class="r"><code>plot + geom_vline(xintercept=12.5, linetype = &quot;dashed&quot;, color = &quot;red&quot;) + geom_vline(xintercept=mean(feather_data$Feathers), linetype = &quot;solid&quot;, color = &quot;black&quot;) </code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-6-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Since we see a difference in the mean of our collected birds from 12.5, we would like to perform a statistical test to determine if this difference is statistically significant. What test should be perform? <hide> T-test for one mean </hide>. Recall that this type of test will be comparing the observed mean to the distribution of values we would expect to see under a null hypothesis. In this case, what this means it that we should find the null distribution for the difference between a sample mean and the species mean and determine what percentile our observed mean falls on this null distribution.</p>
 <p>First, start out by plotting the null sampling distribution of feather number (assuming that the variance of feather number in the species known and is equal to the variance in our collected sample). Here it is in red:</p>
 <pre class="r"><code>nextplot &lt;-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;) +
   geom_vline(xintercept=0, linetype = &quot;solid&quot;, color =&quot;red&quot;)
 nextplot</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-7-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>What important theorem gives us the expected shape and center of our sampling distribution? <hide>The CLT.</hide> The theorem tells us that our sampling distribution should be centered at 0 (<span class="math inline">\(H_0: \mu_{sampling} - \mu_{species} = 0\)</span>) with standard deviation equal to (<span class="math inline">\(\sigma_{sampling} = \frac{\sigma}{\sqrt{n}}\)</span>).</p>
 <p>Recall that in order for a result to be signficant under a one-tailed T-test, the observation should be at a percentile less than or equal to our significance level <span class="math inline">\(\alpha\)</span>. Let’s draw the 5th percentile on the null distribution using a dashed red line to denote our significance level for the test (<span class="math inline">\(\alpha = 0.04\)</span>). Everything to the left of this dotted line would be declared as significant.</p>
 <pre class="r"><code>threshold &lt;- (-1.833*3/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) </code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-8-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Where does our sample mean fall on this null distribution?</p>
 <pre class="r"><code>threshold &lt;- (-1.833*3/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;)  + geom_vline(xintercept = -1.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-9-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Oof! It looks like our sample mean is higher than the threshold for significance for our T-test, meaning we did not detect a signficant difference between our sample and the known species average. How could this be, given that the true population mean was indeed lower than the species mean?</p>
 <p>Let us see what effect changing each of the 5 parameters we discussed earlier would have on our ability to correctly detect the true difference in the tail feather number. Note that this is simply an educational example: in a real experiment you obviously would not and should not have the ability to play with parameters of your sample and statistical test after you have collected data.</p>
 </div>
@@ -758,6 +1115,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 <pre class="r"><code>threshold &lt;- (-1.383*3/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;)  + geom_vline(xintercept = -1.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-10-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>At a significance level of 0.10, our test is signficant! We detect a difference between our population’s mean tail number when compared to the species mean tail number at a signficance level of 0.10. Increasing <span class="math inline">\(\alpha\)</span> gives us more power. It’s almost too good to be true. Why might it be inadvisable to simply use a high value of <span class="math inline">\(\alpha\)</span> when performing statistical tests in order to obtain high power? <hide> By increasing <span class="math inline">\(\alpha\)</span>, we not only increase our power, but also our probability of false positives. Recall that <span class="math inline">\(\alpha\)</span> is equal to our probability of obtaining a false positive result.</hide></p>
 </div>
 <div id="factors-that-affect-power-2.-sample-size-n" class="section level3">
@@ -770,6 +1164,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 threshold &lt;- (-1.833*3/sqrt(50))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) </code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-11-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Where does our observed difference in mean tail feather number (11 - 12.5) fall on this null distribution?</p>
 <pre class="r"><code>nextplot &lt;-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = &quot;red&quot;, linetype = &quot;solid&quot;) +
   geom_vline(xintercept=0, linetype = &quot;solid&quot;, color =&quot;red&quot;)
@@ -777,6 +1208,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 threshold &lt;- (-1.833*3/sqrt(50))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) + geom_vline(xintercept = -1.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-12-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>It’s far to the left of the threshold. Therefore, we would conclude that there our observed mean number of tail feathers is significantly different from 12.5. Increasing the sample size gives us increased power to detect a difference, primarily through causing the sampling distribution to be narrower (i.e. we are more confident in our estimate of the population mean using the mean of our sample).</p>
 </div>
 <div id="factors-that-affect-power-3.-variance-in-the-repsonse-variable" class="section level3">
@@ -789,6 +1257,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 threshold &lt;- (-1.833*1/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) </code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-13-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Once again, you can appreciate that the sampling distribution is narrower. Let’s see where our observed mean falls on the distribution:</p>
 <pre class="r"><code>nextplot &lt;-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;) +
   geom_vline(xintercept=0, linetype = &quot;solid&quot;, color =&quot;red&quot;)
@@ -796,6 +1301,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 threshold &lt;- (-1.833*1/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) + geom_vline(xintercept = -1.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-14-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Again, the observed mean is significantly lower than 12.5. A reduced variance increases power in the same way that increased sample sizes do, through narrowing the sampling distribution.</p>
 </div>
 <div id="factors-that-affect-power-4.-magnitude-of-the-effect-size" class="section level3">
@@ -806,6 +1348,43 @@ nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color
 threshold &lt;- (-1.833*3/sqrt(10))
 nextplot + geom_vline(xintercept=threshold, linetype = &quot;dashed&quot;, color =&quot;red&quot;) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;, xlim = c(-5,threshold), geom = &quot;area&quot;, fill = &quot;red&quot;) + geom_vline(xintercept = -2.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-15-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>we see that the result is significant. Rather than moving the significance threshold, increasing the magnitude of the effect size moves the black line to the left, increasing the power to detect the difference.</p>
 </div>
 <div id="factors-that-affect-power-5.-type-of-test-one-or-two-tailed" class="section level3">
@@ -826,6 +1405,43 @@ blueplot &lt;- nextplot + geom_vline(xintercept=(2.262157*3/sqrt(10)), linetype 
 
 grid.arrange(redplot, blueplot, ncol = 2)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-16-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Comparing the two, you can see that the threshold for significance for a two-tailed test is more extreme on the left side than for a one-tailed test. This is because for a two tailed test, you would be testing for any type of difference between an observed mean and the null mean (significantly greater or significantly smaller). The shaded portions of the two distributions have the same total area (which is equal to <span class="math inline">\(\alpha\)</span>), which means that there is less shaded area on the left side of the graph (half as much as in a one-tailed test). Therefore, a one-tailed test will have more power to detect a one-directional difference than a two-tailed test. However, one-tailed tests are only appropriate to use in cases where there is an <em>a priori</em> reason to expect that the observed quantity will be less than (or greater than) the null value.</p>
 </div>
 </div>
@@ -900,6 +1516,43 @@ grid.arrange(redplot, blueplot, ncol = 2)</code></pre>
   geom_vline(xintercept=10, linetype = &quot;dashed&quot;, color = &quot;blue&quot;, alpha = 0.5) +
   geom_vline(xintercept=15, linetype = &quot;dashed&quot;, color = &quot;red&quot;, alpha = 0.5)</code></pre>
 <p><img src="figure/powerAnalyses.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/a321d7b2e20826590e55b0957b026534e845ecaf/docs/figure/powerAnalyses.Rmd/unnamed-chunk-18-1.png" target="_blank">a321d7b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The next step is important but may be difficult to conceptualize. <strong>In order for the purple area to be equal to our power of 0.80, we need the “distance” (in standard error units) between the mean of the alternative distribution and the significance level to be equal to the T statistic corresponding to the 20th percentile.</strong> Why does this make sense? Because the purple shaded area is defined as the area to the right of the significance level in the alternative distribution. The area to the right of the 20th percentile makes up 80% of the total area (0.80). Great! So we know our goal. How do we set our sample size to get to that goal?</p>
 <p>To start, we can take advantage of another measurement we have: the effect size. This is the difference between the mean of the null distribution and the alternative distribution. This is a great measuring stick to have because it is set: it will not change depending on the sample size, whereas the standard error of each distribution depends on n, which is the very quantity we are trying to estimate!</p>
 <p>In short, we need our effect size (scaled by standard error units) to equal the sum of the distance between the blue dotted line and the black dotted line and the distance between the black dotted line and the red dotted line (in standard error units). The distance between the mean of each distribution and another point scaled by standard error units is another way to phrase a T statistic. In other words:</p>
