@@ -48,7 +48,7 @@ Following the 4-5 weeks of lectures, each student will be expected to prepare a 
 
 2. Select a primary research paper in a field of interest and create a 10 minute presentation describing the statistical methods used in the paper and the conclusions drawn using those statistical tests to be presented in the 10th week.
 
-Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes.
+Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes. A rubric for the presentation can be found [here](https://drive.google.com/open?id=1FPfHFjK83qjQQmMX4uLujx9von8jRZlB).
 
 ## Grading
 
@@ -90,6 +90,14 @@ Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent ti
 * Week 7: Final project proposed to instructors
 
 Week 10 : Project presentations
+
+## Academic Integrity
+
+In this course, students are expected to produce original work. This means that all sources used in written work (including articles, books, chalk posts) should be properly cited. The University policy on academic honesty is central to the ideals that undergird this course. Students are expected to be independently familiar with the policy and to recognize that their work in the course is to be their own original work that truthfully represents the time and effort applied. Violations of the policy are taken seriously and will be handled in a manner that fully represents the extent of the policy and that befits the seriousness of its violation.
+
+## Disability Accommodations
+
+If you have specific physical, psychiatric or learning disabilities and require accommodations, please let the instructors know early in the course so that your learning needs may be appropriately met. You will also need to meet with the Office of Student Disability Services located at 5501 S Ellis Avenue.
 
 ## Final Note
 

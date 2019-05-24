@@ -18,10 +18,8 @@ Our objectives today include learning about Bayes theorem,
 
 Before we delve into Bayesian inference, we must first start by covering Bayes Theorem. Bayes Theorem is a result that comes from probability, 
 
-
-
 Bayesian inference *
-	Bayes rule, likelihoods, likelihood ratios, maximum likelihood expectation
+	Bayes rule, likelihoods, likelihood ratios, conjugate distributions
 
 Markov Chains *
 	Markov Property, memorylessness of poisson, transition probabilities/stationary probabilities, long-run behavior, introduction to Hidden Markov Models

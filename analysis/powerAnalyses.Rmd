@@ -7,6 +7,17 @@ editor_options:
   chunk_output_type: console
 ---
 
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
 ## Introduction
 
 Before going to the lab to carry out any type of full-scale experiment, it is important to determine how many samples and replicates you will need to include in the experiment to best answer the question you would like to answer. Power analyses allow researchers to determine the smallest __sample size__ required to detect the __effect size__ of a given comparison at a given __significance level__.
@@ -23,6 +34,8 @@ Performing a power analysis after running an experiment is also useful, particul
 
 Our objectives today are to review the concept of power, discuss what a power analysis is, and different ways to carry out a power analysis.
 
+Today, we will first review power as a concept. Then, we will discuss some parameters that need to be kept in mind when trying to estimate power. Finally, we will walk through the steps of performing power analyses and the list of assumptions need to make in order to perform one.
+
 ## Reviewing the concept of Power
 
 Recall that there are four possible scenarios when performing a hypothesis test on a null hypothesis. We have previously discussed in some detail the concept of Type 1 and Type 2 errors, which will occur with some probability in any type of test that you will perform.
@@ -34,7 +47,76 @@ Recall that there are four possible scenarios when performing a hypothesis test 
 
 Power can be thought of as the probability of rejecting the null hypothesis given that the null hypothesis is false (the probability of correctly rejecting the null hypothesis). It is also 1-$\beta$, the probability of making a type 2 error. Since power is a probability, it takes on values between 0 and 1.
 
-There are 5 quantities that primarily affect power:
+## Graphical depiction of power
+
+What does it mean that power is the probability of correctly rejecting the null hypothesis? In addition to visualizing it in a table, we can graphically depict what we mean by $\alpha$, power, and $\beta$.
+
+Suppose we have two competing hypotheses to consider: a null hypothesis that the mean surface area of chips in a bag is 10 $cm^2$ and an alternative hypothesis that the mean surface area of the chips in the bag is 15 $cm^2$. You take some samples from the bag and would like to determine which hypothesis better fits the data. Due to sampling error, the null and alternative sampling distributions will have some spread around their mean values. Here we plot the null sampling distribution in blue and the alternative sampling distribution in red:
+
+```{r message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(gridExtra)
+power_visualization <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid") +
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid")
+power_visualization
+```
+
+We would like to perform a one-tailed T-test to determine if there is sufficient evidence in our data to support rejecting the null hypothesis in favor of the alternative. Let us use an $\alpha = 0.05$ and plot the significance threshold on the null distribution:
+
+```{r}
+power_visualization + geom_vline(xintercept=1.645*2+10, linetype = "dashed", color = "black")
+```
+
+Observed means to the right of this threshold would be declared as significant. Now, there are two possible realities: either the null hypothesis ($H_0$) is indeed True, or $H_0$ is False (see the table above). Let's first transport ourselves to the reality where the null hypothesis is True.
+
+### $H_0$ is True
+
+If $H_0$ is true, then looking at the table we created earlier we know that there are two possible results of our hypothesis test. If the results of the test are that we reject $H_0$, then we have committed a type 1 error (false positive). If the results of the test are that we do not reject $H_0$, then we have a true negative result.
+
+Since we exist in the reality where the null hypothesis is true, we should only focus on the blue curve (the null sampling distribution). 
+
+```{r}
+H0true <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid", alpha = "0.2")+
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid") +
+  
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", xlim = c(0,1.645*2+10), geom = "area", fill = "yellow", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", xlim = c(1.645*2+10, 25), geom = "area", fill = "green", alpha = 0.5) +
+  
+  geom_vline(xintercept=1.645*2+10, linetype = "dashed", color = "black")
+H0true
+```
+
+The area under the null distribution curve to the right of the significance threshold in green is the probability of falsely rejecting the null hypothesis given that the null hypothesis is true ($\alpha$). Therefore, the area under the curve to the right of the black line is 5% of the total area under the blue curve. Since the total area under the blue curve must add up to 100%, the remaining area to the left of the black line in yellow is 95%, or the probability of a true negative given the null hypothesis is true.
+
+Now, let's transport ourselves instead to the world where the null hypothesis is False and the alternative hypothesis is true.
+
+### $H_0$ is False
+
+If $H_0$ is False, then looking at the table we created earlier we know that there are two possible results of our hypothesis test. If the results of the test are that we reject $H_0$, then we have a true positive result. If the results of the test are that we do not reject $H_0$, then we have a type 2 error (False negative).
+
+Since we exist in the reality where the null hypothesis is false, we should only focus on the red curve (the alternative sampling distribution).
+
+```{r}
+H0false <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid")+
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", alpha = "0.2") +
+
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "blue", linetype = "solid", xlim = c(0,1.645*2+10), geom = "area", fill = "orange", alpha = 0.5) +
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "blue", linetype = "solid", xlim = c(1.645*2+10, 25), geom = "area", fill = "purple", alpha = 0.5) +
+  
+  geom_vline(xintercept=1.645*2+10, linetype = "dashed", color = "black")
+H0false
+```
+
+The area under the alternative distribution curve to the left of the significance threshold in orange is the probability of incorrectly __not__ rejecting the null hypothesis given that the null hypothesis is false (False negative, type 2 error). What value should the area under the curve to the left of the black line be? <hide>$\beta$</hide> Since the total area under the blue curve must add up to 100%, the remaining area to the left of the black line in purple is $1-\beta$, or the probability of a true positive given the alternative hypothesis is true. This is also known as the power of the test.
+
+## 5 factors that affect power:
+
+There are 5 factors that primarily affect power:
 
 1. Significance level ($\alpha$)
 
@@ -46,7 +128,246 @@ There are 5 quantities that primarily affect power:
 
 5. Type of test (one or two tailed)
 
+Let's figure out intuitively why each of these quantities matters when we're thinking about power. 
+
+### Introducing a scenario: Testing for difference in bird tail feather number
+
+For an example, assume that we are experimenters that are sampling the birds in a forest to see if they have fewer tail feathers than the known species-wide average number of 12.5. Unknown to us, the population mean of tail feathers in this forest is in fact 11, which is less than 12.5. We go out one day and collect 10 birds from the forest and count their number of tail feathers and plot their distribution:
+
+```{r}
+set.seed(1)
+feather_data <-
+  data.frame(
+    Feathers =  c(rnorm(10, mean = 11, sd = 3))
+  )
+plot <- ggplot(data = feather_data, aes(x = Feathers)) + geom_density() + xlim(0, 25)
+plot
+```
+
+What we can appreciate from the plot is that the distribution of number of feathers of sampled birds is shifted down from 12.5. We can see this through comparing the mean of the distribution (in the black solid line) with 12.5 (in the red dashed line). The spread of our sample distribution is fairly broad, with a standard deviation of 3.
+
+```{r}
+plot + geom_vline(xintercept=12.5, linetype = "dashed", color = "red") + geom_vline(xintercept=mean(feather_data$Feathers), linetype = "solid", color = "black") 
+```
+
+Since we see a difference in the mean of our collected birds from 12.5, we would like to perform a statistical test to determine if this difference is statistically significant. What test should be perform? <hide> T-test for one mean </hide>. Recall that this type of test will be comparing the observed mean to the distribution of values we would expect to see under a null hypothesis. In this case, what this means it that we should find the null distribution for the difference between a sample mean and the species mean and determine what percentile our observed mean falls on this null distribution.
+
+First, start out by plotting the null sampling distribution of feather number (assuming that the variance of feather number in the species known and is equal to the variance in our collected sample). Here it is in red:
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+nextplot
+```
+
+What important theorem gives us the expected shape and center of our sampling distribution? <hide>The CLT.</hide> The theorem tells us that our sampling distribution should be centered at 0 ($H_0: \mu_{sampling} - \mu_{species} = 0$) with standard deviation equal to ($\sigma_{sampling} = \frac{\sigma}{\sqrt{n}}$).
+
+Recall that in order for a result to be signficant under a one-tailed T-test, the observation should be at a percentile less than or equal to our significance level $\alpha$. Let's draw the 5th percentile on the null distribution using a dashed red line to denote our significance level for the test ($\alpha = 0.04$). Everything to the left of this dotted line would be declared as significant.
+
+```{r}
+threshold <- (-1.833*3/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") 
+```
+
+Where does our sample mean fall on this null distribution?
+
+```{r}
+threshold <- (-1.833*3/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red")  + geom_vline(xintercept = -1.5)
+```
+
+Oof! It looks like our sample mean is higher than the threshold for significance for our T-test, meaning we did not detect a signficant difference between our sample and the known species average. How could this be, given that the true population mean was indeed lower than the species mean?
+
+Let us see what effect changing each of the 5 parameters we discussed earlier would have on our ability to correctly detect the true difference in the tail feather number. Note that this is simply an educational example: in a real experiment you obviously would not and should not have the ability to play with parameters of your sample and statistical test after you have collected data.
+
+### Factors that affect power: 1. significance level ($\alpha$)
+
+In order for our T-test to be significant, the observed mean for our sample must be lower than the threshold set by applying our significance level to the null distribution (in red). One way we could imagine that would put our black line (sample mean) to the left of the threshold would be to simply move the red line to the right. This is equivalent to setting a higher value of $\alpha$. For example, what if in our test we chose to use an $\alpha = 0.10$?
+
+```{r}
+threshold <- (-1.383*3/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red")  + geom_vline(xintercept = -1.5)
+```
+
+At a significance level of 0.10, our test is signficant! We detect a difference between our population's mean tail number when compared to the species mean tail number at a signficance level of 0.10. Increasing $\alpha$ gives us more power. It's almost too good to be true. Why might it be inadvisable to simply use a high value of $\alpha$ when performing statistical tests in order to obtain high power? <hide> By increasing $\alpha$, we not only increase our power, but also our probability of false positives. Recall that $\alpha$ is equal to our probability of obtaining a false positive result.</hide>
+
+### Factors that affect power: 2. Sample size (n)
+
+Instead of relaxing our significance threshold, what if we collected more birds in our sample (keeping everything else, including the mean feather number, constant)? For example, let's assume we collected 50 birds instead of 10. What will this do to the shape of our null sampling distribution? <hide>This will make our null sampling distribution much narrower, since the standard deviation of the null sampling distribution is proportional to $\frac{1}{\sqrt{n}}$</hide>.
+
+Let's plot the null sampling distribution for a sample size of 50 and draw a dotted line for the threshold for significance under an $\alpha = 0.05$. 
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+
+threshold <- (-1.833*3/sqrt(50))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") 
+```
+
+Where does our observed difference in mean tail feather number (11 - 12.5) fall on this null distribution?
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+
+threshold <- (-1.833*3/sqrt(50))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(50)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") + geom_vline(xintercept = -1.5)
+```
+
+It's far to the left of the threshold. Therefore, we would conclude that there our observed mean number of tail feathers is significantly different from 12.5. Increasing the sample size gives us increased power to detect a difference, primarily through causing the sampling distribution to be narrower (i.e. we are more confident in our estimate of the population mean using the mean of our sample).
+
+### Factors that affect power: 3. Variance in the repsonse variable
+
+In a similar vein, let's assume that instead of our sample size increasing, the variance in our sample distribution was lower. Recall that our sample distribution had a standard deviation of 3. What is it's variance? <hide>$\sqrt{variance} = standard\_deviation$</hide> 
+
+If our sample distribution's sample size was 10 and it's variance was 1 instead of $\sqrt{3}$, our null sampling distirbution with an $\alpha = 0.05$ would look like this:
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+
+threshold <- (-1.833*1/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") 
+```
+
+Once again, you can appreciate that the sampling distribution is narrower. Let's see where our observed mean falls on the distribution:
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+
+threshold <- (-1.833*1/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 1/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") + geom_vline(xintercept = -1.5)
+```
+
+Again, the observed mean is significantly lower than 12.5. A reduced variance increases power in the same way that increased sample sizes do, through narrowing the sampling distribution.
+
+### Factors that affect power: 4. Magnitude of the effect size
+
+Returning to our base example, let's assume that instead of an average tail feather number of 11, we had found an average of 10 tail feathers per bird in our sample (with the same standard deviation of 3 for our sample). This would mean that our effect size (the difference between our observation mean and the null distribution's mean) would increase from $11-12.5 = -1.5$ to $10-12.5 = -2.5$. The effect size is the deviation of an observation from the null hypothesis. Plotting this difference on the null sampling distribution:
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+threshold <- (-1.833*3/sqrt(10))
+nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") + geom_vline(xintercept = -2.5)
+```
+
+we see that the result is significant. Rather than moving the significance threshold, increasing the magnitude of the effect size moves the black line to the left, increasing the power to detect the difference.
+
+### Factors that affect power: 5. Type of test (one or two tailed)
+
+Finally, one easily overlooked aspect of a test that can affect power is whether a test is one or two tailed. Of course, not all statistical tests will have an option of a one or two tailed option. What is an example of a test that is always two-tailed? <hide>Chi-square test</hide> However, in our case a T-test can be either one or two tailed.
+
+Let's compare the significance thresholds on the null distribution for a one (red) and two (blue) tailed test
+
+```{r}
+nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid") +
+  geom_vline(xintercept=0, linetype = "solid", color ="red")
+
+threshold <- (-1.833*3/sqrt(10))
+redplot <- nextplot + geom_vline(xintercept=threshold, linetype = "dashed", color ="red") +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid", xlim = c(-5,threshold), geom = "area", fill = "red") 
+
+blueplot <- nextplot + geom_vline(xintercept=(2.262157*3/sqrt(10)), linetype = "dashed", color ="blue") + 
+  geom_vline(xintercept=(-2.262157*3/sqrt(10)), linetype = "dashed", color ="blue") +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "blue", linetype = "solid", xlim = c((2.262157*3/sqrt(10)),5), geom = "area", fill = "blue") + 
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "blue", linetype = "solid", xlim = c(-5,(-2.262157*3/sqrt(10))), geom = "area", fill = "blue")
+
+grid.arrange(redplot, blueplot, ncol = 2)
+
+```
+
+Comparing the two, you can see that the threshold for significance for a two-tailed test is more extreme on the left side than for a one-tailed test. This is because for a two tailed test, you would be testing for any type of difference between an observed mean and the null mean (significantly greater or significantly smaller). The shaded portions of the two distributions have the same total area (which is equal to $\alpha$), which means that there is less shaded area on the left side of the graph (half as much as in a one-tailed test). Therefore, a one-tailed test will have more power to detect a one-directional difference than a two-tailed test. However, one-tailed tests are only appropriate to use in cases where there is an _a priori_ reason to expect that the observed quantity will be less than (or greater than) the null value.
 
 
+## Performing a power analysis
 
-sampling theory, graphical approaches to power analyses, intervals, example of power analysis
+Now that we have walked through how many different aspects of a statistical test can affect power, we can move on to discussing how to perform a power analysis. Note that the specific details of a power analysis will differ depending on the specific statistical test you plan to perform. 
+
+Two important types of power analyses you can carry out while designing an experiment are _a priori_ analyses and sensitivity analyses. 
+
+1. A priori: compute sample size required to achieve a desired power, given $\alpha$, effect size, and type of test.
+
+The a priori power analysis tells you what sample size is needed to detect a certain effect size. This is useful when you have a good idea of what range of effect size would be useful or of good clinical utility to detect. For example, if you are comparing the effectiveness of two drugs in stopping hair loss and one is 100 times more expensive than the other, you may not be as interested in determining if one is 0.01% more effective than the other.
+
+2. Sensitivity: compute the effect size that could be detected by a test, given $\alpha$, power, sample size, and type of test
+
+A sensitivity power analysis is used when you as a researcher have no control over the sample size of the study (for example, there is not enough funding to process more than X samples). Instead, this analysis determines what effect size you could detect with the subjects you have. This is referred to as the minimal detectable effect (MDE) of your study.
+
+Let us walk through an example of performing a power analysis to determine a sample size. We will move forward by revisiting our previous experiment of trying to determine the true mean number of tail feathers of birds in a given forest. Suppose again that the known species-wide average number is 12.5 with a standard deviation of 3 and the the population mean of tail feathers in this forest is in fact 11, which is less than 12.5. How many birds must we collect from the forest to have a power of 0.80 to detect the difference using a one-tailed T-test at an $\alpha =0.05$?
+
+From the statement of the problem, we already know a few of the factors that we need to know in order to perform the power analysis. If we did not have these, we would need to estimate or make assumptions about them before moving forward.
+
+| Factor | Value |
+|----------------|-----------------------------------------------------------------------|---------------------------------------------------------|
+| Significance level | 0.05 | 
+|  Sample size | ? | 
+|  Variance | $\sqrt{3}$ | 
+|  Effect size | $11-12.5=-1.5$ | 
+|  Type of test | one-tailed | 
+|  Power | 0.80 | 
+
+First, we start with our significance level of 0.05. Given that we are performing a one-tailed T-test for a single mean, we can figure out the T statistic threshold ("critical value") for obtaining a significant result. We can do this in R using the command 'qt(0.05, df = 9)'.
+
+```{r}
+qt(0.05, df = 9)
+```
+
+Recall that the equation for a T-statistic is given by:
+
+$$T = \frac{\mu_{observed}-\mu_0}{\sqrt{\frac{\sigma^2}{n}}}$$
+
+Recall also that the definition of power is the area shaded in purple in this plot
+
+```{r}
+ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid")+
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid") +
+
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "blue", linetype = "solid", xlim = c(1.645*2+10, 25), geom = "area", fill = "purple", alpha = 0.5) +
+  geom_vline(xintercept=1.645*2+10, linetype = "dashed", color = "black") +
+  
+  geom_vline(xintercept=10, linetype = "dashed", color = "blue", alpha = 0.5) +
+  geom_vline(xintercept=15, linetype = "dashed", color = "red", alpha = 0.5)
+```
+
+The next step is important but may be difficult to conceptualize. __In order for the purple area to be equal to our power of 0.80, we need the "distance" (in standard error units) between the mean of the alternative distribution and the significance level to be equal to the T statistic corresponding to the 20th percentile.__ Why does this make sense? Because the purple shaded area is defined as the area to the right of the significance level in the alternative distribution. The area to the right of the 20th percentile makes up 80% of the total area (0.80). Great! So we know our goal. How do we set our sample size to get to that goal?
+
+To start, we can take advantage of another measurement we have: the effect size. This is the difference between the mean of the null distribution and the alternative distribution. This is a great measuring stick to have because it is set: it will not change depending on the sample size, whereas the standard error of each distribution depends on n, which is the very quantity we are trying to estimate!
+
+In short, we need our effect size (scaled by standard error units) to equal the sum of the distance between the blue dotted line and the black dotted line and the distance between the black dotted line and the red dotted line (in standard error units). The distance between the mean of each distribution and another point scaled by standard error units is another way to phrase a T statistic. In other words:
+
+$$\frac{ES}{\frac{\sigma}{\sqrt{n}}} = T_{1-\alpha} + T_{1-\beta}$$
+
+$T_{1-\alpha}$ is the T statistic representing the distance between the blue dotted line and the black dotted line scaled in standard error units, while $T_{1-\beta}$ is the T statistic representing the distance between the black dotted line and the red dotted line scaled in standard error units. Rearranging to obtain an equation to solve for n, we get:
+
+$$n= (\frac{T_{1-\alpha} + T_{1-\beta}}{\frac{ES}{\sigma}})^2$$
+
+Plugging in our known values (and looking up the T statistics using R using the qt() function), we can get the sample size required to obtain a power of 0.80.
+
+```{r}
+qt(0.95, df = 9)
+qt(0.8, df = 9)
+```
+
+$$n = (\frac{2.716517}{\frac{1.5}{3}})^2 = 29.51786 \approx 30$$
+
+We need a sample size of at least 30 birds to obtain our desired power.
+
+### Notes
+
+* One obvious question to ask yourself is how we should base our estimates for effect size and sample variance before we have even performed an experiment. Depending on the situation, a few options are available to better come up with useful estimates for these quantities. For one, a pilot study could be performed. Or, if your lab has experience performing experiments similar to the one you are about to undertake, looking at the effect sizes or sample variances measured in previous studies is a very helpful strategy. Alternatively, looking into the literature to see examples of previous studies may be useful.
+
+* Note also that there are a variety of software packages available to automatically perform power calculations for you if you are able to supply estimates for the parameters of your sample/test. For example, http://rcompanion.org/rcompanion/index.html provides sample R programs to perform power analyses for a variety of different types of tests. Alternatively, G*Power http://www.gpower.hhu.de/ is a popular piece of software that can be used.
+
+* In practice, it may be useful to calculate a range of values for the sample size in an _a priori_ analysis in order to account for the uncertainty in the estimation of each of the parameters in your analysis. The software above offer convenient ways to do this.
+
+## Summary 
+
+* Power is defined as the probability of rejecting the null hypothesis given that the null hypothesis is false (the probability of correctly rejecting the null hypothesis).
+
+* Power analysis is extremely important in study design and post study analysis.
+
+* Power analysis depends on good estimates or prior assumptions for certain parameters of a test and is therefore very unique to the particular experiment being performed. Power analyses are entirely hypothetical as they rely on estimates of these parameters.

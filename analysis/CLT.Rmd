@@ -87,7 +87,6 @@ curve(dnorm(x, mean = mean(sample_means), sd = sd(deer_heights)/sqrt(100)), add=
 abline(v=mean(sample_means), col="red")
 ```
 
-
 ## CLT $\ne$ Law of Large Numbers
 
 The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter Taken to the near limit, you can imagine that if you were able to sample 999,999 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
