@@ -36,6 +36,10 @@ While the title of this course only mentions statistics, in reality knowledge of
 
 We will explore more of both of these fields throughout the course.
 
+## Note
+
+Note that we will be able to explore many different topic areas in this course. However, given the limited amount of time we have to spend together, we will not be able to delve very deeply into most topics to the level where you would be able to base your entire thesis work off of what you learn here. We hope to familiarize you with common statistical tools and methods and encourage you to take courses that are dedicated to exploring these topics in more depth should you require them for your thesis project.
+
 ## Bibliography
 
 * https://www3.cs.stonybrook.edu/~skiena/jaialai/excerpts/node12.html

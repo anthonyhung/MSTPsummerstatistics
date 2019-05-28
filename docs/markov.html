@@ -173,7 +173,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -253,14 +253,18 @@ div.section {
 <li><a href="#the-markov-assumption">The Markov assumption</a><ul>
 <li><a href="#the-central-dogma-of-biology-as-a-markov-chain">The central dogma of biology as a Markov chain</a></li>
 </ul></li>
-<li><a href="#components-of-markov-chains">Components of Markov Chains</a></li>
-<li><a href="#hidden-markov-models">Hidden Markov Models</a></li>
+<li><a href="#components-of-markov-chains">Components of Markov Chains</a><ul>
+<li><a href="#example-of-markov-chain">Example of Markov Chain</a></li>
+</ul></li>
+<li><a href="#long-run-behavior-of-markov-chains-stationary-probabilities">Long run behavior of Markov chains: stationary probabilities</a></li>
+<li><a href="#uses-of-markov-chains">Uses of Markov Chains</a></li>
+<li><a href="#markov-chain-monte-carlo-mcmc">Markov Chain Monte Carlo (MCMC)</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -269,7 +273,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -281,7 +285,7 @@ div.section {
 <strong>Last updated:</strong> 2019-05-24
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -297,22 +301,70 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea321d7b2e20826590e55b0957b026534e845ecaftargetblanka321d7ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/a321d7b2e20826590e55b0957b026534e845ecaf" target="_blank">a321d7b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea321d7b2e20826590e55b0957b026534e845ecaftargetblanka321d7ba" class="panel-collapse collapse">
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb291d24b99263105227f9a3edb002e98252785detargetblankb291d24a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/b291d24b99263105227f9a3edb002e98252785de" target="_blank">b291d24</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb291d24b99263105227f9a3edb002e98252785detargetblankb291d24a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -324,6 +376,10 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/markov.Rmd
 
 </code></pre>
 <p>
@@ -362,6 +418,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/b291d24b99263105227f9a3edb002e98252785de/docs/markov.html" target="_blank">b291d24</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -585,7 +658,7 @@ hide:hover {
 </style>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Markov chains are models that describe the sequence of possible countable events for a system in which the probability of transitions from each event to the next is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind Markov Chains and their long-run behavior.</p>
+<p>Markov chains are stochastic processes that describe the sequence of possible countable events for a system in which the probability of transitions from each event to the next is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind discrete time Markov Chains and their long-run behavior.</p>
 </div>
 <div id="the-markov-assumption" class="section level2">
 <h2>The Markov assumption</h2>
@@ -603,11 +676,118 @@ hide:hover {
 </div>
 <div id="components-of-markov-chains" class="section level2">
 <h2>Components of Markov Chains</h2>
-<p>A Markov chain can be described by two</p>
+<p>A Markov chain describing the states that a time-dependent random variable X_t takes on at each time-step t is fully determined by two elements:</p>
+<ol style="list-style-type: decimal">
+<li><p>A transition probability matrix (P) that defines the transition probabilities between each pair of states i and j (<span class="math inline">\(P_{ij} = P(X_t = j | X_{t-1}=i)\)</span>).</p></li>
+<li><p>An initial probability distribution vector (<span class="math inline">\(x_0\)</span>) containing values for <span class="math inline">\(P(X_0 = i)\)</span> for each state i.</p></li>
+</ol>
+<p>With these two quantities, we can compute the probability that a Markov chain takes on any given state at any given time.</p>
+<div id="example-of-markov-chain" class="section level3">
+<h3>Example of Markov Chain</h3>
+<p>Let’s explore an example of a Markov Chain. For example, let’s say that we live in a world where the weather is very predictable. There are only 3 states of weather (X=s when it’s Sunny, X=c when it’s Cloudy, and X=r when it’s rainy), and the weather is always the same for the whole day. On a day when it is sunny, the probability that it will be sunny the next day is 0.6, the probabilty that it will be cloudy the next day is 0.3, and the probability that it will be rainy the next day is 0.1. On a day when it is cloudy, the probability that the next day is sunny is 0.2, the probability that the next day is cloudy is 0.3, and the probability that the next day is rainy is 0.5. On a day when it is rainy, the probabilty that the next day will be rainy is 0.5, the probability that next day will be sunny is 0.4, and the probability that the next day will be cloudy is 0.1. A visual depiction of these transition probabilities can be found here: <a href="https://stackoverflow.com/questions/36574814/creating-three-state-markov-chain-plot" class="uri">https://stackoverflow.com/questions/36574814/creating-three-state-markov-chain-plot</a>. We can also create a transition probability matrix in R, assuming that the order of the states is s,c,r:</p>
+<pre class="r"><code>P &lt;- matrix(c(c(0.6,0.2,0.4),c(0.3,0.3,0.1),c(0.1,0.5,0.5)),nrow=3)
+P</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]  0.6  0.3  0.1
+[2,]  0.2  0.3  0.5
+[3,]  0.4  0.1  0.5</code></pre>
+<p>The matrix is constructed with i in the rows, and j in the columns. Each cell is filled in with the values for <span class="math inline">\(P_{ij} = P(X_t = j | X_{t-1}=i)\)</span>. Each of the rows must sum to 1, since the matrix describes all possible transitions.</p>
+<p>Let’s also assume that we have an initial probability vector <span class="math inline">\(x_0\)</span>:</p>
+<pre class="r"><code>x_0 &lt;- c(0.8, 0.1, 0.1)</code></pre>
+<p>In this case, this means on day 0 there is a 0.8 probability that it is sunny, 0.1 probability that it is cloudy, and 0.1 probability that it is rainy. The vector must also sum to 1, since it must fully describe all possible states on day 0.</p>
+<p>If we want to compute the probability that on day 1, the weather will be sunny, we must solve the following equation:</p>
+<p><span class="math display">\[P(X_1 = sunny) = \sum\limits_i P(X_0 = i)P(X_1 = sunny|X_0 = i)\]</span></p>
+<p>We could do this manually using our vector <span class="math inline">\(x_0\)</span> and P:</p>
+<p><span class="math display">\[P(X_1 = sunny) = 0.8*0.6 + 0.1*0.2 + 0.1*0.4 = 0.54\]</span></p>
+<p>The probability that day 1 is sunny is 0.54. But what if we want to calculate the probability that day 2 is sunny? We would need to first find the state probabilities for all three states for day 1 (repeating what we did above two more times), then plug them in to the following equation:</p>
+<p><span class="math display">\[P(X_2 = sunny) = \sum\limits_i P(X_1 = i)P(X_2 = sunny|X_1 = i)\]</span></p>
+<p>You can appreciate that manually summing over all possible states would quickly get unwieldy, multiplying the number of calculations you need to perform by 3 for each increasing day.</p>
+<p>Fortunately, we can use matrix algebra to do all this multiplying and summing for us. In R, if we would like to calculate <span class="math inline">\(x_1\)</span>, our vector of state probabilities on day 1 is:</p>
+<pre class="r"><code>x_0%*%P</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,] 0.54 0.28 0.18</code></pre>
+<p>We can do this for any number of days. For example, for the vector of state probabilities after 10 days:</p>
+<pre class="r"><code>library(expm) #the expm package allows us to raise a matrix to a power</code></pre>
+<pre><code>Loading required package: Matrix</code></pre>
+<pre><code>
+Attaching package: &#39;expm&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:Matrix&#39;:
+
+    expm</code></pre>
+<pre class="r"><code>x_0 %*% (P %^% 10)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411769 0.2352953 0.3235278</code></pre>
 </div>
-<div id="hidden-markov-models" class="section level2">
-<h2>Hidden Markov Models</h2>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S0006349596794341" class="uri">https://www.sciencedirect.com/science/article/pii/S0006349596794341</a></p>
+</div>
+<div id="long-run-behavior-of-markov-chains-stationary-probabilities" class="section level2">
+<h2>Long run behavior of Markov chains: stationary probabilities</h2>
+<p>For a certain class of Markov chains, called ergodic Markov chains (<a href="https://brilliant.org/wiki/stationary-distributions/" class="uri">https://brilliant.org/wiki/stationary-distributions/</a>), there exists a stationary probability distribution, or an equillibrium distribution of possible states that a Markov chain will converge upon after many many iterations. To see what this means, let’s see what the probability distributions are for the weather on the 100th day given our values for P and <span class="math inline">\(x_0\)</span>.</p>
+<pre class="r"><code>x_0 %*% (P %^% 100)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411765 0.2352941 0.3235294</code></pre>
+<p>What about on the 101st day? 102nd?</p>
+<pre class="r"><code>x_0 %*% (P %^% 101)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411765 0.2352941 0.3235294</code></pre>
+<pre class="r"><code>x_0 %*% (P %^% 102)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411765 0.2352941 0.3235294</code></pre>
+<p>You can see that the probabilities have convereged upon an equillibrium vector which does not change even as we step forward into the future. In fact, this equillibrium or stationary distribution is unique to the transition probability matrix and does not depend on <span class="math inline">\(x_0\)</span>:</p>
+<pre class="r"><code>c(1, 0, 0) %*% (P %^% 101)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411765 0.2352941 0.3235294</code></pre>
+<pre class="r"><code>c(0, 1, 0) %*% (P %^% 102)</code></pre>
+<pre><code>          [,1]      [,2]      [,3]
+[1,] 0.4411765 0.2352941 0.3235294</code></pre>
+<p>This makes sense because if you go far enough into the future, the current state becomes less and less important and gives you less and less information to predict what the states will look like in the future. If I know it is cloudy today, I can probably do a good job of predicting if it will rain tomorrow. But I probably will not be better at predicting if it will rain 10 years from now compared to if I knew that today was sunny.</p>
+<p>If we did not want to simply raise a matrix to a large power in order to find a stationary distribution, eigenvalue decomposition (beyond the scope of this class) could be used to determine the stationary probability.</p>
+</div>
+<div id="uses-of-markov-chains" class="section level2">
+<h2>Uses of Markov Chains</h2>
+<p>Why do we care about Markov chains? Besides being able to predict the behavior and states of systems, there are many practical applications. For example, if you’ve ever used a smartphone keyboard and seen the suggestions for the next word, you’ve made use of a Markov chain! The subreddit <a href="https://www.reddit.com/r/SubredditSimulator/comments/3g9ioz/what_is_rsubredditsimulator/">/r/SubredditSimulator</a> generates complete posts using Markov Chains created from transition matrices generated using words included in the last 500 submissions in a variety of subreddit communities on reddit.</p>
+<p>Perhaps more relevant to us in Biology and Bayesian statistics, Markov chains are an important element of Markov Chain Monte Carlo methods.</p>
+</div>
+<div id="markov-chain-monte-carlo-mcmc" class="section level2">
+<h2>Markov Chain Monte Carlo (MCMC)</h2>
+<p>As the name may suggest, MCMC methods bring together two concepts: Markov chains and monte carlo methods.</p>
+<ol style="list-style-type: decimal">
+<li><p>Markov chains are stochastic processes where future states only depend on the last state (the markov property)</p></li>
+<li><p>Monte carlo methods rely on simulating a large number of random numbers to estimate properties of a distribution. An example is here, where we use monte carlo methods to estimate pi: <a href="https://academo.org/demos/estimating-pi-monte-carlo/" class="uri">https://academo.org/demos/estimating-pi-monte-carlo/</a>. We also use Monte carlo methods to estimate population means through using sample means. If we were to take a larger and larger number of samples from the population (similar to simulating more and more points on the square), then our estimate of the population mean (the sample mean) would become more and more precice (Question: what mathematical law predicts this behavior? <hide> The Law of Large Numbers </hide>)</p></li>
+</ol>
+<p>Markov Chain Monte Carlo techniques use Markov chains to sample repeatedly from a complicated or unnamed distribution, then use monte carlo methods to estimate properties of that distribution. Why would we ever need to do this? Let’s return to our previous exploration of Bayes rule.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.14.5
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] expm_0.999-3  Matrix_1.2-14
+
+loaded via a namespace (and not attached):
+ [1] workflowr_1.3.0 Rcpp_0.12.18    lattice_0.20-35 digest_0.6.16  
+ [5] rprojroot_1.3-2 grid_3.5.1      backports_1.1.2 git2r_0.23.0   
+ [9] magrittr_1.5    evaluate_0.11   stringi_1.2.4   fs_1.2.7       
+[13] whisker_0.3-2   rmarkdown_1.10  tools_3.5.1     stringr_1.3.1  
+[17] glue_1.3.0      yaml_2.2.0      compiler_3.5.1  htmltools_0.3.6
+[21] knitr_1.20     </code></pre>
+</div>
 </div>
 
 <script type="text/x-mathjax-config">

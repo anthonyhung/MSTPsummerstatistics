@@ -2,7 +2,9 @@
 title: "Markov Chains"
 author: "Anthony Hung"
 date: "2019-05-01"
-output: workflowr::wflow_html
+output: 
+  workflowr::wflow_html:
+    code_folding: show
 editor_options:
   chunk_output_type: console
 ---
@@ -20,7 +22,7 @@ hide:hover {
 
 ## Introduction
 
-Markov chains are models that describe the sequence of possible countable events for a system in which the probability of transitions from each event to the next is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind Markov Chains and their long-run behavior.
+Markov chains are stochastic processes that describe the sequence of possible countable events for a system in which the probability of transitions from each event to the next is dependent only on the event immediately preceeding that event. Markov chains are a staple in computational statistics. Our objective today is to learn the basics behind discrete time Markov Chains and their long-run behavior.
 
 ## The Markov assumption
 
@@ -45,17 +47,100 @@ The assumption under the central dogma is that information flows only in one dir
 
 ## Components of Markov Chains 
 
-A Markov chain can be described by two 
+A Markov chain describing the states that a time-dependent random variable X_t takes on at each time-step t is fully determined by two elements:
+
+1. A transition probability matrix (P) that defines the transition probabilities between each pair of states i and j ($P_{ij} = P(X_t = j | X_{t-1}=i)$).
+
+2. An initial probability distribution vector ($x_0$) containing values for $P(X_0 = i)$ for each state i.
+
+With these two quantities, we can compute the probability that a Markov chain takes on any given state at any given time.
+
+### Example of Markov Chain
+
+Let's explore an example of a Markov Chain. For example, let's say that we live in a world where the weather is very predictable. There are only 3 states of weather (X=s when it's Sunny, X=c when it's Cloudy, and X=r when it's rainy), and the weather is always the same for the whole day. On a day when it is sunny, the probability that it will be sunny the next day is 0.6, the probabilty that it will be cloudy the next day is 0.3, and the probability that it will be rainy the next day is 0.1. On a day when it is cloudy, the probability that the next day is sunny is 0.2, the probability that the next day is cloudy is 0.3, and the probability that the next day is rainy is 0.5. On a day when it is rainy, the probabilty that the next day will be rainy is 0.5, the probability that next day will be sunny is 0.4, and the probability that the next day will be cloudy is 0.1. A visual depiction of these transition probabilities can be found here: https://stackoverflow.com/questions/36574814/creating-three-state-markov-chain-plot. We can also create a transition probability matrix in R, assuming that the order of the states is s,c,r:
+
+```{r}
+P <- matrix(c(c(0.6,0.2,0.4),c(0.3,0.3,0.1),c(0.1,0.5,0.5)),nrow=3)
+P
+```
+
+The matrix is constructed with i in the rows, and j in the columns. Each cell is filled in with the values for $P_{ij} = P(X_t = j | X_{t-1}=i)$. Each of the rows must sum to 1, since the matrix describes all possible transitions.
+
+Let's also assume that we have an initial probability vector $x_0$:
+
+```{r}
+x_0 <- c(0.8, 0.1, 0.1)
+```
+
+In this case, this means on day 0 there is a 0.8 probability that it is sunny, 0.1 probability that it is cloudy, and 0.1 probability that it is rainy. The vector must also sum to 1, since it must fully describe all possible states on day 0.
+
+If we want to compute the probability that on day 1, the weather will be sunny, we must solve the following equation:
+
+$$P(X_1 = sunny) = \sum\limits_i P(X_0 = i)P(X_1 = sunny|X_0 = i)$$
+
+We could do this manually using our vector $x_0$ and P:
+
+$$P(X_1 = sunny) = 0.8*0.6 + 0.1*0.2 + 0.1*0.4 = 0.54$$
+
+The probability that day 1 is sunny is 0.54. But what if we want to calculate the probability that day 2 is sunny? We would need to first find the state probabilities for all three states for day 1 (repeating what we did above two more times), then plug them in to the following equation:
+
+$$P(X_2 = sunny) = \sum\limits_i P(X_1 = i)P(X_2 = sunny|X_1 = i)$$
+
+You can appreciate that manually summing over all possible states would quickly get unwieldy, multiplying the number of calculations you need to perform by 3 for each increasing day.
+
+Fortunately, we can use matrix algebra to do all this multiplying and summing for us. In R, if we would like to calculate $x_1$, our vector of state probabilities on day 1 is:
+
+```{r}
+x_0%*%P
+```
+
+We can do this for any number of days. For example, for the vector of state probabilities after 10 days:
+
+```{r}
+library(expm) #the expm package allows us to raise a matrix to a power
+x_0 %*% (P %^% 10)
+```
+
+## Long run behavior of Markov chains: stationary probabilities
+
+For a certain class of Markov chains, called ergodic Markov chains (https://brilliant.org/wiki/stationary-distributions/), there exists a stationary probability distribution, or an equillibrium distribution of possible states that a Markov chain will converge upon after many many iterations. To see what this means, let's see what the probability distributions are for the weather on the 100th day given our values for P and $x_0$.
+
+```{r}
+x_0 %*% (P %^% 100)
+```
+
+What about on the 101st day? 102nd?
+
+```{r}
+x_0 %*% (P %^% 101)
+x_0 %*% (P %^% 102)
+```
+
+You can see that the probabilities have convereged upon an equillibrium vector which does not change even as we step forward into the future. In fact, this equillibrium or stationary distribution is unique to the transition probability matrix and does not depend on $x_0$:
+
+```{r}
+c(1, 0, 0) %*% (P %^% 101)
+c(0, 1, 0) %*% (P %^% 102)
+```
+
+This makes sense because if you go far enough into the future, the current state becomes less and less important and gives you less and less information to predict what the states will look like in the future. If I know it is cloudy today, I can probably do a good job of predicting if it will rain tomorrow. But I probably will not be better at predicting if it will rain 10 years from now compared to if I knew that today was sunny.
+
+If we did not want to simply raise a matrix to a large power in order to find a stationary distribution, eigenvalue decomposition (beyond the scope of this class) could be used to determine the stationary probability.
+
+## Uses of Markov Chains
+
+Why do we care about Markov chains? Besides being able to predict the behavior and states of systems, there are many practical applications. For example, if you've ever used a smartphone keyboard and seen the suggestions for the next word, you've made use of a Markov chain! The subreddit [/r/SubredditSimulator](https://www.reddit.com/r/SubredditSimulator/comments/3g9ioz/what_is_rsubredditsimulator/) generates complete posts using Markov Chains created from transition matrices generated using words included in the last 500 submissions in a variety of subreddit communities on reddit. 
+
+Perhaps more relevant to us in Biology and Bayesian statistics, Markov chains are an important element of Markov Chain Monte Carlo methods. 
+
+## Markov Chain Monte Carlo (MCMC)
+
+As the name may suggest, MCMC methods bring together two concepts: Markov chains and monte carlo methods.
+
+1) Markov chains are stochastic processes where future states only depend on the last state (the markov property)
+
+2) Monte Carlo methods rely on simulating a large number of random numbers to estimate properties of a distribution. An example is here, where we use monte carlo methods to estimate pi: https://academo.org/demos/estimating-pi-monte-carlo/. We also use Monte Carlo methods to estimate population means through using sample means. If we were to take a larger and larger number of samples from the population (similar to simulating more and more points on the square), then our estimate of the population mean (the sample mean) would become more and more precice (Question: what mathematical law predicts this behavior? <hide> The Law of Large Numbers </hide>)
+
+Markov Chain Monte Carlo techniques use Markov chains to sample repeatedly from a complicated or unnamed distribution, then use Monte Carlo methods to estimate properties of that distribution. Why would we ever need to do this? Let's return to our previous exploration of Bayes rule.
 
 
-
-
-
-
-
-
-
-
-## Hidden Markov Models
-
-https://www.sciencedirect.com/science/article/pii/S0006349596794341
