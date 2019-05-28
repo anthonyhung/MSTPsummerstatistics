@@ -11,7 +11,7 @@ editor_options:
 
 Bayesian inference is a fancy term for educated guessing. In essesence, in Bayesian inference we take prior information that we know about the world and use it to evaluate data that we are presented with to draw educated conclusions about the world.
 
-Our objectives today include learning about Bayes theorem and its connections to conditional probability, likelihood ratios for comparing specified models, and applying Bayes theorem to inference problems.
+Our objectives today include learning about Bayes theorem and its connections to conditional probability, likelihood ratios for comparing specified models, and applying Bayes theorem to inference problems where we would like to compare between two models of reality.
 
 ## Bayes theorem
 
@@ -73,6 +73,10 @@ Notice that the first term in the denominator is the same as the numerator. Let'
 
 $$P(A|B) = \frac{(0.99)(0.01)}{(0.99)(0.01) + (0.01)(0.99)} = \frac{1}{2}$$
 
+### Bayes theorem using a prior probability distribution
+
+Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or "guess," at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.
+
 ## Likelihoods and Likelihood ratios
 
 ### Likelihood vs probability
@@ -125,7 +129,7 @@ What is changing is the left side of the | . The shape of the distribution stays
 
 So what about likelihood? Before we look at it graphically, let's define what we mean by the term. “The likelihood for a model is the probability of the data under the model.” Mathematically,
 
-$$L(Model|Data) = P(Data|Model)$$
+$$L(Model;Data) = P(Data|Model)$$
 
 This may look the same as what we did before, but in this case our __data are fixed__, not the distribution. Instead of asking, "If I keep my distribution constant, what is the probability of observing something?" with likelihood we are asking "Given that I have collected some data, how well does a certain distribution fit the data?"
 
@@ -133,7 +137,7 @@ Let's assume the same situation we did for probability with the coin. In this ca
 
 What is the likelihood for our __fair model__ ($Binom(n=30, p=0.5)$) given that we observe these data? In other words, how well does the model as paramterized fit our observations?
 
-$$L(Model|Data) = P(num\_heads = 20|Binom(n=30, p=0.5))$$
+$$L(Model;Data) = P(num\_heads = 20|Binom(n=30, p=0.5))$$
 
 Let's look at this graphically.
 ```{r}
@@ -150,7 +154,7 @@ dbinom(x = 20, size = 30, prob = 0.5)
 
 Okay. How well does our data fit a __rigged coin__ model, where the P(heads = 0.6)? What is the likelihood for the rigged coin model given our data?
 
-$$L(Model|Data) = P(num\_heads = 25|Binom(n=30, p=0.6))$$
+$$L(Model;Data) = P(num\_heads = 25|Binom(n=30, p=0.6))$$
 
 Let's look at this graphically.
 
@@ -173,28 +177,113 @@ It looks like the likelihood for the rigged coin model is higher! But is it high
 
 ## Likelihood ratios
 
+### Problem
+
+Let's explore an example of two bags containing white and black balls. Both bags contain 100 balls, but Bag #1 contains 50 white and 50 black balls, while Bag #2 contains 75 white and 25 black balls. 
+
+You are given one of the two bags and draw 10 balls from the bag (with replacement, putting the chosen ball back into the bag after each time you draw a ball). From doing this, you get: {BWBWBWWWWW}. Which bag do you have?
+
+### Solution: Likelihood ratio
+
+Here, we are trying to decide between two models (bag #1 and bag #2), that could have generated our observed data ({BWBWBWWWWW}). Let's calculate the likelihoods for each model ($M_1$ and $M_2$). Question: What type of distribution should we use to model the result of a single draw from a bag? <hide>A bernoulli distribution would be appropriate here, since we are modeling the binary result of a single trial.</hide> Since the result of each draw is independent from the results of all other draws, we can take the total probability as a product of all the joint probabilities. 
+
+$$P(x|M_1) = \prod\limits_ip_{1}^{x_i} (1-p_1)^{1-x_i}$$
+
+and
+
+$$P(x|M_2) = \prod\limits_ip_{2}^{x_i} (1-p_2)^{1-x_i}$$
 
 
+where x is a vector of 0s and 1s representing black and white balls respectively, and i denotes a single observation (single draw of a ball from the mystery bag). In other words, $x_1 = 0$ means that the first ball drawn was black. $p_{1}, p_{2} $ denote the probability of drawing a white ball from bag 1 and bag 2 respectively ($p_{1} = 0.5, p_{2} = 0.75 $).
 
+Plugging in numbers,
 
+$$P(x|M_1) = 0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5 = 0.0009765625
+$$
 
+$$P(x|M_2) = 0.25*0.75*0.25*0.75*0.25*0.75*0.75*0.75*0.75*0.75 = 0.002085686
+$$
 
+Notice that in addition to $M_1$'s likelihood being larger, both likelihood values are extremely small. Why might that be the case? <hide>We are multiplying many probabilities that are smaller than 1, so our result will be very small.</hide> This is why likelihood values alone are meaningless, since their absolute magnitude will really depend on the amount of data you have collected. This is also why it is important when comparing two likelihoods, they must have been calculated from the same data! However, interpreting the __relative__ magnitude of likelihoods is productive when comparing two or more different models. We can compare them using a likelihood ratio.
 
+The likelihood ratio comparing $M_1$ and $M_2$ is defined as:
 
+$$LR(M_1, M_2) := \frac{L(M_1; Data)}{L(M_2; Data)}$$
 
+Large values of $LR(M_1, M_2)$ indicate support for M1. Small values of $LR(M_1, M_2)$ indicate support for model $M_2$. For example, a LR = 3 means that the data support $M_1$ by a factor of 3. 
 
+The inverse of $LR(M_1, M_2)$ is $LR(M_2, M_1)$. 
 
+$$LR(M_1, M_2) = \frac{1}{LR(M_2, M_1)} = \frac{L(M_1; Data)}{L(M_2; Data)}$$
+
+In our example, the $LR(M_1, M_2) = \frac{L(M_1; Data)}{L(M_2; Data)} = \frac{0.0009765625}{0.002085686}= 0.4682212$ $LR(M_2, M_1) = \frac{1}{LR(M_1, M_2)} = 2.1356$. In other words, the data favor bag #2 by a factor of 2.14. Notice that in contrast to just comparing the magnitude of the likelihoods to see which one is larger, the LR allows you to have a tangible interpretation of how much larger one likelihood is than another and what this means for the amount of support for each model. Note that in the above example, our two models are fully specified (we know exactly how many balls of each type are in each bag). In cases where one or more of the models being compared are not fully specified and instead parameters must be estimated from the data, simply comparing two likelihood ratios is not sufficient and instead a likelihood ratio test (LRT: https://en.wikipedia.org/wiki/Likelihood-ratio_test) must be employed. LRTs are based on an asymptotic approximation of a test statistic involving the LR that approches a $\chi^2$ distribution.
 
 ## Bayesian inference
+
+Bayes theorem gives us an alternative way to compare two models that incorporates not only the likelihood ratio, but also the prior information in support of a certain model.
 
 Let's return to Bayes theorem. Recall the statement:
 
 $$P(A|B) = \frac{P(B|A )P(A)}{P(B)}$$
 
-If we define B to be our observed data, 
+If we define B to be our observed data, then Bayes theorem becomes:
 
-Bayesian inference *
-	Bayes rule, likelihoods, likelihood ratios, conjugate distributions
+$$P(A|Data) = \frac{P(Data|A )P(A)}{P(Data)}$$
+
+Notice the $P(Data|A)$ term is something we've talked about earlier, the likelihood. “The likelihood for a model is the probability of the data under the model." With that in mind, we can now attach names to each of the terms in the equation.
+
+* P(A|Data) is known as the posterior probability, or the probability of a model A given some observations.
+
+* P(Data|A) is known as the likelihood.
+
+* P(A) is known as the prior probability, or the probability of A before we have the observations.
+
+* P(Data) is the prior probability that the data themselves are true.
 
 
+Let us say we have two possible models $A_0$ and $A_1$ that could have generated our data that we would like to pick between.
+
+$$P(A_0|Data) = \frac{P(Data|A_0 )P(A_0)}{P(Data)}$$
+
+and
+
+$$P(A_1|Data) = \frac{P(Data|A_1 )P(A_1)}{P(Data)}$$
+
+If we take the ratio of the two posterior probabilities, we get:
+
+$$\frac{P(A_0|Data)}{P(A_1|Data)} = \frac{\frac{P(Data|A_0 )P(A_0)}{P(Data)}}{\frac{P(Data|A_1 )P(A_1)}{P(Data)}} = \frac{P(Data|A_0 )P(A_0)}{P(Data|A_1 )P(A_1)} = \frac{P(Data|A_0 )}{P(Data|A_1 )}\cdot \frac{P(A_0)}{P(A_1)}$$
+
+Therefore,
+
+$$\frac{P(A_0|Data)}{P(A_1|Data)} = \frac{P(A_0)}{P(A_1)} \cdot \frac{P(Data|A_0 )}{P(Data|A_1 )}$$
+
+Written out in words and using the term "Odds" to represent the ratio of the probabilities of the two models, we get:
+
+<center>
+Posterior Odds = Prior Odds * Likelihood Ratio
+</center>
+
+Just like before, the __prior__ odds refers to the ratio of the probabilties of the two models before considering the observed data, and the __posterior__ odd refers to the ratio of the probabilities after considering the observed data.
+
+Now we can appreciate how viewing this model selection problem using Bayesian inference holds some advantages over our previous strategy of simply using the Likelihood ratio. Suppose that one of your models is much more likely to be true than the other based on prior evidence or belief. For example, in the 2 bag example we explored earlier, imagine that you had been given a hint earlier that the person in charge of the bag game almost always picks bag #1 to give to the participant and almost never picks bag #2. If you were to simply calculate the likelihood ratio to compare the two models of reality, you would not be able to factor in this extra information. The Prior odds term in the Bayesian case allows you to take into account extra information such as this to great effect. Let's explore an example:
+
+### Example of Bayesian inference in selecting between two models:
+
+Let's return to the example earlier of the two bags. Imagine that instead of there being two different bags, there were 10 different bags, 9 of bag type #1 (corresponding to containing 50 white and 50 black balls), and 1 of bag type #2 (corresponding to containing 75 white and 25 black balls). You draw 10 balls from a randomly chosen bag and they are of the colors {BWBWBWWWWW}. Let's compute the posterior odds of the bag being of type #1 vs the bag being of type #2.
+
+$$\frac{P(type_1|BWBWBWWWWW)}{P(type_2|BWBWBWWWWW)} = \frac{P(type_1)}{P(type_2)} \cdot \frac{P(BWBWBWWWWW|type_1 )}{P(BWBWBWWWWW|type_2 )}$$
+
+We previously already calculated the second term (remember that it is just the LR). We know that there are 9 bags of type #1 and 1 bags of type #2. Thereore, the prior odds will be 9/1.
+
+$$\frac{P(type_1|BWBWBWWWWW)}{P(type_2|BWBWBWWWWW)} = \frac{9}{1}\cdot 0.4682212 = 4.213991$$
+
+Notice that our conclusion has flipped! The data, when considered in light of the prior information about the probability of a certain bag type being chosen, result in a conclusion that we would favor calling the bag in front of us a type #1 bag at an odds of 4.21 to 1.
+
+Question: What happens if instead of 9 bags being of type #1 and 1 being of type #2, there were 5 bags of each type?
+
+<hide>Because the prior odds will be 1 (each bag type has the same prior probability), the prior odds term cancels out and we are left with just the likelihood ratio (exactly what we had already calculated ealier in the "Likelihood ratio" section. We would then favor calling the bag in front of us a type #2 bag.</hide>
+
+## Exercise: Bayes Rule using probability distributions
+
+Let's return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability _distribution_. 
 

@@ -253,18 +253,25 @@ div.section {
 <li><a href="#bayes-theorem">Bayes theorem</a><ul>
 <li><a href="#derivation-of-bayes-theorem">Derivation of Bayes theorem</a></li>
 <li><a href="#applying-bayes-theorem-example-of-screening-test">Applying Bayes theorem: Example of screening test</a></li>
+<li><a href="#bayes-theorem-using-a-prior-probability-distribution">Bayes theorem using a prior probability distribution</a></li>
 </ul></li>
 <li><a href="#likelihoods-and-likelihood-ratios">Likelihoods and Likelihood ratios</a><ul>
 <li><a href="#likelihood-vs-probability">Likelihood vs probability</a></li>
 </ul></li>
-<li><a href="#likelihood-ratios">Likelihood ratios</a></li>
-<li><a href="#bayesian-inference">Bayesian inference</a></li>
+<li><a href="#likelihood-ratios">Likelihood ratios</a><ul>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#solution-likelihood-ratio">Solution: Likelihood ratio</a></li>
+</ul></li>
+<li><a href="#bayesian-inference">Bayesian inference</a><ul>
+<li><a href="#example-of-bayesian-inference-in-selecting-between-two-models">Example of Bayesian inference in selecting between two models:</a></li>
+</ul></li>
+<li><a href="#exercise-bayes-rule-using-probability-distributions">Exercise: Bayes Rule using probability distributions</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -273,7 +280,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -282,10 +289,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-27
+<strong>Last updated:</strong> 2019-05-28
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -301,12 +308,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -361,10 +368,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreec3c7b6e2c616e5e9b36e302b69daebdd1718cae7targetblankc3c7b6ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/c3c7b6e2c616e5e9b36e302b69daebdd1718cae7" target="_blank">c3c7b6e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreec117ef10cb90e0b3b89106a56e0e03762571345atargetblankc117ef1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/c117ef10cb90e0b3b89106a56e0e03762571345a" target="_blank">c117ef1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreec3c7b6e2c616e5e9b36e302b69daebdd1718cae7targetblankc3c7b6ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreec117ef10cb90e0b3b89106a56e0e03762571345atargetblankc117ef1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -376,6 +383,10 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/markov.Rmd
 
 </code></pre>
 <p>
@@ -414,6 +425,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/c117ef10cb90e0b3b89106a56e0e03762571345a/docs/Bayes.html" target="_blank">c117ef1</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -628,7 +656,7 @@ Finalized schedule for classes
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Bayesian inference is a fancy term for educated guessing. In essesence, in Bayesian inference we take prior information that we know about the world and use it to evaluate data that we are presented with to draw educated conclusions about the world.</p>
-<p>Our objectives today include learning about Bayes theorem and its connections to conditional probability, likelihood ratios for comparing specified models, and applying Bayes theorem to inference problems.</p>
+<p>Our objectives today include learning about Bayes theorem and its connections to conditional probability, likelihood ratios for comparing specified models, and applying Bayes theorem to inference problems where we would like to compare between two models of reality.</p>
 </div>
 <div id="bayes-theorem" class="section level2">
 <h2>Bayes theorem</h2>
@@ -664,6 +692,10 @@ Finalized schedule for classes
 <p><span class="math display">\[P(A|B) = \frac{P(B|A )P(A)}{P(B|A)P(A) + P(B| A^c)P(A^c)}\]</span></p>
 <p>Notice that the first term in the denominator is the same as the numerator. Let’s plug in our values and solve the problem.</p>
 <p><span class="math display">\[P(A|B) = \frac{(0.99)(0.01)}{(0.99)(0.01) + (0.01)(0.99)} = \frac{1}{2}\]</span></p>
+</div>
+<div id="bayes-theorem-using-a-prior-probability-distribution" class="section level3">
+<h3>Bayes theorem using a prior probability distribution</h3>
+<p>Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or “guess,” at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.</p>
 </div>
 </div>
 <div id="likelihoods-and-likelihood-ratios" class="section level2">
@@ -819,11 +851,11 @@ Anthony Hung
 <div id="likelihood" class="section level4">
 <h4>Likelihood</h4>
 <p>So what about likelihood? Before we look at it graphically, let’s define what we mean by the term. “The likelihood for a model is the probability of the data under the model.” Mathematically,</p>
-<p><span class="math display">\[L(Model|Data) = P(Data|Model)\]</span></p>
+<p><span class="math display">\[L(Model;Data) = P(Data|Model)\]</span></p>
 <p>This may look the same as what we did before, but in this case our <strong>data are fixed</strong>, not the distribution. Instead of asking, “If I keep my distribution constant, what is the probability of observing something?” with likelihood we are asking “Given that I have collected some data, how well does a certain distribution fit the data?”</p>
 <p>Let’s assume the same situation we did for probability with the coin. In this case, we do not know if the coin is actually fair (P(heads = 0.5), or if it is rigged (e.g. P(heads = 0.6). We flip the coin 30 times and observe 20 heads.</p>
 <p>What is the likelihood for our <strong>fair model</strong> (<span class="math inline">\(Binom(n=30, p=0.5)\)</span>) given that we observe these data? In other words, how well does the model as paramterized fit our observations?</p>
-<p><span class="math display">\[L(Model|Data) = P(num\_heads = 20|Binom(n=30, p=0.5))\]</span></p>
+<p><span class="math display">\[L(Model;Data) = P(num\_heads = 20|Binom(n=30, p=0.5))\]</span></p>
 <p>Let’s look at this graphically.</p>
 <pre class="r"><code>ggplot(df, aes(x = x, y = y)) + 
   geom_bar(stat = &quot;identity&quot;, col = &quot;red&quot;, fill = c(rep(&quot;white&quot;, 15), rep(&quot;red&quot;, 1), rep(&quot;white&quot;, 5))) +
@@ -870,7 +902,7 @@ Anthony Hung
 <pre class="r"><code>dbinom(x = 20, size = 30, prob = 0.5)</code></pre>
 <pre><code>[1] 0.0279816</code></pre>
 <p>Okay. How well does our data fit a <strong>rigged coin</strong> model, where the P(heads = 0.6)? What is the likelihood for the rigged coin model given our data?</p>
-<p><span class="math display">\[L(Model|Data) = P(num\_heads = 25|Binom(n=30, p=0.6))\]</span></p>
+<p><span class="math display">\[L(Model;Data) = P(num\_heads = 25|Binom(n=30, p=0.6))\]</span></p>
 <p>Let’s look at this graphically.</p>
 <pre class="r"><code>x1  &lt;- 5:25
 df_rigged &lt;- data.frame(x = x1, y = dbinom(x1, 30, 0.6))
@@ -925,13 +957,74 @@ Anthony Hung
 </div>
 <div id="likelihood-ratios" class="section level2">
 <h2>Likelihood ratios</h2>
+<div id="problem" class="section level3">
+<h3>Problem</h3>
+<p>Let’s explore an example of two bags containing white and black balls. Both bags contain 100 balls, but Bag #1 contains 50 white and 50 black balls, while Bag #2 contains 75 white and 25 black balls.</p>
+<p>You are given one of the two bags and draw 10 balls from the bag (with replacement, putting the chosen ball back into the bag after each time you draw a ball). From doing this, you get: {BWBWBWWWWW}. Which bag do you have?</p>
+</div>
+<div id="solution-likelihood-ratio" class="section level3">
+<h3>Solution: Likelihood ratio</h3>
+<p>Here, we are trying to decide between two models (bag #1 and bag #2), that could have generated our observed data ({BWBWBWWWWW}). Let’s calculate the likelihoods for each model (<span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>). Question: What type of distribution should we use to model the result of a single draw from a bag? <hide>A bernoulli distribution would be appropriate here, since we are modeling the binary result of a single trial.</hide> Since the result of each draw is independent from the results of all other draws, we can take the total probability as a product of all the joint probabilities.</p>
+<p><span class="math display">\[P(x|M_1) = \prod\limits_ip_{1}^{x_i} (1-p_1)^{1-x_i}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[P(x|M_2) = \prod\limits_ip_{2}^{x_i} (1-p_2)^{1-x_i}\]</span></p>
+<p>where x is a vector of 0s and 1s representing black and white balls respectively, and i denotes a single observation (single draw of a ball from the mystery bag). In other words, <span class="math inline">\(x_1 = 0\)</span> means that the first ball drawn was black. $p_{1}, p_{2} $ denote the probability of drawing a white ball from bag 1 and bag 2 respectively ($p_{1} = 0.5, p_{2} = 0.75 $).</p>
+<p>Plugging in numbers,</p>
+<p><span class="math display">\[P(x|M_1) = 0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5*0.5 = 0.0009765625
+\]</span></p>
+<p><span class="math display">\[P(x|M_2) = 0.25*0.75*0.25*0.75*0.25*0.75*0.75*0.75*0.75*0.75 = 0.002085686
+\]</span></p>
+<p>Notice that in addition to <span class="math inline">\(M_1\)</span>’s likelihood being larger, both likelihood values are extremely small. Why might that be the case? <hide>We are multiplying many probabilities that are smaller than 1, so our result will be very small.</hide> This is why likelihood values alone are meaningless, since their absolute magnitude will really depend on the amount of data you have collected. This is also why it is important when comparing two likelihoods, they must have been calculated from the same data! However, interpreting the <strong>relative</strong> magnitude of likelihoods is productive when comparing two or more different models. We can compare them using a likelihood ratio.</p>
+<p>The likelihood ratio comparing <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> is defined as:</p>
+<p><span class="math display">\[LR(M_1, M_2) := \frac{L(M_1; Data)}{L(M_2; Data)}\]</span></p>
+<p>Large values of <span class="math inline">\(LR(M_1, M_2)\)</span> indicate support for M1. Small values of <span class="math inline">\(LR(M_1, M_2)\)</span> indicate support for model <span class="math inline">\(M_2\)</span>. For example, a LR = 3 means that the data support <span class="math inline">\(M_1\)</span> by a factor of 3.</p>
+<p>The inverse of <span class="math inline">\(LR(M_1, M_2)\)</span> is <span class="math inline">\(LR(M_2, M_1)\)</span>.</p>
+<p><span class="math display">\[LR(M_1, M_2) = \frac{1}{LR(M_2, M_1)} = \frac{L(M_1; Data)}{L(M_2; Data)}\]</span></p>
+<p>In our example, the <span class="math inline">\(LR(M_1, M_2) = \frac{L(M_1; Data)}{L(M_2; Data)} = \frac{0.0009765625}{0.002085686}= 0.4682212\)</span> <span class="math inline">\(LR(M_2, M_1) = \frac{1}{LR(M_1, M_2)} = 2.1356\)</span>. In other words, the data favor bag #2 by a factor of 2.14. Notice that in contrast to just comparing the magnitude of the likelihoods to see which one is larger, the LR allows you to have a tangible interpretation of how much larger one likelihood is than another and what this means for the amount of support for each model. Note that in the above example, our two models are fully specified (we know exactly how many balls of each type are in each bag). In cases where one or more of the models being compared are not fully specified and instead parameters must be estimated from the data, simply comparing two likelihood ratios is not sufficient and instead a likelihood ratio test (LRT: <a href="https://en.wikipedia.org/wiki/Likelihood-ratio_test" class="uri">https://en.wikipedia.org/wiki/Likelihood-ratio_test</a>) must be employed. LRTs are based on an asymptotic approximation of a test statistic involving the LR that approches a <span class="math inline">\(\chi^2\)</span> distribution.</p>
+</div>
 </div>
 <div id="bayesian-inference" class="section level2">
 <h2>Bayesian inference</h2>
+<p>Bayes theorem gives us an alternative way to compare two models that incorporates not only the likelihood ratio, but also the prior information in support of a certain model.</p>
 <p>Let’s return to Bayes theorem. Recall the statement:</p>
 <p><span class="math display">\[P(A|B) = \frac{P(B|A )P(A)}{P(B)}\]</span></p>
-<p>If we define B to be our observed data,</p>
-<p>Bayesian inference * Bayes rule, likelihoods, likelihood ratios, conjugate distributions</p>
+<p>If we define B to be our observed data, then Bayes theorem becomes:</p>
+<p><span class="math display">\[P(A|Data) = \frac{P(Data|A )P(A)}{P(Data)}\]</span></p>
+<p>Notice the <span class="math inline">\(P(Data|A)\)</span> term is something we’ve talked about earlier, the likelihood. “The likelihood for a model is the probability of the data under the model.” With that in mind, we can now attach names to each of the terms in the equation.</p>
+<ul>
+<li><p>P(A|Data) is known as the posterior probability, or the probability of a model A given some observations.</p></li>
+<li><p>P(Data|A) is known as the likelihood.</p></li>
+<li><p>P(A) is known as the prior probability, or the probability of A before we have the observations.</p></li>
+<li><p>P(Data) is the prior probability that the data themselves are true.</p></li>
+</ul>
+<p>Let us say we have two possible models <span class="math inline">\(A_0\)</span> and <span class="math inline">\(A_1\)</span> that could have generated our data that we would like to pick between.</p>
+<p><span class="math display">\[P(A_0|Data) = \frac{P(Data|A_0 )P(A_0)}{P(Data)}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[P(A_1|Data) = \frac{P(Data|A_1 )P(A_1)}{P(Data)}\]</span></p>
+<p>If we take the ratio of the two posterior probabilities, we get:</p>
+<p><span class="math display">\[\frac{P(A_0|Data)}{P(A_1|Data)} = \frac{\frac{P(Data|A_0 )P(A_0)}{P(Data)}}{\frac{P(Data|A_1 )P(A_1)}{P(Data)}} = \frac{P(Data|A_0 )P(A_0)}{P(Data|A_1 )P(A_1)} = \frac{P(Data|A_0 )}{P(Data|A_1 )}\cdot \frac{P(A_0)}{P(A_1)}\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[\frac{P(A_0|Data)}{P(A_1|Data)} = \frac{P(A_0)}{P(A_1)} \cdot \frac{P(Data|A_0 )}{P(Data|A_1 )}\]</span></p>
+<p>Written out in words and using the term “Odds” to represent the ratio of the probabilities of the two models, we get:</p>
+<center>
+Posterior Odds = Prior Odds * Likelihood Ratio
+</center>
+<p>Just like before, the <strong>prior</strong> odds refers to the ratio of the probabilties of the two models before considering the observed data, and the <strong>posterior</strong> odd refers to the ratio of the probabilities after considering the observed data.</p>
+<p>Now we can appreciate how viewing this model selection problem using Bayesian inference holds some advantages over our previous strategy of simply using the Likelihood ratio. Suppose that one of your models is much more likely to be true than the other based on prior evidence or belief. For example, in the 2 bag example we explored earlier, imagine that you had been given a hint earlier that the person in charge of the bag game almost always picks bag #1 to give to the participant and almost never picks bag #2. If you were to simply calculate the likelihood ratio to compare the two models of reality, you would not be able to factor in this extra information. The Prior odds term in the Bayesian case allows you to take into account extra information such as this to great effect. Let’s explore an example:</p>
+<div id="example-of-bayesian-inference-in-selecting-between-two-models" class="section level3">
+<h3>Example of Bayesian inference in selecting between two models:</h3>
+<p>Let’s return to the example earlier of the two bags. Imagine that instead of there being two different bags, there were 10 different bags, 9 of bag type #1 (corresponding to containing 50 white and 50 black balls), and 1 of bag type #2 (corresponding to containing 75 white and 25 black balls). You draw 10 balls from a randomly chosen bag and they are of the colors {BWBWBWWWWW}. Let’s compute the posterior odds of the bag being of type #1 vs the bag being of type #2.</p>
+<p><span class="math display">\[\frac{P(type_1|BWBWBWWWWW)}{P(type_2|BWBWBWWWWW)} = \frac{P(type_1)}{P(type_2)} \cdot \frac{P(BWBWBWWWWW|type_1 )}{P(BWBWBWWWWW|type_2 )}\]</span></p>
+<p>We previously already calculated the second term (remember that it is just the LR). We know that there are 9 bags of type #1 and 1 bags of type #2. Thereore, the prior odds will be 9/1.</p>
+<p><span class="math display">\[\frac{P(type_1|BWBWBWWWWW)}{P(type_2|BWBWBWWWWW)} = \frac{9}{1}\cdot 0.4682212 = 4.213991\]</span></p>
+<p>Notice that our conclusion has flipped! The data, when considered in light of the prior information about the probability of a certain bag type being chosen, result in a conclusion that we would favor calling the bag in front of us a type #1 bag at an odds of 4.21 to 1.</p>
+<p>Question: What happens if instead of 9 bags being of type #1 and 1 being of type #2, there were 5 bags of each type?</p>
+<p><hide>Because the prior odds will be 1 (each bag type has the same prior probability), the prior odds term cancels out and we are left with just the likelihood ratio (exactly what we had already calculated ealier in the “Likelihood ratio” section. We would then favor calling the bag in front of us a type #2 bag.</hide></p>
+</div>
+</div>
+<div id="exercise-bayes-rule-using-probability-distributions" class="section level2">
+<h2>Exercise: Bayes Rule using probability distributions</h2>
+<p>Let’s return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability <em>distribution</em>.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
