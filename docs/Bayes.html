@@ -272,7 +272,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -281,7 +281,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -293,7 +293,7 @@ div.section {
 <strong>Last updated:</strong> 2019-05-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -309,12 +309,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -369,10 +369,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef" target="_blank">6d3e1c8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2debade6b3d2a6dc524f171e5aa30bd2a2156fcbtargetblank2debadea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb" target="_blank">2debade</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2debade6b3d2a6dc524f171e5aa30bd2a2156fcbtargetblank2debadea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -384,11 +384,6 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-
-Unstaged changes:
-    Modified:   analysis/Bayes.Rmd
-    Modified:   analysis/introR.Rmd
-    Modified:   analysis/markov.Rmd
 
 </code></pre>
 <p>
@@ -427,6 +422,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/analysis/Bayes.Rmd" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+<td>
+commit before republish
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/Bayes.html" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+<td>
+commit before republish
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1099,9 +1128,83 @@ Posterior Odds = Prior Odds * Likelihood Ratio
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dunif, args = list(min=0, max=1 ), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Uniform distribution Probabilty density function&quot;)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-8-1.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dbeta, args = list(shape1 = 1, shape2 = 1), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Beta distribution Probabilty density function with parameters (1,1)&quot;)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-8-2.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The PDF of the beta distribution looks like this (B represents the beta function, which is not important to consider for today’s discussion):</p>
 <p><span class="math display">\[f(x;\alpha, \beta) = \frac{1}{B(\alpha, \beta)}x^{\alpha-1}(1-x)^{\beta-1}\]</span></p>
 <p>Plugging in our parameter values for <span class="math inline">\(\alpha and \beta\)</span> and substituting <span class="math inline">\(\theta\)</span> for x, we get</p>
@@ -1122,19 +1225,167 @@ Posterior Odds = Prior Odds * Likelihood Ratio
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dbeta, args = list(shape1 = 41, shape2 = 61), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;) + ylim(0, 8.5)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-9-1.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Where is the mode of our distribution? Does this make sense given the data we were presented with?</p>
 <p>What would happen to the shape of the posterior distribution if our data were less convincing (i.e. there was less data)? Let’s see if instead of 100 coin flips being fed into our inference, we only flipped the coin 20 times (and got 8 heads, or 40%):</p>
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dbeta, args = list(shape1 = 9, shape2 = 13), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-10-1.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>As you can see, if our data are less convincing, our confidence in the inference we have made about the probability of getting a heads from the coin is more spread out around the mode, reflecting our uncertainty in the estimate. In fact, if we have very little data (e.g. 5 coin flips), our distribution starts to look more and more like our prior distribution (flat).</p>
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dbeta, args = list(shape1 = 3, shape2 = 4), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-11-1.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>What happens if we have a huge amount of data (1000 flips, 400 heads)?</p>
 <pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
   stat_function(fun = dbeta, args = list(shape1 = 401, shape2 = 601), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
 <p><img src="figure/Bayes.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2debade6b3d2a6dc524f171e5aa30bd2a2156fcb/docs/figure/Bayes.Rmd/unnamed-chunk-12-1.png" target="_blank">2debade</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>In essence, you can think about a Bayesian inference as a weighted average of our prior expectations about the world and the observations we have about the world. If we have a lot of confidence in our prior (a “strong” prior), it may take us a lot of evidence to persuade us to change our minds. Likewise, if we have very little evidence, we will place less weight on that evidence when making an inference. If we have a lot of evidence, we will be much more likely to rely on this evidence (the prior matters less and less). We can see an interactive illustration of this fact using this applet: <a href="http://stephens999.github.io/fiveMinuteStats/shiny_normal_example.html" class="uri">http://stephens999.github.io/fiveMinuteStats/shiny_normal_example.html</a> (the applet illustrates a situation where you have a normal prior and normal likelihood, and the normal distribution is a conjugate prior for itself!)</p>
 </div>
 <div id="summary" class="section level2">
