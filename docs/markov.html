@@ -259,13 +259,16 @@ div.section {
 <li><a href="#long-run-behavior-of-markov-chains-stationary-probabilities">Long run behavior of Markov chains: stationary probabilities</a></li>
 <li><a href="#uses-of-markov-chains">Uses of Markov Chains</a></li>
 <li><a href="#markov-chain-monte-carlo-mcmc">Markov Chain Monte Carlo (MCMC)</a></li>
-<li><a href="#addendum-hidden-markov-models">Addendum: Hidden Markov Models</a></li>
+<li><a href="#addendum-hidden-markov-models">Addendum: Hidden Markov Models</a><ul>
+<li><a href="#components-of-a-hmm">Components of a HMM</a></li>
+</ul></li>
+<li><a href="#exercises">Exercises:</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -274,7 +277,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -283,10 +286,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-28
+<strong>Last updated:</strong> 2019-05-29
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -302,12 +305,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -362,10 +365,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4fcd1d02795634da2ad4fe5a312d4f3cea747633targetblank4fcd1d0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/4fcd1d02795634da2ad4fe5a312d4f3cea747633" target="_blank">4fcd1d0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef" target="_blank">6d3e1c8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4fcd1d02795634da2ad4fe5a312d4f3cea747633targetblank4fcd1d0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -377,6 +380,10 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/markov.Rmd
 
 </code></pre>
 <p>
@@ -415,6 +422,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef/docs/markov.html" target="_blank">6d3e1c8</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -799,6 +823,7 @@ Attaching package: &#39;expm&#39;</code></pre>
 <pre class="r"><code>x_0 %*% (P %^% 10)</code></pre>
 <pre><code>          [,1]      [,2]      [,3]
 [1,] 0.4411769 0.2352953 0.3235278</code></pre>
+<p>Note that in our simple example, you may ask yourself “what if the probabilty that it rains tomorrow depends not only on the weather today, but also yesterday?” You can actually slightly change our Markov chain to account for this! Instead of representing your states as S, C, and R, you can easily imagine changing our states to SS, SC, SR, CS, CC, CR, RS, RC, and RR to now create a Markov chain in which the probability of weather tomorrow only depends on the weather over the past two days. Now you can see why Markov chains are so powerful!</p>
 </div>
 </div>
 <div id="long-run-behavior-of-markov-chains-stationary-probabilities" class="section level2">
@@ -842,13 +867,37 @@ Attaching package: &#39;expm&#39;</code></pre>
 </div>
 <div id="addendum-hidden-markov-models" class="section level2">
 <h2>Addendum: Hidden Markov Models</h2>
+<p>Markov chains are very useful when we are trying to compute the probability for a sequence of events. However, much of the time we don’t actually observe the sequence of events directly (i.e. they are hidden from us). For example, when we look at a sequence of DNA, we don’t see promoters or enhancers or introns or exons directly. Instead, what we see is a string of A T C and Gs. When we look at a sentence, we don’t see parts of speech. Instead, we see words and can infer their parts of speech based on the sequence we observe them in. Hidden markov models (HMM) are an excellent way to model these types of situations, where we are dealing with both hidden and observed states.</p>
+<div id="components-of-a-hmm" class="section level3">
+<h3>Components of a HMM</h3>
+<p>A HMM can be determined partially using the same elements we described for a regular markov chain, but we need to add on more terms in order to fully determine it.</p>
+<ol style="list-style-type: decimal">
+<li><p>A transition probability matrix (P) that defines the transition probabilities between each pair of <strong>hidden</strong> states i and j (<span class="math inline">\(P_{ij} = P(S_t = j | S_{t-1}=i)\)</span>).</p></li>
+<li><p>An initial probability distribution vector (<span class="math inline">\(\pi\)</span>) containing values for <span class="math inline">\(P(\pi_0 = i)\)</span> for each state i.</p></li>
+<li><p>A set of <em>emission probabilities</em>, which express the probability of an observed state (<span class="math inline">\(X_t\)</span>) given</p></li>
+</ol>
+<p>We can see a graphical depiction of a HMM here:</p>
 <p><a href="https://media.springernature.com/original/springer-static/image/art%3A10.1007%2Fs13253-017-0283-8/MediaObjects/13253_2017_283_Fig1_HTML.gif" class="uri">https://media.springernature.com/original/springer-static/image/art%3A10.1007%2Fs13253-017-0283-8/MediaObjects/13253_2017_283_Fig1_HTML.gif</a></p>
+<p><a href="http://compbio.mit.edu/ChromHMM/" class="uri">http://compbio.mit.edu/ChromHMM/</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1233730/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1233730/</a></p>
-<p>Three problems in HMMs</p>
+<p>Examples of HMMs used in biology abound, and in fact more often than not Hidden Markov chains are a better model of what happens in Biology than a strict Markov chain. Why might this be? <hide>Because Markov chains rely on observed states being exactly mapping to what they are (somewhat like a HMM with a 1:1 mapping between hidden and observed states), any extra interference between “what you see” and “what’s really there” will prevent a Markov chain from accurately modeling the data. Because scientific measurements are often noisy (and biology is itself very noisy), we rarely ever observe hidden states in nature.</hide></p>
+<p>There are three so called “problems” to solve when working with HMMs in order to determine the parameters of a HMM that best fit some observed data:</p>
 <ol style="list-style-type: decimal">
 <li>The Evaluation Problem Given an HMM and a sequence of observations, what is the probability that the observations are generated by the model (likelihood for the model)?</li>
 <li>The Decoding Problem Given an HMM and a sequence of observations, what is the most likely <em>state</em> sequence in the model that produced the observations (What is the state sequence)?</li>
 <li>The Learning Problem Given an HMM and a sequence of observations, how should we adjust the model parameters in order to maximize the probability that the observations are generated by the model (What HMM best fits the observations)?</li>
+</ol>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises:</h2>
+<p>Use R and matrix multiplication to solve these problems From Sheldon Ross’s <em>Introduction to Probability Models</em>, 11th ed.:</p>
+<ol style="list-style-type: decimal">
+<li>Coin 1 comes up heads with probability 0.6 and coin 2 with probability 0.5. A coin is continually flipped until it comes up tails, at which time that coin is put aside and we start flipping the other one.</li>
+</ol>
+<p>If we start the process with coin 1 what is the probability that coin 2 is used on the fifth flip? <hide> 4/9</hide></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Suppose that coin 1 has probability 0.7 of coming up heads, and coin 2 has probability 0.6 of coming up heads. If the coin flipped today comes up heads, then we select coin 1 to flip tomorrow, and if it comes up tails, then we select coin 2 to flip tomorrow. If the coin initially flipped is equally likely to be coin 1 or coin 2, then what is the probability that the coin flipped on the third day after the initial flip is coin 1? Suppose that the coin flipped on Monday comes up heads. What is the probability that the coin flipped on Friday of the same week also comes up heads?</li>
 </ol>
 <br>
 <p>

@@ -101,6 +101,8 @@ library(expm) #the expm package allows us to raise a matrix to a power
 x_0 %*% (P %^% 10)
 ```
 
+Note that in our simple example, you may ask yourself "what if the probabilty that it rains tomorrow depends not only on the weather today, but also yesterday?" You can actually slightly change our Markov chain to account for this! Instead of representing your states as S, C, and R, you can easily imagine changing our states to SS, SC, SR, CS, CC, CR, RS, RC, and RR to now create a Markov chain in which the probability of weather tomorrow only depends on the weather over the past two days. Now you can see why Markov chains are so powerful!
+
 ## Long run behavior of Markov chains: stationary probabilities
 
 For a certain class of Markov chains, called ergodic Markov chains (https://brilliant.org/wiki/stationary-distributions/), there exists a stationary probability distribution, or an equillibrium distribution of possible states that a Markov chain will converge upon after many many iterations. To see what this means, let's see what the probability distributions are for the weather on the 100th day given our values for P and $x_0$.
@@ -148,13 +150,35 @@ Recall that under Bayes theorem,
 $$Posterior\_probability \propto prior\_probability * Likelihood$$
 Although there are cases where multiplying two distributions (our prior probability distribution and the probability distribution of our likelihood) will result in a posterior probability that is named and well-defined (e.g. the normal distribution, or binomial distribution), many times it will actually result in an unnamed distribution that we cannot easily work with. In these cases, MCMC methods are used to _sample from_ the unnamed posterior probability distribution, and statistics are calculated on the samples to determine the mean of the distribution, the median, the 95% credible interval, etc of this unnamed distribution.
 
+MCMC methods construct a Markov chain that tends to stay in states that are of higher probability in the posterior distribution, and tends to avoid states that are of lower probability. The equillibrium distribution of the MCMC will therefore be the posterior distribution, and in the long term the distribution of states that are sampled by that MCMC will correspond to the posterior distribution.
+
+The algorithm that is commonly used to construct MCMCs is called the Metropolis-Hastings algorithm: https://stephens999.github.io/fiveMinuteStats/MH_intro.html
+
 ## Addendum: Hidden Markov Models
+
+Markov chains are very useful when we are trying to compute the probability for a sequence of events. However, much of the time we don't actually observe the sequence of events directly (i.e. they are hidden from us). For example, when we look at a sequence of DNA, we don't see promoters or enhancers or introns or exons directly. Instead, what we see is a string of A T C and Gs. When we look at a sentence, we don't see parts of speech. Instead, we see words and can infer their parts of speech based on the sequence we observe them in. Hidden markov models (HMM) are an excellent way to model these types of situations, where we are dealing with both hidden and observed states.
+
+### Components of a HMM
+
+A HMM can be determined partially using the same elements we described for a regular markov chain, but we need to add on more terms in order to fully determine it.
+
+1. A transition probability matrix (P) that defines the transition probabilities between each pair of __hidden__ states i and j ($P_{ij} = P(S_t = j | S_{t-1}=i)$).
+
+2. An initial probability distribution vector ($\pi$) containing values for $P(\pi_0 = i)$ for each state i.
+
+3. A set of _emission probabilities_, which express the probability of an observed state ($X_t$) given 
+
+We can see a graphical depiction of a HMM here:
 
 https://media.springernature.com/original/springer-static/image/art%3A10.1007%2Fs13253-017-0283-8/MediaObjects/13253_2017_283_Fig1_HTML.gif
 
+http://compbio.mit.edu/ChromHMM/
+
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1233730/
 
-Three problems in HMMs
+Examples of HMMs used in biology abound, and in fact more often than not Hidden Markov chains are a better model of what happens in Biology than a strict Markov chain. Why might this be? <hide>Because Markov chains rely on observed states being exactly mapping to what they are (somewhat like a HMM with a 1:1 mapping between hidden and observed states), any extra interference between "what you see" and "what's really there" will prevent a Markov chain from accurately modeling the data. Because scientific measurements are often noisy (and biology is itself very noisy), we rarely ever observe hidden states in nature.</hide>
+
+There are three so called "problems" to solve when working with HMMs in order to determine the parameters of a HMM that best fit some observed data:
 
 1) The Evaluation Problem
   Given an HMM and a sequence of observations, what is the probability that the observations are generated by the model (likelihood for the model)?
@@ -162,3 +186,12 @@ Three problems in HMMs
 Given an HMM and a sequence of observations, what is the most likely _state_ sequence in the model that produced the observations (What is the state sequence)?
 3) The Learning Problem
 Given an HMM and a sequence of observations, how should we adjust the model parameters in order to maximize the probability that the observations are generated by the model (What HMM best fits the observations)?
+
+## Exercises: 
+
+Use R and matrix multiplication to solve these problems From Sheldon Ross's _Introduction to Probability Models_, 11th ed.:
+
+1) Coin 1 comes up heads with probability 0.6 and coin 2 with probability 0.5. A coin is continually flipped until it comes up tails, at which time that coin is put aside and we start flipping the other one. If we start the process with coin 1 what is the probability that coin 2 is used
+on the fifth flip? <hide> 4/9</hide>
+
+2) Suppose that coin 1 has probability 0.7 of coming up heads, and coin 2 has probability 0.6 of coming up heads. If the coin flipped today comes up heads, then we select coin 1 to flip tomorrow, and if it comes up tails, then we select coin 2 to flip tomorrow. If the coin initially flipped is equally likely to be coin 1 or coin 2, then what is the probability that the coin flipped on the third day after the initial flip is coin 1? Suppose that the coin flipped on Monday comes up heads. What is the probability that the coin flipped on Friday of the same week also comes up heads?

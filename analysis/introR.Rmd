@@ -267,4 +267,5 @@ write.csv(data, "~/Desktop/data/new_bandersnatch.csv")
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
 <hide>Iceland</hide>
 
-3. Based on the plots we made of the bandersnatch data, there seems to be something going on that could potentially be interesting. Find out what might explain the structure in the data we see.
+## If time permits: Introduction to Unix terminal and git/github
+

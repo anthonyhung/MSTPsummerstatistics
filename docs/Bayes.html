@@ -266,12 +266,13 @@ div.section {
 <li><a href="#example-of-bayesian-inference-in-selecting-between-two-models">Example of Bayesian inference in selecting between two models:</a></li>
 </ul></li>
 <li><a href="#exercise-bayes-rule-using-probability-distributions">Exercise: Bayes Rule using probability distributions</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -280,7 +281,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -289,10 +290,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-28
+<strong>Last updated:</strong> 2019-05-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -308,12 +309,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -368,10 +369,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4fcd1d02795634da2ad4fe5a312d4f3cea747633targetblank4fcd1d0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/4fcd1d02795634da2ad4fe5a312d4f3cea747633" target="_blank">4fcd1d0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef" target="_blank">6d3e1c8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree4fcd1d02795634da2ad4fe5a312d4f3cea747633targetblank4fcd1d0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d3e1c816c22dcdf898173d8e2858c3a3d0238eftargetblank6d3e1c8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -383,6 +384,11 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/Bayes.Rmd
+    Modified:   analysis/introR.Rmd
+    Modified:   analysis/markov.Rmd
 
 </code></pre>
 <p>
@@ -421,6 +427,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef/docs/Bayes.html" target="_blank">6d3e1c8</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -725,7 +748,7 @@ Finalized schedule for classes
 </div>
 <div id="bayes-theorem-using-a-prior-probability-distribution" class="section level3">
 <h3>Bayes theorem using a prior probability distribution</h3>
-<p>Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or “guess,” at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.</p>
+<p>Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. In fact, this advantage is the major motivating factor behind Bayesian statistics in the first place. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or “guess,” at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.</p>
 </div>
 </div>
 <div id="likelihoods-and-likelihood-ratios" class="section level2">
@@ -1055,6 +1078,75 @@ Posterior Odds = Prior Odds * Likelihood Ratio
 <div id="exercise-bayes-rule-using-probability-distributions" class="section level2">
 <h2>Exercise: Bayes Rule using probability distributions</h2>
 <p>Let’s return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability <em>distribution</em>.</p>
+<p>In using Bayesian inference, there are four key steps to follow:</p>
+<ol style="list-style-type: decimal">
+<li>Identify the type of data you are working with (continuous, discrete, binary, etc)</li>
+<li>Construct a model for your likelihood</li>
+<li>Specify a prior distribution for the parameter of interest</li>
+<li>Apply Bayes Rule (Posterior <span class="math inline">\(\propto\)</span> Prior * Likelihood)</li>
+</ol>
+<p>Let’s say we have a coin in front of us and we are not sure what the true probability of getting a heads using this coin is. We would like to infer what the probability is using Bayesian inference. Question: How would we estimate the probability of getting heads using frequentist statistics? <hide>Flip it a bunch of times and count the number of heads. Divide the number by the total number of flips and get a proportion.</hide></p>
+<p>Let’s follow the steps for Bayesian inference.</p>
+<ol style="list-style-type: decimal">
+<li><p>We are going to flip this coin to collect data on it, so our collected data will be in the form of heads and tails (binary data if we represent heads and tails as 1s and 0s respectively). If we flip the coin mulitple times, then our data will look like count data (i.e. the number of heads we get in X flips).</p></li>
+<li><p>What would be a good distribution to model the probability of obtaining a certain number of heads from an X number of coin flips? <hide>Binomial distribution</hide> We will use this distribution to model our likelihood. The Binomial likelihood function looks like this:</p></li>
+</ol>
+<p><span class="math display">\[L(p | n, k) = f(k;\theta) =\binom{n}{k}\theta^k (1-\theta)^{n-k}\]</span></p>
+<p>Where k represents number of heads, n represents the total number of coin flips, and <span class="math inline">\(\theta\)</span> represents the probability of getting a heads in a single trial. Notice that the Binomial ikelihood function is just the probability mass function of the binomial distribution.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What is our prior distribution for the probability of a heads from a single flip of this mystery coin? Since we do not have any idea about what the prior probability of heads is, we can use a uniform prior (a “flat” or “uniformative” prior). A flat prior in this case means that we do not have any reason to believe that one value of P(heads) is more likely to be true than any other. To be precise, we will use a beta prior distribution (<a href="https://en.wikipedia.org/wiki/Beta_distribution" class="uri">https://en.wikipedia.org/wiki/Beta_distribution</a>) with parameters (1,1), which is the same thing as a uniform distribution when evaluated between 0 and 1 (see the graphs below). Since probabilties must be between 0 and 1, this is an appropriate substitution to make. It will make sense why we are using this funny distribution later. (Note that we don’t need to use a named distribution as our prior distribution. We could distribute the weights we want to apply to each possible value of P(heads) however we like and still use Bayesian inference.)</li>
+</ol>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dunif, args = list(min=0, max=1 ), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Uniform distribution Probabilty density function&quot;)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 1, shape2 = 1), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Beta distribution Probabilty density function with parameters (1,1)&quot;)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The PDF of the beta distribution looks like this (B represents the beta function, which is not important to consider for today’s discussion):</p>
+<p><span class="math display">\[f(x;\alpha, \beta) = \frac{1}{B(\alpha, \beta)}x^{\alpha-1}(1-x)^{\beta-1}\]</span></p>
+<p>Plugging in our parameter values for <span class="math inline">\(\alpha and \beta\)</span> and substituting <span class="math inline">\(\theta\)</span> for x, we get</p>
+<p><span class="math display">\[f(\theta;1,1) \propto \theta^{1-1}(1-\theta)^{1-1} = 1\]</span></p>
+<p>which is the same as the uniform distribution.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Now that we’ve specified our likelihood function and prior distribution, we can move ahead to generating data and plugging it into Bayes theorem!</li>
+</ol>
+<p>Imagine we flip the coin 100 times and get 40 heads. (n = 100, k = 40). Recall Bayes theorem:</p>
+<p><span class="math display">\[P(A_0|Data) = \frac{P(Data|A_0 )P(A_0)}{P(Data)}\]</span></p>
+<p>We can plug in our likelihood and prior distributions:</p>
+<p><span class="math display">\[P(A_0|Data) = \frac{(\binom{100}{40}\theta^{40} (1-\theta)^{100-40})(\theta^{1-1}(1-\theta)^{1-1})}{P(Data)} \propto \theta^{40} (1-\theta)^{100-40})(\theta^{1-1}(1-\theta)^{1-1} = \theta^{40+1-1} (1-\theta)^{100-40+1-1}\]</span></p>
+<p>Notice that we moved from an = to a <span class="math inline">\(\propto\)</span>. This is done because calculating the P(Data) is difficult, and so is including the math required to evaluate the Beta function and the 100 choose 40 function. However, in ignoring these extraneous normalizing constants (which exist in the equation in order to make our expression equal a probability that sums to 1), we gain a much simpler interpretation of our posterior probability. Recognize that the term <span class="math inline">\(\theta^{40+1-1} (1-\theta)^{100-40+1-1}\)</span> resembles the PDF for a beta distribution: <span class="math inline">\(f(x;\alpha, \beta) = \frac{1}{B(\alpha, \beta)}x^{1-\alpha}(1-x)^{\beta-1}\)</span>, minus the normalizing constant that contains the Beta function, if we set <span class="math inline">\(\alpha = 41\)</span> and <span class="math inline">\(\beta = 61\)</span>. Actually, due to a mathematical property that links the binomial and Beta distributions, we know for a fact that the posterior distribution is Beta distributed.</p>
+<p>This is because the Beta distribution is a <strong>conjugate prior</strong> for the binomial distribution. This means that if the likelihood function is binomial and the prior distribution is a Beta distribution then the posterior distribution is also a Beta distribution. There are many pairs of distributions that have this relationship, and using these relationships allows us to easily work with posterior distributions that come out of applications of Bayes theorem. In cases where conjugate distributions are not used, more sophisticated methods such as Markov Chain Monte Carlo can be used to characterize the posterior distribution.</p>
+<p>Since we now know that the posterior distribution is distributed as a Beta distribution with <span class="math inline">\(\alpha = 41\)</span> and <span class="math inline">\(\beta = 61\)</span>, we can fully determine the posterior distribution and fill in the normalizing constant.</p>
+<p><span class="math display">\[P(A_0| Data) \sim Beta(\alpha = 41, \beta = 61) = \frac{1}{B(41, 61)}x^{41-1}(1-x)^{61-1}\]</span></p>
+<p>Because we know the distribution, we can take advantage of known properties of the Beta distribution to easily determine the mean (<span class="math inline">\(\frac{\alpha}{\alpha+\beta}\)</span>), variance (<span class="math inline">\(\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\)</span>), and other properties of the posterior distribution. We can also graph it:</p>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 41, shape2 = 61), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;) + ylim(0, 8.5)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Where is the mode of our distribution? Does this make sense given the data we were presented with?</p>
+<p>What would happen to the shape of the posterior distribution if our data were less convincing (i.e. there was less data)? Let’s see if instead of 100 coin flips being fed into our inference, we only flipped the coin 20 times (and got 8 heads, or 40%):</p>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 9, shape2 = 13), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>As you can see, if our data are less convincing, our confidence in the inference we have made about the probability of getting a heads from the coin is more spread out around the mode, reflecting our uncertainty in the estimate. In fact, if we have very little data (e.g. 5 coin flips), our distribution starts to look more and more like our prior distribution (flat).</p>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 3, shape2 = 4), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>What happens if we have a huge amount of data (1000 flips, 400 heads)?</p>
+<pre class="r"><code>ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 401, shape2 = 601), color = &quot;red&quot;, linetype = &quot;solid&quot;) + ggtitle(&quot;Posterior distribution&quot;)+ ylim(0, 8.5)</code></pre>
+<p><img src="figure/Bayes.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>In essence, you can think about a Bayesian inference as a weighted average of our prior expectations about the world and the observations we have about the world. If we have a lot of confidence in our prior (a “strong” prior), it may take us a lot of evidence to persuade us to change our minds. Likewise, if we have very little evidence, we will place less weight on that evidence when making an inference. If we have a lot of evidence, we will be much more likely to rely on this evidence (the prior matters less and less). We can see an interactive illustration of this fact using this applet: <a href="http://stephens999.github.io/fiveMinuteStats/shiny_normal_example.html" class="uri">http://stephens999.github.io/fiveMinuteStats/shiny_normal_example.html</a> (the applet illustrates a situation where you have a normal prior and normal likelihood, and the normal distribution is a conjugate prior for itself!)</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In using Bayesian inference, there are four key steps to follow:</p>
+<ol style="list-style-type: decimal">
+<li>Identify the type of data you are working with (continuous, discrete, binary, etc)</li>
+<li>Construct a model for your likelihood</li>
+<li>Specify a prior distribution for the parameter of interest</li>
+<li>Apply Bayes Rule (Posterior <span class="math inline">\(\propto\)</span> Prior * Likelihood)</li>
+</ol>
+<p>The major motivations behind using Bayesian inference are to (1) allow you to take into account prior information you have about a particular model of how the world is when trying to make educated guesses about the world (2) to allow you to obtain a measure of how confident you are in the educated guesses you come up with using inference.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

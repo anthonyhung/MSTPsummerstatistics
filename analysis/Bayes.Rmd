@@ -75,7 +75,7 @@ $$P(A|B) = \frac{(0.99)(0.01)}{(0.99)(0.01) + (0.01)(0.99)} = \frac{1}{2}$$
 
 ### Bayes theorem using a prior probability distribution
 
-Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or "guess," at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.
+Note that we usually will not have a clean, single point statistic summary of the prior probability of an event. For example, in the disease screening example above we are told that the population prevalence of the disease is known and measured to be 0.01. However, as with all statistics, there will be a confidence interval associated with that measurement. Oftentimes, when we use Bayesian statistics we want to be able to capture the uncertainty in our estimates of parameters that are used in our calculations to give a more accurate picture of the confidence we have in our inferences. In fact, this advantage is the major motivating factor behind Bayesian statistics in the first place. Using a probability distribution as our prior probability will lead to our posterior probability being a distribution as well, thereby capturing the uncertainty we have in our inference, or "guess," at the model parameters in question. If we have time at the end of class we will explore an example of this in an exercise.
 
 ## Likelihoods and Likelihood ratios
 
@@ -285,5 +285,103 @@ Question: What happens if instead of 9 bags being of type #1 and 1 being of type
 
 ## Exercise: Bayes Rule using probability distributions
 
-Let's return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability _distribution_. 
+Let's return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability _distribution_.
 
+In using Bayesian inference, there are four key steps to follow:
+
+1) Identify the type of data you are working with (continuous, discrete, binary, etc)
+2) Construct a model for your likelihood
+3) Specify a prior distribution for the parameter of interest
+4) Apply Bayes Rule (Posterior $\propto$ Prior * Likelihood)
+
+Let's say we have a coin in front of us and we are not sure what the true probability of getting a heads using this coin is. We would like to infer what the probability is using Bayesian inference. Question: How would we estimate the probability of getting heads using frequentist statistics? <hide>Flip it a bunch of times and count the number of heads. Divide the number by the total number of flips and get a proportion.</hide>
+
+Let's follow the steps for Bayesian inference. 
+
+(1) We are going to flip this coin to collect data on it, so our collected data will be in the form of heads and tails (binary data if we represent heads and tails as 1s and 0s respectively). If we flip the coin mulitple times, then our data will look like count data (i.e. the number of heads we get in X flips).
+
+(2) What would be a good distribution to model the probability of obtaining a certain number of heads from an X number of coin flips? <hide>Binomial distribution</hide> We will use this distribution to model our likelihood. The Binomial likelihood function looks like this:
+
+$$L(p | n, k) = f(k;\theta) =\binom{n}{k}\theta^k (1-\theta)^{n-k}$$
+
+Where k represents number of heads, n represents the total number of coin flips, and $\theta$ represents the probability of getting a heads in a single trial. Notice that the Binomial ikelihood function is just the probability mass function of the binomial distribution.
+
+(3) What is our prior distribution for the probability of a heads from a single flip of this mystery coin? Since we do not have any idea about what the prior probability of heads is, we can use a uniform prior (a "flat" or "uniformative" prior). A flat prior in this case means that we do not have any reason to believe that one value of P(heads) is more likely to be true than any other. To be precise, we will use a beta prior distribution (https://en.wikipedia.org/wiki/Beta_distribution) with parameters (1,1), which is the same thing as a uniform distribution when evaluated between 0 and 1 (see the graphs below). Since probabilties must be between 0 and 1, this is an appropriate substitution to make. It will make sense why we are using this funny distribution later. (Note that we don't need to use a named distribution as our prior distribution. We could distribute the weights we want to apply to each possible value of P(heads) however we like and still use Bayesian inference.)
+
+```{r}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dunif, args = list(min=0, max=1 ), color = "red", linetype = "solid") + ggtitle("Uniform distribution Probabilty density function")
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 1, shape2 = 1), color = "red", linetype = "solid") + ggtitle("Beta distribution Probabilty density function with parameters (1,1)")
+```
+
+The PDF of the beta distribution looks like this (B represents the beta function, which is not important to consider for today's discussion):
+
+$$f(x;\alpha, \beta) = \frac{1}{B(\alpha, \beta)}x^{\alpha-1}(1-x)^{\beta-1}$$
+
+Plugging in our parameter values for $\alpha and \beta$ and substituting $\theta$ for x, we get
+
+$$f(\theta;1,1) \propto \theta^{1-1}(1-\theta)^{1-1} = 1$$
+
+which is the same as the uniform distribution.
+
+(4) Now that we've specified our likelihood function and prior distribution, we can move ahead to generating data and plugging it into Bayes theorem!
+
+Imagine we flip the coin 100 times and get 40 heads. (n = 100, k = 40). Recall Bayes theorem:
+
+$$P(A_0|Data) = \frac{P(Data|A_0 )P(A_0)}{P(Data)}$$
+
+We can plug in our likelihood and prior distributions:
+
+$$P(A_0|Data) = \frac{(\binom{100}{40}\theta^{40} (1-\theta)^{100-40})(\theta^{1-1}(1-\theta)^{1-1})}{P(Data)} \propto \theta^{40} (1-\theta)^{100-40})(\theta^{1-1}(1-\theta)^{1-1} = \theta^{40+1-1} (1-\theta)^{100-40+1-1}$$
+
+Notice that we moved from an = to a $\propto$. This is done because calculating the P(Data) is difficult, and so is including the math required to evaluate the Beta function and the 100 choose 40 function. However, in ignoring these extraneous normalizing constants (which exist in the equation in order to make our expression equal a probability that sums to 1), we gain a much simpler interpretation of our posterior probability. Recognize that the term $\theta^{40+1-1} (1-\theta)^{100-40+1-1}$ resembles the PDF for a beta distribution: $f(x;\alpha, \beta) = \frac{1}{B(\alpha, \beta)}x^{1-\alpha}(1-x)^{\beta-1}$, minus the normalizing constant that contains the Beta function, if we set $\alpha = 41$ and $\beta = 61$. Actually, due to a mathematical property that links the binomial and Beta distributions, we know for a fact that the posterior distribution is Beta distributed.
+
+This is because the Beta distribution is a __conjugate prior__ for the binomial distribution. This means that if the likelihood function is binomial and the prior distribution is a Beta distribution then the posterior distribution is also a Beta distribution. There are many pairs of distributions that have this relationship, and using these relationships allows us to easily work with posterior distributions that come out of applications of Bayes theorem. In cases where conjugate distributions are not used, more sophisticated methods such as Markov Chain Monte Carlo can be used to characterize the posterior distribution.
+
+Since we now know that the posterior distribution is distributed as a Beta distribution with $\alpha = 41$ and $\beta = 61$, we can fully determine the posterior distribution and fill in the normalizing constant.
+
+$$P(A_0| Data) \sim Beta(\alpha = 41, \beta = 61) = \frac{1}{B(41, 61)}x^{41-1}(1-x)^{61-1}$$
+
+Because we know the distribution, we can take advantage of known properties of the Beta distribution to easily determine the mean ($\frac{\alpha}{\alpha+\beta}$), variance ($\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$), and other properties of the posterior distribution. We can also graph it:
+
+```{r}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 41, shape2 = 61), color = "red", linetype = "solid") + ggtitle("Posterior distribution") + ylim(0, 8.5)
+```
+
+Where is the mode of our distribution? Does this make sense given the data we were presented with?
+
+What would happen to the shape of the posterior distribution if our data were less convincing (i.e. there was less data)? Let's see if instead of 100 coin flips being fed into our inference, we only flipped the coin 20 times (and got 8 heads, or 40%):
+
+```{r}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 9, shape2 = 13), color = "red", linetype = "solid") + ggtitle("Posterior distribution")+ ylim(0, 8.5)
+```
+
+As you can see, if our data are less convincing, our confidence in the inference we have made about the probability of getting a heads from the coin is more spread out around the mode, reflecting our uncertainty in the estimate. In fact, if we have very little data (e.g. 5 coin flips), our distribution starts to look more and more like our prior distribution (flat). 
+
+```{r}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 3, shape2 = 4), color = "red", linetype = "solid") + ggtitle("Posterior distribution")+ ylim(0, 8.5)
+```
+
+What happens if we have a huge amount of data (1000 flips, 400 heads)?
+
+```{r}
+ggplot(data = data.frame(x = c(0, 1)), aes(x)) + 
+  stat_function(fun = dbeta, args = list(shape1 = 401, shape2 = 601), color = "red", linetype = "solid") + ggtitle("Posterior distribution")+ ylim(0, 8.5)
+```
+
+In essence, you can think about a Bayesian inference as a weighted average of our prior expectations about the world and the observations we have about the world. If we have a lot of confidence in our prior (a "strong" prior), it may take us a lot of evidence to persuade us to change our minds. Likewise, if we have very little evidence, we will place less weight on that evidence when making an inference. If we have a lot of evidence, we will be much more likely to rely on this evidence (the prior matters less and less). We can see an interactive illustration of this fact using this applet: http://stephens999.github.io/fiveMinuteStats/shiny_normal_example.html (the applet illustrates a situation where you have a normal prior and normal likelihood, and the normal distribution is a conjugate prior for itself!)
+
+## Summary
+
+In using Bayesian inference, there are four key steps to follow:
+
+1) Identify the type of data you are working with (continuous, discrete, binary, etc)
+2) Construct a model for your likelihood
+3) Specify a prior distribution for the parameter of interest
+4) Apply Bayes Rule (Posterior $\propto$ Prior * Likelihood)
+
+The major motivations behind using Bayesian inference are to (1) allow you to take into account prior information you have about a particular model of how the world is when trying to make educated guesses about the world (2) to allow you to obtain a measure of how confident you are in the educated guesses you come up with using inference.
