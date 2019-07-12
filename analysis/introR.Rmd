@@ -191,6 +191,10 @@ calc_HWE_geno <- function(p = 0.5){
   return(c(pp, pq, qq))
 }
 
+log. <- function(number){ 
+  return(log(number))
+}
+
 calc_HWE_geno(p = 0.1)
 
 #note that in our UDF we assigned a default value to p (p = 0.5). This means that if we do not specify a value for our argument of p, it will default to using that value.
@@ -263,7 +267,7 @@ write.csv(data, "~/Desktop/data/new_bandersnatch.csv")
 ## Exercises:
 
 1. Write a function called calc_KE that takes as arguments the mass (in kg) and velocity (in m/s) of an object and returns the kinetic energy (in Joules) of an object. Use it to find the KE of a 0.5 kg rock moving at 1.2 m/s. <hide>0.36 Joules</hide>
-
+  
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
 <hide>Iceland</hide>
 

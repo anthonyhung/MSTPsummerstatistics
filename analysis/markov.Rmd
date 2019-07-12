@@ -129,6 +129,24 @@ This makes sense because if you go far enough into the future, the current state
 
 If we did not want to simply raise a matrix to a large power in order to find a stationary distribution, eigenvalue decomposition (beyond the scope of this class) could be used to determine the stationary probability.
 
+Note that not all Markov chains will have a unique stationary distribution. For example, consider the following transition matrix describing the transitions between two states:
+
+```{r}
+matrix(c(0,1,1,0), ncol =2, byrow=F)
+```
+
+This is called a _periodic_ Markov Chain.
+
+The Markov chain with this transition probability matrix will also not reach a unique stationary distribution. Why?
+
+```{r}
+matrix(c(0.5,0.5, 0, 0, 0, 0.5, 0.5, 0, 0, 0, 0, 0, 0.3, 0.4, 0.3, 0, 0, 0.3, 0.3, 0.4, 0, 0, 0.3, 0.3, 0.4), ncol =5, byrow=T)
+```
+
+Markov Chains like these are known as _reducible_ Markov chains.
+
+Markov chains that reach a stationary distribution are Ergodic, or _aperiodic_ and _irreducible_.
+
 ## Uses of Markov Chains
 
 Why do we care about Markov chains? Besides being able to predict the behavior and states of systems, there are many practical applications. For example, if you've ever used a smartphone keyboard and seen the suggestions for the next word, you've made use of a Markov chain! The subreddit [/r/SubredditSimulator](https://www.reddit.com/r/SubredditSimulator/comments/3g9ioz/what_is_rsubredditsimulator/) generates complete posts using Markov Chains created from transition matrices generated using words included in the last 500 submissions in a variety of subreddit communities on reddit. 

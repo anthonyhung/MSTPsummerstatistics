@@ -29,7 +29,7 @@ abline(v= mean(deer_heights), col="red")
 mean(deer_heights)
 ```
 
-What we can see is that the histogram, or the __population distribution__ of the 1000 heights does not look like a bell curve, which means that the heights of the population of deer is not normally distributed. This is the population distibution, as it includes every single member of the population rather than representing a subset of the population. The mean of the population distribution of heights is 90.90923 (represented by the red line on the histogram). This the __population mean__.
+What we can see is that the histogram, or the __population distribution__ of the 1,000,000 heights does not look like a bell curve, which means that the heights of the population of deer is not normally distributed. This is the population distibution, as it includes every single member of the population rather than representing a subset of the population. The mean of the population distribution of heights is 90.90923 (represented by the red line on the histogram). This the __population mean__.
 
 Of course, you will almost never have the resources or time to be able to measure every single individual in a population you are interested in. For example, as a ranger you may go out and randomly capture a few representative samples, each containing 30 deer from your park, and measure their heights to compute the mean height within each sample. Each of the means of your samples is a __sample mean__, and plotting the many sample means you have computed will give you the __sampling distribution__.
 

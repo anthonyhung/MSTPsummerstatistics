@@ -352,9 +352,65 @@ qt(0.95, df = 9)
 qt(0.8, df = 9)
 ```
 
-$$n = (\frac{2.716517}{\frac{1.5}{3}})^2 = 29.51786 \approx 30$$
+$$n = (\frac{1.833113+0.8834039}{\frac{1.5}{\sqrt{3}}})^2 = 9.839285 \approx 10$$
 
-We need a sample size of at least 30 birds to obtain our desired power.
+We need a sample size of at least 10 birds to obtain our desired power.
+
+## Power analysis using the "pwr" package in R.
+
+The "pwr" package contains many useful functions to perform power calculations for a variety of statistical tests.
+
+```{r pwr package}
+#install.packages("pwr")
+library(pwr)
+
+pwr.t.test(n = NULL, d = abs(-1.5/sqrt(3)), sig.level = 0.05, power = 0.8, type = c("one.sample"), alternative = c("greater"))
+```
+
+Using this package, one can also create power graphs to see how varying one experimental parameter or another will affect the power of your experiment.
+
+```{r pwr plots}
+# plot sample sizes needed to obtain desired level of power for a variety of effect sizes
+
+# range of effect sizes
+ES <- seq(0.3, 2.5, .01)
+nES <- length(ES)
+
+# range of power values
+power <- seq(.5,.8,0.1)
+npower <- length(power)
+
+# obtain sample sizes
+samsize <- data.frame()
+for (i in 1:npower){
+  for (j in 1:nES){
+    result <- pwr.t.test(n = NULL, 
+                         d = abs(ES[j]/sqrt(3)), 
+                         sig.level = 0.05, 
+                         power = power[i], 
+                         type = c("one.sample"), 
+                         alternative = c("greater"))
+    samsize[j,i] <- ceiling(result$n)
+  }
+}
+rownames(samsize) <- ES
+samsize <- cbind(rownames(samsize), data.frame(samsize, row.names=NULL))
+colnames(samsize) <- c("Effect Size",power)
+
+# convert powers dataframe into "long" format to facilitate plotting
+powers_long <- gather(samsize, key = "power", value ="n", `0.5`:`0.8`)
+powers_long <- mutate_all(powers_long, function(x) as.numeric(as.character(x)))
+powers_long$power <- as.factor(powers_long$power)
+
+ggplot(powers_long) + 
+  geom_smooth(aes(x = `Effect Size`, y = `n`, col = power)) + 
+  ggtitle("Power graph for one-tailed T test \n with one mean") + 
+  xlab("Effect Size") +
+  scale_y_log10()
+
+```
+
+Note that the above graph shows sample size (n) on a log scale.
 
 ### Notes
 

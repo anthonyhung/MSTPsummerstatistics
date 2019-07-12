@@ -194,7 +194,7 @@ and
 $$P(x|M_2) = \prod\limits_ip_{2}^{x_i} (1-p_2)^{1-x_i}$$
 
 
-where x is a vector of 0s and 1s representing black and white balls respectively, and i denotes a single observation (single draw of a ball from the mystery bag). In other words, $x_1 = 0$ means that the first ball drawn was black. $p_{1}, p_{2} $ denote the probability of drawing a white ball from bag 1 and bag 2 respectively ($p_{1} = 0.5, p_{2} = 0.75 $).
+where x is a vector of 0s and 1s representing black and white balls respectively, and i denotes a single observation (single draw of a ball from the mystery bag). In other words, $x_1 = 0$ means that the first ball drawn was black. $p_{1}, p_{2}$ denote the probability of drawing a white ball from bag 1 and bag 2 respectively ($p_{1} = 0.5, p_{2} = 0.75$).
 
 Plugging in numbers,
 
