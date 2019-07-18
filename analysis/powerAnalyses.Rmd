@@ -245,7 +245,7 @@ Again, the observed mean is significantly lower than 12.5. A reduced variance in
 
 ### Factors that affect power: 4. Magnitude of the effect size
 
-Returning to our base example, let's assume that instead of an average tail feather number of 11, we had found an average of 10 tail feathers per bird in our sample (with the same standard deviation of 3 for our sample). This would mean that our effect size (the difference between our observation mean and the null distribution's mean) would increase from $11-12.5 = -1.5$ to $10-12.5 = -2.5$. The effect size is the deviation of an observation from the null hypothesis. Plotting this difference on the null sampling distribution:
+Returning to our base example, let's assume that instead of an average tail feather number of 11, we had found an average of 10 tail feathers per bird in our sample (with the same standard deviation of 3 for our sample). This would mean that our effect size (the difference between our observation mean and the null distribution's mean) would increase from $\frac{11-12.5}{\frac{3}{\sqrt{10}}} = -1.5$ to $10-12.5 = -2.5$. The effect size is the deviation of an observation from the null hypothesis (scaled by the standard deviation). Plotting this difference on the null sampling distribution:
 
 ```{r}
 nextplot <-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = "red", linetype = "solid") +
@@ -339,22 +339,22 @@ To start, we can take advantage of another measurement we have: the effect size.
 
 In short, we need our effect size (scaled by standard error units) to equal the sum of the distance between the blue dotted line and the black dotted line and the distance between the black dotted line and the red dotted line (in standard error units). The distance between the mean of each distribution and another point scaled by standard error units is another way to phrase a T statistic. In other words:
 
-$$\frac{ES}{\frac{\sigma}{\sqrt{n}}} = T_{1-\alpha} + T_{1-\beta}$$
+$$\frac{ES}{\frac{\sigma^2}{\sqrt{n}}} = T_{1-\alpha} + T_{1-\beta}$$
 
 $T_{1-\alpha}$ is the T statistic representing the distance between the blue dotted line and the black dotted line scaled in standard error units, while $T_{1-\beta}$ is the T statistic representing the distance between the black dotted line and the red dotted line scaled in standard error units. Rearranging to obtain an equation to solve for n, we get:
 
-$$n= (\frac{T_{1-\alpha} + T_{1-\beta}}{\frac{ES}{\sigma}})^2$$
+$$n= (\frac{T_{1-\alpha} + T_{1-\beta}}{\frac{ES}{\sigma^2}})^2$$
 
 Plugging in our known values (and looking up the T statistics using R using the qt() function), we can get the sample size required to obtain a power of 0.80.
 
 ```{r}
-qt(0.95, df = 9)
-qt(0.8, df = 9)
+qt(0.95, df = 26)
+qt(0.8, df = 26)
 ```
 
-$$n = (\frac{1.833113+0.8834039}{\frac{1.5}{\sqrt{3}}})^2 = 9.839285 \approx 10$$
+$$n = (\frac{1.833113+0.8834039}{\frac{1.5}{3}})^2 = 26.24069 \approx 27$$
 
-We need a sample size of at least 10 birds to obtain our desired power.
+We need a sample size of at least 27 birds to obtain our desired power.
 
 ## Power analysis using the "pwr" package in R.
 
@@ -364,7 +364,7 @@ The "pwr" package contains many useful functions to perform power calculations f
 #install.packages("pwr")
 library(pwr)
 
-pwr.t.test(n = NULL, d = abs(-1.5/sqrt(3)), sig.level = 0.05, power = 0.8, type = c("one.sample"), alternative = c("greater"))
+pwr.t.test(n = NULL, d = abs(-1.5/3), sig.level = 0.05, power = 0.8, type = c("one.sample"), alternative = c("greater"))
 ```
 
 Using this package, one can also create power graphs to see how varying one experimental parameter or another will affect the power of your experiment.
@@ -373,7 +373,7 @@ Using this package, one can also create power graphs to see how varying one expe
 # plot sample sizes needed to obtain desired level of power for a variety of effect sizes
 
 # range of effect sizes
-ES <- seq(0.3, 2.5, .01)
+ES <- seq(0.3, 5, .01)
 nES <- length(ES)
 
 # range of power values
@@ -385,7 +385,7 @@ samsize <- data.frame()
 for (i in 1:npower){
   for (j in 1:nES){
     result <- pwr.t.test(n = NULL, 
-                         d = abs(ES[j]/sqrt(3)), 
+                         d = abs(ES[j]/3), 
                          sig.level = 0.05, 
                          power = power[i], 
                          type = c("one.sample"), 

@@ -375,7 +375,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -384,7 +384,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -396,7 +396,7 @@ div.section {
 <strong>Last updated:</strong> 2019-07-18
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -412,12 +412,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -472,10 +472,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree3283a68805c2b723be0fbb7d2e3591091b8fdb3btargetblank3283a68a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/3283a68805c2b723be0fbb7d2e3591091b8fdb3b" target="_blank">3283a68</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea3aa9e0d23508c7eecdd5fc5f5a83a3f1f856fc7targetblanka3aa9e0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/a3aa9e0d23508c7eecdd5fc5f5a83a3f1f856fc7" target="_blank">a3aa9e0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree3283a68805c2b723be0fbb7d2e3591091b8fdb3btargetblank3283a68a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreea3aa9e0d23508c7eecdd5fc5f5a83a3f1f856fc7targetblanka3aa9e0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -488,6 +488,9 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   analysis/powerAnalyses.Rmd
 
 </code></pre>
 <p>
@@ -526,6 +529,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a3aa9e0d23508c7eecdd5fc5f5a83a3f1f856fc7/docs/powerAnalyses.html" target="_blank">a3aa9e0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1582,7 +1602,7 @@ Anthony Hung
 </div>
 <div id="factors-that-affect-power-4.-magnitude-of-the-effect-size" class="section level3">
 <h3>Factors that affect power: 4. Magnitude of the effect size</h3>
-<p>Returning to our base example, let’s assume that instead of an average tail feather number of 11, we had found an average of 10 tail feathers per bird in our sample (with the same standard deviation of 3 for our sample). This would mean that our effect size (the difference between our observation mean and the null distribution’s mean) would increase from <span class="math inline">\(11-12.5 = -1.5\)</span> to <span class="math inline">\(10-12.5 = -2.5\)</span>. The effect size is the deviation of an observation from the null hypothesis. Plotting this difference on the null sampling distribution:</p>
+<p>Returning to our base example, let’s assume that instead of an average tail feather number of 11, we had found an average of 10 tail feathers per bird in our sample (with the same standard deviation of 3 for our sample). This would mean that our effect size (the difference between our observation mean and the null distribution’s mean) would increase from <span class="math inline">\(\frac{11-12.5}{\frac{3}{\sqrt{10}}} = -1.5\)</span> to <span class="math inline">\(10-12.5 = -2.5\)</span>. The effect size is the deviation of an observation from the null hypothesis (scaled by the standard deviation). Plotting this difference on the null sampling distribution:</p>
 <pre class="r"><code>nextplot &lt;-  ggplot(data = data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm, args = list(mean = 0, sd = 3/sqrt(10)), color = &quot;red&quot;, linetype = &quot;solid&quot;) +
   geom_vline(xintercept=0, linetype = &quot;solid&quot;, color =&quot;red&quot;)
 threshold &lt;- (-1.833*3/sqrt(10))
@@ -1796,16 +1816,16 @@ Anthony Hung
 <p>The next step is important but may be difficult to conceptualize. <strong>In order for the purple area to be equal to our power of 0.80, we need the “distance” (in standard error units) between the mean of the alternative distribution and the significance level to be equal to the T statistic corresponding to the 20th percentile.</strong> Why does this make sense? Because the purple shaded area is defined as the area to the right of the significance level in the alternative distribution. The area to the right of the 20th percentile makes up 80% of the total area (0.80). Great! So we know our goal. How do we set our sample size to get to that goal?</p>
 <p>To start, we can take advantage of another measurement we have: the effect size. This is the difference between the mean of the null distribution and the alternative distribution. This is a great measuring stick to have because it is set: it will not change depending on the sample size, whereas the standard error of each distribution depends on n, which is the very quantity we are trying to estimate!</p>
 <p>In short, we need our effect size (scaled by standard error units) to equal the sum of the distance between the blue dotted line and the black dotted line and the distance between the black dotted line and the red dotted line (in standard error units). The distance between the mean of each distribution and another point scaled by standard error units is another way to phrase a T statistic. In other words:</p>
-<p><span class="math display">\[\frac{ES}{\frac{\sigma}{\sqrt{n}}} = T_{1-\alpha} + T_{1-\beta}\]</span></p>
+<p><span class="math display">\[\frac{ES}{\frac{\sigma^2}{\sqrt{n}}} = T_{1-\alpha} + T_{1-\beta}\]</span></p>
 <p><span class="math inline">\(T_{1-\alpha}\)</span> is the T statistic representing the distance between the blue dotted line and the black dotted line scaled in standard error units, while <span class="math inline">\(T_{1-\beta}\)</span> is the T statistic representing the distance between the black dotted line and the red dotted line scaled in standard error units. Rearranging to obtain an equation to solve for n, we get:</p>
-<p><span class="math display">\[n= (\frac{T_{1-\alpha} + T_{1-\beta}}{\frac{ES}{\sigma}})^2\]</span></p>
+<p><span class="math display">\[n= (\frac{T_{1-\alpha} + T_{1-\beta}}{\frac{ES}{\sigma^2}})^2\]</span></p>
 <p>Plugging in our known values (and looking up the T statistics using R using the qt() function), we can get the sample size required to obtain a power of 0.80.</p>
-<pre class="r"><code>qt(0.95, df = 9)</code></pre>
-<pre><code>[1] 1.833113</code></pre>
-<pre class="r"><code>qt(0.8, df = 9)</code></pre>
-<pre><code>[1] 0.8834039</code></pre>
-<p><span class="math display">\[n = (\frac{1.833113+0.8834039}{\frac{1.5}{\sqrt{3}}})^2 = 9.839285 \approx 10\]</span></p>
-<p>We need a sample size of at least 10 birds to obtain our desired power.</p>
+<pre class="r"><code>qt(0.95, df = 26)</code></pre>
+<pre><code>[1] 1.705618</code></pre>
+<pre class="r"><code>qt(0.8, df = 26)</code></pre>
+<pre><code>[1] 0.8556652</code></pre>
+<p><span class="math display">\[n = (\frac{1.833113+0.8834039}{\frac{1.5}{3}})^2 = 26.24069 \approx 27\]</span></p>
+<p>We need a sample size of at least 27 birds to obtain our desired power.</p>
 </div>
 <div id="power-analysis-using-the-pwr-package-in-r." class="section level2">
 <h2>Power analysis using the “pwr” package in R.</h2>
@@ -1813,12 +1833,12 @@ Anthony Hung
 <pre class="r"><code>#install.packages(&quot;pwr&quot;)
 library(pwr)
 
-pwr.t.test(n = NULL, d = abs(-1.5/sqrt(3)), sig.level = 0.05, power = 0.8, type = c(&quot;one.sample&quot;), alternative = c(&quot;greater&quot;))</code></pre>
+pwr.t.test(n = NULL, d = abs(-1.5/3), sig.level = 0.05, power = 0.8, type = c(&quot;one.sample&quot;), alternative = c(&quot;greater&quot;))</code></pre>
 <pre><code>
      One-sample t test power calculation 
 
-              n = 9.747036
-              d = 0.8660254
+              n = 26.13753
+              d = 0.5
       sig.level = 0.05
           power = 0.8
     alternative = greater</code></pre>
@@ -1838,7 +1858,7 @@ samsize &lt;- data.frame()
 for (i in 1:npower){
   for (j in 1:nES){
     result &lt;- pwr.t.test(n = NULL, 
-                         d = abs(ES[j]/sqrt(3)), 
+                         d = abs(ES[j]/3), 
                          sig.level = 0.05, 
                          power = power[i], 
                          type = c(&quot;one.sample&quot;), 
