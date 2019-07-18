@@ -230,7 +230,7 @@ runif(1,0,1)
 ### Reading and writing data in R
 
 Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://raw.githubusercontent.com/anthonyhung/MSTPsummerstatistics/master/data/bandersnatch.csv. If you would like to have your own copy of this dataset, you can open up a terminal window and run the commands.
-```{bash}
+```{bash results = 'hide'}
 cd ~/Desktop
 mkdir data
 cd data

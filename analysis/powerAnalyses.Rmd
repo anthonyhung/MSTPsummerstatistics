@@ -53,7 +53,7 @@ What does it mean that power is the probability of correctly rejecting the null 
 
 Suppose we have two competing hypotheses to consider: a null hypothesis that the mean surface area of chips in a bag is 10 $cm^2$ and an alternative hypothesis that the mean surface area of the chips in the bag is 15 $cm^2$. You take some samples from the bag and would like to determine which hypothesis better fits the data. Due to sampling error, the null and alternative sampling distributions will have some spread around their mean values. Here we plot the null sampling distribution in blue and the alternative sampling distribution in red:
 
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(cowplot)

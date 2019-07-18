@@ -71,13 +71,11 @@ Grading for the final project will be based on completion, effort, and a demonst
 
 Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions 
 
-Week 2: Bayesian inference
+Week 2: Bayesian inference; Review of basic statistical tests
 
-Week 3: Markov Chains; Hidden Markov Models; Review of basic statistical tests
+Week 3: Review of basic statistical tests continued; Regression
 
-Week 4: Review of basic statistical tests Continued; Linear Regression
-
-Week 5: Mutliple Testing; Power Analyses
+Week 4: Mutliple Testing; Power Analyses
 
 Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent time to complete final project.)
 

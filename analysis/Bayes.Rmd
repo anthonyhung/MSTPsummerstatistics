@@ -285,7 +285,7 @@ Question: What happens if instead of 9 bags being of type #1 and 1 being of type
 
 ## Exercise: Bayes Rule using probability distributions
 
-Let's return to Bayes Rule and instead of plugging in a single point estimate for our prior probability, enter in a prior probability _distribution_.
+Let's return to Bayes Rule and instead of plugging in a single point estimate for our prior probability (a very restrictive condition), enter in a prior probability _distribution_ (allowing us to summarize our prior experience as a density). 
 
 In using Bayesian inference, there are four key steps to follow:
 
@@ -323,7 +323,7 @@ Plugging in our parameter values for $\alpha and \beta$ and substituting $\theta
 
 $$f(\theta;1,1) \propto \theta^{1-1}(1-\theta)^{1-1} = 1$$
 
-which is the same as the uniform distribution.
+which is the same as the uniform distribution. In effect, you can think of the uniform distribution as a special case of the Beta distribution when $\alpha = \beta = 1$.
 
 (4) Now that we've specified our likelihood function and prior distribution, we can move ahead to generating data and plugging it into Bayes theorem!
 

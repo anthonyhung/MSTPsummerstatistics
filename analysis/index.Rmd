@@ -17,13 +17,13 @@ output:
 
 * [Introduction to R](introR.html)
 
-### Week 2-3:
+### Week 3:
 
 * [Bayesian Inference](Bayes.html)
 
 * [Introduction to Markov Chains](markov.html)
 
-### Week 5:
+### Week 4:
 
 * [Power](powerAnalyses.html)
 
