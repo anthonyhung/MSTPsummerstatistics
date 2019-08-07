@@ -353,14 +353,15 @@ div.section {
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#hypothesis-testing">Hypothesis testing</a></li>
-<li><a href="#the-issue-of-multiple-testing">The issue of multiple testing</a><ul>
+<li><a href="#the-issue-of-multiple-testing">The “issue” of multiple testing</a><ul>
 <li><a href="#case-1-performing-1-test">Case 1: Performing 1 test</a></li>
 <li><a href="#case-2-performing-20-tests">Case 2: Performing 20 tests</a></li>
 </ul></li>
-<li><a href="#correcting-for-multiple-tests">Correcting for multiple tests:</a><ul>
+<li><a href="#looking-at-multiple-testing-and-fwer-graphically">Looking at multiple testing and FWER graphically</a></li>
+<li><a href="#controlling-type-1-error-for-situations-with-multiple-tests">Controlling type 1 error for situations with multiple tests:</a><ul>
 <li><a href="#bonferroni-correction">Bonferroni Correction</a></li>
-<li><a href="#holms-procedure">Holm’s Procedure</a></li>
 <li><a href="#false-discovery-rates-q-values-and-the-benjamini-hochberg-method">False Discovery Rates, q values, and the Benjamini-Hochberg Method</a></li>
+<li><a href="#final-thoughts">Final thoughts</a></li>
 <li><a href="#exercise">Exercise:</a></li>
 </ul></li>
 </ul>
@@ -386,7 +387,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-18
+<strong>Last updated:</strong> 2019-08-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -465,10 +466,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeaf6c4dc5f97293141a2c902b44695a98887f8132targetblankaf6c4dca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/af6c4dc5f97293141a2c902b44695a98887f8132" target="_blank">af6c4dc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree7c276548c891e06bd0a8e32d0e41670457e4c30ftargetblank7c27654a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/7c276548c891e06bd0a8e32d0e41670457e4c30f" target="_blank">7c27654</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeaf6c4dc5f97293141a2c902b44695a98887f8132targetblankaf6c4dca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree7c276548c891e06bd0a8e32d0e41670457e4c30ftargetblank7c27654a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -481,6 +482,7 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    docs/figure/NaiveBayes.Rmd/.DS_Store
 
 </code></pre>
 <p>
@@ -519,6 +521,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/7c276548c891e06bd0a8e32d0e41670457e4c30f/analysis/multipleTesting.Rmd" target="_blank">7c27654</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-08-07
+</td>
+<td>
+add NaiveBayes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/15ca1f112dabdce101896776b46418dcbb66aa08/docs/multipleTesting.html" target="_blank">15ca1f1</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1086,10 +1122,10 @@ hide:hover {
 </div>
 <div id="hypothesis-testing" class="section level2">
 <h2>Hypothesis testing</h2>
-<p>The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis.</p>
+<p>The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis. As a reminder, the null hypothesis usually is the ‘status quo’ or less interesting view of the world. The alternative hypothesis is the opposite of the null hypothesis.</p>
 </div>
 <div id="the-issue-of-multiple-testing" class="section level2">
-<h2>The issue of multiple testing</h2>
+<h2>The “issue” of multiple testing</h2>
 <p>As many scientific fields enter an age of “Big Data,” where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart.</p>
 <p>To illustrate this, consider the xkcd comic (<a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a>). Obviously, something is not right with the conclusions of the study, since we all have an intuition that green jelly beans do not have any true association with skin conditions. To better understand why mutliple testing can easily lead to false positive associations unless adequately treated, let us walk through the calculations for the probability of making a Type 1 error given the number of tests you are performing.</p>
 <div id="case-1-performing-1-test" class="section level3">
@@ -1101,15 +1137,38 @@ hide:hover {
 <h3>Case 2: Performing 20 tests</h3>
 <p>Now, let us test for an association between 20 different colors of jelly beans and acne at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> for each individual test. What is the probability that we make at least one type 1 error now?</p>
 <p><hide> Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to <span class="math inline">\(1- \alpha = 0.95\)</span>. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is <span class="math inline">\(1-(1-0.05)^{20} = 0.6415\)</span>. </hide></p>
-<p>This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! Clearly, we need to take into account the number of tests when setting our significance threshold.</p>
+<p>This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! The number of expected false positives increases with the number of independent tests you perform. Clearly, we need to take into account the number of tests when setting our significance threshold.</p>
 <p>In the above two examples, what we calculated was the probability of making <strong>at least one type 1 error</strong> in all the independent tests we were performing. This is otherwise known as the <strong>Family-Wise Error Rate (FWER)</strong>.</p>
 </div>
 </div>
-<div id="correcting-for-multiple-tests" class="section level2">
-<h2>Correcting for multiple tests:</h2>
+<div id="looking-at-multiple-testing-and-fwer-graphically" class="section level2">
+<h2>Looking at multiple testing and FWER graphically</h2>
+<p>This graph plots the # of independent tests performed on the x axis, and the probability of seeing at least one type 1 error (the FWER) on the y axis, given an <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>Warning: package &#39;cowplot&#39; was built under R version 3.5.2</code></pre>
+<pre><code>Loading required package: ggplot2</code></pre>
+<pre><code>Warning: package &#39;ggplot2&#39; was built under R version 3.5.2</code></pre>
+<pre><code>
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave</code></pre>
+<pre class="r"><code>library(ggplot2)
+ggplot(data.frame(x=c(0,60)), aes(x)) +
+  stat_function(fun=function(x)1-(1-0.05)^x, geom=&quot;line&quot;, aes(colour=&quot;square&quot;)) + xlab(&quot;# of independent tests&quot;) + ylab(&quot;FWER&quot;) + theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="figure/multipleTesting.Rmd/graph_FWER-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>As you can appreciate, the FWER increases quickly with every increase in the number of tests you are performing!</p>
+</div>
+<div id="controlling-type-1-error-for-situations-with-multiple-tests" class="section level2">
+<h2>Controlling type 1 error for situations with multiple tests:</h2>
+<p>We have two sets of options to control for our type 1 error rate when performing multiple tests:</p>
+<ol style="list-style-type: decimal">
+<li><p>Control the FWER to be under a certain value by setting an <span class="math inline">\(\alpha_{corrected}\)</span> for each individual test.</p></li>
+<li><p>Control the <strong>false discovery rate</strong> (FDR). In short, FDR methods control the proportion of false positive tests to all positive tests.</p></li>
+</ol>
 <div id="bonferroni-correction" class="section level3">
 <h3>Bonferroni Correction</h3>
-<p>The Bonferroni correction is the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of <span class="math inline">\(\alpha\)</span>.</p>
+<p>The Bonferroni correction is one of the most common and the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of <span class="math inline">\(\alpha\)</span>.</p>
 <p>To carry out the correction, simply set your corrected <span class="math display">\[\alpha_{corrected} = \frac{\alpha}{m}\]</span>, where m is the number of tests you are performing. Rejecting the null hypothesis for each individual test at a significance level of <span class="math inline">\(\leq \frac{\alpha}{m}\)</span> keeps our FWER at <span class="math inline">\(\leq \alpha\)</span>.</p>
 <p>The proof for this inequality comes from Boole’s inequality, which states that “for any finite countable set of events, the probability that at least one of the events happens is no greater than the sum of the probabilities of the individual events” (<a href="https://en.wikipedia.org/wiki/Boole%27s_inequality" class="uri">https://en.wikipedia.org/wiki/Boole%27s_inequality</a>). In this case, <span class="math inline">\(\alpha \leq m \cdot \alpha_{corrected}\)</span>.</p>
 <p><strong>Exercise:</strong> In the case where we tested for an association between 20 colors of jelly beans and acne, what would our Bonferroni corrected <span class="math inline">\(\alpha\)</span> be?</p>
@@ -1121,60 +1180,17 @@ hide:hover {
 print(adjusted_pvals)</code></pre>
 <pre><code>[1] 1.5e-01 3.0e-07 1.0e+00</code></pre>
 <p>Although the Bonferroni correction is relatively simple to implement, in practice it a very conservative correction (meaning that through employing it, you will likely be missing out on many true positives through overcorrecting for multiple tests, amplifying the number of FNs). This effect is especially powerful when you are carrying out a large number of tests or when the tests you are performing are not completely independent.</p>
+<p>To explain why the Bonferroni correction is very conservative, we can explore what it does. The correction method sets the FWER to be <strong>at most</strong> <span class="math inline">\(\alpha\)</span>, which works well in cases when tests are truly independent. However, if there are any correlations/dependence (no matter how small), then the Bonferroni correction would be more stringent than strictly necessary. We rarely will run into situations in Biology where our tests are truly independent. For example, the genes expressed in your cells may exist in pathways, where the expression of one gene is correlated with the expression of other genes in the same pathway. Although individual jelly beans may have different flavoring compounds, they all share a large majority of their ingredients and are made in the same factory by largely the same machinery.</p>
 <p>Because of this flaw in the Bonferroni correction, much effort has been devoted to developing methods that can correct for the number of FPs while not inflating the number of FNs.</p>
-</div>
-<div id="holms-procedure" class="section level3">
-<h3>Holm’s Procedure</h3>
-<p>Holm’s procedure also corrects for the FWER, but is uniformly more powerful than the Bonferroni correction (it gives you fewer FNs for any range of p-value than if you were to use the Bonferroni correction).</p>
-<p>The steps for carrying out the procedure given you are performing m hypotheses:</p>
-<ul>
-<li><p>Order your p-values from smallest to largest (<span class="math inline">\(P_1, P_2, P_3, P_4\)</span>) corresponding to null hypotheses (<span class="math inline">\(H_1, H_2, H_3, H_4\)</span>).</p></li>
-<li><p>For each rank k starting with 1 (corresponding to your smallest p-value), calculate an <span class="math inline">\(\alpha_{adjustedk}\)</span> such that:</p></li>
-</ul>
-<p><span class="math display">\[\alpha_{adjustedk}=\frac{\alpha}{m+ 1 -k}\]</span></p>
-<ul>
-<li><p>Compare each p-value with its corresponding adjusted significance level, starting from the smallest p-value. Keep comparing until you find a p-value that is <strong>greater than</strong> its adjusted significance level.</p></li>
-<li><p>Reject the hypotheses corresponding to the ranked p-values up to and <strong>not including</strong> the first p-value that is greater than its adjusted significance level.</p></li>
-</ul>
-<p><strong>Exercise:</strong> That probably was a bit confusing, so let us walk through an example:</p>
-<p>Suppose we have 4 p-values: {0.5, 0.01, 0.001, 0.3}. We want to perform a Holm procedure correction to get our FWER to 0.05</p>
-<ul>
-<li>Order the p-values from smallest to largest</li>
-</ul>
-<p><hide> {0.001, 0.01, 0.3, 0.5} </hide></p>
-<ul>
-<li>Calculate the adjusted <span class="math inline">\(\alpha\)</span> for the first rank test.</li>
-</ul>
-<p><hide> <span class="math inline">\(\alpha_{adjusted1}=\frac{\alpha}{m+ 1 -1} = \frac{0.05}{4+ 1 -1} = 0.0125\)</span></hide></p>
-<ul>
-<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the first rank test to its p-value.</li>
-</ul>
-<p><hide> <span class="math inline">\(0.0125 &gt; 0.001\)</span>. Reject the first rank hypothesis (the hypothesis with the lowest p-value of the 4). </hide></p>
-<ul>
-<li>Now, calculate the adjusted <span class="math inline">\(\alpha\)</span> for the second rank test.</li>
-</ul>
-<p><hide> <span class="math inline">\(\alpha_{adjusted2}=\frac{0.05}{4+ 1 -2} = 0.01666667\)</span></hide></p>
-<ul>
-<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the second rank test to its p-value.</li>
-</ul>
-<p><hide> <span class="math inline">\(0.01666667 &gt; 0.01\)</span>. Reject the second rank hypothesis (the hypothesis with the second lowest p-value of the 4). </hide></p>
-<ul>
-<li>Now, calculate the adjusted <span class="math inline">\(\alpha\)</span> for the third rank test.</li>
-</ul>
-<p><hide> <span class="math inline">\(\alpha_{adjusted3}=\frac{0.05}{4+ 1 -3} = 0.025\)</span></hide></p>
-<ul>
-<li>Compare our adjusted <span class="math inline">\(\alpha\)</span> for the third rank test to its p-value.</li>
-</ul>
-<p><hide> <span class="math inline">\(0.025 &lt; 0.3\)</span>. Do not reject the third rank hypothesis (or any other hypothesis with higher rank). </hide></p>
-<p>The rationale behind the Holm procedure is that it still corrects for the FWER like the Bonferroni correction, but whereas the Bonferroni correction applied the same <span class="math inline">\(\alpha_{corrected}\)</span> to all tests no matter how large their p-values were, the Holm procedure applies the most stringent threshold to the smallest p-value (<span class="math inline">\(\alpha_{corrected1}= \frac{\alpha}{m}\)</span>) and applies the least stringent threshold to the largest p-value (<span class="math inline">\(\alpha_{correctedm}= \frac{\alpha}{1}\)</span>). In other words, larger p-values experience less of a correction than smaller p-values, meaning you are more likely to reject their hypotheses compared to if you applied the same stringent significance level uniformly to all tests.</p>
 </div>
 <div id="false-discovery-rates-q-values-and-the-benjamini-hochberg-method" class="section level3">
 <h3>False Discovery Rates, q values, and the Benjamini-Hochberg Method</h3>
 <div id="false-discovery-rates" class="section level4">
 <h4>False discovery rates</h4>
 <p>In addition the the FWER, a different framework to conceptualize the number of incorrect conclusions you draw from performing a set of hypothesis tests is the False discovery rate (FDR).</p>
-<p>When we set <span class="math inline">\(\alpha = 0.05\)</span> we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that <strong>among the tests that are called significant, about 5% will turn out to be null (false discoveries)</strong>. In other words, <span class="math inline">\(\alpha = 0.05\)</span> means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed <strong>X number of tests</strong> and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.</p>
+<p>When we set <span class="math inline">\(\alpha = 0.05\)</span> we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that <strong>among the tests that are called significant (positive tests, or “discoveries”), about 5% will turn out to be null (false positive tests, or “false discoveries”)</strong>. In other words, <span class="math inline">\(\alpha = 0.05\)</span> means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed <strong>X number of tests</strong> and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.</p>
 <p><span class="math display">\[FDR = \frac{FP}{FP+TP}\]</span></p>
+<p>False discovery rate methods allow a certain number of false positives to slip through, but by doing so do a better job of finding more true positives (reducing the number of false negative tests).</p>
 </div>
 <div id="q-values" class="section level4">
 <h4>q-values</h4>
@@ -1473,6 +1489,11 @@ Anthony Hung
 <p><hide> {0.1, 0.55, 0.70, 0.77, 0.82, 0.85, 0.87, 0.89, 0.90, 0.91} </hide></p>
 </div>
 </div>
+<div id="final-thoughts" class="section level3">
+<h3>Final thoughts</h3>
+<p>Methods that control for FWER (i.e. Bonferroni correction) maximize the purity of the discoveries you make (you can be more confident that the tests you call positive are indeed true positives rather than false postiives) at the cost of the completeness of those discoveries (you miss many true positives by commiting more type 2 errors). These types of corrections are most appropriate in situations where the costs of a false positive are very high.</p>
+<p>Methods that control for FDR (i.e. Benjamini-Hochberg) relax the constraint on the purity of the discoveries you make (you still control the number of false positives you expect to have) in order to increase the completeness of your discoveries substantially. These types of corrections are most appropriate when you expect to have several true positives and can afford to have some false positives.</p>
+</div>
 <div id="exercise" class="section level3">
 <h3>Exercise:</h3>
 <p>Write a function that takes as input a vector of p-values and performs a Benjamini-Hochberg procedure to return a vector of q-values. Plot histograms of the vector of p-values in Set3 (found below) before and after correction.</p>
@@ -1488,7 +1509,7 @@ set3 &lt;- c(runif(10000), rexp(500, rate = 2)/10)</code></pre>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.5.1 (2018-07-02)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.14.5
+Running under: macOS  10.14.6
 
 Matrix products: default
 BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
@@ -1500,12 +1521,20 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] cowplot_0.9.4 ggplot2_3.1.1
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_1.0.1      digest_0.6.19   rprojroot_1.3-2
- [5] backports_1.1.4 git2r_0.25.2    magrittr_1.5    evaluate_0.14  
- [9] stringi_1.4.3   fs_1.3.1        whisker_0.3-2   rmarkdown_1.13 
-[13] tools_3.5.1     stringr_1.4.0   glue_1.3.1      xfun_0.7       
-[17] yaml_2.2.0      compiler_3.5.1  htmltools_0.3.6 knitr_1.23     </code></pre>
+ [1] Rcpp_1.0.1       knitr_1.23       whisker_0.3-2    magrittr_1.5    
+ [5] workflowr_1.3.0  tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1
+ [9] R6_2.4.0         rlang_0.3.4      dplyr_0.8.1      stringr_1.4.0   
+[13] plyr_1.8.4       tools_3.5.1      grid_3.5.1       gtable_0.3.0    
+[17] xfun_0.7         withr_2.1.2      git2r_0.25.2     htmltools_0.3.6 
+[21] assertthat_0.2.1 yaml_2.2.0       lazyeval_0.2.2   rprojroot_1.3-2 
+[25] digest_0.6.19    tibble_2.1.2     crayon_1.3.4     purrr_0.3.2     
+[29] fs_1.3.1         glue_1.3.1       evaluate_0.14    rmarkdown_1.13  
+[33] labeling_0.3     stringi_1.4.3    pillar_1.4.1     compiler_3.5.1  
+[37] scales_1.0.0     backports_1.1.4  pkgconfig_2.0.2 </code></pre>
 </div>
 </div>
 </div>
