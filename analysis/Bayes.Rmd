@@ -6,6 +6,16 @@ output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
 ---
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
 
 ## Introduction
 

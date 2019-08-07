@@ -9,7 +9,7 @@ output:
 
 * [Syllabus](syllabus.html) 
 
-### Week 1:
+### Introduction:
 
 * [Course Introduction and Probability vs Statistics](introCourse.html)
 
@@ -17,13 +17,15 @@ output:
 
 * [Introduction to R](introR.html)
 
-### Week 3:
+### Probability and Bayesian methods:
 
 * [Bayesian Inference](Bayes.html)
 
+* [Naive Bayes Classifier](NaiveBayes.html)
+
 * [Introduction to Markov Chains](markov.html)
 
-### Week 4:
+### Special Topics:
 
 * [Power](powerAnalyses.html)
 

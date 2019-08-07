@@ -1,0 +1,359 @@
+---
+title: "Naive Bayes Classifier"
+author: "Anthony Hung"
+date: "2019-08-06"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
+# Introduction
+
+The Naive Bayes classifiers are a class of supervised machine learning algorithms that use Bayes rule to solve classification problems. Today we will introduce the concept of classification and implement a Naive Bayes classifier to build a classifier to identify poisonous mushrooms.
+
+## What is classification?
+
+Classification is essentially the act of arranging items into predetermined categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of _supervised learning_, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples.
+
+## Motivating example: Is this Mushroom poisonous or not?
+
+```{r}
+mush_data <- read.csv("data/mushrooms.csv")
+mush_data[1:6,1:6]
+```
+
+We can break down the above table into two different elements. The first, containing all the columns except for the first one, is also known as the "feature matrix". This matrix contains descriptions of each of the features that describe each of the individual mushrooms (i.e. mushroom 1 has a cap shape that can be described as conveX, a cap surface that is Smooth, a cap color of browN, has bruises, and a Pungent odor). The second element is the first column, also known as the "response vector". The response vector contains the class of each of the mushrooms (the response variable in our case).
+
+Notice that the response variable is a categorical variable that can take on one of two values: {e=edible, p=poisonous}. In classification problems, the y variable is always categorical. The analogous situation for when you have a _numerical_ response variable is regression, which will be covered in a later lecture.
+
+Using this labeled dataset, we can teach a classification algorithm how to predict if a new mushroom is poisonous or not, given we have information about the other features of that mushroom. In order to do this, the algorithm must search for patterns amongst the other features that are shared between poisonous mushrooms and distinguish these mushrooms from edible ones. One way to do this is through using a Naive bayes classifier.
+
+As a side note, a third task that is often performed with machine learning is _clustering_, in which clusters are learned from the input data themselves rather than being specified by the user. This is a case of _unsupervised learning_, meaning the algorithm is not supplied with gold standard examples of what each cluster looks like but rather defines them on its own.
+
+# Review of Bayes rule
+
+Before we jump into the applied example, we must first review the components of Bayes rule. Bayes rule is a result that comes from probability and describes the relationship between conditional probabilities.
+
+Let us define A and B as two separate types of events. P(A|B), or "the probability of A given B" denotes the conditional probability of A occurring if we know that B has occurred. Likewise, P(B|A) denotes "the probability of B given A". Bayes theorem relates P(A|B) and P(B|A) in a deceptively simple equation.
+
+## Derivation of Bayes rule
+
+https://oracleaide.files.wordpress.com/2012/12/ovals_pink_and_blue1.png
+
+From our definition of conditional probability, we know that P(A|B) can be defined as the probability that A occurs given that B has occured. This can be written mathematically as:
+
+$$P(A|B) = \frac{P(A \cap B )}{P(B)}$$
+
+Here, $\cap$ denotes the intersection between A and B (i.e. "A AND B occur together"). To calculate the probability of A conditional on B, we first need to find the probability that B has occured. Then, we need to figure out out of the situations where B has occured, how often does A also occur?
+
+In a similar way, we can write P(B|A) mathematically:
+
+$$P(B|A) = \frac{P(B \cap A )}{P(A)}$$
+
+Since $P(B \cap A )=P(A \cap B)$ (does this make sense?), we can combine the two equations:
+
+$$P(A|B)P(B) = P(B \cap A ) = P(B|A)P(A)$$
+
+If we divide both sides by P(B):
+
+$$P(A|B) = \frac{P(B|A )P(A)}{P(B)}$$
+
+This is Bayes theorem! Notice that using this equation, we can connect the two conditional probabilities. Oftentimes, knowing this relationship is extremely useful because we will know P(B|A) but want to compute P(A|B). Let's explore an example.
+
+## Applying Bayes theorem: Example of screening test
+
+Let us assume that a patient named John goes to a see a doctor to undergo a screening test for an infectious disease. The test that is performed has been previously researched, and it is known to have a 99% reliability when administered to patients like John. In other words, 99% of sick people test positive in the test and 99% of healthy people test negative. The doctor has prior knowledge that 1% of people in general will have the disease in question. If the patient tests positive, what are the chances that he is sick?
+
+<hide>50%</hide>
+
+
+## Components of Bayes rule
+
+$$P(A|B) = \frac{P(B|A )P(A)}{P(B)}$$
+
+If we define B to be our observed data (i.e. features of a mushroom), then Bayes theorem becomes:
+
+$$P(A|Data) = \frac{P(Data|A )P(A)}{P(Data)}$$
+
+Notice the $P(Data|A)$ term is something we've talked about earlier, the likelihood. “The likelihood for a model is the probability of the data under the model." With that in mind, we can now attach names to each of the terms in the equation.
+
+* P(A|Data) is known as the a posteriori probability, or the probability of a model A given some observations.
+
+* P(Data|A) is known as the likelihood.
+
+* P(A) is known as the prior probability, or the probability of A before we have the observations.
+
+* P(Data) is the prior probability that the data themselves are true.
+
+Let us say we have two possible models $A_p$ and $A_e$ that could have generated our data that we would like to pick between. 
+
+$$P(A_p|Data) = \frac{P(Data|A_p )P(A_p)}{P(Data)}$$
+
+and
+
+$$P(A_e|Data) = \frac{P(Data|A_e )P(A_e)}{P(Data)}$$
+
+If we would like to compare the probability that a certain set of data (or features of a mushroom) came from model $A_e$ with the probability that the data came from model $A_p$, we can simply compare their a posteriori probabilities $P(A_e|Data)$ and $P(A_p|Data)$. Additionally, we can notice that both of these a posteriori probabilities contain the same denominators, which means that the denominator can be ignored when comparing between them to see which is larger. Therefore, we can compare $P(Data|A_e)P(A_e)$ and $P(Data|A_p)P(A_p)$ to determine the model that has the higher probability of generating the observed data. Being able to ignore the denominator when using Bayes rule to compare between two (or more) models is an extremely convenient trick and simplifies things mathematically a great deal.
+
+A Naive Bayes Classifier uses data that is fed into it to estimate prior probabilities and likelihoods to be used in Bayes rule. The classifier then uses Bayes rule to compute the posterior probability that a new observation belongs to each possible defined class given its other features. It then assigns the observation to the class that has the largest posterior probability ("Maximum A Posteriori Probability", or MAP).
+
+# Exercise: Naive Bayes classifier to classify mushrooms
+
+The reason why this is called a "Naive" Bayes classifier is that this algorithm assumes that each feature in the feature matrix is independent of all others and equal to all others in weight. For example, in our mushroom example a Naive Bayes classifier assumes that the cap shape of a mushroom does not depend on the cap color. Also, each feature carries equal weight in determining which class a row belongs to: there are no features that are irrelevant and each features contributes equally to the classification. Even though these conditions are almost never completely true in practice, the classifier still works very well in situations where these assumptions are violated.
+
+Let's walk through conceptually what the Naive Bayes algorithm does, and then look at how R can help perform each step.
+
+## Training a Naive Bayes algorithm using training data
+
+As mentioned previously, training of a Naive Bayes algorithm essentially boils down to using training data to estimate values for prior probabilities ($P(A_p)$ and $P(A_e)$) and likelihoods ($P(Data|A_p)$ and $P(Data|A_e)$) to be inputted into Bayes rule.
+
+### 1. Estimating Prior probabilities from training data
+
+Question: What would be a good way to come up with a prior probability for a mushroom being poisonous if you have access to a labeled training dataset? Recall that a prior probability is the probability of a certain model _before_ you have access to any data.
+
+<hide>Simply calculate the proportion of observations in the training data that belong that are poisonous. Alternatively, one could also argue that we treat the prior probabilities as 1/2 and 1/2, treating each class as equally likely.</hide>
+
+Pretty straightforward.
+
+### 2. Estimating likelihoods from training data
+
+Now, we need to calculate the other missing part of our Bayes rule equation: the likelihoods. A likelihood is similar to, but not equivalent to, a probability.
+
+#### Likelihood vs probability
+
+##### Probability
+
+Recall from our previous class on probability distributions that the definition of probability can be visualized as the area under the curve of a probability distribution. For example, let's say that we have a fair coin (P(heads) = 0.5) and we flip it 30 times:
+
+```{r}
+library(ggplot2)
+library(cowplot)
+library(grid)
+
+x1  <- 5:25
+df <- data.frame(x = x1, y = dbinom(x1, 30, 0.5))
+
+ggplot(df, aes(x = x, y = y)) + 
+  geom_bar(stat = "identity", col = "red", fill = c("white")) +
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
+
+```
+
+If we would like to find the probability that we would get more than 20 heads in 30 flips, we could calculate the area represented by bars that are greater than 18 on the x axis:
+
+```{r}
+ggplot(df, aes(x = x, y = y)) + 
+  geom_bar(stat = "identity", col = "red", fill = c(rep("white", 14), rep("red", 7))) +
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
+```
+
+Similarly, we could calculate the probability that we get between 9 and 13 heads:
+
+```{r}
+ggplot(df, aes(x = x, y = y)) + 
+  geom_bar(stat = "identity", col = "red", fill = c(rep("white", 5), rep("red", 4), rep("white", 12))) +
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
+```
+
+In each case, notice that the shape of the distribution does not change. The only thing that changes is the area that we shade in. In mathematical terms, in the first case we are calculating:
+
+$$P(num\_heads > 20 | Binom(n=30, p=0.5))$$
+
+and in the second:
+
+$$P(9< num\_heads < 13 | Binom(n=30, p=0.5))$$
+
+What is changing is the left side of the | . The shape of the distribution stays the same. When we discuss probabilities, we are talking about the areas under a __fixed distribution (model)__.
+
+##### Likelihood
+
+So what about likelihood? Before we look at it graphically, let's define what we mean by the term. “The likelihood for a model is the probability of the data under the model.” Mathematically,
+
+$$L(Model;Data) = P(Data|Model)$$
+
+This may look the same as what we did before, but in this case our __data are fixed__, not the distribution. Instead of asking, "If I keep my distribution constant, what is the probability of observing something?" with likelihood we are asking "Given that I have collected some data, how well does a certain distribution fit the data?"
+
+Let's assume the same situation we did for probability with the coin. In this case, we do not know if the coin is actually fair (P(heads = 0.5), or if it is rigged (e.g. P(heads = 0.6). We flip the coin 30 times and observe 20 heads. 
+
+What is the likelihood for our __fair model__ ($Binom(n=30, p=0.5)$) given that we observe these data? In other words, how well does the model as paramterized fit our observations?
+
+$$L(Model;Data) = P(num\_heads = 20|Binom(n=30, p=0.5))$$
+
+Let's look at this graphically.
+```{r}
+ggplot(df, aes(x = x, y = y)) + 
+  geom_bar(stat = "identity", col = "red", fill = c(rep("white", 15), rep("red", 1), rep("white", 5))) +
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
+```
+
+We can also compute the exact probability using the "dbinom" function in R.
+
+```{r, echo = TRUE, code_folding= show}
+dbinom(x = 20, size = 30, prob = 0.5)
+```
+
+Okay. How well does our data fit a __rigged coin__ model, where the P(heads = 0.6)? What is the likelihood for the rigged coin model given our data?
+
+$$L(Model;Data) = P(num\_heads = 25|Binom(n=30, p=0.6))$$
+
+Let's look at this graphically.
+
+```{r}
+x1  <- 5:25
+df_rigged <- data.frame(x = x1, y = dbinom(x1, 30, 0.6))
+
+ggplot(df_rigged, aes(x = x, y = y)) + 
+  geom_bar(stat = "identity", col = "red", fill = c(rep("white", 15), rep("red", 1), rep("white", 5))) +
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
+```
+
+We can also compute the exact probability using the "dbinom" function in R.
+
+```{r, echo = TRUE, code_folding= show}
+dbinom(x = 20, size = 30, prob = 0.6)
+```
+
+It looks like the likelihood for the rigged coin model is higher!
+
+#### Determining likelihood equations 
+
+Now, let's approach computing likelihoods for our mushroom example. The first thing we need to do is choose an appropriate distribution to model our data. Given that each of our features is a categorical variable that has either 2 or more than 2 levels, what is the best distribution to choose for the expression $P(Data|A_p)$ for each individual feature (e.g. cap shape)?
+
+<hide>For the features that are categorical variables with 2 levels, a Bernoulli likelihood is most appropriate (this is also equivalent to a binomial distribution with only 1 trial). For the features that are categorical variables with more than 2 levels, a multinomial likelihood is appropriate (or more specifically, the categorical distribution).</hide>
+
+The multinomial distribution is a generalization of the binomial to cases where the number of categories is greater than 2. Recall that a binomial distribution describes the probability of observing k successes in n trials, with the result of each trial being either a success or a failure (2 possible categories of results). The multinomial distribution expands the number of possible categories of results to beyond 2. In other words, while you can use the binomial distribution to model the probability of observing a number of heads in n coin filps, you can use the multinomial distribution to model the probability of landing on any one of the sides of a 6-sided dice a certain number of times after n throws of the dice.
+
+(Also, for distributions, categorical : multinomial :: bernoulli : binomial)
+
+We can get the PMFs for the bernoulli and multinomial distributions from memory or wikipedia: https://en.wikipedia.org/wiki/Bernoulli_distribution, https://en.wikipedia.org/wiki/Multinomial_distribution. These are our likelihood equations.
+
+#### Estimating likelihoods from training data
+
+Now that we have determined our likelihood equations, we can move on to estimating the parameters that will fit into these equations from our training data.
+
+In both cases (bernoulli and multinomial), the number of trials n will be 1. Why is this? <hide>Each mushroom will only have one value for each feature. For example, a mushroom cannot have a bell shaped and conical shaped cap at the same time, and cannot have a doubly-bell shaped cap.</hide>
+
+All that is left to estimate, therefore, are the event probabilities p for the bernoulli or $p_1, p_2, p_3, ... p_k$ for the multinomial. What is an intuitve way to estimate these probabilities from our training data? <hide>Much like what we did above for our prior probabiliites, we can simply find the proportion of mushrooms that are classified as poisonous in our training data that have bell shaped caps, conical shaped caps, etc. and do the same for the mushrooms that are classified as edible. These probabilities should add up to 1 within each feature within each class of mushroom. If you look hard enough at the PMFs for either the bernoulli or multinomial distributions where n = 1, you'll be able to see that it's actually very very easy to compute likelihoods for each individual feature.</hide>
+
+### 3. Putting it all together: computing a posteriori probabilities using Bayes rule
+
+Cool, now that we have all the pieces, we can use Bayes rule to calculate our posterior probabilities. Recall that since the denominators will always be the same across categories when using Bayes rule, we can omit them and instead use a simplified version of the equation:
+
+$$Posterior \propto Prior * Likelihood$$
+
+Recall also that the _Naive_ in Naive Bayes means we are assuming that each of our features is independent. This means that to calculate the joint probabilities across all of features for an individual mushroom, we can simply take the product of the likelihoods for each individual feature (multiply many multinomial/bernoulli likelihoods together).
+
+$$Posterior_{edible} \propto Prior_{edible} * Likelihood_{cap.shape\_edible} * Likelihood_{cap.surface\_edible} * Likelihood_{cap.color\_edible} * ... * Likelihood_{habitat\_edible}$$
+
+or 
+
+$$P(A_{edible}|Data) \propto P(A_{edible}) * P(Data_{cap.shape}|A_{edible}) * P(Data_{cap.surface}|A_{edible}) * P(Data_{cap.color}|A_{edible}) * ... * P(Data_{habitat}|A_{edible})$$
+
+Using R, we can easily obtain the numbers needed to estimate the prior probabilties and the event probabilities from our mushroom data using a few commands. We will not walk through individually calculating all the likelihoods because there are automated packages to do all the steps conveniently in R/other programming languages.
+
+```{r}
+#prior probabilties:
+summary(mush_data)
+
+#subset data into poisonous and edible
+poisonous <- mush_data[mush_data$class=="p",]
+edible <- mush_data[mush_data$class=="e",]
+
+#calculate event probabilities for cap.shape for each class
+##poisonous
+table(poisonous$cap.shape)
+##edible
+table(edible$cap.shape)
+```
+
+# Additional notes relevant to training machine learning algorithms.
+
+Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using training data to train an algorithm. 
+
+## The issue of overfitting
+
+If you've ever heard anyone talking about machine learning, you've probably heard of the term "overfitting." Overfitting can be summed up by any situation where an algorithm learns from the training data ... a bit too well. For example, if there are certain patterns in the data you have collected for your training data that are just flukes due to sampling error and do not accurately represent the actual relationships found in the wild, the algorithm you've trained will falsely apply these incorrect patterns to new classification problems, leading to inaccurate results. One way to test if your algorithm has overfit your data is to simply collect more labeled data that were not used to train your algorithm and see how well your trained algorithm performs in correctly classifying the new "test" data.
+
+### One way to assess overfitting: Splitting data into training vs test data sets (i.e. the "Hold out" method)
+
+Of course, oftentimes the easier alternative to going out to collect new data is to just pretend that a subset of the data that is already collected is your "test" data set. By randomly partitioning your data into a "training set" and a "test set," you can assess your algorithm's ability to perform on previously unseen data to determine if it has overfit your training data. A common split is 20% test data and 80% training data.
+
+### An additional problem: Unlucky splits
+
+Of course, the word "randomly" above may trigger warning bells, since the whole problem we are trying to avoid in the first place is sampling error! Therefore, by randomly partitioning our training and test sets, we run into the potential problem of unlucky splits in which our training set looks nothing like our test set, despite both having come from the same larger group of data. In this case, using our test set to evaluate the ability of our algorithm to perform on previously unseen data would be inaccurate.
+
+### Cross-validation to avoid unlucky splits
+
+In order to avoid the above problem, we can employ cross-validation or ‘k-fold cross-validation’. Cross-validation involves randomly splitting our data into ‘k’ equal-sized groups. In each iteration of the process, one of the groups is used as the test set and the rest are used as the training set. The algorithm is trained on the training set and tested on the test set. Then, in the next iteration selects a different group to be used as the test set and rest are used as the training set. The process is repeated until each unique group has been used as the test set in an iteration. For example, in 5-fold cross-validation, we would split the dataset randomly into 5 groups, and run 5 iterations of training and testing. See the graphical depiction below.
+
+https://miro.medium.com/max/1400/1*rgba1BIOUys7wQcXcL4U5A.png
+
+# Naive Bayes classifier in R
+
+Finally, after discussing the theoretical basis behind the classifier and the necessity for training/test sets and cross-validation, we will be able to implement our algorithm with 5-fold cross-validation in R. Since others have written neat programs to automate most of the calculations for us, you will find that the implementation is actually quite simple to carry out.
+
+```{r NB in R}
+#Note: a seed has been set already at the beginning of this document, which allows us to reproducibly recreate the random splits that we perform in this code chunk. 
+
+#load two libraries in R that are popular for implementing machine learning algorithms
+library(e1071)
+library(caret)
+
+#randomly subset our data into 5 groups (folds_i is a vector that contains the indices of observations included in each group)
+n_folds <- 5
+folds_i <- sample(rep(1:n_folds, length.out = nrow(mush_data)))
+table(folds_i)
+
+#iterate through training and testing a naiveBayes classifier for all 5 cross-validation folds and print the results
+for(k in 1:n_folds){
+  #select which group is our test data and define our training/testing data
+  test_i <- which(folds_i == k)
+  train_data <- mush_data[-test_i, ]
+  test_data <- mush_data[test_i, ]
+  
+  #train classifier
+  classifier_nb <- naiveBayes(train_data[,-1], train_data$class)
+  
+  #use classifier to predict classes of test data
+  nb_pred <- predict(classifier_nb, type = 'class', newdata = test_data)
+  
+  #assess the accuracy of the classifier on the test data using a confusion matrix
+  print(confusionMatrix(nb_pred,test_data$class))
+}
+
+```
+
+We can appreciate that the algorithm performs fairly well in each iteration (>90% accuracy), meaning we can be pretty confident that it is not overfitting our data.
+
+To better understand what the algorithm has determined (i.e. the individual event probabilities and prior probabilities that have been estimated), we can examine the output for one of the iterations of our cross validation (treating group 1 as our test set). Do you notice any patterns that jump out at you? Which variables do you think are most informative in terms of differentiating between edible and poisonous mushrooms?
+
+```{r one case}
+
+#select which group is our test data and define our training/testing data
+test_i <- which(folds_i == 1)
+train_data <- mush_data[-test_i, ]
+test_data <- mush_data[test_i, ]
+
+#train classifier
+classifier_nb <- naiveBayes(train_data[,-1], train_data$class)
+  
+#use classifier to predict classes of test data
+nb_pred <- predict(classifier_nb, type = 'class', newdata = test_data)
+  
+#assess the accuracy of the classifier on the test data using a confusion matrix
+print(confusionMatrix(nb_pred,test_data$class))
+
+#print a summary of the classifier
+print(classifier_nb)
+```
+

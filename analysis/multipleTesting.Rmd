@@ -29,11 +29,11 @@ Multiple testing describes situations where many hypotheses are simultaneously i
 
 ## Hypothesis testing
 
-The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis. 
+The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis. As a reminder, the null hypothesis usually is the 'status quo' or less interesting view of the world. The alternative hypothesis is the opposite of the null hypothesis.
 
-## The issue of multiple testing
+## The "issue" of multiple testing
 
-As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart. 
+As many scientific fields enter an age of "Big Data," where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart.
 
 To illustrate this, consider the xkcd comic (https://xkcd.com/882/). Obviously, something is not right with the conclusions of the study, since we all have an intuition that green jelly beans do not have any true association with skin conditions. To better understand why mutliple testing can easily lead to false positive associations unless adequately treated, let us walk through the calculations for the probability of making a Type 1 error given the number of tests you are performing.
 
@@ -51,16 +51,34 @@ Now, let us test for an association between 20 different colors of jelly beans a
 Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to $1- \alpha = 0.95$. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is $1-(1-0.05)^{20} = 0.6415$.
 </hide>
 
-This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! Clearly, we need to take into account the number of tests when setting our significance threshold. 
+This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! The number of expected false positives increases with the number of independent tests you perform. Clearly, we need to take into account the number of tests when setting our significance threshold. 
 
 In the above two examples, what we calculated was the probability of making __at least one type 1 error__ in all the independent tests we were performing. This is otherwise known as the __Family-Wise Error Rate (FWER)__.
 
+## Looking at multiple testing and FWER graphically
 
-## Correcting for multiple tests:
+This graph plots the # of independent tests performed on the x axis, and the probability of seeing at least one type 1 error (the FWER) on the y axis, given an $\alpha = 0.05$.
+
+```{r graph_FWER}
+library(cowplot)
+library(ggplot2)
+ggplot(data.frame(x=c(0,60)), aes(x)) +
+  stat_function(fun=function(x)1-(1-0.05)^x, geom="line", aes(colour="square")) + xlab("# of independent tests") + ylab("FWER") + theme(legend.position = "none")
+```
+
+As you can appreciate, the FWER increases quickly with every increase in the number of tests you are performing!
+
+## Controlling type 1 error for situations with multiple tests:
+
+We have two sets of options to control for our type 1 error rate when performing multiple tests:
+
+1. Control the FWER to be under a certain value by setting an $\alpha_{corrected}$ for each individual test.
+
+2. Control the __false discovery rate__ (FDR). In short, FDR methods control the proportion of false positive tests to all positive tests. 
 
 ### Bonferroni Correction
 
-The Bonferroni correction is the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of $\alpha$.
+The Bonferroni correction is one of the most common and the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of $\alpha$.
 
 To carry out the correction, simply set your corrected $$\alpha_{corrected} = \frac{\alpha}{m}$$, where m is the number of tests you are performing. Rejecting the null hypothesis for each individual test at a significance level of $\leq \frac{\alpha}{m}$ keeps our FWER at $\leq \alpha$.
 
@@ -82,60 +100,11 @@ adjusted_pvals <- p.adjust(c(0.05,0.0000001, 0.8), method = "bonferroni")
 print(adjusted_pvals)
 ```
 
-Although the Bonferroni correction is relatively simple to implement, in practice it a very conservative correction (meaning that through employing it, you will likely be missing out on many true positives through overcorrecting for multiple tests, amplifying the number of FNs). This effect is especially powerful when you are carrying out a large number of tests or when the tests you are performing are not completely independent. 
+Although the Bonferroni correction is relatively simple to implement, in practice it a very conservative correction (meaning that through employing it, you will likely be missing out on many true positives through overcorrecting for multiple tests, amplifying the number of FNs). This effect is especially powerful when you are carrying out a large number of tests or when the tests you are performing are not completely independent.
+
+To explain why the Bonferroni correction is very conservative, we can explore what it does. The correction method sets the FWER to be __at most__ $\alpha$, which works well in cases when tests are truly independent. However, if there are any correlations/dependence (no matter how small), then the Bonferroni correction would be more stringent than strictly necessary. We rarely will run into situations in Biology where our tests are truly independent. For example, the genes expressed in your cells may exist in pathways, where the expression of one gene is correlated with the expression of other genes in the same pathway. Although individual jelly beans may have different flavoring compounds, they all share a large majority of their ingredients and are made in the same factory by largely the same machinery.
 
 Because of this flaw in the Bonferroni correction, much effort has been devoted to developing methods that can correct for the number of FPs while not inflating the number of FNs.
-
-### Holm's Procedure
-
-Holm's procedure also corrects for the FWER, but is uniformly more powerful than the Bonferroni correction (it gives you fewer FNs for any range of p-value than if you were to use the Bonferroni correction). 
-
-The steps for carrying out the procedure given you are performing m hypotheses:
-
-* Order your p-values from smallest to largest ($P_1, P_2, P_3, P_4$) corresponding to null hypotheses ($H_1, H_2, H_3, H_4$).
-
-* For each rank k starting with 1 (corresponding to your smallest p-value), calculate an $\alpha_{adjustedk}$ such that:
-
-$$\alpha_{adjustedk}=\frac{\alpha}{m+ 1 -k}$$
-
-* Compare each p-value with its corresponding adjusted significance level, starting from the smallest p-value. Keep comparing until you find a p-value that is __greater than__ its adjusted significance level.
-
-* Reject the hypotheses corresponding to the ranked p-values up to and __not including__ the first p-value that is greater than its adjusted significance level.
-
-
-__Exercise:__ That probably was a bit confusing, so let us walk through an example:
-
-Suppose we have 4 p-values: {0.5, 0.01, 0.001, 0.3}. We want to perform a Holm procedure correction to get our FWER to 0.05
-
-* Order the p-values from smallest to largest
-
-<hide> {0.001, 0.01, 0.3, 0.5} </hide>
-
-* Calculate the adjusted $\alpha$ for the first rank test.
-
-<hide> $\alpha_{adjusted1}=\frac{\alpha}{m+ 1 -1} = \frac{0.05}{4+ 1 -1} = 0.0125$</hide>
-
-* Compare our adjusted $\alpha$ for the first rank test to its p-value.
-
-<hide> $0.0125 > 0.001$. Reject the first rank hypothesis (the hypothesis with the lowest p-value of the 4). </hide>
-
-* Now, calculate the adjusted $\alpha$ for the second rank test.
-
-<hide> $\alpha_{adjusted2}=\frac{0.05}{4+ 1 -2} = 0.01666667$</hide>
-
-* Compare our adjusted $\alpha$ for the second rank test to its p-value.
-
-<hide> $0.01666667 > 0.01$. Reject the second rank hypothesis (the hypothesis with the second lowest p-value of the 4). </hide>
-
-* Now, calculate the adjusted $\alpha$ for the third rank test.
-
-<hide> $\alpha_{adjusted3}=\frac{0.05}{4+ 1 -3} = 0.025$</hide>
-
-* Compare our adjusted $\alpha$ for the third rank test to its p-value.
-
-<hide> $0.025 < 0.3$. Do not reject the third rank hypothesis (or any other hypothesis with higher rank). </hide>
-
-The rationale behind the Holm procedure is that it still corrects for the FWER like the Bonferroni correction, but whereas the Bonferroni correction applied the same $\alpha_{corrected}$ to all tests no matter how large their p-values were, the Holm procedure applies the most stringent threshold to the smallest p-value ($\alpha_{corrected1}= \frac{\alpha}{m}$) and applies the least stringent threshold to the largest p-value ($\alpha_{correctedm}= \frac{\alpha}{1}$). In other words, larger p-values experience less of a correction than smaller p-values, meaning you are more likely to reject their hypotheses compared to if you applied the same stringent significance level uniformly to all tests.
 
 ### False Discovery Rates, q values, and the Benjamini-Hochberg Method
 
@@ -143,9 +112,11 @@ The rationale behind the Holm procedure is that it still corrects for the FWER l
 
 In addition the the FWER, a different framework to conceptualize the number of incorrect conclusions you draw from performing a set of hypothesis tests is the False discovery rate (FDR).
 
-When we set $\alpha = 0.05$ we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that __among the tests that are called significant, about 5% will turn out to be null (false discoveries)__. In other words, $\alpha = 0.05$ means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed __X number of tests__ and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.
+When we set $\alpha = 0.05$ we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that __among the tests that are called significant (positive tests, or "discoveries"), about 5% will turn out to be null (false positive tests, or "false discoveries")__. In other words, $\alpha = 0.05$ means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed __X number of tests__ and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.
 
 $$FDR = \frac{FP}{FP+TP}$$
+
+False discovery rate methods allow a certain number of false positives to slip through, but by doing so do a better job of finding more true positives (reducing the number of false negative tests).
 
 #### q-values
 
@@ -217,6 +188,14 @@ Finally, why do we take the minimum value between $\frac{p_i m}{i}$ and $q_{i+1}
 Suppose we have p-values for 10 tests: {0.01, 0.11, 0.21, 0.31, 0.41, 0.51, 0.61, 0.71, 0.81, 0.91}. We want to perform a Benjamini-Hochberg procedure on the p-values to obtain q-values.
 
 <hide> {0.1, 0.55, 0.70, 0.77, 0.82, 0.85, 0.87, 0.89, 0.90, 0.91} </hide>
+
+
+
+### Final thoughts
+
+Methods that control for FWER (i.e. Bonferroni correction) maximize the purity of the discoveries you make (you can be more confident that the tests you call positive are indeed true positives rather than false postiives) at the cost of the completeness of those discoveries (you miss many true positives by commiting more type 2 errors). These types of corrections are most appropriate in situations where the costs of a false positive are very high.
+
+Methods that control for FDR (i.e. Benjamini-Hochberg) relax the constraint on the purity of the discoveries you make (you still control the number of false positives you expect to have) in order to increase the completeness of your discoveries substantially. These types of corrections are most appropriate when you expect to have several true positives and can afford to have some false positives.
 
 ### Exercise:
 
