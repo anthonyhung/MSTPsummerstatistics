@@ -21,9 +21,13 @@ hide:hover {
 
 The Naive Bayes classifiers are a class of supervised machine learning algorithms that use Bayes rule to solve classification problems. Today we will introduce the concept of classification and implement a Naive Bayes classifier to build a classifier to identify poisonous mushrooms.
 
+## What is Machine learning?
+
+Machine learning is a field that leverages generic algorithms that learn pattterns from data rather than having to write code that specifically instructs the algorithm what patterns to focus on.
+
 ## What is classification?
 
-Classification is essentially the act of arranging items into predetermined categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of _supervised learning_, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples.
+Classification is essentially the act of arranging items into categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of _supervised learning_, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples. The original data comes from UCI's Machine learning department via kaggle: https://www.kaggle.com/uciml/mushroom-classification.
 
 ## Motivating example: Is this Mushroom poisonous or not?
 
@@ -34,7 +38,7 @@ mush_data[1:6,1:6]
 
 We can break down the above table into two different elements. The first, containing all the columns except for the first one, is also known as the "feature matrix". This matrix contains descriptions of each of the features that describe each of the individual mushrooms (i.e. mushroom 1 has a cap shape that can be described as conveX, a cap surface that is Smooth, a cap color of browN, has bruises, and a Pungent odor). The second element is the first column, also known as the "response vector". The response vector contains the class of each of the mushrooms (the response variable in our case).
 
-Notice that the response variable is a categorical variable that can take on one of two values: {e=edible, p=poisonous}. In classification problems, the y variable is always categorical. The analogous situation for when you have a _numerical_ response variable is regression, which will be covered in a later lecture.
+Notice that the response variable is a categorical variable that can take on one of two values: {e=edible, p=poisonous}. In classification problems, the y variable is always categorical. The analogous situation for when you have a _continouous_ response variable is regression, which will be covered in a later lecture.
 
 Using this labeled dataset, we can teach a classification algorithm how to predict if a new mushroom is poisonous or not, given we have information about the other features of that mushroom. In order to do this, the algorithm must search for patterns amongst the other features that are shared between poisonous mushrooms and distinguish these mushrooms from edible ones. One way to do this is through using a Naive bayes classifier.
 
@@ -278,7 +282,7 @@ table(edible$cap.shape)
 
 # Additional notes relevant to training machine learning algorithms.
 
-Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using training data to train an algorithm. 
+Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using data to train and evaluate a model. 
 
 ## The issue of overfitting
 

@@ -57,6 +57,7 @@ Suppose we have two competing hypotheses to consider: a null hypothesis that the
 library(tidyverse)
 library(ggplot2)
 library(cowplot)
+theme_set(theme_cowplot())
 library(gridExtra)
 power_visualization <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
   stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid") +

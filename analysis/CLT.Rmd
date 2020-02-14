@@ -13,7 +13,7 @@ The central limit theorem (CLT) is a fundamental pillar to statistics and probab
 
 ## Definitions
 
-The CLT states that for sufficiently large samples taken from a population with any population distribution, the sampling distribution of the mean tends towards a normal distribution centered around the true mean of the population. The power of this statement is that it does not matter what shape the population distribution takes. If our sample size is large enough, the distribution of our samples looks like a bell curve with a mean that is approximately equal to the population mean.
+The CLT states that for sufficiently large samples taken from a population with any population distribution, the sampling distribution of the mean tends towards a normal distribution centered around the true mean of the population. The power of this statement is that it does not matter what shape the population distribution takes. If our sample size is large enough, the distribution of our samples looks like a bell curve with a mean that is approximately equal to the population mean. More formally, when a continuous variable is dependent on many independent small, random factors, measurements of that variable will approximate a Gaussian distribution.
 
 To go more in depth, let's define what we mean by population and sampling distributions.
 
@@ -87,6 +87,10 @@ curve(dnorm(x, mean = mean(sample_means), sd = sd(deer_heights)/sqrt(100)), add=
 abline(v=mean(sample_means), col="red")
 ```
 
+## CLT and why the normal distribution is so prevalent
+
+The CLT not only is useful for science in allowing us to apply many fundamental statistical tests to sampling distributions, but it also explains why we see the normal distribution so often in nature. For example, you may know that the height of people in a population is distributed normally. The reason behind this fascinating result is that the height of a person is contributed to by a large number of random variables, including nutrition, genetics, other aspects of environment, etc. Even just looking at the genetics piece of the equation, height is known as a highly polygenic trait, which means many many different loci across the genome contribute genetically to a person's height, and each locus can be thought of as a random variable. In the end, you can think of a person's height as the sum of the value of a large number of random variables. The CLT tells us that the sum of the distribution of a large number of random variables looks like a normal distribution, which explains this result.
+
 ## CLT $\ne$ Law of Large Numbers
 
 The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter Taken to the near limit, you can imagine that if you were able to sample 999,999 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
@@ -100,7 +104,7 @@ In contrast, the CLT does not say anything about individual samples and their es
 
 * The CLT allows us to apply many of the statistical tests that are commonly used to a wide variety of situations. For example, in nature there is no such thing as a perfectly normally distributed population. However, the CLT tells us that if we have a large enough sample size, we can always expect to see a normally distributed sampling distribution, which means we can apply statistical tests that assume normality on sampling distributions.
 
-* The statement of the CLT allows us to use information we calculate based on a random representative sample to infer parameters of the population. This is of great usefulness to us a scientists. Imagine if the only way to obtain accurate measurements of a population of cells, mice, or patients was to measure every single last one!
+* The statement of the CLT allows us to use information we calculate based on a random representative sample to infer parameters of the population. This is of great usefulness to us a scientists, as it enables *inference*. Imagine if the only way to obtain accurate measurements of a population of cells, mice, or patients was to measure every single last one!
 
 * The precision of the estimates we obtain from our samples depends very much on the sample size, or number of individuals contained within each sample. 
 
