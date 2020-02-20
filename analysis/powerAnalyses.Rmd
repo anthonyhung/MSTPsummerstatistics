@@ -81,7 +81,7 @@ Since we exist in the reality where the null hypothesis is true, we should only 
 
 ```{r}
 H0true <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
-  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid", alpha = "0.2")+
+  stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid", alpha = 0.2)+
   stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid") +
   
   stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", xlim = c(0,1.645*2+10), geom = "area", fill = "yellow", alpha = 0.5) +
@@ -104,7 +104,7 @@ Since we exist in the reality where the null hypothesis is false, we should only
 ```{r}
 H0false <- ggplot(data = data.frame(x = c(0, 25)), aes(x)) + 
   stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "red", linetype = "solid")+
-  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", alpha = "0.2") +
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 2), color = "blue", linetype = "solid", alpha = 0.2) +
 
   stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "blue", linetype = "solid", xlim = c(0,1.645*2+10), geom = "area", fill = "orange", alpha = 0.5) +
   stat_function(fun = dnorm, args = list(mean = 15, sd = 2), color = "blue", linetype = "solid", xlim = c(1.645*2+10, 25), geom = "area", fill = "purple", alpha = 0.5) +

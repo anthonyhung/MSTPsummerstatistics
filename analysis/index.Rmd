@@ -27,6 +27,8 @@ output:
 
 ### Special Topics:
 
+* [Data Visualization Exercise](dataviz.html)
+
 * [Power](powerAnalyses.html)
 
 * [Correcting for Mutliple Tests](multipleTesting.html)

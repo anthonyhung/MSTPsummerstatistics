@@ -1,0 +1,166 @@
+---
+title: "ggplot2"
+author: "Anthony Hung"
+date: "2020-02-20"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+# Data visualization in many dimensions with ggplot2
+
+# Load data and libraries
+
+```{r}
+library(ggplot2)
+cars <- mtcars
+?mtcars
+```
+
+# Examine structure of data
+
+These data contain 32 observations on cars across 11 different variables. Some of these variables (e.g. mpg) are numeric, while others (e.g. cyl) are factors. Notice that these data are in "tidy" format, meaning that:
+
+1. Each variable forms a column.
+
+2. Each observation forms a row.
+
+3. Each type of observational unit forms a table.
+
+```{r}
+dim(cars)
+head(cars)
+```
+
+# Plot showing 2 dimensions
+
+Let's examine the relationship between two variables, mpg and wt: 
+
+```{r}
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg)) #geom layer, aesthetics layer
+```
+
+# Plot showing 3 dimensions
+
+Now let's color by cylinder number. What is important to take into account for the cylinder variable?
+
+```{r}
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = cyl)) #geom layer, aesthetics layer
+
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, size = factor(cyl))) #geom layer, aesthetics layer, color
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, shape = factor(cyl))) #geom layer, aesthetics layer, color
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) #geom layer, aesthetics layer, color
+```
+
+# Plot showing 4 dimensions
+
+What if we're interested in the same plot as above, but separated by automatic vs manual transmissions?
+
+```{r}
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) + #geom layer, aesthetics layer, color
+  facet_wrap(~factor(am)) #facet
+
+#rename factor labels
+cars$am <- as.factor(cars$am)
+levels(cars$am) <- c("automatic", "manual")
+
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) + #geom layer, aesthetics layer, color
+  facet_wrap(~am) #facet
+  
+```
+
+# Plot showing 5 dimensions
+
+```{r}
+cars$vs <- as.factor(cars$vs)
+levels(cars$vs) <- c("V-shaped engine", "straight engine")
+
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) + #geom layer, aesthetics layer, color
+  facet_grid(vs~am) #facet
+```
+
+# Gone too far?
+
+```{r}
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl), size = disp, shape = factor(gear))) + #geom layer, aesthetics layer, color
+  facet_grid(vs~am)
+```
+
+# Additional points
+
+## Adding labels
+
+```{r}
+labeled_plot <- ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = factor(cyl))) + #geom layer, aesthetics layer, color
+  ggtitle("Relationship between mpg and weight \n in mtcars") + 
+  xlab("weight (1000 lbs)") + 
+  ylab("miles per gallon (mpg)") +
+  labs(color = "Cylinder type")
+
+labeled_plot
+```
+
+
+## Choosing colors
+
+```{r}
+cylinder_colors <- c("#035AA6", "#F2AE2E", "#F23D3D")
+
+labeled_plot +
+  scale_color_manual(values=cylinder_colors)
+```
+
+## Reordering factors
+
+```{r}
+cars$cyl <- factor(cars$cyl)
+cars$cyl <- factor(cars$cyl, levels(cars$cyl)[c(3,2,1)])
+
+ggplot(data = cars) + #data layer
+  geom_point(aes(x = wt, y = mpg, color = cyl)) + #geom layer, aesthetics layer, color
+  ggtitle("Relationship between mpg and weight \n in mtcars") + 
+  xlab("weight (1000 lbs)") + 
+  ylab("miles per gallon (mpg)") +
+  labs(color = "Cylinder type") +
+  scale_color_manual(values=cylinder_colors)
+```
+
+## Adding statistics
+
+Remember, we are working with the grammar of graphics so we can add as many geoms as we want/need to our plot!
+
+```{r}
+labeled_plot + 
+  geom_smooth(aes(x = wt, y = mpg, color = factor(cyl)), method = "lm", se = FALSE) #additional geoms inherit data and aesthetics from the predefined plot
+
+
+#we can also define a new dataset for an additional geom
+library(dplyr)
+means <- cars %>% 
+  group_by(cyl) %>% 
+  summarise(mean.wt = mean(wt), mean.mpg = mean(mpg))
+means
+
+labeled_plot + 
+  geom_point(data = means, aes(x = mean.wt, y = mean.mpg, color = cyl), size = 10, alpha = 0.5) +
+  scale_color_manual(values=c(cylinder_colors))
+```
+
+## Themes
+
+```{r}
+library(ggthemes)
+labeled_plot + 
+  theme_fivethirtyeight()
+```
+
