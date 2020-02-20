@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Anthony Hung" />
@@ -88,7 +88,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -237,6 +236,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -249,27 +249,10 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 
@@ -352,6 +335,7 @@ div.section {
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a><ul>
+<li><a href="#what-is-machine-learning">What is Machine learning?</a></li>
 <li><a href="#what-is-classification">What is classification?</a></li>
 <li><a href="#motivating-example-is-this-mushroom-poisonous-or-not">Motivating example: Is this Mushroom poisonous or not?</a></li>
 </ul></li>
@@ -398,17 +382,17 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-08-07
+<strong>Last updated:</strong> 2020-02-20
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.3.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -477,10 +461,22 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree7c276548c891e06bd0a8e32d0e41670457e4c30ftargetblank7c27654a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/7c276548c891e06bd0a8e32d0e41670457e4c30f" target="_blank">7c27654</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree7c276548c891e06bd0a8e32d0e41670457e4c30ftargetblank7c27654a" class="panel-collapse collapse">
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreee02f5cea2c9c0bfe784675c88d5abb52c739c8b2targetblanke02f5cea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/e02f5cea2c9c0bfe784675c88d5abb52c739c8b2" target="_blank">e02f5ce</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreee02f5cea2c9c0bfe784675c88d5abb52c739c8b2targetblanke02f5cea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -536,6 +532,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/e6a84ffea92f1a6e2aa6cbdf7df6089b81c14d77/analysis/NaiveBayes.Rmd" target="_blank">e6a84ff</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-02-14
+</td>
+<td>
+correct typos
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/96722bdbe5195cb0e43c78b0bc8de5a17af3db56/docs/NaiveBayes.html" target="_blank">96722bd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-08-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/7c276548c891e06bd0a8e32d0e41670457e4c30f/analysis/NaiveBayes.Rmd" target="_blank">7c27654</a>
 </td>
 <td>
@@ -585,9 +615,13 @@ hide:hover {
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>The Naive Bayes classifiers are a class of supervised machine learning algorithms that use Bayes rule to solve classification problems. Today we will introduce the concept of classification and implement a Naive Bayes classifier to build a classifier to identify poisonous mushrooms.</p>
+<div id="what-is-machine-learning" class="section level2">
+<h2>What is Machine learning?</h2>
+<p>Machine learning is a field that leverages generic algorithms that learn pattterns from data rather than having to write code that specifically instructs the algorithm what patterns to focus on.</p>
+</div>
 <div id="what-is-classification" class="section level2">
 <h2>What is classification?</h2>
-<p>Classification is essentially the act of arranging items into predetermined categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of <em>supervised learning</em>, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples.</p>
+<p>Classification is essentially the act of arranging items into categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of <em>supervised learning</em>, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples. The original data comes from UCI’s Machine learning department via kaggle: <a href="https://www.kaggle.com/uciml/mushroom-classification" class="uri">https://www.kaggle.com/uciml/mushroom-classification</a>.</p>
 </div>
 <div id="motivating-example-is-this-mushroom-poisonous-or-not" class="section level2">
 <h2>Motivating example: Is this Mushroom poisonous or not?</h2>
@@ -601,7 +635,7 @@ mush_data[1:6,1:6]</code></pre>
 5     e         x           s         g       f    n
 6     e         x           y         y       t    a</code></pre>
 <p>We can break down the above table into two different elements. The first, containing all the columns except for the first one, is also known as the “feature matrix”. This matrix contains descriptions of each of the features that describe each of the individual mushrooms (i.e. mushroom 1 has a cap shape that can be described as conveX, a cap surface that is Smooth, a cap color of browN, has bruises, and a Pungent odor). The second element is the first column, also known as the “response vector”. The response vector contains the class of each of the mushrooms (the response variable in our case).</p>
-<p>Notice that the response variable is a categorical variable that can take on one of two values: {e=edible, p=poisonous}. In classification problems, the y variable is always categorical. The analogous situation for when you have a <em>numerical</em> response variable is regression, which will be covered in a later lecture.</p>
+<p>Notice that the response variable is a categorical variable that can take on one of two values: {e=edible, p=poisonous}. In classification problems, the y variable is always categorical. The analogous situation for when you have a <em>continouous</em> response variable is regression, which will be covered in a later lecture.</p>
 <p>Using this labeled dataset, we can teach a classification algorithm how to predict if a new mushroom is poisonous or not, given we have information about the other features of that mushroom. In order to do this, the algorithm must search for patterns amongst the other features that are shared between poisonous mushrooms and distinguish these mushrooms from edible ones. One way to do this is through using a Naive bayes classifier.</p>
 <p>As a side note, a third task that is often performed with machine learning is <em>clustering</em>, in which clusters are learned from the input data themselves rather than being specified by the user. This is a case of <em>unsupervised learning</em>, meaning the algorithm is not supplied with gold standard examples of what each cluster looks like but rather defines them on its own.</p>
 </div>
@@ -670,15 +704,15 @@ mush_data[1:6,1:6]</code></pre>
 <div id="probability" class="section level5">
 <h5>Probability</h5>
 <p>Recall from our previous class on probability distributions that the definition of probability can be visualized as the area under the curve of a probability distribution. For example, let’s say that we have a fair coin (P(heads) = 0.5) and we flip it 30 times:</p>
-<pre class="r"><code>library(ggplot2)</code></pre>
-<pre><code>Warning: package &#39;ggplot2&#39; was built under R version 3.5.2</code></pre>
-<pre class="r"><code>library(cowplot)</code></pre>
-<pre><code>Warning: package &#39;cowplot&#39; was built under R version 3.5.2</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(cowplot)</code></pre>
 <pre><code>
-Attaching package: &#39;cowplot&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
-
-    ggsave</code></pre>
+********************************************************</code></pre>
+<pre><code>Note: As of version 1.0.0, cowplot does not change the</code></pre>
+<pre><code>  default ggplot2 theme anymore. To recover the previous</code></pre>
+<pre><code>  behavior, execute:
+  theme_set(theme_cowplot())</code></pre>
+<pre><code>********************************************************</code></pre>
 <pre class="r"><code>library(grid)
 
 x1  &lt;- 5:25
@@ -955,38 +989,38 @@ summary(mush_data)</code></pre>
           s:  32                w      :1040            a      : 400  
           x:3656                b      : 168            l      : 400  
                                 (Other): 220            (Other): 484  
- gill.attachment gill.spacing gill.size   gill.color   stalk.shape
- a: 210          c:6812       b:5612    b      :1728   e:3516     
- f:7914          w:1312       n:2512    p      :1492   t:4608     
-                                        w      :1202              
-                                        n      :1048              
-                                        g      : 752              
-                                        h      : 732              
-                                        (Other):1170              
- stalk.root stalk.surface.above.ring stalk.surface.below.ring
- ?:2480     f: 552                   f: 600                  
- b:3776     k:2372                   k:2304                  
- c: 556     s:5176                   s:4936                  
- e:1120     y:  24                   y: 284                  
- r: 192                                                      
-                                                             
-                                                             
- stalk.color.above.ring stalk.color.below.ring veil.type veil.color
- w      :4464           w      :4384           p:8124    n:  96    
- p      :1872           p      :1872                     o:  96    
- g      : 576           g      : 576                     w:7924    
- n      : 448           n      : 512                     y:   8    
- b      : 432           b      : 432                               
- o      : 192           o      : 192                               
- (Other): 140           (Other): 156                               
- ring.number ring.type spore.print.color population habitat 
- n:  36      e:2776    w      :2388      a: 384     d:3148  
- o:7488      f:  48    n      :1968      c: 340     g:2148  
- t: 600      l:1296    k      :1872      n: 400     l: 832  
-             n:  36    h      :1632      s:1248     m: 292  
-             p:3968    r      :  72      v:4040     p:1144  
-                       b      :  48      y:1712     u: 368  
-                       (Other): 144                 w: 192  </code></pre>
+ gill.attachment gill.spacing gill.size   gill.color   stalk.shape stalk.root
+ a: 210          c:6812       b:5612    b      :1728   e:3516      ?:2480    
+ f:7914          w:1312       n:2512    p      :1492   t:4608      b:3776    
+                                        w      :1202               c: 556    
+                                        n      :1048               e:1120    
+                                        g      : 752               r: 192    
+                                        h      : 732                         
+                                        (Other):1170                         
+ stalk.surface.above.ring stalk.surface.below.ring stalk.color.above.ring
+ f: 552                   f: 600                   w      :4464          
+ k:2372                   k:2304                   p      :1872          
+ s:5176                   s:4936                   g      : 576          
+ y:  24                   y: 284                   n      : 448          
+                                                   b      : 432          
+                                                   o      : 192          
+                                                   (Other): 140          
+ stalk.color.below.ring veil.type veil.color ring.number ring.type
+ w      :4384           p:8124    n:  96     n:  36      e:2776   
+ p      :1872                     o:  96     o:7488      f:  48   
+ g      : 576                     w:7924     t: 600      l:1296   
+ n      : 512                     y:   8                 n:  36   
+ b      : 432                                            p:3968   
+ o      : 192                                                     
+ (Other): 156                                                     
+ spore.print.color population habitat 
+ w      :2388      a: 384     d:3148  
+ n      :1968      c: 340     g:2148  
+ k      :1872      n: 400     l: 832  
+ h      :1632      s:1248     m: 292  
+ r      :  72      v:4040     p:1144  
+ b      :  48      y:1712     u: 368  
+ (Other): 144                 w: 192  </code></pre>
 <pre class="r"><code>#subset data into poisonous and edible
 poisonous &lt;- mush_data[mush_data$class==&quot;p&quot;,]
 edible &lt;- mush_data[mush_data$class==&quot;e&quot;,]
@@ -1007,7 +1041,7 @@ table(edible$cap.shape)</code></pre>
 </div>
 <div id="additional-notes-relevant-to-training-machine-learning-algorithms." class="section level1">
 <h1>Additional notes relevant to training machine learning algorithms.</h1>
-<p>Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using training data to train an algorithm.</p>
+<p>Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using data to train and evaluate a model.</p>
 <div id="the-issue-of-overfitting" class="section level2">
 <h2>The issue of overfitting</h2>
 <p>If you’ve ever heard anyone talking about machine learning, you’ve probably heard of the term “overfitting.” Overfitting can be summed up by any situation where an algorithm learns from the training data … a bit too well. For example, if there are certain patterns in the data you have collected for your training data that are just flukes due to sampling error and do not accurately represent the actual relationships found in the wild, the algorithm you’ve trained will falsely apply these incorrect patterns to new classification problems, leading to inaccurate results. One way to test if your algorithm has overfit your data is to simply collect more labeled data that were not used to train your algorithm and see how well your trained algorithm performs in correctly classifying the new “test” data.</p>
@@ -1032,10 +1066,8 @@ table(edible$cap.shape)</code></pre>
 <pre class="r"><code>#Note: a seed has been set already at the beginning of this document, which allows us to reproducibly recreate the random splits that we perform in this code chunk. 
 
 #load two libraries in R that are popular for implementing machine learning algorithms
-library(e1071)</code></pre>
-<pre><code>Warning: package &#39;e1071&#39; was built under R version 3.5.2</code></pre>
-<pre class="r"><code>library(caret)</code></pre>
-<pre><code>Warning: package &#39;caret&#39; was built under R version 3.5.2</code></pre>
+library(e1071)
+library(caret)</code></pre>
 <pre><code>Loading required package: lattice</code></pre>
 <pre class="r"><code>#randomly subset our data into 5 groups (folds_i is a vector that contains the indices of observations included in each group)
 n_folds &lt;- 5
@@ -1064,53 +1096,26 @@ for(k in 1:n_folds){
 
           Reference
 Prediction   e   p
-         e 874  81
-         p   7 663
+         e 836  91
+         p   2 696
                                           
-               Accuracy : 0.9458          
-                 95% CI : (0.9337, 0.9563)
-    No Information Rate : 0.5422          
+               Accuracy : 0.9428          
+                 95% CI : (0.9303, 0.9536)
+    No Information Rate : 0.5157          
     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
-                  Kappa : 0.8901          
-                                          
- Mcnemar&#39;s Test P-Value : 7.149e-15       
-                                          
-            Sensitivity : 0.9921          
-            Specificity : 0.8911          
-         Pos Pred Value : 0.9152          
-         Neg Pred Value : 0.9896          
-             Prevalence : 0.5422          
-         Detection Rate : 0.5378          
-   Detection Prevalence : 0.5877          
-      Balanced Accuracy : 0.9416          
-                                          
-       &#39;Positive&#39; Class : e               
-                                          
-Confusion Matrix and Statistics
-
-          Reference
-Prediction   e   p
-         e 804  82
-         p   4 735
-                                          
-               Accuracy : 0.9471          
-                 95% CI : (0.9351, 0.9575)
-    No Information Rate : 0.5028          
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-                                          
-                  Kappa : 0.8942          
+                  Kappa : 0.885           
                                           
  Mcnemar&#39;s Test P-Value : &lt; 2.2e-16       
                                           
-            Sensitivity : 0.9950          
-            Specificity : 0.8996          
-         Pos Pred Value : 0.9074          
-         Neg Pred Value : 0.9946          
-             Prevalence : 0.4972          
-         Detection Rate : 0.4948          
-   Detection Prevalence : 0.5452          
-      Balanced Accuracy : 0.9473          
+            Sensitivity : 0.9976          
+            Specificity : 0.8844          
+         Pos Pred Value : 0.9018          
+         Neg Pred Value : 0.9971          
+             Prevalence : 0.5157          
+         Detection Rate : 0.5145          
+   Detection Prevalence : 0.5705          
+      Balanced Accuracy : 0.9410          
                                           
        &#39;Positive&#39; Class : e               
                                           
@@ -1118,26 +1123,80 @@ Confusion Matrix and Statistics
 
           Reference
 Prediction   e   p
-         e 818 111
-         p   7 689
+         e 847 100
+         p   4 674
+                                         
+               Accuracy : 0.936          
+                 95% CI : (0.923, 0.9474)
+    No Information Rate : 0.5237         
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+                                         
+                  Kappa : 0.871          
+                                         
+ Mcnemar&#39;s Test P-Value : &lt; 2.2e-16      
+                                         
+            Sensitivity : 0.9953         
+            Specificity : 0.8708         
+         Pos Pred Value : 0.8944         
+         Neg Pred Value : 0.9941         
+             Prevalence : 0.5237         
+         Detection Rate : 0.5212         
+   Detection Prevalence : 0.5828         
+      Balanced Accuracy : 0.9331         
+                                         
+       &#39;Positive&#39; Class : e              
+                                         
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   e   p
+         e 831  97
+         p  10 687
+                                         
+               Accuracy : 0.9342         
+                 95% CI : (0.921, 0.9457)
+    No Information Rate : 0.5175         
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+                                         
+                  Kappa : 0.8676         
+                                         
+ Mcnemar&#39;s Test P-Value : &lt; 2.2e-16      
+                                         
+            Sensitivity : 0.9881         
+            Specificity : 0.8763         
+         Pos Pred Value : 0.8955         
+         Neg Pred Value : 0.9857         
+             Prevalence : 0.5175         
+         Detection Rate : 0.5114         
+   Detection Prevalence : 0.5711         
+      Balanced Accuracy : 0.9322         
+                                         
+       &#39;Positive&#39; Class : e              
+                                         
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   e   p
+         e 856  90
+         p   7 672
                                           
-               Accuracy : 0.9274          
-                 95% CI : (0.9137, 0.9395)
-    No Information Rate : 0.5077          
+               Accuracy : 0.9403          
+                 95% CI : (0.9277, 0.9513)
+    No Information Rate : 0.5311          
     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
-                  Kappa : 0.8544          
+                  Kappa : 0.8794          
                                           
  Mcnemar&#39;s Test P-Value : &lt; 2.2e-16       
                                           
-            Sensitivity : 0.9915          
-            Specificity : 0.8612          
-         Pos Pred Value : 0.8805          
-         Neg Pred Value : 0.9899          
-             Prevalence : 0.5077          
-         Detection Rate : 0.5034          
-   Detection Prevalence : 0.5717          
-      Balanced Accuracy : 0.9264          
+            Sensitivity : 0.9919          
+            Specificity : 0.8819          
+         Pos Pred Value : 0.9049          
+         Neg Pred Value : 0.9897          
+             Prevalence : 0.5311          
+         Detection Rate : 0.5268          
+   Detection Prevalence : 0.5822          
+      Balanced Accuracy : 0.9369          
                                           
        &#39;Positive&#39; Class : e               
                                           
@@ -1145,53 +1204,26 @@ Confusion Matrix and Statistics
 
           Reference
 Prediction   e   p
-         e 861 105
-         p   4 655
+         e 810  74
+         p   5 735
                                           
-               Accuracy : 0.9329          
-                 95% CI : (0.9197, 0.9446)
-    No Information Rate : 0.5323          
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+               Accuracy : 0.9514          
+                 95% CI : (0.9397, 0.9613)
+    No Information Rate : 0.5018          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
                                           
-                  Kappa : 0.8642          
+                  Kappa : 0.9027          
                                           
- Mcnemar&#39;s Test P-Value : &lt; 2.2e-16       
+ Mcnemar&#39;s Test P-Value : 2e-14           
                                           
-            Sensitivity : 0.9954          
-            Specificity : 0.8618          
-         Pos Pred Value : 0.8913          
-         Neg Pred Value : 0.9939          
-             Prevalence : 0.5323          
-         Detection Rate : 0.5298          
-   Detection Prevalence : 0.5945          
-      Balanced Accuracy : 0.9286          
-                                          
-       &#39;Positive&#39; Class : e               
-                                          
-Confusion Matrix and Statistics
-
-          Reference
-Prediction   e   p
-         e 822  75
-         p   7 720
-                                          
-               Accuracy : 0.9495          
-                 95% CI : (0.9377, 0.9596)
-    No Information Rate : 0.5105          
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-                                          
-                  Kappa : 0.8988          
-                                          
- Mcnemar&#39;s Test P-Value : 1.373e-13       
-                                          
-            Sensitivity : 0.9916          
-            Specificity : 0.9057          
-         Pos Pred Value : 0.9164          
-         Neg Pred Value : 0.9904          
-             Prevalence : 0.5105          
-         Detection Rate : 0.5062          
-   Detection Prevalence : 0.5523          
-      Balanced Accuracy : 0.9486          
+            Sensitivity : 0.9939          
+            Specificity : 0.9085          
+         Pos Pred Value : 0.9163          
+         Neg Pred Value : 0.9932          
+             Prevalence : 0.5018          
+         Detection Rate : 0.4988          
+   Detection Prevalence : 0.5443          
+      Balanced Accuracy : 0.9512          
                                           
        &#39;Positive&#39; Class : e               
                                           </code></pre>
@@ -1214,26 +1246,26 @@ print(confusionMatrix(nb_pred,test_data$class))</code></pre>
 
           Reference
 Prediction   e   p
-         e 874  81
-         p   7 663
+         e 836  91
+         p   2 696
                                           
-               Accuracy : 0.9458          
-                 95% CI : (0.9337, 0.9563)
-    No Information Rate : 0.5422          
+               Accuracy : 0.9428          
+                 95% CI : (0.9303, 0.9536)
+    No Information Rate : 0.5157          
     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
-                  Kappa : 0.8901          
+                  Kappa : 0.885           
                                           
- Mcnemar&#39;s Test P-Value : 7.149e-15       
+ Mcnemar&#39;s Test P-Value : &lt; 2.2e-16       
                                           
-            Sensitivity : 0.9921          
-            Specificity : 0.8911          
-         Pos Pred Value : 0.9152          
-         Neg Pred Value : 0.9896          
-             Prevalence : 0.5422          
-         Detection Rate : 0.5378          
-   Detection Prevalence : 0.5877          
-      Balanced Accuracy : 0.9416          
+            Sensitivity : 0.9976          
+            Specificity : 0.8844          
+         Pos Pred Value : 0.9018          
+         Neg Pred Value : 0.9971          
+             Prevalence : 0.5157          
+         Detection Rate : 0.5145          
+   Detection Prevalence : 0.5705          
+      Balanced Accuracy : 0.9410          
                                           
        &#39;Positive&#39; Class : e               
                                           </code></pre>
@@ -1248,119 +1280,111 @@ naiveBayes.default(x = train_data[, -1], y = train_data$class)
 A-priori probabilities:
 train_data$class
         e         p 
-0.5119249 0.4880751 
+0.5185413 0.4814587 
 
 Conditional probabilities:
                 cap.shape
-train_data$class           b           c           f           k
-               e 0.088067328 0.000000000 0.384430418 0.052900511
-               p 0.011979823 0.001261034 0.392812106 0.149747793
+train_data$class           b           c           f           k           s
+               e 0.097032641 0.000000000 0.381899110 0.055489614 0.007715134
+               p 0.012144455 0.001278364 0.395973154 0.153403643 0.000000000
                 cap.shape
-train_data$class           s           x
-               e 0.007814848 0.466786895
-               p 0.000000000 0.444199243
+train_data$class           x
+               e 0.457863501
+               p 0.437200384
 
                 cap.surface
 train_data$class           f           g           s           y
-               e 0.375713856 0.000000000 0.269311692 0.354974451
-               p 0.192938209 0.001261034 0.358133670 0.447667087
+               e 0.374777448 0.000000000 0.273590504 0.351632047
+               p 0.197826782 0.001278364 0.356983062 0.443911793
 
                 cap.color
-train_data$class           b           c           e           g
-               e 0.011722272 0.008115419 0.150886685 0.245867148
-               p 0.030580076 0.003783102 0.232030265 0.210592686
+train_data$class           b           c           e           g           n
+               e 0.012462908 0.007418398 0.148664688 0.243620178 0.298516320
+               p 0.029721956 0.003195909 0.224033237 0.210930010 0.259827421
                 cap.color
-train_data$class           n           p           r           u
-               e 0.296964232 0.013525699 0.003606853 0.004207995
-               p 0.244955864 0.023644388 0.000000000 0.000000000
-                cap.color
-train_data$class           w           y
-               e 0.171926661 0.093177036
-               p 0.083228247 0.171185372
+train_data$class           p           r           u           w           y
+               e 0.013649852 0.003857567 0.004154303 0.172403561 0.095252226
+               p 0.022371365 0.000000000 0.000000000 0.079258549 0.170661553
 
                 bruises
 train_data$class         f         t
-               e 0.3387436 0.6612564
-               p 0.8398487 0.1601513
+               e 0.3548961 0.6451039
+               p 0.8443592 0.1556408
 
                 odor
 train_data$class          a          c          f          l          m
-               e 0.09377818 0.00000000 0.00000000 0.09588218 0.00000000
-               p 0.00000000 0.05138714 0.55737705 0.00000000 0.00851198
+               e 0.09169139 0.00000000 0.00000000 0.09495549 0.00000000
+               p 0.00000000 0.05017578 0.55193353 0.00000000 0.01022691
                 odor
 train_data$class          n          p          s          y
-               e 0.81033965 0.00000000 0.00000000 0.00000000
-               p 0.03152585 0.06399748 0.14312736 0.14407314
+               e 0.81335312 0.00000000 0.00000000 0.00000000
+               p 0.02972196 0.06295941 0.14988814 0.14509428
 
                 gill.attachment
 train_data$class           a           f
-               e 0.045386234 0.954613766
-               p 0.004098361 0.995901639
+               e 0.045994065 0.954005935
+               p 0.005113455 0.994886545
 
                 gill.spacing
-train_data$class         c         w
-               e 0.7204689 0.2795311
-               p 0.9703657 0.0296343
+train_data$class          c          w
+               e 0.70593472 0.29406528
+               p 0.96963886 0.03036114
 
                 gill.size
 train_data$class          b          n
-               e 0.93146979 0.06853021
-               p 0.43568726 0.56431274
+               e 0.92818991 0.07181009
+               p 0.43560243 0.56439757
 
                 gill.color
-train_data$class           b           e           g           h
-               e 0.000000000 0.024646829 0.060414788 0.046287947
-               p 0.437263556 0.000000000 0.137452711 0.134930643
+train_data$class           b           e           g           h           k
+               e 0.000000000 0.024925816 0.060534125 0.048961424 0.082492582
+               p 0.440396293 0.000000000 0.131032279 0.134547779 0.014062001
                 gill.color
-train_data$class           k           n           o           p
-               e 0.081454764 0.220919748 0.014727983 0.205590622
-               p 0.016078184 0.028058008 0.000000000 0.160781841
+train_data$class           n           o           p           r           u
+               e 0.217804154 0.016023739 0.200890208 0.000000000 0.105341246
+               p 0.028124001 0.000000000 0.163630553 0.006072228 0.012464046
                 gill.color
-train_data$class           r           u           w           y
-               e 0.000000000 0.106101593 0.224226029 0.015629696
-               p 0.006935687 0.011664565 0.061160151 0.005674653
+train_data$class           w           y
+               e 0.227596439 0.015430267
+               p 0.063598594 0.006072228
 
                 stalk.shape
 train_data$class         e         t
-               e 0.3808236 0.6191764
-               p 0.4883354 0.5116646
+               e 0.3878338 0.6121662
+               p 0.4880153 0.5119847
 
                 stalk.root
 train_data$class          ?          b          c          e          r
-               e 0.16771867 0.46137662 0.12082958 0.20408777 0.04598738
-               p 0.44482976 0.48045397 0.01071879 0.06399748 0.00000000
+               e 0.17833828 0.44985163 0.11869436 0.20949555 0.04362018
+               p 0.44646852 0.47778843 0.01278364 0.06295941 0.00000000
 
                 stalk.surface.above.ring
 train_data$class           f           k           s           y
-               e 0.100390742 0.032461677 0.864141870 0.003005711
-               p 0.037515763 0.570933165 0.389344262 0.002206810
+               e 0.100296736 0.035905045 0.859940653 0.003857567
+               p 0.034196229 0.571108981 0.392138063 0.002556727
 
                 stalk.surface.below.ring
 train_data$class          f          k          s          y
-               e 0.10309588 0.03095882 0.81695221 0.04899309
-               p 0.03720050 0.55170240 0.39281211 0.01828499
+               e 0.11186944 0.03620178 0.80445104 0.04747774
+               p 0.03323746 0.55640780 0.39149888 0.01885586
 
                 stalk.color.above.ring
-train_data$class           b           c           e           g
-               e 0.000000000 0.000000000 0.023745116 0.138563270
-               p 0.112862547 0.008511980 0.000000000 0.000000000
+train_data$class           b           c           e           g           n
+               e 0.000000000 0.000000000 0.024035608 0.137388724 0.003857567
+               p 0.107062959 0.010226910 0.000000000 0.000000000 0.111217641
                 stalk.color.above.ring
-train_data$class           n           o           p           w
-               e 0.003005711 0.045386234 0.138262699 0.651036970
-               p 0.109394704 0.000000000 0.331967213 0.435056747
-                stalk.color.above.ring
-train_data$class           y
-               e 0.000000000
-               p 0.002206810
+train_data$class           o           p           w           y
+               e 0.045994065 0.129970326 0.658753709 0.000000000
+               p 0.000000000 0.342921061 0.426014701 0.002556727
 
                 stalk.color.below.ring
-train_data$class          b          c          e          g          n
-               e 0.00000000 0.00000000 0.02434626 0.14066727 0.01502855
-               p 0.10844893 0.00851198 0.00000000 0.00000000 0.11443884
+train_data$class           b           c           e           g           n
+               e 0.000000000 0.000000000 0.024925816 0.139465875 0.016023739
+               p 0.110258869 0.010226910 0.000000000 0.000000000 0.112496005
                 stalk.color.below.ring
-train_data$class          o          p          w          y
-               e 0.04538623 0.13645927 0.63811241 0.00000000
-               p 0.00000000 0.33354351 0.42875158 0.00630517
+train_data$class           o           p           w           y
+               e 0.045994065 0.129080119 0.644510386 0.000000000
+               p 0.000000000 0.340044743 0.421860019 0.005113455
 
                 veil.type
 train_data$class p
@@ -1368,46 +1392,46 @@ train_data$class p
                p 1
 
                 veil.color
-train_data$class          n          o          w          y
-               e 0.02224226 0.02314397 0.95461377 0.00000000
-               p 0.00000000 0.00000000 0.99779319 0.00220681
+train_data$class           n           o           w           y
+               e 0.024332344 0.021661721 0.954005935 0.000000000
+               p 0.000000000 0.000000000 0.997443273 0.002556727
 
                 ring.number
 train_data$class          n          o          t
-               e 0.00000000 0.87706643 0.12293357
-               p 0.00851198 0.97162673 0.01986129
+               e 0.00000000 0.86795252 0.13204748
+               p 0.01022691 0.97091723 0.01885586
 
                 ring.type
 train_data$class          e          f          l          n          p
-               e 0.24165915 0.01112113 0.00000000 0.00000000 0.74721972
-               p 0.44703657 0.00000000 0.33291299 0.00851198 0.21153846
+               e 0.24718101 0.01186944 0.00000000 0.00000000 0.74094955
+               p 0.44902525 0.00000000 0.33493129 0.01022691 0.20581655
 
                 spore.print.color
 train_data$class          b          h          k          n          o
-               e 0.01202284 0.01112113 0.38984070 0.41839495 0.01232341
-               p 0.00000000 0.40731400 0.05737705 0.05800757 0.00000000
+               e 0.01038576 0.01186944 0.38427300 0.41305638 0.01127596
+               p 0.00000000 0.40651965 0.05496964 0.05816555 0.00000000
                 spore.print.color
 train_data$class          r          u          w          y
-               e 0.00000000 0.01112113 0.13495642 0.01021942
-               p 0.01986129 0.00000000 0.45744010 0.00000000
+               e 0.00000000 0.01246291 0.14421365 0.01246291
+               p 0.01885586 0.00000000 0.46148929 0.00000000
 
                 population
 train_data$class          a          c          n          s          v
-               e 0.08866847 0.07033363 0.09347761 0.20619176 0.28914938
-               p 0.00000000 0.01261034 0.00000000 0.09583859 0.72730139
+               e 0.09376855 0.07210682 0.09436202 0.21038576 0.28011869
+               p 0.00000000 0.01502077 0.00000000 0.09395973 0.72962608
                 population
 train_data$class          y
-               e 0.25217914
-               p 0.16424968
+               e 0.24925816
+               p 0.16139342
 
                 habitat
-train_data$class           d           g           l           m
-               e 0.450556057 0.328524196 0.057409077 0.059513075
-               p 0.322824716 0.191046658 0.149432535 0.009773014
+train_data$class           d           g           l           m           p
+               e 0.440059347 0.337091988 0.058160237 0.061424332 0.030860534
+               p 0.322786833 0.187919463 0.150527325 0.008948546 0.259827421
                 habitat
-train_data$class           p           u           w
-               e 0.033363390 0.022542831 0.048091374
-               p 0.257250946 0.069672131 0.000000000</code></pre>
+train_data$class           u           w
+               e 0.023442136 0.048961424
+               p 0.069990412 0.000000000</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1416,13 +1440,13 @@ train_data$class           p           u           w
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.1 (2018-07-02)
+<pre><code>R version 3.6.1 (2019-07-05)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.14.6
+Running under: macOS Mojave 10.14.6
 
 Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1432,31 +1456,27 @@ attached base packages:
 [8] base     
 
 other attached packages:
-[1] caret_6.0-84    lattice_0.20-38 e1071_1.7-1     cowplot_0.9.4  
-[5] ggplot2_3.1.1  
+[1] caret_6.0-84    lattice_0.20-38 e1071_1.7-3     cowplot_1.0.0  
+[5] ggplot2_3.2.1   workflowr_1.5.0
 
 loaded via a namespace (and not attached):
- [1] tidyselect_0.2.5   xfun_0.7           reshape2_1.4.3    
- [4] purrr_0.3.2        splines_3.5.1      colorspace_1.4-1  
- [7] generics_0.0.2     stats4_3.5.1       htmltools_0.3.6   
-[10] yaml_2.2.0         prodlim_2018.04.18 survival_2.44-1.1 
-[13] rlang_0.3.4        ModelMetrics_1.2.2 pillar_1.4.1      
-[16] glue_1.3.1         withr_2.1.2        foreach_1.4.4     
-[19] plyr_1.8.4         lava_1.6.5         stringr_1.4.0     
-[22] timeDate_3043.102  munsell_0.5.0      gtable_0.3.0      
-[25] workflowr_1.3.0    recipes_0.1.5      codetools_0.2-16  
-[28] evaluate_0.14      labeling_0.3       knitr_1.23        
-[31] class_7.3-15       Rcpp_1.0.1         scales_1.0.0      
-[34] backports_1.1.4    ipred_0.9-9        fs_1.3.1          
-[37] digest_0.6.19      stringi_1.4.3      dplyr_0.8.1       
-[40] rprojroot_1.3-2    tools_3.5.1        magrittr_1.5      
-[43] lazyeval_0.2.2     tibble_2.1.2       crayon_1.3.4      
-[46] whisker_0.3-2      pkgconfig_2.0.2    MASS_7.3-51.4     
-[49] Matrix_1.2-17      data.table_1.12.2  lubridate_1.7.4   
-[52] gower_0.2.1        assertthat_0.2.1   rmarkdown_1.13    
-[55] iterators_1.0.10   R6_2.4.0           rpart_4.1-15      
-[58] nnet_7.3-12        nlme_3.1-140       git2r_0.25.2      
-[61] compiler_3.5.1    </code></pre>
+ [1] tidyselect_1.0.0   xfun_0.12          reshape2_1.4.3     purrr_0.3.3       
+ [5] splines_3.6.1      colorspace_1.4-1   generics_0.0.2     stats4_3.6.1      
+ [9] htmltools_0.4.0    yaml_2.2.1         prodlim_2019.11.13 survival_3.1-8    
+[13] rlang_0.4.4        ModelMetrics_1.2.2 later_1.0.0        pillar_1.4.3      
+[17] glue_1.3.1         withr_2.1.2        foreach_1.4.7      lifecycle_0.1.0   
+[21] plyr_1.8.5         lava_1.6.6         stringr_1.4.0      timeDate_3043.102 
+[25] munsell_0.5.0      gtable_0.3.0       recipes_0.1.7      codetools_0.2-16  
+[29] evaluate_0.14      labeling_0.3       knitr_1.26         httpuv_1.5.2      
+[33] class_7.3-15       Rcpp_1.0.3         promises_1.1.0     scales_1.1.0      
+[37] backports_1.1.5    ipred_0.9-9        farver_2.0.3       fs_1.3.1          
+[41] digest_0.6.23      stringi_1.4.5      dplyr_0.8.4        rprojroot_1.3-2   
+[45] tools_3.6.1        magrittr_1.5       lazyeval_0.2.2     tibble_2.1.3      
+[49] crayon_1.3.4       whisker_0.4        pkgconfig_2.0.3    MASS_7.3-51.4     
+[53] Matrix_1.2-18      data.table_1.12.8  lubridate_1.7.4    gower_0.2.1       
+[57] assertthat_0.2.1   rmarkdown_1.18     iterators_1.0.12   R6_2.4.1          
+[61] rpart_4.1-15       nnet_7.3-12        nlme_3.1-143       git2r_0.26.1      
+[65] compiler_3.6.1    </code></pre>
 </div>
 </div>
 
@@ -1494,6 +1514,28 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
