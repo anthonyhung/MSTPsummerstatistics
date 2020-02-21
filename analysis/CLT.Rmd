@@ -13,7 +13,7 @@ The central limit theorem (CLT) is a fundamental pillar to statistics and probab
 
 ## Definitions
 
-The CLT states that for sufficiently large samples taken from a population with any population distribution, the sampling distribution of the mean tends towards a normal distribution centered around the true mean of the population. The power of this statement is that it does not matter what shape the population distribution takes. If our sample size is large enough, the distribution of our samples looks like a bell curve with a mean that is approximately equal to the population mean. More formally, when a continuous variable is dependent on many independent small, random factors, measurements of that variable will approximate a Gaussian distribution.
+The CLT states that for sufficiently large samples taken from a population with any population distribution, the sampling distribution of the mean tends towards a normal distribution centered around the true mean of the population. The power of this statement is that it does not matter what shape the population distribution takes. If our sample size is large enough, the distribution of our samples looks like a bell curve with a mean that is approximately equal to the population mean. More formally, when a continuous variable is dependent on many independent small, random factors, measurements of that variable will approximate a normal distribution.
 
 To go more in depth, let's define what we mean by population and sampling distributions.
 
@@ -93,10 +93,9 @@ The CLT not only is useful for science in allowing us to apply many fundamental 
 
 ## CLT $\ne$ Law of Large Numbers
 
-The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter Taken to the near limit, you can imagine that if you were able to sample 999,999 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
+The CLT is often confused with the definition for the Law of Large numbers, which states that as the size of an individual sample is increased, the more accurate of an estimate the sample statistic will be of a population parameter. Taken to the near limit, you can imagine that if you were able to sample 999,999 out of the 1,000,000 deer and measure their heights, your sample estimate for the mean height of the entire deer population would most likely be very good!
 
-In contrast, the CLT does not say anything about individual samples and their estimates of population parameters. Instead, it describes the shape of the sampling distribution, which encompasses what one would expect to see through taking many samples from the population.
-
+In contrast, the CLT does not say anything about individual samples and their estimates of population parameters. Instead, it describes the shape of the sampling distribution, which encompasses what one would expect to see through taking many samples from the population. In short, the law of large numbers describes a property of a single sample, while the CLT describes a property of a distribution of sample statistics.
 
 ## Key points about the CLT
 
