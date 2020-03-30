@@ -349,7 +349,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -358,7 +358,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -370,7 +370,7 @@ div.section {
 <strong>Last updated:</strong> 2020-03-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -386,22 +386,22 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreefb45352e192e6650a10e83d87bb91ebe4eba722ftargetblankfb45352a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/fb45352e192e6650a10e83d87bb91ebe4eba722f" target="_blank">fb45352</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree058310ef4141029790a75dbb6c3061bdb32e7560targetblank058310ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/058310ef4141029790a75dbb6c3061bdb32e7560" target="_blank">058310e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreefb45352e192e6650a10e83d87bb91ebe4eba722ftargetblankfb45352a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree058310ef4141029790a75dbb6c3061bdb32e7560targetblank058310ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -416,13 +416,8 @@ Ignored files:
     Ignored:    analysis/.Rhistory
     Ignored:    data/.DS_Store
 
-Untracked files:
-    Untracked:  analysis/resampling.Rmd
-    Untracked:  data/avocado.csv
-
 Unstaged changes:
-    Modified:   analysis/dataviz.Rmd
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -461,6 +456,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/f15db48dbd6a0ea59883ffe6c16b34a3f5c2f4a2/docs/syllabus.html" target="_blank">f15db48</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1151,7 +1163,7 @@ Update all webpages
 </div>
 <div id="grading" class="section level2">
 <h2>Grading</h2>
-<p>The grades for this course will be Pass/Fail (P/F), with Pass being a final grade 70% or higher, and are based on the following criteria:</p>
+<p>The grades for this course are based on the following criteria:</p>
 <p><em>Participation (30%):</em></p>
 <p>Students are expected to attend all sessions listed in the course schedule. In cases of expected scheduling conflicts, please notify the instructors at least 24 hours in advance for an excused absence.</p>
 <p><em>Homework (40%):</em></p>
@@ -1162,9 +1174,9 @@ Update all webpages
 <div id="outline-of-course" class="section level2">
 <h2>Outline of Course</h2>
 <p>Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions</p>
-<p>Week 2: Bayesian inference; Review of basic statistical tests</p>
+<p>Week 2: Bayesian inference; Naive Bayes classifier; Review of basic statistical tests</p>
 <p>Week 3: Review of basic statistical tests continued; Regression</p>
-<p>Week 4: Mutliple Testing; Power Analyses</p>
+<p>Week 4: Data visualization; Resampling methods; Power analysis</p>
 <p>Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent time to complete final project.)</p>
 <ul>
 <li><p>Work with PIs or senior grad students in same research area</p></li>
