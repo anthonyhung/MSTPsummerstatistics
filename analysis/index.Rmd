@@ -33,4 +33,6 @@ output:
 
 * [Correcting for Mutliple Tests](multipleTesting.html)
 
+* [Resampling Methods (Bootstrapping and Permutation Testing)](resampling.html)
+
 

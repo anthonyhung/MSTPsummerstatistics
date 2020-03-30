@@ -1,0 +1,241 @@
+---
+title: "Resampling methods"
+author: "Anthony Hung"
+date: "2020-03-29"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+
+# Introduction
+
+Remember that we can think of any given random sample as independent draws from an identical underlying distribution that characterizes the population you are sampling from. However, even if we know that there is some underlying distribution that properly models the population and your data, that does not necessarily mean you can conveniently fit your data into one of the boxes of the named distributions we have discussed thus far in the course. 
+
+* One such reason for this could be that there is no well-defined named distribution that fits your data well. (For example, imagine a trimodal distribution.)
+
+* Another reason could be that you simply do not have enough datapoints in your dataset for any well-defined distribution to properly fit. 
+
+* Finally, maybe an empirical distribution is known that fits your data, but the computational burden required to perform inference using this empirical distribution are too high. This is particularly true for empirical distributions with very complicated parameters that need to be fit using your data.
+
+One potential solution to problems such as these would be to use resampling methods, which leverage the information contained within a single sample to allow you to make inferences about the population without assuming an underlying distribution. 
+
+Today, we will discuss two types of resampling methods: bootstrapping and permutation tests.
+
+*Bootstrapping* is used to access the reliability of an estimate by . *Permutation* tests are used to test hypotheses involving two or more groups.
+
+Note: both of these resampling methods assume that your sample was properly collected (all observations are independent and randomly selected from the population). Neither can make up for improperly collected data. In other words, "garbage in, garbage out."
+
+# Bootstrapping
+
+Bootstrapping comes from the idea of "pulling oneself up by ones bootstraps," a seemingly impossible feat. Similarly, the idea of generating a sample distribution from just one sample is a seemingly impossible task. Bootstrapping is commonly used to calculate the sampling distribution of a test statistic for the purposes of quantifying uncertainty about the estimate of a test statistic from sample data.
+
+There is one sample summary statistic that you have the ability to easily calculate a sampling distribution for on without resorting to resampling? Which is this? 
+
+<hide> Sample mean, because of CLT you can confidently use the normal distribution or the t distribution to find the sampling distribution without using resampling. But what if you were interested in finding the sampling distribution of the median? </hide>
+
+## How to do bootstrapping
+
+Bootstrapping involves taking multiple sub-samples from the original sample, of equal size to the original and with replacement, and then calculating sampling distributions of sample statistics using this new bootstrapped pool of samples. You may recall that sampling distributions allow us to show how precise we expect our estimate of a certain population statistic based on sample data to be rather than just giving us a point estimate of the population statistic.
+
+The steps for generating a confidence interval for a statistic estimated from sample data is as follows:
+
+1. Calculate your statistic of interest from your sample data.
+
+2. Take a bootstrap sample - a random sample taken with replacement from the original sample, of the same size as the
+original sample. This means your bootstrap sample will have the same number of datapoints as your original sample, but some datapoints will be represented multiple times and others not at all.
+
+3. Compute the statistic of interest from your bootstrap sample.
+
+4. Repeat 2 and 3 for a large number of times and save the computed statistic for each bootstrap sample.
+
+5. Find the confidence interval for your sample statistic by finding what proportion of your bootstrap statistics are as extreme or more extreme than your sample statistic.
+
+## Example 
+
+For example, imagine you have collected data on sales of avocadoes from different regions in the US. Now you are interested in how reliable your statistics (mean, standard deviation, etc) that you have calculated from this sample are. We can perform this task using permutation tests.
+
+First, let's generate our sample by pulling from the avocado data (which we will call our population data). Let's sample 500 observations of the `Total.Volume` column to serve as our sample. Let's also plot its distribution.
+
+```{r}
+set.seed(1234)
+avocado <- read.csv('data/avocado.csv')
+hist(avocado$Total.Volume)
+avocado_sample <- sample(avocado$Total.Volume, size = 500)
+hist(avocado_sample)
+```
+
+As we might expect, the distribution of the sample resembles that of the population data.
+
+Let's use bootstrapping to generate a bootstrap distribution for the sample standard deviation and compute a 95% confidence interval for this statistic. First, let's compute our statistic for our sample.
+
+```{r}
+stdev_sample <- sd(avocado_sample)
+```
+
+Next, let's generate our bootstrap distribution by generating 10,000 bootstrap samples and computing the standard deviation for each of them.
+
+```{r}
+bootstrap_stdevs <- c()
+
+for(i in 1:1E4){
+  bootstrap_sample <- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev <- sd(bootstrap_sample)
+  bootstrap_stdevs <- c(bootstrap_stdevs, bootstrap_stdev)
+}
+hist(bootstrap_stdevs)
+abline(v=stdev_sample, col = 'red')
+```
+
+As expected, our sample standard deviation lies near the middle of our boostrap distribution.
+
+Finally, to compute our 95% confidence interval from the bootstrapped statistics, we just need to find the 2.5 and 97.5 percentiles of the bootstrapped statistics.
+
+```{r}
+quantile(bootstrap_stdevs, c(.025, .975))
+```
+
+The 95% confidence interval of the standard deviation is (2323884, 5073467).
+
+Side note: although we computed 10,000 bootstrapped samples here, the confidence interval would not change meaningfully if we simulated a different number of bootstrapped samples. Specifically, although the precision of the endpoints of the confidence interval would increase with more bootstrapped samples, the magnitude of the confidence interval would not change meaningfully. We show this below with 1,000 and 100,000 bootstrapped samples.
+
+```{r}
+bootstrap_stdevs <- c()
+
+for(i in 1:1E3){
+  bootstrap_sample <- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev <- sd(bootstrap_sample)
+  bootstrap_stdevs <- c(bootstrap_stdevs, bootstrap_stdev)
+}
+
+quantile(bootstrap_stdevs, c(.025, .975))
+
+
+bootstrap_stdevs <- c()
+for(i in 1:1E5){
+  bootstrap_sample <- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev <- sd(bootstrap_sample)
+  bootstrap_stdevs <- c(bootstrap_stdevs, bootstrap_stdev)
+}
+
+quantile(bootstrap_stdevs, c(.025, .975))
+```
+
+### Bootstrapping compared to the real deal
+
+Now that we have performed bootstrapping on our sample of the overall data to generate a bootstrap distribution for the standard deviation statistic, let's show that this bootstrap distribution accurately approximates an actual sampling distribution by generating an empirical sampling distribution from the data. We can do this by taking many random samples from the original avocado population data and computing the standard deviations of each sample (how does this sampling scheme differ from what we did to generate our boostrap distribution?) We can use this sampling distribution to compute a 95% confidence interval for the standard deviation.
+
+```{r}
+sample_stdevs <- c()
+
+for(i in 1:1E4){
+  sample <- sample(avocado$Total.Volume, replace = FALSE, size = 500)
+  stdev <- sd(sample)
+  sample_stdevs <- c(sample_stdevs, stdev)
+}
+hist(sample_stdevs)
+
+quantile(sample_stdevs, c(.025, .975))
+```
+
+Pretty close but not a perfect match. The actual sampling distribution gives us a narrower confidence interval than the bootstrapping distribution. Why might this be the case?
+
+# Permutation Testing (aka 'randomization testing' or 'exact test')
+
+Similar to bootstrapping, permutation tests generate sampling distributions by resampling the data rather than pulling from a known distribution as the sampling distribution. Permutation testing is used to perform hypothesis testing. 
+
+## Steps for permutation testing
+
+1. As with any hypothesis testing situation, the first step in permutation testing is to define your null/alternative hypotheses. These can be stated in words or as mathematical expressions.
+
+2. Next, we need to define what our test statistic of interest is. Calculate this test statistic for your sample data.
+
+3. After we have the above two nailed down, we next need to resample our data! In this case, we would generate many simulated datasets from our sample by permuting our sample. Specifically, this involves "scrambling" the data labels *according to our null hypothesis*. More on this later.
+
+4. After generating these permuted samples, we would calculate the test statistic for each of these permuted datasets.
+
+5. Finally, we need to get a p-value for our hypothesis test. Recall what the definition of a p-value is. Here, we calculate the p-value by finding what proportion of our permuted test statistics is as extreme or more extreme than the test statistic computed from our original data.
+
+## Connections to previous discussions about hypothesis testing
+
+Hopefully, it is clear that what we are doing in permutation testing has 1 to 1 analogies to normal hypothesis testing. We first define what our null hypothesis is, and generate a sampling distribution under the assumption that the null hypothesis is true. We generate this sampling distribution by permuting our data in a way that generates samples that we would expect to see if the null hypothesis were true. After generating the sampling distribution, we find where our observation falls on the distribution and calculate a p-value (p-value = "the probability of obtaining test results at least as extreme as the results actually observed during the test, assuming that the null hypothesis is correct.")
+
+## Example
+
+Imagine you were collecting flowers from two different species one day and taking measurements from them. You didn't have much time, so you ended up collecting only 15 flowers of one species and 10 of the other. You are interested in seeing if the Sepal widths of both species are different from each other. Let's use a permutation test to answer this question. Let's walk through the 5 steps:
+
+```{r}
+iris_data <- iris[c(1:15, 141:150),c('Species', 'Sepal.Width')]
+hist(iris_data$Sepal.Width)
+```
+
+1. What is the null hypothesis here? A good one would be that the mean sepal widths of both species are equal (or equivalently, the difference between the two sepal width means is 0). Since we do not have a good reason to think either species has wider sepals than the other, we can use a two-sided alternative hypothesis.
+
+2. What is our test statistic here? That would be the difference between the two mean sepal widths. Let's calculate it for our sample (for consistency's sake, let's define it as mean sepal width of setosa - mean sepal width of virginica).
+
+```{r}
+sample_statistic <- mean(iris_data$Sepal.Width[iris_data$Species == 'setosa']) - mean(iris_data$Sepal.Width[iris_data$Species == 'virginica'])
+sample_statistic
+```
+
+3 and 4. Generate many permuted samples by scrambling the labels of our data under the null hypothesis. Under our null hypothesis, there is no difference between the sepal widths of the two species. Therefore, the way we could permute the dataset is to erase our species column name labels, shuffle the sepal width values, and reassign them randomly to the two species (being careful to have 15 setosas and 10 virginicas in the final labels to match the number of each in our original sample).
+
+After generating each of the permuted samples, we can compute the test statistic (mean sepal width of setosa - mean sepal width of virginica) for each of them.
+
+```{r}
+#let's generate 10000 permuted samples and test statistics
+widths <- iris_data$Sepal.Width
+
+permuted_statistics <- c() #initialize empty vector to store our permuted values
+
+for(i in 1:10000){
+  permuted_sample <- sample(widths) # sample without replacement from widths to shuffle the values
+  permuted_setosa <- permuted_sample[1:15] # label the first 15 widths setosa
+  permuted_viriginca <- permuted_sample[16:length(widths)] # label the rest viriginica
+  permuted_statistic <- mean(permuted_setosa) - mean(permuted_viriginca) # compute our permuted test statistic
+  
+  permuted_statistics <- c(permuted_statistics, permuted_statistic) # add the permuted test statistic to our vector
+}
+```
+
+5. Finally, we can find where our observed test statistic falls on the permuted sample distribution and use that to calculate a p-value.
+
+```{r}
+hist(permuted_statistics)
+abline(v=c(sample_statistic, -sample_statistic), col = 'red')
+
+# calculate the p-value
+sum(permuted_statistics >= sample_statistic | permuted_statistics <= -sample_statistic) / length(permuted_statistics)
+```
+
+It looks like with a p-value of 0.0278, there is a significant difference in the widths of the sepals between these two species!
+
+Note: We probably could have used a t-test here since we were comparing two means, but the same procedure here could be used to perform hypothesis tests on a number of test statistics that are not means.
+
+
+# Key points
+
+1. Both bootstrapping and permutation testing leverage sample data and do not assume an underlying distribution for the data (i.e. they are 'non-parametric' statistics).
+
+2. The primary difference is that while bootstrapping usually is used to build a sampling distribution of some statistic computed from the data (to come up with confidence intervals, for example), permutation analyses typically seek to quantify the null distribution (for hypothesis testing, for example). Therefore, permutation testing relies on breaking up the labels attached to data points in a sample to generate what the sample would look like if pulled from a null distribution.
+
+3. Both methods rely on the fact that your sample is a good representation of the population. Any biases in your sample will be reflected in your conclusions even after resampling!
+
+# Exercises
+
+1. Imagine a test statistic which comprises of the cube root of each datapoint divided by the square root of each datapoint. Come up with a 95% confidence interval for that test statistic for `Total.Bags` in the avocado dataset.
+```{r}
+head(avocado$Total.Bags)
+```
+
+2. Now imagine that you were interested in seeing if the above test statistic is different for `Total.Bags` between avocadoes sold in 2015 vs those sold in 2016. Walk through the steps for performing a permutation test for this problem.
