@@ -375,7 +375,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-20
+<strong>Last updated:</strong> 2020-03-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -423,7 +423,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -466,10 +466,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreee02f5cea2c9c0bfe784675c88d5abb52c739c8b2targetblanke02f5cea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/e02f5cea2c9c0bfe784675c88d5abb52c739c8b2" target="_blank">e02f5ce</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreefb45352e192e6650a10e83d87bb91ebe4eba722ftargetblankfb45352a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/fb45352e192e6650a10e83d87bb91ebe4eba722f" target="_blank">fb45352</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreee02f5cea2c9c0bfe784675c88d5abb52c739c8b2targetblanke02f5cea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreefb45352e192e6650a10e83d87bb91ebe4eba722ftargetblankfb45352a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -482,6 +482,15 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/resampling.Rmd
+    Untracked:  data/avocado.csv
+
+Unstaged changes:
+    Modified:   analysis/dataviz.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -520,6 +529,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/310d040edca8fa7dc53f12dd0ba799f63e4259a4/docs/Bayes.html" target="_blank">310d040</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1044,7 +1070,7 @@ hide:hover {
 <p><a href="https://oracleaide.files.wordpress.com/2012/12/ovals_pink_and_blue1.png" class="uri">https://oracleaide.files.wordpress.com/2012/12/ovals_pink_and_blue1.png</a></p>
 <p>From our definition of conditional probability, we know that P(A|B) can be defined as the probability that A occurs given that B has occured. This can be written mathematically as:</p>
 <p><span class="math display">\[P(A|B) = \frac{P(A \cap B )}{P(B)}\]</span></p>
-<p>Here, <span class="math inline">\(\cap\)</span> denotes the intersection between A and B (i.e. “A AND B occur together”). To calculate the probability of A conditional on B, we first need to find the probability that B has occured. Then, we need to figure out out of the situations where B has occured, how often does A also occur?</p>
+<p>Here, <span class="math inline">\(\cap\)</span> denotes the intersection between A and B (i.e. “A AND B occur together”). To calculate the probability of A conditional on B, we first need to find the probability that B has occured. Then, we need to figure out out of the situations where B has occured, how often does A also occur?</p>
 <p>In a similar way, we can write P(B|A) mathematically:</p>
 <p><span class="math display">\[P(B|A) = \frac{P(B \cap A )}{P(A)}\]</span></p>
 <p>Since <span class="math inline">\(P(B \cap A )=P(A \cap B)\)</span> (does this make sense?), we can combine the two equations:</p>
