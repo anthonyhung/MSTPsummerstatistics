@@ -145,14 +145,15 @@ ls() #ls lists all the variable names that have been assigned to objects in your
 In addition to the basic functions provided in R, oftentimes we will be working with packages that contain functions written by other people to perform common tasks or specific analyses. Packages can also contain datasets. We can load these packages into our R environment after installing them in R.
 
 ```{r Packages}
-usePackage <- function(p) 
-{
-  if (!is.element(p, installed.packages()[,1]))
-    install.packages(p, dep = TRUE)
-  require(p, character.only = TRUE)
-}
+# note that we won't use most of these packages today, but it's nice to have them for later on in the course
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("cowplot")
+install.packages("grid")
+install.packages("e1071")
+install.packages("caret")
+install.packages("gapminder")
 
-usePackage("gapminder")#This code installs the gapminder packages, which contains vital statistics data from multiple countries. install.packages() is the function that will install a package for you if you know it's name.
 library("gapminder") #After installing the package, we need to tell R to load it into our current environment with this function.
 head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the "head" function to print out the first 6 rows of this dataset.
 
@@ -271,5 +272,82 @@ write.csv(data, "~/Desktop/data/new_bandersnatch.csv")
 2. Working with the gapminder dataset, find the country with the highest life expectancy in 1962.
 <hide>Iceland</hide>
 
-## If time permits: Introduction to Unix terminal and git/github
+## dplyr
 
+The dplyr package is a powerful tool for working with dataframes (what is a dataframe?) in R. The framework of dplyr relies on the use of "pipes" or the "%>%" operator, to apply multiple useful functions to a dataframe sequentially. Today we will cover these functions:
+
+mutate() adds new variables that are functions of existing variables
+select() picks variables based on their names.
+filter() picks cases based on their values.
+summarise() reduces multiple values down to a single summary.
+arrange() changes the ordering of the rows.
+
+However, there are many more useful functions in the package that may come in handy depending on your specific problem!
+
+```{r dplyr intro}
+library(dplyr)
+
+gapminder
+#mutate
+mutate(gapminder, GDP = gdpPercap * pop)
+gapminder %>% mutate(GDP = gdpPercap * pop) #pipes
+
+gapminder_with_GDP <- gapminder %>% mutate(GDP = gdpPercap * pop) #assign output to variable
+gapminder_with_GDP
+
+#select
+gapminder %>% select(c(country, continent, year))
+data %>% select(contains("frumiosity"))
+gapminder %>%  select(starts_with("c"))
+gapminder %>%  select(ends_with("p"))
+
+#filter
+gapminder %>% filter(country == "United States")
+gapminder %>% filter(year > 1999)
+gapminder %>% filter()
+
+#summarise
+gapminder %>% summarise(mean(gdpPercap))
+
+
+
+#arrange
+gapminder %>% arrange(year)
+gapminder %>% arrange(desc(year))
+gapminder %>% arrange(country, desc(year))
+
+
+#putting it all together. what if we wanted to know the highest absolute GDP of Zimbabwe between 1982 and 2007? (printing out only 1 value)
+gapminder %>% 
+  mutate(GDP = gdpPercap * pop) %>% 
+  filter(country == "Zimbabwe", between(year, 1982, 2007)) %>% #between!
+  arrange(desc(GDP)) %>% 
+  select(GDP) %>% 
+  top_n(1)
+  
+# what if we wanted the average GDP of Zimbabwe between 1982 and 2007?
+gapminder %>% 
+  mutate(GDP = gdpPercap * pop) %>% 
+  filter(country == "Zimbabwe", between(year, 1982, 2007)) %>% #between!
+  summarise(mean(GDP))
+
+#Bonus: group_by
+gapminder %>% 
+  group_by(country) %>% 
+  summarise(mean(gdpPercap))
+
+gapminder %>% 
+  group_by(continent) %>% 
+  filter(year == "2007") %>% 
+  summarise(n())
+```
+
+Exercise: Using dplyr functions, find the Country in Asia that had the largest population in 1982 and tell me it's total GDP that year.
+
+Exercise: The labs data contains information about labs taken for patients over a period of time. Using dplyr, compute the ratio of PaO2/FiO2 for each patient at each time point and output a table of the minimum recorded PaO2/FiO2 ratio for each patient in the data. (not very useful but necessary hint: what is the difference between "PAO2" and "PO2 (ARTERIAL)"?)
+
+```{r exercise labs}
+labs <- read.csv("data/labs.csv")
+```
+
+## If time permits: Introduction to Unix terminal and git/github

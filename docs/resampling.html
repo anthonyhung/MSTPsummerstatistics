@@ -353,7 +353,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -362,7 +362,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -371,10 +371,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-03-30
+<strong>Last updated:</strong> 2020-04-22
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -390,12 +390,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -462,10 +462,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree058310ef4141029790a75dbb6c3061bdb32e7560targetblank058310ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/058310ef4141029790a75dbb6c3061bdb32e7560" target="_blank">058310e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6c6f3e67c424c30884f25d937b2b60059e629eb7targetblank6c6f3e6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/6c6f3e67c424c30884f25d937b2b60059e629eb7" target="_blank">6c6f3e6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree058310ef4141029790a75dbb6c3061bdb32e7560targetblank058310ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6c6f3e67c424c30884f25d937b2b60059e629eb7targetblank6c6f3e6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -481,7 +481,7 @@ Ignored files:
     Ignored:    data/.DS_Store
 
 Unstaged changes:
-    Modified:   analysis/syllabus.Rmd
+    Modified:   analysis/resampling.Rmd
 
 </code></pre>
 <p>
@@ -520,6 +520,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/4e089357d0e95411d0a6199b2a4d314567d7088a/docs/resampling.html" target="_blank">4e08935</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -576,7 +593,7 @@ hide:hover {
 <p>Remember that we can think of any given random sample as independent draws from an identical underlying distribution that characterizes the population you are sampling from. However, even if we know that there is some underlying distribution that properly models the population and your data, that does not necessarily mean you can conveniently fit your data into one of the boxes of the named distributions we have discussed thus far in the course.</p>
 <ul>
 <li><p>One such reason for this could be that there is no well-defined named distribution that fits your data well. (For example, imagine a trimodal distribution.)</p></li>
-<li><p>Another reason could be that you simply do not have enough datapoints in your dataset for any well-defined distribution to properly fit.</p></li>
+<li><p>Another reason could be that you simply do not have enough datapoints in your dataset for any well-defined distribution to properly fit. For example, even if you are comparing two means, sometimes the populations were unevenly sampled. Often there is no guarantee that the underlying distributions are normal with equal variances in the two populations.</p></li>
 <li><p>Finally, maybe an empirical distribution is known that fits your data, but the computational burden required to perform inference using this empirical distribution are too high. This is particularly true for empirical distributions with very complicated parameters that need to be fit using your data.</p></li>
 </ul>
 <p>One potential solution to problems such as these would be to use resampling methods, which leverage the information contained within a single sample to allow you to make inferences about the population without assuming an underlying distribution.</p>
@@ -969,8 +986,25 @@ sum(permuted_statistics &gt;= sample_statistic | permuted_statistics &lt;= -samp
 <pre class="r"><code>head(avocado$Total.Bags)</code></pre>
 <pre><code>[1] 8696.87 9505.56 8145.35 5811.16 6183.95 6683.91</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Now imagine that you were interested in seeing if the above test statistic is different for <code>Total.Bags</code> between avocadoes sold in 2015 vs those sold in 2016. Walk through the steps for performing a permutation test for this problem.</li>
+<li><p>Now imagine that you were interested in seeing if the above test statistic is different for <code>Total.Bags</code> between avocadoes sold in 2015 vs those sold in 2016. Walk through the steps for performing a permutation test for this problem.</p></li>
+<li><p>Permutation tests are also extremely useful in th context of determining if the correlation or dependency between two distributions is significant. Let’s examine the iris dataset, specifically the correlation between sepal length and width in the species virginica. Use a permutation test to determine whether the measured pearson correlation of 0.457 is significant. How should you permute your samples? Hint: <hide> you should only need to shuffle the labels for one of the two vectors of measurements </hide></p></li>
 </ol>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+iris %&gt;% filter(Species == &quot;virginica&quot;) %&gt;% 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point()</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cor(iris[iris$Species == &#39;virginica&#39;,]$Sepal.Length, iris[iris$Species == &#39;virginica&#39;,]$Sepal.Width, method = &quot;pearson&quot;)</code></pre>
+<pre><code>[1] 0.4572278</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -979,9 +1013,9 @@ sum(permuted_statistics &gt;= sample_statistic | permuted_statistics &lt;= -samp
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.6.1 (2019-07-05)
+<pre><code>R version 3.6.3 (2020-02-29)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS Mojave 10.14.6
+Running under: macOS Catalina 10.15.4
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
@@ -994,15 +1028,20 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.5.0
+[1] ggplot2_3.3.0 dplyr_0.8.5  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.3      rprojroot_1.3-2 digest_0.6.23   later_1.0.0    
- [5] R6_2.4.1        backports_1.1.5 git2r_0.26.1    magrittr_1.5   
- [9] evaluate_0.14   stringi_1.4.5   rlang_0.4.4     fs_1.3.1       
-[13] promises_1.1.0  whisker_0.4     rmarkdown_1.18  tools_3.6.1    
-[17] stringr_1.4.0   glue_1.3.1      httpuv_1.5.2    xfun_0.12      
-[21] yaml_2.2.1      compiler_3.6.1  htmltools_0.4.0 knitr_1.26     </code></pre>
+ [1] Rcpp_1.0.4.6     compiler_3.6.3   pillar_1.4.3     later_1.0.0     
+ [5] git2r_0.26.1     workflowr_1.5.0  tools_3.6.3      digest_0.6.25   
+ [9] evaluate_0.14    tibble_3.0.1     lifecycle_0.2.0  gtable_0.3.0    
+[13] pkgconfig_2.0.3  rlang_0.4.5      yaml_2.2.1       xfun_0.12       
+[17] withr_2.1.2      stringr_1.4.0    knitr_1.26       fs_1.3.1        
+[21] vctrs_0.2.4      rprojroot_1.3-2  grid_3.6.3       tidyselect_1.0.0
+[25] glue_1.4.0       R6_2.4.1         rmarkdown_1.18   farver_2.0.3    
+[29] purrr_0.3.4      magrittr_1.5     whisker_0.4      backports_1.1.6 
+[33] scales_1.1.0     promises_1.1.0   ellipsis_0.3.0   htmltools_0.4.0 
+[37] assertthat_0.2.1 colorspace_1.4-1 httpuv_1.5.2     labeling_0.3    
+[41] stringi_1.4.5    munsell_0.5.0    crayon_1.3.4    </code></pre>
 </div>
 </div>
 
