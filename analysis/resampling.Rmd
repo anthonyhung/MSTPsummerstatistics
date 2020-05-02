@@ -97,7 +97,7 @@ hist(bootstrap_stdevs)
 abline(v=stdev_sample, col = 'red')
 ```
 
-As expected, our sample standard deviation lies near the middle of our boostrap distribution.
+As expected, our sample standard deviation lies near the middle of our bootstrap distribution.
 
 Finally, to compute our 95% confidence interval from the bootstrapped statistics, we just need to find the 2.5 and 97.5 percentiles of the bootstrapped statistics.
 
@@ -250,4 +250,8 @@ iris %>% filter(Species == "virginica") %>%
   geom_point()
 cor(iris[iris$Species == 'virginica',]$Sepal.Length, iris[iris$Species == 'virginica',]$Sepal.Width, method = "pearson")
 ```
+
+# Side-bar: Fisher's exact test vs Chi-sq test
+
+Fisher's exact test is an example of a permutation test (used in the same situations where one could use a Chi square test). It actually is more accurate than a Chi-sq test, as a Chi-sq test assumes a continuous distribution to the data (which can never truly be exactly fit to any finite dataset). However, Fisher's exact test is exact because it exhaustively computes every single possible permutation (rather than simply a large number of them like we have done above), meaning for large sample sizes it becomes computationally burdensome to carry this test out. In school, I was taught as a rule of thumb that you can use the Chi-sq test when the expected values of each of the cells in your data table are at least 5, but this is a remnant of the days when statistics were done by hand. With the processing power available to researchers nowadays, one could reasonably apply Fisher's exact test to larger and larger sample sizes (though at that point, both methods will be functionally equivalent in most circumstances anyways).
 
