@@ -348,6 +348,7 @@ div.section {
 </ul></li>
 <li><a href="#key-points">Key points</a></li>
 <li><a href="#exercises">Exercises</a></li>
+<li><a href="#side-bar-fishers-exact-test-vs-chi-sq-test">Side-bar: Fisher’s exact test vs Chi-sq test</a></li>
 </ul>
 </div>
 
@@ -371,7 +372,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-30
+<strong>Last updated:</strong> 2020-05-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -462,10 +463,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90targetblank20a6cfda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90" target="_blank">20a6cfd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/b4b4e0d62a097d714bc5310aadf648d33d606e61" target="_blank">b4b4e0d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90targetblank20a6cfda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -479,6 +480,12 @@ Ignored files:
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/confusionMatrxiUpdated.jpg
+
+Unstaged changes:
+    Modified:   analysis/NaiveBayes.Rmd
 
 </code></pre>
 <p>
@@ -517,6 +524,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/b4b4e0d62a097d714bc5310aadf648d33d606e61/analysis/resampling.Rmd" target="_blank">b4b4e0d</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-02
+</td>
+<td>
+add blurb about fisher’s exact as a permutation test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/0e6b6d0fad27510d20b1193d8939bac1d6fc3263/docs/resampling.html" target="_blank">0e6b6d0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -818,7 +859,7 @@ Anthony Hung
 </table>
 </div>
 </div>
-<p>As expected, our sample standard deviation lies near the middle of our boostrap distribution.</p>
+<p>As expected, our sample standard deviation lies near the middle of our bootstrap distribution.</p>
 <p>Finally, to compute our 95% confidence interval from the bootstrapped statistics, we just need to find the 2.5 and 97.5 percentiles of the bootstrapped statistics.</p>
 <pre class="r"><code>quantile(bootstrap_stdevs, c(.025, .975))</code></pre>
 <pre><code>   2.5%   97.5% 
@@ -1139,6 +1180,10 @@ Anthony Hung
 </div>
 <pre class="r"><code>cor(iris[iris$Species == &#39;virginica&#39;,]$Sepal.Length, iris[iris$Species == &#39;virginica&#39;,]$Sepal.Width, method = &quot;pearson&quot;)</code></pre>
 <pre><code>[1] 0.4572278</code></pre>
+</div>
+<div id="side-bar-fishers-exact-test-vs-chi-sq-test" class="section level1">
+<h1>Side-bar: Fisher’s exact test vs Chi-sq test</h1>
+<p>Fisher’s exact test is an example of a permutation test (used in the same situations where one could use a Chi square test). It actually is more accurate than a Chi-sq test, as a Chi-sq test assumes a continuous distribution to the data (which can never truly be exactly fit to any finite dataset). However, Fisher’s exact test is exact because it exhaustively computes every single possible permutation (rather than simply a large number of them like we have done above), meaning for large sample sizes it becomes computationally burdensome to carry this test out. In school, I was taught as a rule of thumb that you can use the Chi-sq test when the expected values of each of the cells in your data table are at least 5, but this is a remnant of the days when statistics were done by hand. With the processing power available to researchers nowadays, one could reasonably apply Fisher’s exact test to larger and larger sample sizes (though at that point, both methods will be functionally equivalent in most circumstances anyways).</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
