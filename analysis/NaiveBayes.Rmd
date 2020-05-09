@@ -99,7 +99,7 @@ Notice the $P(Data|A)$ term is something we've talked about earlier, the likelih
 
 * P(Data) is the prior probability that the data themselves are true.
 
-Let us say we have two possible models $A_p$ and $A_e$ that could have generated our data that we would like to pick between. 
+Let us say we have two possible models $A_p$ and $A_e$ that could have generated our data that we would like to pick between.
 
 $$P(A_p|Data) = \frac{P(Data|A_p )P(A_p)}{P(Data)}$$
 
@@ -147,7 +147,7 @@ library(grid)
 x1  <- 5:25
 df <- data.frame(x = x1, y = dbinom(x1, 30, 0.5))
 
-ggplot(df, aes(x = x, y = y)) + 
+ggplot(df, aes(x = x, y = y)) +
   geom_bar(stat = "identity", col = "red", fill = c("white")) +
   scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
 
@@ -156,7 +156,7 @@ ggplot(df, aes(x = x, y = y)) +
 If we would like to find the probability that we would get more than 20 heads in 30 flips, we could calculate the area represented by bars that are greater than 18 on the x axis:
 
 ```{r}
-ggplot(df, aes(x = x, y = y)) + 
+ggplot(df, aes(x = x, y = y)) +
   geom_bar(stat = "identity", col = "red", fill = c(rep("white", 14), rep("red", 7))) +
   scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
 ```
@@ -164,7 +164,7 @@ ggplot(df, aes(x = x, y = y)) +
 Similarly, we could calculate the probability that we get between 9 and 13 heads:
 
 ```{r}
-ggplot(df, aes(x = x, y = y)) + 
+ggplot(df, aes(x = x, y = y)) +
   geom_bar(stat = "identity", col = "red", fill = c(rep("white", 5), rep("red", 4), rep("white", 12))) +
   scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
 ```
@@ -187,7 +187,7 @@ $$L(Model;Data) = P(Data|Model)$$
 
 This may look the same as what we did before, but in this case our __data are fixed__, not the distribution. Instead of asking, "If I keep my distribution constant, what is the probability of observing something?" with likelihood we are asking "Given that I have collected some data, how well does a certain distribution fit the data?"
 
-Let's assume the same situation we did for probability with the coin. In this case, we do not know if the coin is actually fair (P(heads = 0.5), or if it is rigged (e.g. P(heads = 0.6). We flip the coin 30 times and observe 20 heads. 
+Let's assume the same situation we did for probability with the coin. In this case, we do not know if the coin is actually fair (P(heads = 0.5), or if it is rigged (e.g. P(heads = 0.6). We flip the coin 30 times and observe 20 heads.
 
 What is the likelihood for our __fair model__ ($Binom(n=30, p=0.5)$) given that we observe these data? In other words, how well does the model as paramterized fit our observations?
 
@@ -195,7 +195,7 @@ $$L(Model;Data) = P(num\_heads = 20|Binom(n=30, p=0.5))$$
 
 Let's look at this graphically.
 ```{r}
-ggplot(df, aes(x = x, y = y)) + 
+ggplot(df, aes(x = x, y = y)) +
   geom_bar(stat = "identity", col = "red", fill = c(rep("white", 15), rep("red", 1), rep("white", 5))) +
   scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
 ```
@@ -216,7 +216,7 @@ Let's look at this graphically.
 x1  <- 5:25
 df_rigged <- data.frame(x = x1, y = dbinom(x1, 30, 0.6))
 
-ggplot(df_rigged, aes(x = x, y = y)) + 
+ggplot(df_rigged, aes(x = x, y = y)) +
   geom_bar(stat = "identity", col = "red", fill = c(rep("white", 15), rep("red", 1), rep("white", 5))) +
   scale_y_continuous(expand = c(0.01, 0)) + xlab("number of heads") + ylab("Density")
 ```
@@ -229,7 +229,7 @@ dbinom(x = 20, size = 30, prob = 0.6)
 
 It looks like the likelihood for the rigged coin model is higher!
 
-#### Determining likelihood equations 
+#### Determining likelihood equations
 
 Now, let's approach computing likelihoods for our mushroom example. The first thing we need to do is choose an appropriate distribution to model our data. Given that each of our features is a categorical variable that has either 2 or more than 2 levels, what is the best distribution to choose for the expression $P(Data|A_p)$ for each individual feature (e.g. cap shape)?
 
@@ -259,7 +259,7 @@ Recall also that the _Naive_ in Naive Bayes means we are assuming that each of o
 
 $$Posterior_{edible} \propto Prior_{edible} * Likelihood_{cap.shape\_edible} * Likelihood_{cap.surface\_edible} * Likelihood_{cap.color\_edible} * ... * Likelihood_{habitat\_edible}$$
 
-or 
+or
 
 $$P(A_{edible}|Data) \propto P(A_{edible}) * P(Data_{cap.shape}|A_{edible}) * P(Data_{cap.surface}|A_{edible}) * P(Data_{cap.color}|A_{edible}) * ... * P(Data_{habitat}|A_{edible})$$
 
@@ -282,15 +282,32 @@ table(edible$cap.shape)
 
 # Additional notes relevant to training machine learning algorithms.
 
-Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using data to train and evaluate a model. 
+Before actually carrying out this algorithm in R on our data, we need to discuss some topics that are relevant to machine learning in general when using data to train and evaluate a model.
 
-## The issue of overfitting
+## Another Issue: The issue of overfitting
 
 If you've ever heard anyone talking about machine learning, you've probably heard of the term "overfitting." Overfitting can be summed up by any situation where an algorithm learns from the training data ... a bit too well. For example, if there are certain patterns in the data you have collected for your training data that are just flukes due to sampling error and do not accurately represent the actual relationships found in the wild, the algorithm you've trained will falsely apply these incorrect patterns to new classification problems, leading to inaccurate results. One way to test if your algorithm has overfit your data is to simply collect more labeled data that were not used to train your algorithm and see how well your trained algorithm performs in correctly classifying the new "test" data.
 
 ### One way to assess overfitting: Splitting data into training vs test data sets (i.e. the "Hold out" method)
 
 Of course, oftentimes the easier alternative to going out to collect new data is to just pretend that a subset of the data that is already collected is your "test" data set. By randomly partitioning your data into a "training set" and a "test set," you can assess your algorithm's ability to perform on previously unseen data to determine if it has overfit your training data. A common split is 20% test data and 80% training data.
+
+### Sidebar: Evaluating model performance
+
+Now that you've separated your data into a training and test set, how do you know if you've got a good model? There are numerous ways to evaluate a classifer model's accuracy, but the most intuitive is a confusion matrix. To build a confusion matrix, you must first generate predictions on your test data and compare these predictions to your actual labels in your test data. A confusion matrix will look something like this (we can define the positive case as either one of our binary classes if there is no obvious "positive" class):
+
+https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMat
+
+Sensitivity is also known as recall.
+
+However, remember that our Naive Bayes classifer doesn't exactly return hard classifications, but rather probabilities (we take the additional step of setting a threshold of 0.5 to bin these probabilities into hard classifications.) If we would like a measure of our model performance that reflects this probabilistic nature of our predictions, we can use the Receiver Operating Characteristics curve, or ROC curve. A ROC curve looks like this:
+
+https://upload.wikimedia.org/wikipedia/commons/6/6b/Roccurves.png
+https://upload.wikimedia.org/wikipedia/commons/3/36/ROC_space-2.png
+
+The curves drawn plot the continuous changes in both the false positive rate and the true positive rate as we vary the threshold for what probabilities constitute a positive case from 0 to 1. The larger the area *under* the curve (AUC), the better the model at accurately picking up on positive cases while avoiding falsely calling negative cases positive. Oftentimes for imbalanced test sets (for example, lottery tickets), it makes sense to plot precision and recall on the axes instead of FPR and recall. This is because precision (TP/(TP + FP)) does not include TN in its equation and therefore may be a more accurate metric.
+
+The AUC allows us to compare different models, with generally the models with larger AUC having better performance.
 
 ### An additional problem: Unlucky splits
 
@@ -307,11 +324,12 @@ https://miro.medium.com/max/1400/1*rgba1BIOUys7wQcXcL4U5A.png
 Finally, after discussing the theoretical basis behind the classifier and the necessity for training/test sets and cross-validation, we will be able to implement our algorithm with 5-fold cross-validation in R. Since others have written neat programs to automate most of the calculations for us, you will find that the implementation is actually quite simple to carry out.
 
 ```{r NB in R}
-#Note: a seed has been set already at the beginning of this document, which allows us to reproducibly recreate the random splits that we perform in this code chunk. 
+#Note: a seed has been set already at the beginning of this document, which allows us to reproducibly recreate the random splits that we perform in this code chunk.
 
 #load two libraries in R that are popular for implementing machine learning algorithms
 library(e1071)
 library(caret)
+library(pROC) #for getting AUC
 
 #randomly subset our data into 5 groups (folds_i is a vector that contains the indices of observations included in each group)
 n_folds <- 5
@@ -324,15 +342,23 @@ for(k in 1:n_folds){
   test_i <- which(folds_i == k)
   train_data <- mush_data[-test_i, ]
   test_data <- mush_data[test_i, ]
-  
+
   #train classifier
   classifier_nb <- naiveBayes(train_data[,-1], train_data$class)
-  
+
   #use classifier to predict classes of test data
-  nb_pred <- predict(classifier_nb, type = 'class', newdata = test_data)
+  nb_pred_probabilities <- predict(classifier_nb, newdata = test_data, type = "raw")
   
+  nb_pred_classes <- predict(classifier_nb, newdata = test_data, type = "class")
+
   #assess the accuracy of the classifier on the test data using a confusion matrix
-  print(confusionMatrix(nb_pred,test_data$class))
+  print(confusionMatrix(nb_pred_classes,test_data$class))
+
+  #assess the accuracy of the classifier on the test data using a ROC (function defined above)
+  ROC <- roc(predictor=nb_pred_probabilities[,1],
+                 response=test_data$class)
+  print(ROC$auc)
+  plot(ROC)
 }
 
 ```
@@ -350,14 +376,13 @@ test_data <- mush_data[test_i, ]
 
 #train classifier
 classifier_nb <- naiveBayes(train_data[,-1], train_data$class)
-  
+
 #use classifier to predict classes of test data
 nb_pred <- predict(classifier_nb, type = 'class', newdata = test_data)
-  
+
 #assess the accuracy of the classifier on the test data using a confusion matrix
 print(confusionMatrix(nb_pred,test_data$class))
 
 #print a summary of the classifier
 print(classifier_nb)
 ```
-
