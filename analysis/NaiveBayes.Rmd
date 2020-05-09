@@ -350,7 +350,7 @@ for(k in 1:n_folds){
 
   #use classifier to predict classes of test data
   nb_pred_probabilities <- predict(classifier_nb, newdata = test_data, type = "raw")
-  
+
   nb_pred_classes <- predict(classifier_nb, newdata = test_data, type = "class")
 
   #assess the accuracy of the classifier on the test data using a confusion matrix

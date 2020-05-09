@@ -153,6 +153,7 @@ install.packages("grid")
 install.packages("e1071")
 install.packages("caret")
 install.packages("gapminder")
+install.packages("pROC")
 
 library("gapminder") #After installing the package, we need to tell R to load it into our current environment with this function.
 head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the "head" function to print out the first 6 rows of this dataset.
@@ -350,4 +351,3 @@ Exercise: The labs data contains information about labs taken for patients over 
 labs <- read.csv("data/labs.csv")
 ```
 
-## If time permits: Introduction to Unix terminal and git/github
