@@ -29,6 +29,8 @@ Machine learning is a field that leverages generic algorithms that learn pattter
 
 Classification is essentially the act of arranging items into categories according to shared characteristics amongst the items in the same category. An example is classifying a banana and apple as fruits and lettuce and spinach as vegetables. In machine learning, classification is typically an example of _supervised learning_, in which an algorithm learns from a user-supplied gold standard example of data and assigned category labels in order to determine patterns and shared characteristics that define each category. For example, consider this table of data that contains information about individual mushroom samples. The original data comes from UCI's Machine learning department via kaggle: https://www.kaggle.com/uciml/mushroom-classification.
 
+Other broad types of machine learning are depicted here: https://d2h0cx97tjks2p.cloudfront.net/blogs/wp-content/uploads/sites/2/2019/08/Types-of-Machine-Learning-algorithms.jpg
+
 ## Motivating example: Is this Mushroom poisonous or not?
 
 ```{r}
@@ -305,9 +307,9 @@ However, remember that our Naive Bayes classifer doesn't exactly return hard cla
 https://upload.wikimedia.org/wikipedia/commons/6/6b/Roccurves.png
 https://upload.wikimedia.org/wikipedia/commons/3/36/ROC_space-2.png
 
-The curves drawn plot the continuous changes in both the false positive rate and the true positive rate as we vary the threshold for what probabilities constitute a positive case from 0 to 1. The larger the area *under* the curve (AUC), the better the model at accurately picking up on positive cases while avoiding falsely calling negative cases positive. Oftentimes for imbalanced test sets (for example, lottery tickets), it makes sense to plot precision and recall on the axes instead of FPR and recall. This is because precision (TP/(TP + FP)) does not include TN in its equation and therefore may be a more accurate metric.
+The curves drawn plot the continuous changes in both the false positive rate (1-specificity) and the true positive rate (sensitivity) as we vary the threshold for what probabilities constitute a positive case from 0 to 1. The larger the area *under* the curve (AUC), the better the model at accurately picking up on positive cases while avoiding falsely calling negative cases positive. Oftentimes for imbalanced test sets (for example, lottery tickets), it makes sense to plot precision and recall on the axes instead of FPR and recall. This is because precision (TP/(TP + FP)) does not include TN in its equation and therefore may be a more accurate metric. In that case, the curve is no longer called the ROC curve but rather the Precision-Recall curve. For our edible/poisonous mushroom example, is it appropriate to use a ROC curve (i.e. are the positive/negative cases very imbalanced or not?).
 
-The AUC allows us to compare different models, with generally the models with larger AUC having better performance.
+In either case, the AUC allows us to compare different models, with generally the models with larger AUC having better performance.
 
 ### An additional problem: Unlucky splits
 

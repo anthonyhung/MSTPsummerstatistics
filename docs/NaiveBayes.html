@@ -383,7 +383,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-08
+<strong>Last updated:</strong> 2020-05-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -474,10 +474,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/b4b4e0d62a097d714bc5310aadf648d33d606e61" target="_blank">b4b4e0d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeecd13809c9538658ffd2ef75bbf41fd24ac2e39dtargetblankecd1380a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d" target="_blank">ecd1380</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeecd13809c9538658ffd2ef75bbf41fd24ac2e39dtargetblankecd1380a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -490,10 +490,8 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
-
-Untracked files:
-    Untracked:  analysis/confusionMatrxiUpdated.jpg
 
 Unstaged changes:
     Modified:   analysis/NaiveBayes.Rmd
@@ -535,6 +533,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/analysis/NaiveBayes.Rmd" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+add ROC
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/NaiveBayes.html" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+add ROC
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1276,8 +1308,8 @@ table(edible$cap.shape)</code></pre>
 <p>Sensitivity is also known as recall.</p>
 <p>However, remember that our Naive Bayes classifer doesn’t exactly return hard classifications, but rather probabilities (we take the additional step of setting a threshold of 0.5 to bin these probabilities into hard classifications.) If we would like a measure of our model performance that reflects this probabilistic nature of our predictions, we can use the Receiver Operating Characteristics curve, or ROC curve. A ROC curve looks like this:</p>
 <p><a href="https://upload.wikimedia.org/wikipedia/commons/6/6b/Roccurves.png" class="uri">https://upload.wikimedia.org/wikipedia/commons/6/6b/Roccurves.png</a> <a href="https://upload.wikimedia.org/wikipedia/commons/3/36/ROC_space-2.png" class="uri">https://upload.wikimedia.org/wikipedia/commons/3/36/ROC_space-2.png</a></p>
-<p>The curves drawn plot the continuous changes in both the false positive rate and the true positive rate as we vary the threshold for what probabilities constitute a positive case from 0 to 1. The larger the area <em>under</em> the curve (AUC), the better the model at accurately picking up on positive cases while avoiding falsely calling negative cases positive. Oftentimes for imbalanced test sets (for example, lottery tickets), it makes sense to plot precision and recall on the axes instead of FPR and recall. This is because precision (TP/(TP + FP)) does not include TN in its equation and therefore may be a more accurate metric.</p>
-<p>The AUC allows us to compare different models, with generally the models with larger AUC having better performance.</p>
+<p>The curves drawn plot the continuous changes in both the false positive rate (1-specificity) and the true positive rate (sensitivity) as we vary the threshold for what probabilities constitute a positive case from 0 to 1. The larger the area <em>under</em> the curve (AUC), the better the model at accurately picking up on positive cases while avoiding falsely calling negative cases positive. Oftentimes for imbalanced test sets (for example, lottery tickets), it makes sense to plot precision and recall on the axes instead of FPR and recall. This is because precision (TP/(TP + FP)) does not include TN in its equation and therefore may be a more accurate metric. In that case, the curve is no longer called the ROC curve but rather the Precision-Recall curve. For our edible/poisonous mushroom example, is it appropriate to use a ROC curve (i.e. are the positive/negative cases very imbalanced or not?).</p>
+<p>In either case, the AUC allows us to compare different models, with generally the models with larger AUC having better performance.</p>
 </div>
 <div id="an-additional-problem-unlucky-splits" class="section level3">
 <h3>An additional problem: Unlucky splits</h3>
@@ -1397,6 +1429,43 @@ Prediction   e   p
 <pre><code>Setting levels: control = e, case = p
 Setting direction: controls &gt; cases</code></pre>
 <p><img src="figure/NaiveBayes.Rmd/NB%20in%20R-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-NB-in-R-1">
+Past versions of “NB in R-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-NB-in-R-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/figure/NaiveBayes.Rmd/NB in R-1.png" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>Area under the curve: 0.995</code></pre>
 <pre><code>Confusion Matrix and Statistics
 
@@ -1428,6 +1497,43 @@ Prediction   e   p
 <pre><code>Setting levels: control = e, case = p
 Setting direction: controls &gt; cases</code></pre>
 <p><img src="figure/NaiveBayes.Rmd/NB%20in%20R-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-NB-in-R-2">
+Past versions of “NB in R-2.png”
+</button>
+</p>
+<div id="fig-no-spaces-NB-in-R-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/figure/NaiveBayes.Rmd/NB in R-2.png" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>Area under the curve: 0.9939</code></pre>
 <pre><code>Confusion Matrix and Statistics
 
@@ -1459,6 +1565,43 @@ Prediction   e   p
 <pre><code>Setting levels: control = e, case = p
 Setting direction: controls &gt; cases</code></pre>
 <p><img src="figure/NaiveBayes.Rmd/NB%20in%20R-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-NB-in-R-3">
+Past versions of “NB in R-3.png”
+</button>
+</p>
+<div id="fig-no-spaces-NB-in-R-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/figure/NaiveBayes.Rmd/NB in R-3.png" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>Area under the curve: 0.9953</code></pre>
 <pre><code>Confusion Matrix and Statistics
 
@@ -1490,8 +1633,82 @@ Prediction   e   p
 <pre><code>Setting levels: control = e, case = p
 Setting direction: controls &gt; cases</code></pre>
 <p><img src="figure/NaiveBayes.Rmd/NB%20in%20R-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-NB-in-R-4">
+Past versions of “NB in R-4.png”
+</button>
+</p>
+<div id="fig-no-spaces-NB-in-R-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/figure/NaiveBayes.Rmd/NB in R-4.png" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>Area under the curve: 0.9976</code></pre>
 <p><img src="figure/NaiveBayes.Rmd/NB%20in%20R-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-NB-in-R-5">
+Past versions of “NB in R-5.png”
+</button>
+</p>
+<div id="fig-no-spaces-NB-in-R-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/ecd13809c9538658ffd2ef75bbf41fd24ac2e39d/docs/figure/NaiveBayes.Rmd/NB in R-5.png" target="_blank">ecd1380</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>We can appreciate that the algorithm performs fairly well in each iteration (&gt;90% accuracy), meaning we can be pretty confident that it is not overfitting our data.</p>
 <p>To better understand what the algorithm has determined (i.e. the individual event probabilities and prior probabilities that have been estimated), we can examine the output for one of the iterations of our cross validation (treating group 1 as our test set). Do you notice any patterns that jump out at you? Which variables do you think are most informative in terms of differentiating between edible and poisonous mushrooms?</p>
 <pre class="r"><code>#select which group is our test data and define our training/testing data
