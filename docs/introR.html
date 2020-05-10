@@ -341,6 +341,7 @@ div.section {
 <li><a href="#objects">Objects</a></li>
 <li><a href="#using-packages-in-r">Using Packages in R</a></li>
 <li><a href="#loops">Loops</a></li>
+<li><a href="#conditional-statements">Conditional Statements</a></li>
 <li><a href="#user-defined-functions-udf">User-defined Functions (UDF)</a></li>
 <li><a href="#plots">Plots</a></li>
 <li><a href="#setting-a-random-seed">Setting a random seed</a></li>
@@ -348,7 +349,6 @@ div.section {
 </ul></li>
 <li><a href="#exercises">Exercises:</a></li>
 <li><a href="#dplyr">dplyr</a></li>
-<li><a href="#if-time-permits-introduction-to-unix-terminal-and-gitgithub">If time permits: Introduction to Unix terminal and git/github</a></li>
 </ul>
 </div>
 
@@ -372,7 +372,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-08
+<strong>Last updated:</strong> 2020-05-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -463,10 +463,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/b4b4e0d62a097d714bc5310aadf648d33d606e61" target="_blank">b4b4e0d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2b35d5306dbe9fe8f249e632513972e3ecc547c9targetblank2b35d53a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/2b35d5306dbe9fe8f249e632513972e3ecc547c9" target="_blank">2b35d53</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeb4b4e0d62a097d714bc5310aadf648d33d606e61targetblankb4b4e0da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2b35d5306dbe9fe8f249e632513972e3ecc547c9targetblank2b35d53a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -480,12 +480,6 @@ Ignored files:
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    data/.DS_Store
-
-Untracked files:
-    Untracked:  analysis/confusionMatrxiUpdated.jpg
-
-Unstaged changes:
-    Modified:   analysis/NaiveBayes.Rmd
 
 </code></pre>
 <p>
@@ -524,6 +518,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2b35d5306dbe9fe8f249e632513972e3ecc547c9/analysis/introR.Rmd" target="_blank">2b35d53</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Add conditional statements
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/8e5d9b0fc41ba7f478a3572009ea4738dba0bf61/analysis/introR.Rmd" target="_blank">8e5d9b0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+add exercises
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a6d0787a18ba58d83f9a0728f8d2a583add8675c/docs/introR.html" target="_blank">a6d0787</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1494,30 +1539,34 @@ emp.data</code></pre>
 install.packages(&quot;dplyr&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>install.packages(&quot;cowplot&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>install.packages(&quot;grid&quot;)</code></pre>
 <pre><code>Warning: package &#39;grid&#39; is not available (for R version 3.6.3)</code></pre>
 <pre><code>Warning: package &#39;grid&#39; is a base package, and should not be updated</code></pre>
 <pre class="r"><code>install.packages(&quot;e1071&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>install.packages(&quot;caret&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>install.packages(&quot;gapminder&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpF4Rbmh/downloaded_packages</code></pre>
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
+<pre class="r"><code>install.packages(&quot;pROC&quot;)</code></pre>
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/td/y4r5skr139d88lvmz1yy97440000gn/T//RtmpshZbvI/downloaded_packages</code></pre>
 <pre class="r"><code>library(&quot;gapminder&quot;) #After installing the package, we need to tell R to load it into our current environment with this function.
 head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the &quot;head&quot; function to print out the first 6 rows of this dataset.</code></pre>
 <pre><code># A tibble: 6 x 6
@@ -1569,6 +1618,56 @@ for(i in 0:20){
 [1] 262144
 [1] 524288
 [1] 1048576</code></pre>
+</div>
+<div id="conditional-statements" class="section level3">
+<h3>Conditional Statements</h3>
+<p>When we want code to only be executed when a certain condition is met, we can write a conditional statement.</p>
+<pre class="r"><code>if (1 &lt; 3) {
+  print(&quot;True!&quot;)
+} else {
+  print(&quot;False!&quot;)
+}</code></pre>
+<pre><code>[1] &quot;True!&quot;</code></pre>
+<pre class="r"><code>x &lt;- seq(1, 100)
+
+for (number in x){
+  if (number %% 3 == 0){
+    print(number)
+  }
+}</code></pre>
+<pre><code>[1] 3
+[1] 6
+[1] 9
+[1] 12
+[1] 15
+[1] 18
+[1] 21
+[1] 24
+[1] 27
+[1] 30
+[1] 33
+[1] 36
+[1] 39
+[1] 42
+[1] 45
+[1] 48
+[1] 51
+[1] 54
+[1] 57
+[1] 60
+[1] 63
+[1] 66
+[1] 69
+[1] 72
+[1] 75
+[1] 78
+[1] 81
+[1] 84
+[1] 87
+[1] 90
+[1] 93
+[1] 96
+[1] 99</code></pre>
 </div>
 <div id="user-defined-functions-udf" class="section level3">
 <h3>User-defined Functions (UDF)</h3>
@@ -52323,9 +52422,6 @@ gapminder %&gt;%
 <p>Exercise: Using dplyr functions, find the Country in Asia that had the largest population in 1982 and tell me it’s total GDP that year.</p>
 <p>Exercise: The labs data contains information about labs taken for patients over a period of time. Using dplyr, compute the ratio of PaO2/FiO2 for each patient at each time point and output a table of the minimum recorded PaO2/FiO2 ratio for each patient in the data. (not very useful but necessary hint: what is the difference between “PAO2” and “PO2 (ARTERIAL)”?)</p>
 <pre class="r"><code>labs &lt;- read.csv(&quot;data/labs.csv&quot;)</code></pre>
-</div>
-<div id="if-time-permits-introduction-to-unix-terminal-and-gitgithub" class="section level2">
-<h2>If time permits: Introduction to Unix terminal and git/github</h2>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
