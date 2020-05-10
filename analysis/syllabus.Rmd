@@ -42,13 +42,9 @@ These concepts will be taught again for the Basic Computing in R track at the BS
 
 ## Final Project
 
-Following the 4-5 weeks of lectures, each student will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes. Two options are available for the presentation:
+Following the 4-5 weeks of lectures, each student/group will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes. 
 
-1. Complete a data analysis project using data from a rotation project or data previously collected by members of a rotation lab. In addition to carrying out the project, each student will create a 10 minute presentation describing the data that were collected as well as the statistical methods used to analyze the data to be presented in the 10th week.
-
-2. Select a primary research paper in a field of interest and create a 10 minute presentation describing the statistical methods used in the paper and the conclusions drawn using those statistical tests to be presented in the 10th week.
-
-Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes. A rubric for the presentation can be found [here](https://drive.google.com/open?id=1FPfHFjK83qjQQmMX4uLujx9von8jRZlB).
+A rubric for the presentation can be found [here](https://drive.google.com/open?id=1FPfHFjK83qjQQmMX4uLujx9von8jRZlB).
 
 ## Grading
 
@@ -58,7 +54,7 @@ _Participation (30%):_
 
 Students are expected to attend all sessions listed in the course schedule. In cases of expected scheduling conflicts, please notify the instructors at least 24 hours in advance for an excused absence.
 
-_Homework (40%):_
+_Homework (30%):_
 
 Quizzes after each lecture will be given in order to assess understanding after each lecture. Each is quiz is due by the time the next lecture begins (except for the last lecture; the quiz will be due 48 hours after lecture ends). Because these quizzes are meant to help students review and reinforce concepts, they will be graded based on completion and effort.
 Tutorials and other resources will be given for students to learn R. These tutorials must be completed by the end of the course. Grading will depend on timely submission of an R script that contains code used for the tutorial.
@@ -70,7 +66,6 @@ Grading for the final project will be based on completion, effort, and a demonst
 ## Outline of Course
 
 Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions 
-
 Week 2: Bayesian inference; Naive Bayes classifier; Review of basic statistical tests
 
 Week 3: Review of basic statistical tests continued; Regression
