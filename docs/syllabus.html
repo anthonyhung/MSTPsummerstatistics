@@ -367,7 +367,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-09
+<strong>Last updated:</strong> 2020-05-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -398,10 +398,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2b35d5306dbe9fe8f249e632513972e3ecc547c9targetblank2b35d53a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/2b35d5306dbe9fe8f249e632513972e3ecc547c9" target="_blank">2b35d53</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d7daf110e6bc483f1dce5235850d82642bacd81targetblank6d7daf1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/6d7daf110e6bc483f1dce5235850d82642bacd81" target="_blank">6d7daf1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2b35d5306dbe9fe8f249e632513972e3ecc547c9targetblank2b35d53a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree6d7daf110e6bc483f1dce5235850d82642bacd81targetblank6d7daf1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -412,9 +412,17 @@ Ignored files:
     Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/heirarchicalmodels.Rmd
+
+Unstaged changes:
+    Modified:   analysis/NaiveBayes.Rmd
+    Deleted:    analysis/confusionMatrxiUpdated.jpg
 
 </code></pre>
 <p>
@@ -453,6 +461,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/6d7daf110e6bc483f1dce5235850d82642bacd81/analysis/syllabus.Rmd" target="_blank">6d7daf1</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+change syllabus
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/29c91df7cfe6c689a286531fc31948746f830894/docs/syllabus.html" target="_blank">29c91df</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1253,27 +1295,22 @@ Update all webpages
 </div>
 <div id="final-project" class="section level2">
 <h2>Final Project</h2>
-<p>Following the 4-5 weeks of lectures, each student will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes. Two options are available for the presentation:</p>
-<ol style="list-style-type: decimal">
-<li><p>Complete a data analysis project using data from a rotation project or data previously collected by members of a rotation lab. In addition to carrying out the project, each student will create a 10 minute presentation describing the data that were collected as well as the statistical methods used to analyze the data to be presented in the 10th week.</p></li>
-<li><p>Select a primary research paper in a field of interest and create a 10 minute presentation describing the statistical methods used in the paper and the conclusions drawn using those statistical tests to be presented in the 10th week.</p></li>
-</ol>
-<p>Students should propose a topic for their presentation and send the proposed topic to the instructors via email by the 7th week of classes. A rubric for the presentation can be found <a href="https://drive.google.com/open?id=1FPfHFjK83qjQQmMX4uLujx9von8jRZlB">here</a>.</p>
+<p>Following the 4-5 weeks of lectures, each student/group will be expected to prepare a 10-minute presentation to be delivered on the 10th week of classes.</p>
+<p>A rubric for the presentation can be found <a href="https://drive.google.com/open?id=1FPfHFjK83qjQQmMX4uLujx9von8jRZlB">here</a>.</p>
 </div>
 <div id="grading" class="section level2">
 <h2>Grading</h2>
 <p>The grades for this course are based on the following criteria:</p>
 <p><em>Participation (30%):</em></p>
 <p>Students are expected to attend all sessions listed in the course schedule. In cases of expected scheduling conflicts, please notify the instructors at least 24 hours in advance for an excused absence.</p>
-<p><em>Homework (40%):</em></p>
+<p><em>Homework (30%):</em></p>
 <p>Quizzes after each lecture will be given in order to assess understanding after each lecture. Each is quiz is due by the time the next lecture begins (except for the last lecture; the quiz will be due 48 hours after lecture ends). Because these quizzes are meant to help students review and reinforce concepts, they will be graded based on completion and effort. Tutorials and other resources will be given for students to learn R. These tutorials must be completed by the end of the course. Grading will depend on timely submission of an R script that contains code used for the tutorial.</p>
 <p><em>Final Project (40%):</em></p>
 <p>Grading for the final project will be based on completion, effort, and a demonstrated understanding of statistical concepts. Students will need to submit all scripts/code, slides, papers, and/or other materials used in their final project before the day of their presentation.</p>
 </div>
 <div id="outline-of-course" class="section level2">
 <h2>Outline of Course</h2>
-<p>Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions</p>
-<p>Week 2: Bayesian inference; Naive Bayes classifier; Review of basic statistical tests</p>
+<p>Week 1: Course Introduction; the Central Limit Theorem; Intro to R; Probability and distributions Week 2: Bayesian inference; Naive Bayes classifier; Review of basic statistical tests</p>
 <p>Week 3: Review of basic statistical tests continued; Regression</p>
 <p>Week 4: Data visualization; Resampling methods; Power analysis</p>
 <p>Weeks 6-9: Breakouts within specific programs (No formal lecture. Independent time to complete final project.)</p>
