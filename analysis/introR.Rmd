@@ -146,14 +146,14 @@ In addition to the basic functions provided in R, oftentimes we will be working 
 
 ```{r Packages}
 # note that we won't use most of these packages today, but it's nice to have them for later on in the course
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("cowplot")
-install.packages("grid")
-install.packages("e1071")
-install.packages("caret")
-install.packages("gapminder")
-install.packages("pROC")
+# install.packages("dplyr")
+# install.packages("ggplot2")
+# install.packages("cowplot")
+# install.packages("grid")
+# install.packages("e1071")
+# install.packages("caret")
+# install.packages("gapminder")
+# install.packages("pROC")
 
 library("gapminder") #After installing the package, we need to tell R to load it into our current environment with this function.
 head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the "head" function to print out the first 6 rows of this dataset.
@@ -318,7 +318,7 @@ gapminder_with_GDP
 
 #select
 gapminder %>% select(c(country, continent, year))
-data %>% select(contains("frumiosity"))
+data %>% select(contains("frumiosity")) %>% slice(10)
 gapminder %>%  select(starts_with("c"))
 gapminder %>%  select(ends_with("p"))
 
