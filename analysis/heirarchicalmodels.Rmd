@@ -1,0 +1,78 @@
+---
+title: "heirarchicalmodels"
+author: "Anthony Hung"
+date: "2020-05-10"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+data that are nested within themselves are hierarchical (meaning the observations are not all independent, and there is a structure that connects certain observations)
+  examples: 
+    *student test scores (students are in classrooms and in schools, and therefore are not independent from students in the same class or in the same school)
+      *also, the sizes of the classes will make it so that the variance of the estimate is different between classes (i.e. larger class sizes will have lower variances)
+    *repeated measurements over time (each past observation is not independent from the present observation, etc)
+  
+other words for hierarchical models:
+  nested models (classrooms within schools)
+  multi-level models
+  
+terms of interest:
+  pool information
+  random effect
+  fixed effect
+  
+types of models
+  mixed-effects models
+  linear mixed-effect models
+  generalized linear mixed-effect models
+  repeated measurements model
+
+
+
+Modeling incorrectly:
+  can lead to the fitted slopes to show the opposite direction relationship from the truth (ie positive slope when in reality it's a negative slope)
+    
+
+
+
+Interaction terms: 
+
+Y ~ var1 + var2
+If var1 is categorical and var2 is continuous, then var1 will have multiple intercepts (one for each level) and var2 will have a slope.
+
+Y ~ var1 * var2
+The interaction term means the model fit a separate intercept AND slope for each of the levels in var1 (slope will be different for each level)
+
+
+
+Random effects allow for nested distributions to be modeled
+	i.e. a classroom is nested within a school, so its parameter is drawn from a school-level distribution.
+	random effects will better account for differences in sizes between the classrooms (less impact of outliers in small classrooms)
+	random-effect parameters assume data share a common error distribution. These parameters are considered to be random values drawn from a common error distribution. For situations with small amounts of data or outliers, random-effect models can produce different estimates.
+	random effect intercepts and random effect slopes can both be fit (random effect slopes will need be fit for a particular categorical variable, with one slope for each factor level; otherwise it would just be fitting a single slope to all the data in general)
+
+```{r}
+#anova(lm())
+#tidy(lmer())
+library(lme4)
+```
+
+Linear Mixed Effect Models
+  (var1|var2) means estimate for pair (random depends), 1 is continuous 2 is categorical
+    var1 as a random effect within each var2 level (var2 is also simultaneously fit as random effect intercept)
+  (var1||var2) will NOT assume that the slopes are correlated.
+
+significance for random effects
+  still an open question in statistics, since they do not have standard deviations to calculate a CI with.
+  however, you can use an ANOVA to compare the ability of a model without/with the RE to explain the variance in y (pick the one that does better job of explaining the variance)
+    anova(null_model, year_model)
+  
+GLMs don't assume normality (of residuals)
+  can use logistic, poisson, etc to model error term instead
+  
+  
+
+  
+
