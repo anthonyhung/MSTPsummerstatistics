@@ -35,6 +35,18 @@ Both R and RStudio are freely available online.
 
 * Download the appropriate RStudio version for your operating system: https://www.rstudio.com/products/rstudio/download/#download
 
+## Orienting ourselves
+
+R is a language and environment for statistical computing that is very popular in many scientific fields. Rstudio is an integrated development environment (IDE) for R, which is just another way of saying it's a useful environment to help you write and run R code. Let's orient ourselves to a few aspects of the Rstudio window and functionality to get started. (DEMO)
+
+## .R and .Rmd files
+
+In addition to being able to write and run code, we would like to be able to save a record of the code we have written for a specific task for future use or documentation. There are several file types that can store R code. 
+
+At the most basic level, a .R file or "Rscript" file stores the code you have written and nothing else. It's not pretty, but it gets the job done. (DEMO)
+
+In contrast, an .Rmd file not only saves the code you have written, but also allows you to generate nicely formatted descriptions of code alongside both code and outputs of code. The webpages on this website, for example, were written entirely using .Rmd files that were "knitted" to generate .html files. (DEMO)
+
 ## R Basics
 
 Follow along in your R console with the code in each of the code chunks as we explore the different aspects of R! Clicking on the github logo on the top right corner of the webpage will take you to the repository for this website, where you can download the R markdown file for this page to load into RStudio to follow along.
