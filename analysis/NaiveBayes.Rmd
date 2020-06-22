@@ -242,8 +242,6 @@ Now, let's approach computing likelihoods for our mushroom example. The first th
 
 The multinomial distribution is a generalization of the binomial to cases where the number of categories is greater than 2. Recall that a binomial distribution describes the probability of observing k successes in n trials, with the result of each trial being either a success or a failure (2 possible categories of results). The multinomial distribution expands the number of possible categories of results to beyond 2. In other words, while you can use the binomial distribution to model the probability of observing a number of heads in n coin filps, you can use the multinomial distribution to model the probability of landing on any one of the sides of a 6-sided dice a certain number of times after n throws of the dice.
 
-(Also, for distributions, categorical : multinomial :: bernoulli : binomial)
-
 We can get the PMFs for the bernoulli and multinomial distributions from memory or wikipedia: https://en.wikipedia.org/wiki/Bernoulli_distribution, https://en.wikipedia.org/wiki/Multinomial_distribution. These are our likelihood equations.
 
 #### Estimating likelihoods from training data
@@ -323,6 +321,8 @@ Of course, the word "randomly" above may trigger warning bells, since the whole 
 In order to avoid the above problem, we can employ cross-validation or ‘k-fold cross-validation’. Cross-validation involves randomly splitting our data into ‘k’ equal-sized groups. In each iteration of the process, one of the groups is used as the test set and the rest are used as the training set. The algorithm is trained on the training set and tested on the test set. Then, in the next iteration selects a different group to be used as the test set and rest are used as the training set. The process is repeated until each unique group has been used as the test set in an iteration. For example, in 5-fold cross-validation, we would split the dataset randomly into 5 groups, and run 5 iterations of training and testing. See the graphical depiction below.
 
 https://miro.medium.com/max/1400/1*rgba1BIOUys7wQcXcL4U5A.png
+
+Therefore, k-fold cross-validation is an effective way of comparing different models to select the one with the best performance for your data and problem.
 
 # Naive Bayes classifier in R
 
