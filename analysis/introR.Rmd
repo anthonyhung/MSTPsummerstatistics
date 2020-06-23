@@ -419,3 +419,8 @@ Exercise: The labs data contains information about labs taken for patients over 
 labs <- read.csv("data/labs.csv")
 ```
 
+# Handy cheat sheets
+
+https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
+https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
