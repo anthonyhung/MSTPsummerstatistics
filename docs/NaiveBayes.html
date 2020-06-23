@@ -384,7 +384,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-12
+<strong>Last updated:</strong> 2020-06-23
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,10 +475,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree1378fcad8eb1b58e61b70a6ff46517e2fb9b6ad4targetblank1378fcaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/1378fcad8eb1b58e61b70a6ff46517e2fb9b6ad4" target="_blank">1378fca</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2ac74f5a18d8318c3841925ca51b64dd577e6eddtargetblank2ac74f5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/2ac74f5a18d8318c3841925ca51b64dd577e6edd" target="_blank">2ac74f5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree1378fcad8eb1b58e61b70a6ff46517e2fb9b6ad4targetblank1378fcaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstree2ac74f5a18d8318c3841925ca51b64dd577e6eddtargetblank2ac74f5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -495,7 +495,7 @@ Ignored files:
     Ignored:    data/.DS_Store
 
 Unstaged changes:
-    Modified:   analysis/introR.Rmd
+    Modified:   analysis/syllabus.Rmd
 
 </code></pre>
 <p>
@@ -534,6 +534,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/2ac74f5a18d8318c3841925ca51b64dd577e6edd/analysis/NaiveBayes.Rmd" target="_blank">2ac74f5</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-22
+</td>
+<td>
+edits to cross-validation snippet
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/14c0094c035d017f8be1e0851c138ae49fcb3daf/docs/NaiveBayes.html" target="_blank">14c0094</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1354,7 +1388,6 @@ Anthony Hung
 <p>Now, let’s approach computing likelihoods for our mushroom example. The first thing we need to do is choose an appropriate distribution to model our data. Given that each of our features is a categorical variable that has either 2 or more than 2 levels, what is the best distribution to choose for the expression <span class="math inline">\(P(Data|A_p)\)</span> for each individual feature (e.g. cap shape)?</p>
 <p><hide>For the features that are categorical variables with 2 levels, a Bernoulli likelihood is most appropriate (this is also equivalent to a binomial distribution with only 1 trial). For the features that are categorical variables with more than 2 levels, a multinomial likelihood is appropriate (or more specifically, the categorical distribution).</hide></p>
 <p>The multinomial distribution is a generalization of the binomial to cases where the number of categories is greater than 2. Recall that a binomial distribution describes the probability of observing k successes in n trials, with the result of each trial being either a success or a failure (2 possible categories of results). The multinomial distribution expands the number of possible categories of results to beyond 2. In other words, while you can use the binomial distribution to model the probability of observing a number of heads in n coin filps, you can use the multinomial distribution to model the probability of landing on any one of the sides of a 6-sided dice a certain number of times after n throws of the dice.</p>
-<p>(Also, for distributions, categorical : multinomial :: bernoulli : binomial)</p>
 <p>We can get the PMFs for the bernoulli and multinomial distributions from memory or wikipedia: <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution" class="uri">https://en.wikipedia.org/wiki/Bernoulli_distribution</a>, <a href="https://en.wikipedia.org/wiki/Multinomial_distribution" class="uri">https://en.wikipedia.org/wiki/Multinomial_distribution</a>. These are our likelihood equations.</p>
 </div>
 <div id="estimating-likelihoods-from-training-data-1" class="section level4">
@@ -1461,6 +1494,7 @@ table(edible$cap.shape)</code></pre>
 <h3>Cross-validation to avoid unlucky splits</h3>
 <p>In order to avoid the above problem, we can employ cross-validation or ‘k-fold cross-validation’. Cross-validation involves randomly splitting our data into ‘k’ equal-sized groups. In each iteration of the process, one of the groups is used as the test set and the rest are used as the training set. The algorithm is trained on the training set and tested on the test set. Then, in the next iteration selects a different group to be used as the test set and rest are used as the training set. The process is repeated until each unique group has been used as the test set in an iteration. For example, in 5-fold cross-validation, we would split the dataset randomly into 5 groups, and run 5 iterations of training and testing. See the graphical depiction below.</p>
 <p><a href="https://miro.medium.com/max/1400/1*rgba1BIOUys7wQcXcL4U5A.png" class="uri">https://miro.medium.com/max/1400/1*rgba1BIOUys7wQcXcL4U5A.png</a></p>
+<p>Therefore, k-fold cross-validation is an effective way of comparing different models to select the one with the best performance for your data and problem.</p>
 </div>
 </div>
 </div>
