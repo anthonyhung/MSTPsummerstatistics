@@ -79,19 +79,20 @@ In addition to being able to work with actual numbers, R works in objects, which
 
 R has many data structures, including:
 
-* atomic vector
-* list
-* matrix
-* data frame
-* factors
+* atomic vector (1d Homogeneous)
+* list (1d Heterogeneous)
+* matrix (2d Homogeneous)
+* data frame (2d Heterogeneous)
+* factors (vectors that can only take on certain predefined values)
 
-R has 6 atomic vector types, or classes. Atomic means that a vector only contains elements of one class (i.e. the elements inside the vector do not come from mutliple classes).
+R has 6 atomic vector types, or classes. Atomic means that a vector only contains elements of one class (i.e. the elements inside the vector do not come from multiple classes).
 
 * character
 * numeric (real or decimal)
 * integer
 * logical (TRUE or FALSE)
 * complex (containing i)
+* (the last class is the raw class, but that is beyond the scope of this course)
 
 ```{r objects}
 a <- 2
@@ -99,6 +100,9 @@ b <- 3
 a + b
 class(a) #the "class" function tells you what class of object a is
 
+
+
+#vectors
 d <- c(1,2,3,4,5) #the "c" function concatenates the arguments contained within it into a vector
 d
 d <- c(d, 1) #The "c" function also allows you to append items to an existing vector
@@ -106,6 +110,8 @@ d
 class(d)
 d[3] #brackets allow you index vectors or matrices. Here, we call the third value from our d vector.
 
+
+#matrices
 #Matrices are just like vectors, but with two dimensions
 my_matrix <- matrix(seq(1:9), ncol = 3)
 my_matrix
@@ -121,6 +127,8 @@ y
 z <- c("a", TRUE)
 z
 
+
+#list
 #If you would like to store objects of multiple classes into one object, a list can accomodate such a task.
 x_y_z_list <- list(x,y,z)
 x_y_z_list
@@ -131,6 +139,9 @@ x_y_z_list[[1]][2]
 x_y_z_list <- list(a=x, b=y, c=z)
 x_y_z_list
 
+
+
+#dataframes
 #Dataframes are a very commonly used type of object in R. You can think of a dataframe as a rectangular combination of lists.
 #The below code stores the stated values in a dataframe which contains employee ids, names, salaries, and start dates for 5 employees
 emp.data <- data.frame(
@@ -148,6 +159,25 @@ emp.data$emp_id #the $ operator calls on a certain column of a dataframe
 class(emp.data$emp_id) #As noted earlier, a dataframe can be thought of as a rectangular list, combining different data classes together, each in a different column.
 class(emp.data$salary)
 emp.data$emp_name[emp.data$salary > 620] #You can combine logical operators, brackets, and the $ sign to subset your dataframe in any way you choose! Here, we print out all the employee names for employees who have a salary greater than 620.
+
+
+
+#factors
+marital_character <- c("Married", "Married", "Married")
+marital_factor <- factor(marital_character, levels = c("Married", "Single"))
+marital_factor
+levels(marital_factor)
+
+class(marital_character)
+class(marital_factor)
+
+table(marital_character)
+table(marital_factor)
+
+marital_factor[3] <- "Divorced"
+levels(marital_factor) <- c(levels(marital_factor), "Divorced")
+marital_factor[3] <- "Divorced"
+marital_factor
 
 ls() #ls lists all the variable names that have been assigned to objects in your workspace
 ```
@@ -170,7 +200,9 @@ In addition to the basic functions provided in R, oftentimes we will be working 
 library("gapminder") #After installing the package, we need to tell R to load it into our current environment with this function.
 head(gapminder) #The package gapminder contains a dataset called gapminder. We can use the "head" function to print out the first 6 rows of this dataset.
 
-?gapminder #the ? operator lauches a help page to describe a particular function, including the arguments it takes. Whenever using a new function, it is good practice to first explore it through ?.
+?gapminder #the ? operator launches a help page to describe a particular function, including the arguments it takes. Whenever using a new function, it is good practice to first explore it through ?.
+
+#exercise: Use the ? operator and tell me what the read.csv function does and what the first three arguments mean
 ```
 
 ### Loops
@@ -188,6 +220,8 @@ Oftentimes, we may want to perform the same operation or function many many time
 for(i in 0:20){
   print(2^i)
 }
+
+#exercise: Write a for loop to print out the first 20 perfect squares
 ```
 
 ### Conditional Statements
@@ -208,6 +242,7 @@ for (number in x){
     print(number)
   }
 }
+
 ```
 
 ### User-defined Functions (UDF)
@@ -263,7 +298,8 @@ runif(1,0,1)
 
 ### Reading and writing data in R
 
-Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://raw.githubusercontent.com/anthonyhung/MSTPsummerstatistics/master/data/bandersnatch.csv. If you would like to have your own copy of this dataset, you can open up a terminal window and run the commands.
+Finally, let us address probably one of the most important points when working with statistics in science: how to get the data you have collected into your R environment. For this part of the lesson, we will be working with the bandersnatch.csv file (created by Katie Long) located here: https://raw.githubusercontent.com/anthonyhung/MSTPsummerstatistics/master/data/bandersnatch.csv. If you would like to have your own copy of this dataset, you can open up a terminal window and run the commands (tools menu in R studio).
+
 ```{bash results = 'hide'}
 cd ~/Desktop
 mkdir data
