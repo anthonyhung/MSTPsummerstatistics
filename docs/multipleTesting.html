@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Anthony Hung" />
+
+<meta name="date" content="2019-04-24" />
+
+<title>Multiple Testing Correction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">ISTP Summer JC: Statistical Theory & Methods</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/anthonyhung/MSTPsummerstatistics">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+  <style type="text/css">
+    div.section {
+      padding-top: 12px;
+    }
+  </style>
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Multiple Testing Correction</h1>
+<h4 class="author">Anthony Hung</h4>
+<h4 class="date">2019-04-24</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#hypothesis-testing">Hypothesis testing</a></li>
+<li><a href="#the-issue-of-multiple-testing">The “issue” of multiple testing</a><ul>
+<li><a href="#case-1-performing-1-test">Case 1: Performing 1 test</a></li>
+<li><a href="#case-2-performing-20-tests">Case 2: Performing 20 tests</a></li>
+</ul></li>
+<li><a href="#looking-at-multiple-testing-and-fwer-graphically">Looking at multiple testing and FWER graphically</a></li>
+<li><a href="#controlling-type-1-error-for-situations-with-multiple-tests">Controlling type 1 error for situations with multiple tests:</a><ul>
+<li><a href="#bonferroni-correction">Bonferroni Correction</a></li>
+<li><a href="#false-discovery-rates-q-values-and-the-benjamini-hochberg-method">False Discovery Rates, q values, and the Benjamini-Hochberg Method</a></li>
+<li><a href="#final-thoughts">Final thoughts</a></li>
+<li><a href="#exercise">Exercise:</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-06-23
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeac9c26cf733df79010cd8da39588b3336223a70ftargetblankac9c26ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/ac9c26cf733df79010cd8da39588b3336223a70f" target="_blank">ac9c26c</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeac9c26cf733df79010cd8da39588b3336223a70ftargetblankac9c26ca" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+    Ignored:    data/.DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/61e38924d6c3b56a15af54de71241d69e857de0a/docs/multipleTesting.html" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+add cheatsheet links
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2a379835ae385a702118ff4b931b89300235307f/docs/multipleTesting.html" target="_blank">2a37983</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a1a0bd4a9676f2eedffada25c857aabc53c54a64/docs/multipleTesting.html" target="_blank">a1a0bd4</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/cdeb6c5df403543fff38d1f92a2ed87ebbc5723d/docs/multipleTesting.html" target="_blank">cdeb6c5</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/14c0094c035d017f8be1e0851c138ae49fcb3daf/docs/multipleTesting.html" target="_blank">14c0094</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/1378fcad8eb1b58e61b70a6ff46517e2fb9b6ad4/docs/multipleTesting.html" target="_blank">1378fca</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9bb0ed699ed2fe1a2ca05cfd505c6cb7c986860f/docs/multipleTesting.html" target="_blank">9bb0ed6</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2114e6c9aebfa316aab6c7a2676ebdce1bc08ef5/docs/multipleTesting.html" target="_blank">2114e6c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/29c91df7cfe6c689a286531fc31948746f830894/docs/multipleTesting.html" target="_blank">29c91df</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a6d0787a18ba58d83f9a0728f8d2a583add8675c/docs/multipleTesting.html" target="_blank">a6d0787</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e18c369e3fcbb64ccf95c695d84510a1fcb0acac/docs/multipleTesting.html" target="_blank">e18c369</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/0e6b6d0fad27510d20b1193d8939bac1d6fc3263/docs/multipleTesting.html" target="_blank">0e6b6d0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/multipleTesting.html" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/4e089357d0e95411d0a6199b2a4d314567d7088a/docs/multipleTesting.html" target="_blank">4e08935</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/f15db48dbd6a0ea59883ffe6c16b34a3f5c2f4a2/docs/multipleTesting.html" target="_blank">f15db48</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/310d040edca8fa7dc53f12dd0ba799f63e4259a4/docs/multipleTesting.html" target="_blank">310d040</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5a37a3ece9be5a700915a43c6df6383efe5aa680/docs/multipleTesting.html" target="_blank">5a37a3e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-02-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/96722bdbe5195cb0e43c78b0bc8de5a17af3db56/docs/multipleTesting.html" target="_blank">96722bd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-08-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/7c276548c891e06bd0a8e32d0e41670457e4c30f/analysis/multipleTesting.Rmd" target="_blank">7c27654</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-08-07
+</td>
+<td>
+add NaiveBayes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/15ca1f112dabdce101896776b46418dcbb66aa08/docs/multipleTesting.html" target="_blank">15ca1f1</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a3aa9e0d23508c7eecdd5fc5f5a83a3f1f856fc7/docs/multipleTesting.html" target="_blank">a3aa9e0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ceb577eed36a810ffebbf60a524affa541281a33/docs/multipleTesting.html" target="_blank">ceb577e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/6234571134071f3d5abbf6c8093043fabcf63377/analysis/multipleTesting.Rmd" target="_blank">6234571</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-07-12
+</td>
+<td>
+commit changes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/397882ba5bb902738ccf3b8e3dd320b85eeb4bec/docs/multipleTesting.html" target="_blank">397882b</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6d3e1c816c22dcdf898173d8e2858c3a3d0238ef/docs/multipleTesting.html" target="_blank">6d3e1c8</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/c117ef10cb90e0b3b89106a56e0e03762571345a/docs/multipleTesting.html" target="_blank">c117ef1</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/b291d24b99263105227f9a3edb002e98252785de/docs/multipleTesting.html" target="_blank">b291d24</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/4e210d641f8ab305d79d5c884528be2e26f028f5/docs/multipleTesting.html" target="_blank">4e210d6</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/c4bdfdc7ed061819bbb246828e4af30054e26b39/docs/multipleTesting.html" target="_blank">c4bdfdc</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/dd1e4114724e90bc7711b0f563b508f043146cd2/analysis/multipleTesting.Rmd" target="_blank">dd1e411</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+before republishing syllabus
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/096760a626cc23032b925ccc238d64c8c991c8c7/docs/multipleTesting.html" target="_blank">096760a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/193ab25f3669113690dde6ae45a377acf5ac68df/analysis/multipleTesting.Rmd" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+<td>
+additions to complete mult testing
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/193ab25f3669113690dde6ae45a377acf5ac68df/docs/multipleTesting.html" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+<td>
+additions to complete mult testing
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/da98ae8f6248396dfbe60499fbe402a628903369/docs/multipleTesting.html" target="_blank">da98ae8</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/analysis/multipleTesting.Rmd" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+<td>
+commit before publishing
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/bb90220aacdc72e064891aa021c1475fa69388c9/docs/multipleTesting.html" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+<td>
+commit before publishing
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/239723ec3a2b2292484af14f0a209ba997b6cc7b/analysis/multipleTesting.Rmd" target="_blank">239723e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+Update learning objectives
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/239723ec3a2b2292484af14f0a209ba997b6cc7b/docs/multipleTesting.html" target="_blank">239723e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+Update learning objectives
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2ec7944f6cbaafe7eae338dc3e788fd1ee8b5a25/docs/multipleTesting.html" target="_blank">2ec7944</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/d45dca418110b00b669ce0fc53b3824986a0e826/analysis/multipleTesting.Rmd" target="_blank">d45dca4</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-06
+</td>
+<td>
+Republish
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/d45dca418110b00b669ce0fc53b3824986a0e826/docs/multipleTesting.html" target="_blank">d45dca4</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-06
+</td>
+<td>
+Republish
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ee754863c0a68a5f471f3f8d253974ec9c5dba8f/docs/multipleTesting.html" target="_blank">ee75486</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/5ea5f30ecc0c0780f1e40f7924eccb5da5a8973d/docs/multipleTesting.html" target="_blank">5ea5f30</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/22ae3cd582bc4a1674a8078d7e3cd88257a9d7a1/analysis/multipleTesting.Rmd" target="_blank">22ae3cd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-30
+</td>
+<td>
+Add HMM file
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/e746cf5aeb1cb8550432e5e1c4d068084db37bfa/docs/multipleTesting.html" target="_blank">e746cf5</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/133df4a6da47042807011612d94187d322af9c12/analysis/multipleTesting.Rmd" target="_blank">133df4a</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+introR
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/22b3720a083c2f1e82c8ad357ae66aff45fe46d9/docs/multipleTesting.html" target="_blank">22b3720</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/ddb3114f340d0a205d34aca4f7f35c516049fdb5/docs/multipleTesting.html" target="_blank">ddb3114</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/413d06593754be3f2cb5c65bf0f9f8b290e45c40/docs/multipleTesting.html" target="_blank">413d065</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/6b98d6c19b53e6c549857d19bc13f75fe78e1289/docs/multipleTesting.html" target="_blank">6b98d6c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/9f13e70b59c42080ed5d3870179af2956771d47e/analysis/multipleTesting.Rmd" target="_blank">9f13e70</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+finish CLT
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9f13e70b59c42080ed5d3870179af2956771d47e/docs/multipleTesting.html" target="_blank">9f13e70</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+finish CLT
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Multiple testing describes situations where many hypotheses are simultaneously investigated from a given dataset. Correct treatment of statistics when working with multiple hypotheses is paramount, as mistakes can easily lead to false interpretations of results and many false positives. Our objectives today are to review the framework behind hypothesis testing in single hypotheses, why this framework falls apart in multiple testing, and different methods that have been proposed to correct for multiple testing.</p>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2>Hypothesis testing</h2>
+<p>The basic idea in hypothesis testing is to use data or observations to choose between two possible realities: a null hypothesis or an alternative hypothesis. As a reminder, the null hypothesis usually is the ‘status quo’ or less interesting view of the world. The alternative hypothesis is the opposite of the null hypothesis.</p>
+</div>
+<div id="the-issue-of-multiple-testing" class="section level2">
+<h2>The “issue” of multiple testing</h2>
+<p>As many scientific fields enter an age of “Big Data,” where the ability to collect and work with data from a large number of measurements gives rise to the ability to test many hypotheses at the same time. However, as scientistists tests many more hypotheses, the standard view of hypothesis testing falls apart.</p>
+<p>To illustrate this, consider the xkcd comic (<a href="https://xkcd.com/882/" class="uri">https://xkcd.com/882/</a>). Obviously, something is not right with the conclusions of the study, since we all have an intuition that green jelly beans do not have any true association with skin conditions. To better understand why mutliple testing can easily lead to false positive associations unless adequately treated, let us walk through the calculations for the probability of making a Type 1 error given the number of tests you are performing.</p>
+<div id="case-1-performing-1-test" class="section level3">
+<h3>Case 1: Performing 1 test</h3>
+<p>Let us say we are performing the study in the comic and testing for a link between purple jelly beans and acne at a significance level <span class="math inline">\(\alpha = 0.05\)</span>. What is the probability that we make a type 1 error?</p>
+<p><hide> As <span class="math inline">\(\alpha\)</span> is equal to our type 1 error rate (the probability of rejecting the null hypothesis given the null hypothesis is true), we know that the probability is equal to 0.05.</hide></p>
+</div>
+<div id="case-2-performing-20-tests" class="section level3">
+<h3>Case 2: Performing 20 tests</h3>
+<p>Now, let us test for an association between 20 different colors of jelly beans and acne at a significance level of <span class="math inline">\(\alpha = 0.05\)</span> for each individual test. What is the probability that we make at least one type 1 error now?</p>
+<p><hide> Here, we are interested in finding the P(making a type 1 error), which is the same as 1 - P(NOT making a type 1 error). The P(NOT making a type 1 error) for each of the individual tests is equal to <span class="math inline">\(1- \alpha = 0.95\)</span>. If we assume that each of the separate tests is independent, then our probability of making at least one type 1 error amongst our 20 tests is <span class="math inline">\(1-(1-0.05)^{20} = 0.6415\)</span>. </hide></p>
+<p>This makes sense if we go back to the definition of a p-value. The p-value measures the probability of seeing an observation as extreme or more extreme than your data given that the data were drawn from a null distribution. If we have a p-value of 0.05, that is equivalent to saying that 5% of the time, in a universe where the null hypothesis is true, we would see data as extreme or more extreme that our data. (See drawing on chalkboard). If we perform 100 tests in a universe where the null hypothesis is true, then we expect 5 of those tests to have p-values less than 0.05! The number of expected false positives increases with the number of independent tests you perform. Clearly, we need to take into account the number of tests when setting our significance threshold.</p>
+<p>In the above two examples, what we calculated was the probability of making <strong>at least one type 1 error</strong> in all the independent tests we were performing. This is otherwise known as the <strong>Family-Wise Error Rate (FWER)</strong>.</p>
+</div>
+</div>
+<div id="looking-at-multiple-testing-and-fwer-graphically" class="section level2">
+<h2>Looking at multiple testing and FWER graphically</h2>
+<p>This graph plots the # of independent tests performed on the x axis, and the probability of seeing at least one type 1 error (the FWER) on the y axis, given an <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>
+********************************************************</code></pre>
+<pre><code>Note: As of version 1.0.0, cowplot does not change the</code></pre>
+<pre><code>  default ggplot2 theme anymore. To recover the previous</code></pre>
+<pre><code>  behavior, execute:
+  theme_set(theme_cowplot())</code></pre>
+<pre><code>********************************************************</code></pre>
+<pre class="r"><code>library(ggplot2)
+ggplot(data.frame(x=c(0,60)), aes(x)) +
+  stat_function(fun=function(x)1-(1-0.05)^x, geom=&quot;line&quot;, aes(colour=&quot;square&quot;)) + xlab(&quot;# of independent tests&quot;) + ylab(&quot;FWER&quot;) + theme(legend.position = &quot;none&quot;)</code></pre>
+<pre><code>Warning: `mapping` is not used by stat_function()</code></pre>
+<p><img src="figure/multipleTesting.Rmd/graph_FWER-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-graph_FWER-1">
+Past versions of graph_FWER-1.png
+</button>
+</p>
+<div id="fig-graph_FWER-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/graph_FWER-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/graph_FWER-1.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5a37a3ece9be5a700915a43c6df6383efe5aa680/docs/figure/multipleTesting.Rmd/graph_FWER-1.png" target="_blank">5a37a3e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-02-14
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/96722bdbe5195cb0e43c78b0bc8de5a17af3db56/docs/figure/multipleTesting.Rmd/graph_FWER-1.png" target="_blank">96722bd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-08-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As you can appreciate, the FWER increases quickly with every increase in the number of tests you are performing!</p>
+</div>
+<div id="controlling-type-1-error-for-situations-with-multiple-tests" class="section level2">
+<h2>Controlling type 1 error for situations with multiple tests:</h2>
+<p>We have two sets of options to control for our type 1 error rate when performing multiple tests:</p>
+<ol style="list-style-type: decimal">
+<li><p>Control the FWER to be under a certain value by setting an <span class="math inline">\(\alpha_{corrected}\)</span> for each individual test.</p></li>
+<li><p>Control the <strong>false discovery rate</strong> (FDR). In short, FDR methods control the proportion of false positive tests to all positive tests.</p></li>
+</ol>
+<div id="bonferroni-correction" class="section level3">
+<h3>Bonferroni Correction</h3>
+<p>The Bonferroni correction is one of the most common and the simplest method for correcting for multiple testing, and it can be applied to cases where you are performing multiple dependent or independent tests. The theoretical basis behind this correction is to attempt to adjust our FWER to match our desired value of <span class="math inline">\(\alpha\)</span>.</p>
+<p>To carry out the correction, simply set your corrected <span class="math display">\[\alpha_{corrected} = \frac{\alpha}{m}\]</span>, where m is the number of tests you are performing. Rejecting the null hypothesis for each individual test at a significance level of <span class="math inline">\(\leq \frac{\alpha}{m}\)</span> keeps our FWER at <span class="math inline">\(\leq \alpha\)</span>.</p>
+<p>The proof for this inequality comes from Boole’s inequality, which states that “for any finite countable set of events, the probability that at least one of the events happens is no greater than the sum of the probabilities of the individual events” (<a href="https://en.wikipedia.org/wiki/Boole%27s_inequality" class="uri">https://en.wikipedia.org/wiki/Boole%27s_inequality</a>). In this case, <span class="math inline">\(\alpha \leq m \cdot \alpha_{corrected}\)</span>.</p>
+<p><strong>Exercise:</strong> In the case where we tested for an association between 20 colors of jelly beans and acne, what would our Bonferroni corrected <span class="math inline">\(\alpha\)</span> be?</p>
+<p><hide> <span class="math inline">\(\alpha_{corrected} = \frac{0.05}{20} = 0.0025\)</span> </hide></p>
+<p>An alternative way to perform the Bonferroni correction is not to adjust our significance level, but rather adjust our p-values themselves. To do this, simply multiply your p-values by the number of tests performed and use the uncorrected <span class="math inline">\(\alpha\)</span> as your significance level.</p>
+<p><span class="math display">\[p_{adjusted} = m \cdot p\]</span></p>
+<p>R has a function to adjust p-values through a variety of methods, including Bonferroni:</p>
+<pre class="r"><code>adjusted_pvals &lt;- p.adjust(c(0.05,0.0000001, 0.8), method = &quot;bonferroni&quot;) 
+print(adjusted_pvals)</code></pre>
+<pre><code>[1] 1.5e-01 3.0e-07 1.0e+00</code></pre>
+<p>Although the Bonferroni correction is relatively simple to implement, in practice it a very conservative correction (meaning that through employing it, you will likely be missing out on many true positives through overcorrecting for multiple tests, amplifying the number of FNs). This effect is especially powerful when you are carrying out a large number of tests or when the tests you are performing are not completely independent.</p>
+<p>To explain why the Bonferroni correction is very conservative, we can explore what it does. The correction method sets the FWER to be <strong>at most</strong> <span class="math inline">\(\alpha\)</span>, which works well in cases when tests are truly independent. However, if there are any correlations/dependence (no matter how small), then the Bonferroni correction would be more stringent than strictly necessary. We rarely will run into situations in Biology where our tests are truly independent. For example, the genes expressed in your cells may exist in pathways, where the expression of one gene is correlated with the expression of other genes in the same pathway. Although individual jelly beans may have different flavoring compounds, they all share a large majority of their ingredients and are made in the same factory by largely the same machinery.</p>
+<p>Because of this flaw in the Bonferroni correction, much effort has been devoted to developing methods that can correct for the number of FPs while not inflating the number of FNs.</p>
+</div>
+<div id="false-discovery-rates-q-values-and-the-benjamini-hochberg-method" class="section level3">
+<h3>False Discovery Rates, q values, and the Benjamini-Hochberg Method</h3>
+<div id="false-discovery-rates" class="section level4">
+<h4>False discovery rates</h4>
+<p>In addition the the FWER, a different framework to conceptualize the number of incorrect conclusions you draw from performing a set of hypothesis tests is the False discovery rate (FDR).</p>
+<p>When we set <span class="math inline">\(\alpha = 0.05\)</span> we are stating that about 5% of truly null tests will be called significant. An FDR = 0.05 means that <strong>among the tests that are called significant (positive tests, or “discoveries”), about 5% will turn out to be null (false positive tests, or “false discoveries”)</strong>. In other words, <span class="math inline">\(\alpha = 0.05\)</span> means that if we performed 100 tests under the null, 5 of them would be false positives. FDR = 0.05 means that if we performed <strong>X number of tests</strong> and found 100 significant tests, 5 of those significant results would actually be false positives. The first situation says that 5% of our tests will be false positives. The second situation tells us that 5% of our significant tests will be false positives.</p>
+<p><span class="math display">\[FDR = \frac{FP}{FP+TP}\]</span></p>
+<p>False discovery rate methods allow a certain number of false positives to slip through, but by doing so do a better job of finding more true positives (reducing the number of false negative tests).</p>
+</div>
+<div id="q-values" class="section level4">
+<h4>q-values</h4>
+<p>Q-values are the name given to the adjusted p-values found using an optimised FDR approach. The FDR approach uses characteristics of a p-value distribution to produce a list of q-values.</p>
+<p><strong>Exercise:</strong> If we were to perform a bunch of tests in a universe where all the null hypotheses are true and calculate their p-values, what would the distribution of p-values look like?</p>
+<p><hide> The distribution should look like a uniform distribution between 0 and 1. (Why? Hint: what is the definition of a p-value?) </hide></p>
+<p>Observe the distributions of p-values collected from 2 different sets of 10000 tests. What is different between the two? Which do you think corresponds to a set of tests where the null hypothesis is true for all the tests?</p>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-1.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-1.png" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
+Past versions of unnamed-chunk-2-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/193ab25f3669113690dde6ae45a377acf5ac68df/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/docs/figure/multipleTesting.Rmd/unnamed-chunk-2-2.png" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>If there are no true positives in a set of tests, you will expect to see a distribution more like the first distribution, but if there are true positives in a set of tests you will expect to see a distribution more like the second. So, even if there are no true positives in the experiment, we still expect, by chance, to get p-values &lt; 0.05. These are all false positives. However, even in an experiment with true positives, we are still unsure if a p-value &lt; 0.05 represents a true positive or a false positive. This is because in the second set, the majority of tests are consistent with the null hypothesis, but there are a minority which are consistent with true positives. The resulting histogram is the sum of two histograms (one representing all the null tests, and one representing all the true positive tests). See below for a graphical depiction of this fact. Therefore, in the composite plot the true positives are mixed in with the false positives at the left side of the distribution! The q-value approach tries to find the height of the histogram where the p-value distribution flattens out on the right (where the majority of tests are drawn from the null distribution) and uses this information to determine what proportion of the values on the left side of the distribution are false positives vs true positives, giving us FDR adjusted p-values (q-values).</p>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-1.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-1.png" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-2">
+Past versions of unnamed-chunk-3-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/193ab25f3669113690dde6ae45a377acf5ac68df/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-2.png" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-3">
+Past versions of unnamed-chunk-3-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/193ab25f3669113690dde6ae45a377acf5ac68df/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/bb90220aacdc72e064891aa021c1475fa69388c9/docs/figure/multipleTesting.Rmd/unnamed-chunk-3-3.png" target="_blank">bb90220</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A q-value threshold of 0.05 means that 0.05 of significant results will result in false positives. Another way to think about this is if we arrange all the q values for our set of tests from smallest to largest and pick one (for example a q-value of 0.10), then if we were to reject all hypotheses with a q-value less than this number in our set, we would expect 10% of them to be false positives. The most popular method of calculating q-values is known as the Benjamini-Hochberg method.</p>
+</div>
+<div id="benjamini-hochberg-method" class="section level4">
+<h4>Benjamini-Hochberg Method</h4>
+<p>Before going into the mathematical details of the BH method, let us return to the p-value distribution we described above.</p>
+<p><img src="figure/multipleTesting.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/multipleTesting.Rmd/unnamed-chunk-4-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/5cbe42ce67e5f188c7e88ac65574f4e6318920ae/docs/figure/multipleTesting.Rmd/unnamed-chunk-4-1.png" target="_blank">5cbe42c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/193ab25f3669113690dde6ae45a377acf5ac68df/docs/figure/multipleTesting.Rmd/unnamed-chunk-4-1.png" target="_blank">193ab25</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2019-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Given that we know that the right side of the distribution is largely made up by null tests (which are uniformly flattly distributed between 0 and 1), and the true positive tests are concentrated around p-values of 0, how would you try to find a set of tests that would give you the highest proportion of true positives?</p>
+<p><hide> One thing we could do is take advantage of the red line we’ve drawn, which can be thought of as separating our two distributions apart. Notice how the number of true positive tests in each histogram bin is the number of tests in each bin that rise above the red line. In this case, we could be fairly confident in knowing that if we took the tests with the 350 lowest p-values, we would have a set that was enriched for true positives (since there are ~350 tests above the red line in the last bin). We can imagine that if we were to draw a circle around the p-values in the distribution that we wanted to keep as significant, we could determine what number of p-values to circle in order to have an FDR of approximately 0.05. </hide></p>
+<p>The BH method does something similar to the quick and dirty method we employed above, but instead of reporting p-values, it adjusts them to assign q-values to each test instead.</p>
+</div>
+<div id="actually-performing-the-method" class="section level4">
+<h4>Actually performing the method:</h4>
+<p>The mathematics of employing the BH method are actually very simple. Here are the steps assuming you have a set of p-values from a set of hypothesis tests.</p>
+<ol style="list-style-type: decimal">
+<li>Order the p-values from smallest to largest and rank them from 1 (smallest) to m (largest)</li>
+<li>Adjust the p-values using this equation: <span class="math display">\[q_i = min\{\frac{p_i m}{i}, q_{i+1}\}\]</span></li>
+</ol>
+<p>where <span class="math inline">\(q_i, p_i\)</span> represents the q-value or p-value for the test ranked <span class="math inline">\(i\)</span>, m represents the total number of tests in your set, and <span class="math inline">\(q_{i+1}\)</span> is the q-value for the next largest rank test.</p>
+<p>And that’s it! You would then interpret the q-values as we did above: “If we arrange all the q values for our set of tests from smallest to largest and pick one (for example a q-value of 0.10), then if we were to reject all hypotheses with a q-value less than this number in our set, we would expect 10% of them to be false positives.”</p>
+<p>Taking a closer look at the q-value equation, we can figure out what each part means.</p>
+<p>The numerator (<span class="math inline">\(p_i m\)</span>) represents the expected number of FP if you accept all the tests with p-values of <span class="math inline">\(p_i\)</span> or smaller. Why is this the case? <hide> Recall that <span class="math inline">\(p_i\)</span> is the type 1 error rate, and m is the total number of results in your experiment. Just as rejecting all tests with a p-value of 0.05 or less means that 5% of our your tests will be false positives, the same can be said for any p-value. </hide></p>
+<p>The denominator (<span class="math inline">\(i\)</span>) represents the number of hypotheses you will reject at a threshold equal to <span class="math inline">\(q_i\)</span>. Why is this? <hide> In this test, by rejecting the test corresponding to <span class="math inline">\(q_i\)</span>, you will be also rejecting all tests with q-values less than <span class="math inline">\(q_i\)</span>. This is equal to the rank number <span class="math inline">\(i\)</span>. Therefore, the equation is the expected number of FP based on the p-value divided by the total number of positives declared at that same p-value threshold. Recall that <span class="math inline">\(FDR = \frac{FP}{FP+TP}\)</span> </hide>.</p>
+<p>Finally, why do we take the minimum value between <span class="math inline">\(\frac{p_i m}{i}\)</span> and <span class="math inline">\(q_{i+1}\)</span>? <hide> This allows us to maintain the same rank order of our p-values and our q-values. If you paid attention to the previous explanations of the other terms, you could have realized that I switched from discussing rejecting <strong>p-values</strong> less than a certain threshold to talking about rejecting <strong>q-values</strong> less than a certain threshold. By maintaining the rank order of our tests (making it so the adjusted p-value or q-value cannot be larger than that of higher rank order tests), we can make that switch. </hide></p>
+</div>
+<div id="lets-walk-through-an-example-on-the-board" class="section level4">
+<h4>Let’s walk through an example on the board:</h4>
+<p>Suppose we have p-values for 10 tests: {0.01, 0.11, 0.21, 0.31, 0.41, 0.51, 0.61, 0.71, 0.81, 0.91}. We want to perform a Benjamini-Hochberg procedure on the p-values to obtain q-values.</p>
+<p><hide> {0.1, 0.55, 0.70, 0.77, 0.82, 0.85, 0.87, 0.89, 0.90, 0.91} </hide></p>
+</div>
+</div>
+<div id="final-thoughts" class="section level3">
+<h3>Final thoughts</h3>
+<p>Methods that control for FWER (i.e. Bonferroni correction) maximize the purity of the discoveries you make (you can be more confident that the tests you call positive are indeed true positives rather than false postiives) at the cost of the completeness of those discoveries (you miss many true positives by commiting more type 2 errors). These types of corrections are most appropriate in situations where the costs of a false positive are very high.</p>
+<p>Methods that control for FDR (i.e. Benjamini-Hochberg) relax the constraint on the purity of the discoveries you make (you still control the number of false positives you expect to have) in order to increase the completeness of your discoveries substantially. These types of corrections are most appropriate when you expect to have several true positives and can afford to have some false positives.</p>
+</div>
+<div id="exercise" class="section level3">
+<h3>Exercise:</h3>
+<p>Write a function that takes as input a vector of p-values and performs a Benjamini-Hochberg procedure to return a vector of q-values. Plot histograms of the vector of p-values in Set3 (found below) before and after correction.</p>
+<pre class="r"><code>set.seed(1234)
+set3 &lt;- c(runif(10000), rexp(500, rate = 2)/10)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.3 (2020-02-29)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.5
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.3.0 cowplot_1.0.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.4.6     compiler_3.6.3   pillar_1.4.3     later_1.0.0     
+ [5] git2r_0.26.1     workflowr_1.5.0  tools_3.6.3      digest_0.6.25   
+ [9] evaluate_0.14    lifecycle_0.2.0  tibble_3.0.1     gtable_0.3.0    
+[13] pkgconfig_2.0.3  rlang_0.4.5      yaml_2.2.1       xfun_0.12       
+[17] withr_2.1.2      stringr_1.4.0    dplyr_0.8.5      knitr_1.26      
+[21] fs_1.3.1         vctrs_0.2.4      rprojroot_1.3-2  grid_3.6.3      
+[25] tidyselect_1.0.0 glue_1.4.0       R6_2.4.1         rmarkdown_1.18  
+[29] farver_2.0.3     purrr_0.3.4      magrittr_1.5     whisker_0.4     
+[33] backports_1.1.6  scales_1.1.0     promises_1.1.0   htmltools_0.4.0 
+[37] ellipsis_0.3.0   assertthat_0.2.1 colorspace_1.4-1 httpuv_1.5.2    
+[41] labeling_0.3     stringi_1.4.5    munsell_0.5.0    crayon_1.3.4    </code></pre>
+</div>
+</div>
+</div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

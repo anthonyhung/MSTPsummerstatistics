@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Anthony Hung" />
+
+<meta name="date" content="2020-03-29" />
+
+<title>Resampling methods</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">ISTP Summer JC: Statistical Theory & Methods</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/anthonyhung/MSTPsummerstatistics">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+  <style type="text/css">
+    div.section {
+      padding-top: 12px;
+    }
+  </style>
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Resampling methods</h1>
+<h4 class="author">Anthony Hung</h4>
+<h4 class="date">2020-03-29</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#bootstrapping">Bootstrapping</a><ul>
+<li><a href="#how-to-do-bootstrapping">How to do bootstrapping</a></li>
+<li><a href="#example">Example</a><ul>
+<li><a href="#bootstrapping-compared-to-the-real-deal">Bootstrapping compared to the real deal</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#permutation-testing-aka-randomization-testing-or-exact-test">Permutation Testing (aka ‘randomization testing’ or ‘exact test’)</a><ul>
+<li><a href="#steps-for-permutation-testing">Steps for permutation testing</a></li>
+<li><a href="#connections-to-previous-discussions-about-hypothesis-testing">Connections to previous discussions about hypothesis testing</a></li>
+<li><a href="#example-1">Example</a></li>
+</ul></li>
+<li><a href="#key-points">Key points</a></li>
+<li><a href="#exercises">Exercises</a></li>
+<li><a href="#side-bar-fishers-exact-test-vs-chi-sq-test">Side-bar: Fisher’s exact test vs Chi-sq test</a></li>
+</ul>
+</div>
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-06-23
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MSTPsummerstatistics/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20180927code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20180927)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20180927code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20180927)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeac9c26cf733df79010cd8da39588b3336223a70ftargetblankac9c26ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/anthonyhung/MSTPsummerstatistics/tree/ac9c26cf733df79010cd8da39588b3336223a70f" target="_blank">ac9c26c</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomanthonyhungMSTPsummerstatisticstreeac9c26cf733df79010cd8da39588b3336223a70ftargetblankac9c26ca" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+    Ignored:    data/.DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/61e38924d6c3b56a15af54de71241d69e857de0a/docs/resampling.html" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+add cheatsheet links
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2a379835ae385a702118ff4b931b89300235307f/docs/resampling.html" target="_blank">2a37983</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a1a0bd4a9676f2eedffada25c857aabc53c54a64/docs/resampling.html" target="_blank">a1a0bd4</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/cdeb6c5df403543fff38d1f92a2ed87ebbc5723d/docs/resampling.html" target="_blank">cdeb6c5</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/14c0094c035d017f8be1e0851c138ae49fcb3daf/docs/resampling.html" target="_blank">14c0094</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/1378fcad8eb1b58e61b70a6ff46517e2fb9b6ad4/docs/resampling.html" target="_blank">1378fca</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/9bb0ed699ed2fe1a2ca05cfd505c6cb7c986860f/docs/resampling.html" target="_blank">9bb0ed6</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/2114e6c9aebfa316aab6c7a2676ebdce1bc08ef5/docs/resampling.html" target="_blank">2114e6c</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/29c91df7cfe6c689a286531fc31948746f830894/docs/resampling.html" target="_blank">29c91df</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/a6d0787a18ba58d83f9a0728f8d2a583add8675c/docs/resampling.html" target="_blank">a6d0787</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/b4b4e0d62a097d714bc5310aadf648d33d606e61/analysis/resampling.Rmd" target="_blank">b4b4e0d</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-05-02
+</td>
+<td>
+add blurb about fisher’s exact as a permutation test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/0e6b6d0fad27510d20b1193d8939bac1d6fc3263/docs/resampling.html" target="_blank">0e6b6d0</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/analysis/resampling.Rmd" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+<td>
+add new exercise for introR
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/resampling.html" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+<td>
+add new exercise for introR
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/4e089357d0e95411d0a6199b2a4d314567d7088a/docs/resampling.html" target="_blank">4e08935</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/analysis/resampling.Rmd" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+resampling lesson
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/anthonyhung/MSTPsummerstatistics/058310ef4141029790a75dbb6c3061bdb32e7560/docs/resampling.html" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+resampling lesson
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<style>
+hide {
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+}
+hide:hover {
+  background-color: white;
+  color: black;
+}
+</style>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Remember that we can think of any given random sample as independent draws from an identical underlying distribution that characterizes the population you are sampling from. However, even if we know that there is some underlying distribution that properly models the population and your data, that does not necessarily mean you can conveniently fit your data into one of the boxes of the named distributions we have discussed thus far in the course.</p>
+<ul>
+<li><p>One such reason for this could be that there is no well-defined named distribution that fits your data well. (For example, imagine a trimodal distribution.)</p></li>
+<li><p>Another reason could be that you simply do not have enough datapoints in your dataset for any well-defined distribution to properly fit. For example, even if you are comparing two means, sometimes the populations were unevenly sampled. Often there is no guarantee that the underlying distributions are normal with equal variances in the two populations.</p></li>
+<li><p>Finally, maybe an empirical distribution is known that fits your data, but the computational burden required to perform inference using this empirical distribution are too high. This is particularly true for empirical distributions with very complicated parameters that need to be fit using your data.</p></li>
+</ul>
+<p>One potential solution to problems such as these would be to use resampling methods, which leverage the information contained within a single sample to allow you to make inferences about the population without assuming an underlying distribution.</p>
+<p>Today, we will discuss two types of resampling methods: bootstrapping and permutation tests.</p>
+<p><em>Bootstrapping</em> is used to access the reliability of an estimate by . <em>Permutation</em> tests are used to test hypotheses involving two or more groups.</p>
+<p>Note: both of these resampling methods assume that your sample was properly collected (all observations are independent and randomly selected from the population). Neither can make up for improperly collected data. In other words, “garbage in, garbage out.”</p>
+</div>
+<div id="bootstrapping" class="section level1">
+<h1>Bootstrapping</h1>
+<p>Bootstrapping comes from the idea of “pulling oneself up by ones bootstraps,” a seemingly impossible feat. Similarly, the idea of generating a sample distribution from just one sample is a seemingly impossible task. Bootstrapping is commonly used to calculate the sampling distribution of a test statistic for the purposes of quantifying uncertainty about the estimate of a test statistic from sample data.</p>
+<p>There is one sample summary statistic that you have the ability to easily calculate a sampling distribution for on without resorting to resampling? Which is this?</p>
+<p><hide> Sample mean, because of CLT you can confidently use the normal distribution or the t distribution to find the sampling distribution without using resampling. But what if you were interested in finding the sampling distribution of the median? </hide></p>
+<div id="how-to-do-bootstrapping" class="section level2">
+<h2>How to do bootstrapping</h2>
+<p>Bootstrapping involves taking multiple sub-samples from the original sample, of equal size to the original and with replacement, and then calculating sampling distributions of sample statistics using this new bootstrapped pool of samples. You may recall that sampling distributions allow us to show how precise we expect our estimate of a certain population statistic based on sample data to be rather than just giving us a point estimate of the population statistic.</p>
+<p>The steps for generating a confidence interval for a statistic estimated from sample data is as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>Calculate your statistic of interest from your sample data.</p></li>
+<li><p>Take a bootstrap sample - a random sample taken with replacement from the original sample, of the same size as the original sample. This means your bootstrap sample will have the same number of datapoints as your original sample, but some datapoints will be represented multiple times and others not at all.</p></li>
+<li><p>Compute the statistic of interest from your bootstrap sample.</p></li>
+<li><p>Repeat 2 and 3 for a large number of times and save the computed statistic for each bootstrap sample.</p></li>
+<li><p>Find the confidence interval for your sample statistic by finding what proportion of your bootstrap statistics are as extreme or more extreme than your sample statistic.</p></li>
+</ol>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>For example, imagine you have collected data on sales of avocadoes from different regions in the US. Now you are interested in how reliable your statistics (mean, standard deviation, etc) that you have calculated from this sample are. We can perform this task using permutation tests.</p>
+<p>First, let’s generate our sample by pulling from the avocado data (which we will call our population data). Let’s sample 500 observations of the <code>Total.Volume</code> column to serve as our sample. Let’s also plot its distribution.</p>
+<pre class="r"><code>set.seed(1234)
+avocado &lt;- read.csv(&#39;data/avocado.csv&#39;)
+hist(avocado$Total.Volume)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-1-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-1-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-1-1.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>avocado_sample &lt;- sample(avocado$Total.Volume, size = 500)
+hist(avocado_sample)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-2">
+Past versions of unnamed-chunk-1-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-1-2.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-1-2.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-1-2.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As we might expect, the distribution of the sample resembles that of the population data.</p>
+<p>Let’s use bootstrapping to generate a bootstrap distribution for the sample standard deviation and compute a 95% confidence interval for this statistic. First, let’s compute our statistic for our sample.</p>
+<pre class="r"><code>stdev_sample &lt;- sd(avocado_sample)</code></pre>
+<p>Next, let’s generate our bootstrap distribution by generating 10,000 bootstrap samples and computing the standard deviation for each of them.</p>
+<pre class="r"><code>bootstrap_stdevs &lt;- c()
+
+for(i in 1:1E4){
+  bootstrap_sample &lt;- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev &lt;- sd(bootstrap_sample)
+  bootstrap_stdevs &lt;- c(bootstrap_stdevs, bootstrap_stdev)
+}
+hist(bootstrap_stdevs)
+abline(v=stdev_sample, col = &#39;red&#39;)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-3-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-3-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-3-1.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As expected, our sample standard deviation lies near the middle of our bootstrap distribution.</p>
+<p>Finally, to compute our 95% confidence interval from the bootstrapped statistics, we just need to find the 2.5 and 97.5 percentiles of the bootstrapped statistics.</p>
+<pre class="r"><code>quantile(bootstrap_stdevs, c(.025, .975))</code></pre>
+<pre><code>   2.5%   97.5% 
+2323884 5073467 </code></pre>
+<p>The 95% confidence interval of the standard deviation is (2323884, 5073467).</p>
+<p>Side note: although we computed 10,000 bootstrapped samples here, the confidence interval would not change meaningfully if we simulated a different number of bootstrapped samples. Specifically, although the precision of the endpoints of the confidence interval would increase with more bootstrapped samples, the magnitude of the confidence interval would not change meaningfully. We show this below with 1,000 and 100,000 bootstrapped samples.</p>
+<pre class="r"><code>bootstrap_stdevs &lt;- c()
+
+for(i in 1:1E3){
+  bootstrap_sample &lt;- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev &lt;- sd(bootstrap_sample)
+  bootstrap_stdevs &lt;- c(bootstrap_stdevs, bootstrap_stdev)
+}
+
+quantile(bootstrap_stdevs, c(.025, .975))</code></pre>
+<pre><code>   2.5%   97.5% 
+2317542 5047546 </code></pre>
+<pre class="r"><code>bootstrap_stdevs &lt;- c()
+for(i in 1:1E5){
+  bootstrap_sample &lt;- sample(avocado_sample, replace = TRUE)
+  bootstrap_stdev &lt;- sd(bootstrap_sample)
+  bootstrap_stdevs &lt;- c(bootstrap_stdevs, bootstrap_stdev)
+}
+
+quantile(bootstrap_stdevs, c(.025, .975))</code></pre>
+<pre><code>   2.5%   97.5% 
+2312316 5098232 </code></pre>
+<div id="bootstrapping-compared-to-the-real-deal" class="section level3">
+<h3>Bootstrapping compared to the real deal</h3>
+<p>Now that we have performed bootstrapping on our sample of the overall data to generate a bootstrap distribution for the standard deviation statistic, let’s show that this bootstrap distribution accurately approximates an actual sampling distribution by generating an empirical sampling distribution from the data. We can do this by taking many random samples from the original avocado population data and computing the standard deviations of each sample (how does this sampling scheme differ from what we did to generate our boostrap distribution?) We can use this sampling distribution to compute a 95% confidence interval for the standard deviation.</p>
+<pre class="r"><code>sample_stdevs &lt;- c()
+
+for(i in 1:1E4){
+  sample &lt;- sample(avocado$Total.Volume, replace = FALSE, size = 500)
+  stdev &lt;- sd(sample)
+  sample_stdevs &lt;- c(sample_stdevs, stdev)
+}
+hist(sample_stdevs)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-6-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-6-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-6-1.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>quantile(sample_stdevs, c(.025, .975))</code></pre>
+<pre><code>   2.5%   97.5% 
+1850429 4817787 </code></pre>
+<p>Pretty close but not a perfect match. The actual sampling distribution gives us a narrower confidence interval than the bootstrapping distribution. Why might this be the case?</p>
+</div>
+</div>
+</div>
+<div id="permutation-testing-aka-randomization-testing-or-exact-test" class="section level1">
+<h1>Permutation Testing (aka ‘randomization testing’ or ‘exact test’)</h1>
+<p>Similar to bootstrapping, permutation tests generate sampling distributions by resampling the data rather than pulling from a known distribution as the sampling distribution. Permutation testing is used to perform hypothesis testing.</p>
+<div id="steps-for-permutation-testing" class="section level2">
+<h2>Steps for permutation testing</h2>
+<ol style="list-style-type: decimal">
+<li><p>As with any hypothesis testing situation, the first step in permutation testing is to define your null/alternative hypotheses. These can be stated in words or as mathematical expressions.</p></li>
+<li><p>Next, we need to define what our test statistic of interest is. Calculate this test statistic for your sample data.</p></li>
+<li><p>After we have the above two nailed down, we next need to resample our data! In this case, we would generate many simulated datasets from our sample by permuting our sample. Specifically, this involves “scrambling” the data labels <em>according to our null hypothesis</em>. More on this later.</p></li>
+<li><p>After generating these permuted samples, we would calculate the test statistic for each of these permuted datasets.</p></li>
+<li><p>Finally, we need to get a p-value for our hypothesis test. Recall what the definition of a p-value is. Here, we calculate the p-value by finding what proportion of our permuted test statistics is as extreme or more extreme than the test statistic computed from our original data.</p></li>
+</ol>
+</div>
+<div id="connections-to-previous-discussions-about-hypothesis-testing" class="section level2">
+<h2>Connections to previous discussions about hypothesis testing</h2>
+<p>Hopefully, it is clear that what we are doing in permutation testing has 1 to 1 analogies to normal hypothesis testing. We first define what our null hypothesis is, and generate a sampling distribution under the assumption that the null hypothesis is true. We generate this sampling distribution by permuting our data in a way that generates samples that we would expect to see if the null hypothesis were true. After generating the sampling distribution, we find where our observation falls on the distribution and calculate a p-value (p-value = “the probability of obtaining test results at least as extreme as the results actually observed during the test, assuming that the null hypothesis is correct.”)</p>
+</div>
+<div id="example-1" class="section level2">
+<h2>Example</h2>
+<p>Imagine you were collecting flowers from two different species one day and taking measurements from them. You didn’t have much time, so you ended up collecting only 15 flowers of one species and 10 of the other. You are interested in seeing if the Sepal widths of both species are different from each other. Let’s use a permutation test to answer this question. Let’s walk through the 5 steps:</p>
+<pre class="r"><code>iris_data &lt;- iris[c(1:15, 141:150),c(&#39;Species&#39;, &#39;Sepal.Width&#39;)]
+hist(iris_data$Sepal.Width)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-7-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-7-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-7-1.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>What is the null hypothesis here? A good one would be that the mean sepal widths of both species are equal (or equivalently, the difference between the two sepal width means is 0). Since we do not have a good reason to think either species has wider sepals than the other, we can use a two-sided alternative hypothesis.</p></li>
+<li><p>What is our test statistic here? That would be the difference between the two mean sepal widths. Let’s calculate it for our sample (for consistency’s sake, let’s define it as mean sepal width of setosa - mean sepal width of virginica).</p></li>
+</ol>
+<pre class="r"><code>sample_statistic &lt;- mean(iris_data$Sepal.Width[iris_data$Species == &#39;setosa&#39;]) - mean(iris_data$Sepal.Width[iris_data$Species == &#39;virginica&#39;])
+sample_statistic</code></pre>
+<pre><code>[1] 0.3166667</code></pre>
+<p>3 and 4. Generate many permuted samples by scrambling the labels of our data under the null hypothesis. Under our null hypothesis, there is no difference between the sepal widths of the two species. Therefore, the way we could permute the dataset is to erase our species column name labels, shuffle the sepal width values, and reassign them randomly to the two species (being careful to have 15 setosas and 10 virginicas in the final labels to match the number of each in our original sample).</p>
+<p>After generating each of the permuted samples, we can compute the test statistic (mean sepal width of setosa - mean sepal width of virginica) for each of them.</p>
+<pre class="r"><code>#let&#39;s generate 10000 permuted samples and test statistics
+widths &lt;- iris_data$Sepal.Width
+
+permuted_statistics &lt;- c() #initialize empty vector to store our permuted values
+
+for(i in 1:10000){
+  permuted_sample &lt;- sample(widths) # sample without replacement from widths to shuffle the values
+  permuted_setosa &lt;- permuted_sample[1:15] # label the first 15 widths setosa
+  permuted_viriginca &lt;- permuted_sample[16:length(widths)] # label the rest viriginica
+  permuted_statistic &lt;- mean(permuted_setosa) - mean(permuted_viriginca) # compute our permuted test statistic
+  
+  permuted_statistics &lt;- c(permuted_statistics, permuted_statistic) # add the permuted test statistic to our vector
+}</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Finally, we can find where our observed test statistic falls on the permuted sample distribution and use that to calculate a p-value.</li>
+</ol>
+<pre class="r"><code>hist(permuted_statistics)
+abline(v=c(sample_statistic, -sample_statistic), col = &#39;red&#39;)</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-10-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-10-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/058310ef4141029790a75dbb6c3061bdb32e7560/docs/figure/resampling.Rmd/unnamed-chunk-10-1.png" target="_blank">058310e</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># calculate the p-value
+sum(permuted_statistics &gt;= sample_statistic | permuted_statistics &lt;= -sample_statistic) / length(permuted_statistics)</code></pre>
+<pre><code>[1] 0.0266</code></pre>
+<p>It looks like with a p-value of 0.0278, there is a significant difference in the widths of the sepals between these two species!</p>
+<p>Note: We probably could have used a t-test here since we were comparing two means, but the same procedure here could be used to perform hypothesis tests on a number of test statistics that are not means.</p>
+</div>
+</div>
+<div id="key-points" class="section level1">
+<h1>Key points</h1>
+<ol style="list-style-type: decimal">
+<li><p>Both bootstrapping and permutation testing leverage sample data and do not assume an underlying distribution for the data (i.e. they are ‘non-parametric’ statistics).</p></li>
+<li><p>The primary difference is that while bootstrapping usually is used to build a sampling distribution of some statistic computed from the data (to come up with confidence intervals, for example), permutation analyses typically seek to quantify the null distribution (for hypothesis testing, for example). Therefore, permutation testing relies on breaking up the labels attached to data points in a sample to generate what the sample would look like if pulled from a null distribution.</p></li>
+<li><p>Both methods rely on the fact that your sample is a good representation of the population. Any biases in your sample will be reflected in your conclusions even after resampling!</p></li>
+</ol>
+</div>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+<ol style="list-style-type: decimal">
+<li>Imagine a test statistic which comprises of the cube root of each datapoint divided by the square root of each datapoint. Come up with a 95% confidence interval for that test statistic for <code>Total.Bags</code> in the avocado dataset.</li>
+</ol>
+<pre class="r"><code>head(avocado$Total.Bags)</code></pre>
+<pre><code>[1] 8696.87 9505.56 8145.35 5811.16 6183.95 6683.91</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Now imagine that you were interested in seeing if the above test statistic is different for <code>Total.Bags</code> between avocadoes sold in 2015 vs those sold in 2016. Walk through the steps for performing a permutation test for this problem.</p></li>
+<li><p>Permutation tests are also extremely useful in th context of determining if the correlation or dependency between two distributions is significant. Let’s examine the iris dataset, specifically the correlation between sepal length and width in the species virginica. Use a permutation test to determine whether the measured pearson correlation of 0.457 is significant. How should you permute your samples? Hint: <hide> you should only need to shuffle the labels for one of the two vectors of measurements </hide></p></li>
+</ol>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+iris %&gt;% filter(Species == &quot;virginica&quot;) %&gt;% 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point()</code></pre>
+<p><img src="figure/resampling.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/61e38924d6c3b56a15af54de71241d69e857de0a/docs/figure/resampling.Rmd/unnamed-chunk-12-1.png" target="_blank">61e3892</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-06-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/anthonyhung/MSTPsummerstatistics/blob/20a6cfd6dcc7bbe6165ad6cb6196f2e390c94a90/docs/figure/resampling.Rmd/unnamed-chunk-12-1.png" target="_blank">20a6cfd</a>
+</td>
+<td>
+Anthony Hung
+</td>
+<td>
+2020-04-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>cor(iris[iris$Species == &#39;virginica&#39;,]$Sepal.Length, iris[iris$Species == &#39;virginica&#39;,]$Sepal.Width, method = &quot;pearson&quot;)</code></pre>
+<pre><code>[1] 0.4572278</code></pre>
+</div>
+<div id="side-bar-fishers-exact-test-vs-chi-sq-test" class="section level1">
+<h1>Side-bar: Fisher’s exact test vs Chi-sq test</h1>
+<p>Fisher’s exact test is an example of a permutation test (used in the same situations where one could use a Chi square test). It actually is more accurate than a Chi-sq test, as a Chi-sq test assumes a continuous distribution to the data (which can never truly be exactly fit to any finite dataset). However, Fisher’s exact test is exact because it exhaustively computes every single possible permutation (rather than simply a large number of them like we have done above), meaning for large sample sizes it becomes computationally burdensome to carry this test out. In school, I was taught as a rule of thumb that you can use the Chi-sq test when the expected values of each of the cells in your data table are at least 5, but this is a remnant of the days when statistics were done by hand. With the processing power available to researchers nowadays, one could reasonably apply Fisher’s exact test to larger and larger sample sizes (though at that point, both methods will be functionally equivalent in most circumstances anyways).</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.3 (2020-02-29)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.5
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.3.0 dplyr_0.8.5  
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.4.6     compiler_3.6.3   pillar_1.4.3     later_1.0.0     
+ [5] git2r_0.26.1     workflowr_1.5.0  tools_3.6.3      digest_0.6.25   
+ [9] evaluate_0.14    tibble_3.0.1     lifecycle_0.2.0  gtable_0.3.0    
+[13] pkgconfig_2.0.3  rlang_0.4.5      yaml_2.2.1       xfun_0.12       
+[17] withr_2.1.2      stringr_1.4.0    knitr_1.26       fs_1.3.1        
+[21] vctrs_0.2.4      rprojroot_1.3-2  grid_3.6.3       tidyselect_1.0.0
+[25] glue_1.4.0       R6_2.4.1         rmarkdown_1.18   farver_2.0.3    
+[29] purrr_0.3.4      magrittr_1.5     whisker_0.4      backports_1.1.6 
+[33] scales_1.1.0     promises_1.1.0   ellipsis_0.3.0   htmltools_0.4.0 
+[37] assertthat_0.2.1 colorspace_1.4-1 httpuv_1.5.2     labeling_0.3    
+[41] stringi_1.4.5    munsell_0.5.0    crayon_1.3.4    </code></pre>
+</div>
+</div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
